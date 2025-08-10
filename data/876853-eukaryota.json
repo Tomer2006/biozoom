@@ -1,0 +1,111 @@
+{
+  "name": "Eukaryota",
+  "level": "Level 2",
+  "children": [
+    {
+      "name": "Rhodophyta",
+      "level": "Level 3",
+      "childrenUrl": "/data/876854-rhodophyta.json"
+    },
+    {
+      "name": "Cryptophyceae",
+      "level": "Level 3",
+      "childrenUrl": "/data/887311-cryptophyceae.json"
+    },
+    {
+      "name": "Viridiplantae",
+      "level": "Level 3",
+      "childrenUrl": "/data/887870-viridiplantae.json"
+    },
+    {
+      "name": "Opisthokonta",
+      "level": "Level 3",
+      "childrenUrl": "/data/1164046-opisthokonta.json"
+    },
+    {
+      "name": "Glaucocystophyceae",
+      "level": "Level 3",
+      "childrenUrl": "/data/2618336-glaucocystophyceae.json"
+    },
+    {
+      "name": "unclassified eukaryotes",
+      "level": "Level 3",
+      "childrenUrl": "/data/2618378-unclassified-eukaryotes.json"
+    },
+    {
+      "name": "environmental samples",
+      "level": "Level 3",
+      "childrenUrl": "/data/2618657-environmental-samples.json"
+    },
+    {
+      "name": "Apusozoa",
+      "level": "Level 3",
+      "childrenUrl": "/data/2618955-apusozoa.json"
+    },
+    {
+      "name": "Amoebozoa",
+      "level": "Level 3",
+      "childrenUrl": "/data/2619023-amoebozoa.json"
+    },
+    {
+      "name": "Breviatea",
+      "level": "Level 3",
+      "childrenUrl": "/data/2623076-breviatea.json"
+    },
+    {
+      "name": "Hemimastigophora",
+      "level": "Level 3",
+      "childrenUrl": "/data/2623093-hemimastigophora.json"
+    },
+    {
+      "name": "Rhodelphea",
+      "level": "Level 3",
+      "childrenUrl": "/data/2623103-rhodelphea.json"
+    },
+    {
+      "name": "Haptista",
+      "level": "Level 3",
+      "childrenUrl": "/data/2623114-haptista.json"
+    },
+    {
+      "name": "CRuMs",
+      "level": "Level 3",
+      "childrenUrl": "/data/2623994-crums.json"
+    },
+    {
+      "name": "Metamonada",
+      "level": "Level 3",
+      "childrenUrl": "/data/2624030-metamonada.json"
+    },
+    {
+      "name": "Discoba",
+      "level": "Level 3",
+      "childrenUrl": "/data/2625323-discoba.json"
+    },
+    {
+      "name": "Eukaryota incertae sedis",
+      "level": "Level 3",
+      "childrenUrl": "/data/2628401-eukaryota-incertae-sedis.json"
+    },
+    {
+      "name": "Ancyromonadida",
+      "level": "Level 3",
+      "childrenUrl": "/data/2628471-ancyromonadida.json"
+    },
+    {
+      "name": "Sar",
+      "level": "Level 3",
+      "childrenUrl": "/data/2628530-sar.json"
+    },
+    {
+      "name": "Malawimonadida",
+      "level": "Level 3",
+      "childrenUrl": "/data/2670126-malawimonadida.json"
+    },
+    {
+      "name": "Provora",
+      "level": "Level 3",
+      "childrenUrl": "/data/2670140-provora.json"
+    }
+  ]
+}

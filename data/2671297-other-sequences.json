@@ -1,0 +1,51 @@
+{
+  "name": "other sequences",
+  "level": "Level 2",
+  "children": [
+    {
+      "name": "transposons",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671298-transposons.json"
+    },
+    {
+      "name": "integrons",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671330-integrons.json"
+    },
+    {
+      "name": "insertion sequences",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671331-insertion-sequences.json"
+    },
+    {
+      "name": "midivariant sequence",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671342-midivariant-sequence.json"
+    },
+    {
+      "name": "promoter consensus sequence",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671343-promoter-consensus-sequence.json"
+    },
+    {
+      "name": "plasmids",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671344-plasmids.json"
+    },
+    {
+      "name": "artificial sequences",
+      "level": "Level 3",
+      "childrenUrl": "/data/2671706-artificial-sequences.json"
+    },
+    {
+      "name": "stable RNAs",
+      "level": "Level 3",
+      "childrenUrl": "/data/2691074-stable-rnas.json"
+    },
+    {
+      "name": "minichromosomes",
+      "level": "Level 3",
+      "childrenUrl": "/data/2691075-minichromosomes.json"
+    }
+  ]
+}

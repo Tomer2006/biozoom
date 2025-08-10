@@ -1,0 +1,306 @@
+{
+  "name": "unclassified archaeal viruses",
+  "level": "Level 2",
+  "children": [
+    {
+      "name": "Hyperthermophilic Archaeal Virus 2",
+      "level": "Level 3",
+      "childrenUrl": "/data/11229-hyperthermophilic-archaeal-virus-2.json"
+    },
+    {
+      "name": "Aeropyrum pernix spindle-shaped virus 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11230-aeropyrum-pernix-spindle-shaped-virus-1.json"
+    },
+    {
+      "name": "Thermococcus prieurii virus 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11231-thermococcus-prieurii-virus-1.json"
+    },
+    {
+      "name": "Los Azufres archaeal virus 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11232-los-azufres-archaeal-virus-1.json"
+    },
+    {
+      "name": "Los Azufres archaeal virus 2",
+      "level": "Level 3",
+      "childrenUrl": "/data/11233-los-azufres-archaeal-virus-2.json"
+    },
+    {
+      "name": "Yellowstone hot spring archaeal RNA virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11234-yellowstone-hot-spring-archaeal-rna-virus.json"
+    },
+    {
+      "name": "ANMV-1 virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11235-anmv-1-virus.json"
+    },
+    {
+      "name": "Aeropyrum globular virus 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11236-aeropyrum-globular-virus-1.json"
+    },
+    {
+      "name": "Metallosphaera turreted icosahedral virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11237-metallosphaera-turreted-icosahedral-virus.json"
+    },
+    {
+      "name": "Nanoarchaeotal virus 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11238-nanoarchaeotal-virus-1.json"
+    },
+    {
+      "name": "Aquificae Conch Spring virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11239-aquificae-conch-spring-virus.json"
+    },
+    {
+      "name": "Aquificae Joseph's Coat Spring virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11240-aquificae-joseph-s-coat-spring-virus.json"
+    },
+    {
+      "name": "Thermocrinis Great Boiling Spring virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11241-thermocrinis-great-boiling-spring-virus.json"
+    },
+    {
+      "name": "Altiarchaeum virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11242-altiarchaeum-virus.json"
+    },
+    {
+      "name": "Helarchaeota virus Nidhogg Meg22_1012",
+      "level": "Level 3",
+      "childrenUrl": "/data/11243-helarchaeota-virus-nidhogg-meg22-1012.json"
+    },
+    {
+      "name": "Helarchaeota virus Nidhogg Meg22_1214",
+      "level": "Level 3",
+      "childrenUrl": "/data/11244-helarchaeota-virus-nidhogg-meg22-1214.json"
+    },
+    {
+      "name": "Lokiarchaeota virus Fenrir Meg22_1012",
+      "level": "Level 3",
+      "childrenUrl": "/data/11245-lokiarchaeota-virus-fenrir-meg22-1012.json"
+    },
+    {
+      "name": "Lokiarchaeota virus Fenrir Meg22_1214",
+      "level": "Level 3",
+      "childrenUrl": "/data/11246-lokiarchaeota-virus-fenrir-meg22-1214.json"
+    },
+    {
+      "name": "Lokiarchaeota virus Ratatoskr Meg22_1012",
+      "level": "Level 3",
+      "childrenUrl": "/data/11247-lokiarchaeota-virus-ratatoskr-meg22-1012.json"
+    },
+    {
+      "name": "Lokiarchaeota virus Skoll Meg22_1214",
+      "level": "Level 3",
+      "childrenUrl": "/data/11248-lokiarchaeota-virus-skoll-meg22-1214.json"
+    },
+    {
+      "name": "Archaeal virus sp.",
+      "level": "Level 3",
+      "childrenUrl": "/data/11249-archaeal-virus-sp.json"
+    },
+    {
+      "name": "Huginn virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11250-huginn-virus.json"
+    },
+    {
+      "name": "Muninn virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11251-muninn-virus.json"
+    },
+    {
+      "name": "Sulfolobus virus STSV3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11252-sulfolobus-virus-stsv3.json"
+    },
+    {
+      "name": "Sulfolobus virus STSV4",
+      "level": "Level 3",
+      "childrenUrl": "/data/11253-sulfolobus-virus-stsv4.json"
+    },
+    {
+      "name": "Saccharolobus virus SPV3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11254-saccharolobus-virus-spv3.json"
+    },
+    {
+      "name": "Metallosphaera turreted icosahedral virus 3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11255-metallosphaera-turreted-icosahedral-virus-3.json"
+    },
+    {
+      "name": "Saccharolobus shibatae filamentous virus 3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11256-saccharolobus-shibatae-filamentous-virus-3.json"
+    },
+    {
+      "name": "Sulfolobus polyhedral virus 3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11257-sulfolobus-polyhedral-virus-3.json"
+    },
+    {
+      "name": "Sulfolobus tengchongensis spindle-shaped virus 3",
+      "level": "Level 3",
+      "childrenUrl": "/data/11258-sulfolobus-tengchongensis-spindle-shaped-virus-3.json"
+    },
+    {
+      "name": "Sulfolobus tengchongensis spindle-shaped virus 4",
+      "level": "Level 3",
+      "childrenUrl": "/data/11259-sulfolobus-tengchongensis-spindle-shaped-virus-4.json"
+    },
+    {
+      "name": "Saccharolobus shibatae rod virus 2",
+      "level": "Level 3",
+      "childrenUrl": "/data/11260-saccharolobus-shibatae-rod-virus-2.json"
+    },
+    {
+      "name": "Nitrosopumilaceae spindle-shaped virus",
+      "level": "Level 3",
+      "childrenUrl": "/data/11261-nitrosopumilaceae-spindle-shaped-virus.json"
+    },
+    {
+      "name": "dsDNA virus vir530",
+      "level": "Level 3",
+      "childrenUrl": "/data/11262-dsdna-virus-vir530.json"
+    },
+    {
+      "name": "dsDNA virus vir556",
+      "level": "Level 3",
+      "childrenUrl": "/data/11263-dsdna-virus-vir556.json"
+    },
+    {
+      "name": "Haloarchaeal virus HJTV-4",
+      "level": "Level 3",
+      "childrenUrl": "/data/11264-haloarchaeal-virus-hjtv-4.json"
+    },
+    {
+      "name": "Halorubrum virus V_ICIS4",
+      "level": "Level 3",
+      "childrenUrl": "/data/11265-halorubrum-virus-v-icis4.json"
+    },
+    {
+      "name": "Haloferax phage LSV-48N",
+      "level": "Level 3",
+      "childrenUrl": "/data/11266-haloferax-phage-lsv-48n.json"
+    },
+    {
+      "name": "Marefusivirus Columifiumense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11267-marefusivirus-columifiumense-1.json"
+    },
+    {
+      "name": "Marefusivirus Helgoense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11268-marefusivirus-helgoense-1.json"
+    },
+    {
+      "name": "Marefusivirus Jervisense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11269-marefusivirus-jervisense-1.json"
+    },
+    {
+      "name": "Marefusivirus Montrience 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11270-marefusivirus-montrience-1.json"
+    },
+    {
+      "name": "Marefusivirus Pacifica 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11271-marefusivirus-pacifica-1.json"
+    },
+    {
+      "name": "Baiafusivirus Chesapense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11272-baiafusivirus-chesapense-1.json"
+    },
+    {
+      "name": "Baiafusivirus Delawense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11273-baiafusivirus-delawense-1.json"
+    },
+    {
+      "name": "Terrafusivirus Michiganse 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11274-terrafusivirus-michiganse-1.json"
+    },
+    {
+      "name": "Terrafusivirus Tennessense 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11275-terrafusivirus-tennessense-1.json"
+    },
+    {
+      "name": "Terrafusivirus Tennessense 2",
+      "level": "Level 3",
+      "childrenUrl": "/data/11276-terrafusivirus-tennessense-2.json"
+    },
+    {
+      "name": "Yangshanfusivirus Mimetico 1",
+      "level": "Level 3",
+      "childrenUrl": "/data/11277-yangshanfusivirus-mimetico-1.json"
+    },
+    {
+      "name": "Haloquadratum virus sp.",
+      "level": "Level 3",
+      "childrenUrl": "/data/11278-haloquadratum-virus-sp.json"
+    },
+    {
+      "name": "Archaeal virus JdFR002",
+      "level": "Level 3",
+      "childrenUrl": "/data/11279-archaeal-virus-jdfr002.json"
+    },
+    {
+      "name": "Archaeal virus JdFR009",
+      "level": "Level 3",
+      "childrenUrl": "/data/11280-archaeal-virus-jdfr009.json"
+    },
+    {
+      "name": "Archaeal virus JdFR013",
+      "level": "Level 3",
+      "childrenUrl": "/data/11281-archaeal-virus-jdfr013.json"
+    },
+    {
+      "name": "Archaeal virus JdFR019",
+      "level": "Level 3",
+      "childrenUrl": "/data/11282-archaeal-virus-jdfr019.json"
+    },
+    {
+      "name": "Archaeal virus JdFR077",
+      "level": "Level 3",
+      "childrenUrl": "/data/11283-archaeal-virus-jdfr077.json"
+    },
+    {
+      "name": "Archaeal virus JdFR114",
+      "level": "Level 3",
+      "childrenUrl": "/data/11284-archaeal-virus-jdfr114.json"
+    },
+    {
+      "name": "Archaeoglobus virus JdFR005",
+      "level": "Level 3",
+      "childrenUrl": "/data/11285-archaeoglobus-virus-jdfr005.json"
+    },
+    {
+      "name": "Archaeoglobus virus JdFR416",
+      "level": "Level 3",
+      "childrenUrl": "/data/11286-archaeoglobus-virus-jdfr416.json"
+    },
+    {
+      "name": "Bathyarchaeota virus JdFR006",
+      "level": "Level 3",
+      "childrenUrl": "/data/11287-bathyarchaeota-virus-jdfr006.json"
+    },
+    {
+      "name": "Bathyarchaeota virus JdFR012",
+      "level": "Level 3",
+      "childrenUrl": "/data/11288-bathyarchaeota-virus-jdfr012.json"
+    }
+  ]
+}
