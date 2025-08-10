@@ -1,8 +1,8 @@
 /* Event Handlers and Input Management */
-import { canvas, searchInputEl } from './dom.js';
+import { canvas, searchInputEl, ttip } from './dom.js';
 import { camera } from './camera.js';
 import { pickNodeAt } from './picking.js';
-import { setHoverNode, hoverNode, current, DATA_ROOT } from './state.js';
+import { setHoverNode, hoverNode, current, DATA_ROOT, setHighlightNode } from './state.js';
 import { updateTooltip } from './tooltip.js';
 import { requestRender } from './render.js';
 import { goToNode, fitNodeInView } from './navigation.js';
@@ -23,12 +23,12 @@ export function setupMouseEvents() {
       lastPan = { x, y }; 
       requestRender(); 
       ttip.style.opacity = 0;
-      const { thumbDelayTimer, hideBigPreview, isPreviewPinned } = await import('./images.js');
-      if (thumbDelayTimer) { 
-        clearTimeout(thumbDelayTimer); 
-        thumbDelayTimer = null; 
+      const images = await import('./images.js');
+      if (images.thumbDelayTimer) { 
+        clearTimeout(images.thumbDelayTimer); 
+        images.thumbDelayTimer = null; 
       }
-      if (!isPreviewPinned) hideBigPreview();
+      if (!images.isPreviewPinned) images.hideBigPreview();
       return; 
     }
     const n = pickNodeAt(x, y); 
@@ -40,13 +40,13 @@ export function setupMouseEvents() {
   canvas.addEventListener('mouseleave', async () => { 
     setHoverNode(null); 
     ttip.style.opacity = 0; 
-    const { lastThumbShownForId, thumbDelayTimer, hideBigPreview, isPreviewPinned } = await import('./images.js');
-    lastThumbShownForId = 0; 
-    if (thumbDelayTimer) { 
-      clearTimeout(thumbDelayTimer); 
-      thumbDelayTimer = null; 
+    const images = await import('./images.js');
+    images.lastThumbShownForId = 0; 
+    if (images.thumbDelayTimer) { 
+      clearTimeout(images.thumbDelayTimer); 
+      images.thumbDelayTimer = null; 
     } 
-    if (!isPreviewPinned) hideBigPreview(); 
+    if (!images.isPreviewPinned) images.hideBigPreview(); 
     requestRender(); 
   });
 
@@ -141,15 +141,15 @@ export function setupKeyboardEvents() {
       e.preventDefault();
     } else if (e.code === 'KeyP') {
       const target = hoverNode || current;
-      const { isPreviewPinned, pinPreviewFor, unpinPreview, showBigFor, hideBigPreview } = await import('./images.js');
-      if (!isPreviewPinned) {
+      const images = await import('./images.js');
+      if (!images.isPreviewPinned) {
         if (target) {
-          pinPreviewFor(target);
-          showBigFor(target);
+          images.pinPreviewFor(target);
+          images.showBigFor(target);
         }
       } else {
-        unpinPreview(); 
-        if (!hoverNode) hideBigPreview();
+        images.unpinPreview(); 
+        if (!hoverNode) images.hideBigPreview();
       }
       e.preventDefault();
     } else if (e.code === 'Slash' || e.code === 'IntlRo' || e.key === 'F1' || e.code === 'F1') {

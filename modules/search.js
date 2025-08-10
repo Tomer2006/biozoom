@@ -75,7 +75,7 @@ export function clearSearch() {
   requestRender();
 }
 
-export function surpriseMe() {
+export async function surpriseMe() {
   const { allNodes } = await import('./state.js');
   if (!allNodes.length) return; 
   const leaves = allNodes.filter(n => !n.children || n.children.length === 0); 
