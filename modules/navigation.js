@@ -4,6 +4,7 @@ import { rebuildNodeMap, state } from './state.js';
 import { updateDeepLinkFromNode } from './deeplink.js';
 import { animateToCam } from './camera.js';
 import { requestRender, W, H } from './canvas.js';
+import { loadChildrenIfNeeded } from './lazy.js';
 
 export function setBreadcrumbs(node) {
   if (!breadcrumbsEl) return;
@@ -40,7 +41,8 @@ export function fitNodeInView(node, frac = 0.35) {
   animateToCam(d._vx, d._vy, k);
 }
 
-export function goToNode(node, animate = true) {
+export async function goToNode(node, animate = true) {
+  await loadChildrenIfNeeded(node);
   state.current = node;
   state.layout = layoutFor(state.current);
   rebuildNodeMap();
@@ -54,6 +56,21 @@ export function goToNode(node, animate = true) {
     state.camera.y = 0;
     state.camera.k = Math.min(W, H) / state.layout.diameter;
   }
+  requestRender();
+}
+
+export function relayoutPreserveView() {
+  // Recompute layout for current node and rebuild mappings, keeping camera where it is
+  if (!state.current) return;
+  const cx = state.camera.x;
+  const cy = state.camera.y;
+  const ck = state.camera.k;
+  state.layout = layoutFor(state.current);
+  rebuildNodeMap();
+  state.camera.x = cx;
+  state.camera.y = cy;
+  state.camera.k = ck;
+  setBreadcrumbs(state.current);
   requestRender();
 }
 

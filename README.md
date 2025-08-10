@@ -110,6 +110,15 @@ Notes:
 - **Large datasets feel slow**: zoom in; labels only render for sufficiently large circles.
 - **Invalid JSON**: the loader will show the parse error in the modal.
 
+### Large datasets (lazy loading)
+- The app can lazy-load subtrees per node using `childrenUrl` to avoid loading huge files at once.
+- Use the provided splitter to convert a large `big.json` into chunked files:
+  - Place your file at project root as `big.json`.
+  - Run: `npm run split` (requires Node 18+). This generates `data/` with a `root.json` and many chunk files.
+  - Deploy the `data/` folder to Netlify with your site.
+  - Open with query: `?data=/data/root.json` (e.g., `https://your-site.netlify.app/?data=%2Fdata%2Froot.json`).
+  - As you click or zoom into nodes that have `childrenUrl`, the app fetches those subtrees on demand.
+
 ### License
 MIT 
 

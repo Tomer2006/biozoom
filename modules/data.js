@@ -1,4 +1,4 @@
-import { LEVELS } from './constants.js';
+// No hardcoded levels; infer by depth when missing
 import { clearIndex, registerNode, state } from './state.js';
 import { setProgress, showLoading, hideLoading } from './loading.js';
 import { progressLabel } from './dom.js';
@@ -8,7 +8,7 @@ import { requestRender, W, H } from './canvas.js';
 import { setBreadcrumbs } from './navigation.js';
 
 function inferLevelByDepth(depth) {
-  return LEVELS[depth] || `Level ${depth}`;
+  return `Level ${depth}`;
 }
 
 export function mapToChildren(obj) {
@@ -42,6 +42,7 @@ export function normalizeTree(rootLike) {
     }
     return { name: 'Life', level: 'Life', children: mapToChildren(rootLike) };
   }
+  // Allow lazy children via childrenUrl
   if (!Array.isArray(rootLike.children)) rootLike.children = rootLike.children ? [].concat(rootLike.children) : [];
   return rootLike;
 }
