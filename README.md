@@ -77,7 +77,7 @@ Notes:
 - D3 `pack()` produces circle positions/sizes; circle size ≈ number of descendant leaves.
 - Label placement prioritizes larger labels and avoids overlap.
 - Camera supports smooth pan/zoom with easing.
-1
+15
 ### Project layout
 - `index.html`: UI skeleton and includes D3; loads `app-modular.js`
 - `styles.css`: theme and layout
