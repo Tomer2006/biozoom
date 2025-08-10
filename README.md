@@ -11,6 +11,8 @@ Interactive circle‑packing explorer for biological taxonomy powered by D3.
 - **Web search** integration (Google, Wikipedia, GBIF, NCBI, CoL, iNaturalist).
 - **Custom JSON loading** via modal (paste or file).
 - **Demo data** generator for instant play.
+- **Deep links**: URL hash tracks the current path; use Copy Link to share the exact view.
+- **PNG export**: Snapshot the current view.
  
 
 ### Quick start
@@ -26,17 +28,23 @@ Interactive circle‑packing explorer for biological taxonomy powered by D3.
 - **Mouse Wheel**: Smooth zoom
 - **Middle Drag**: Pan
 - **Keyboard S**: Web search hovered/current node
+- **Keyboard R**: Reset to root
+- **Keyboard F**: Fit hovered/current node in view
+- **Keyboard P**: Pin/unpin image preview
+- **Keyboard ? / F1**: Toggle help
 
 ### UI overview
-- Top bar:
+- **Top bar**:
   - `Load JSON`: paste or upload a JSON file
   - `Demo Data`: build a synthetic tree
   - Provider select + `Web Search`: open selected provider for hovered/current node
-  - `Tiny Circles`: culls tiny circles to keep rendering fast when zoomed out
   - Search field: find by name (supports partial matches)
   - `Surprise Me`: jump to a random deepest leaf
+  - `Fit`: fit hovered/current node into view
+  - `Copy Link`: copy a deep link to the current view (URL hash)
+  - `Export PNG`: snapshot the canvas
   - `Reset`: back to root
-- Breadcrumbs: click any crumb to navigate up
+- **Breadcrumbs**: click any crumb to navigate up (also updates the URL hash for deep linking)
 
 ### Data loading
 On startup, the app tries (in order):
@@ -71,10 +79,28 @@ Notes:
 - Camera supports smooth pan/zoom with easing.
 
 ### Project layout
-- `index.html`: UI skeleton and includes D3
+- `index.html`: UI skeleton and includes D3; loads `app-modular.js`
 - `styles.css`: theme and layout
-- `app.js`: rendering, input, data ingestion, navigation
+- `app-modular.js`: entry that imports the modular app
+- `modules/`: modular source files
+  - `main.js`: bootstraps event handlers and starts rendering
+  - `canvas.js`: canvas context and sizing
+  - `camera.js`: pan/zoom state and animations
+  - `constants.js`: levels, palette, render thresholds
+  - `deeplink.js`: encode/decode and update URL hash for deep links
+  - `dom.js`: references to DOM elements
+  - `events.js`: mouse, wheel, and keyboard handlers; buttons wiring
+  - `layout.js`: D3 pack layout and coordinate preparation
+  - `navigation.js`: breadcrumbs, go-to-node, fit-in-view
+  - `picking.js`: hit testing to find the node under the cursor
+  - `render.js`: draw circles and labels efficiently
+  - `search.js`: local search, pulse highlight, surprise me
+  - `state.js`: shared app state and indexes
 - `tree.json`: sample nested-key dataset
+
+### Deep links and sharing
+- The URL hash encodes the path to the current node (e.g., `#/Life/Eukarya/Animalia/...`).
+- Use `Copy Link` to copy a URL you can share; opening it restores the same view.
 
 ### Troubleshooting
 - **CORS / fetch errors**: run a local server (see Quick start). Opening via `file://` will load demo data only.
