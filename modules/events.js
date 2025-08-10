@@ -13,7 +13,7 @@ import { W, H } from './canvas.js';
 let isMiddlePanning = false, lastPan = null;
 
 export function setupMouseEvents() {
-  canvas.addEventListener('mousemove', (ev) => {
+  canvas.addEventListener('mousemove', async (ev) => {
     const rect = canvas.getBoundingClientRect(); 
     const x = ev.clientX - rect.left, y = ev.clientY - rect.top;
     if (isMiddlePanning && lastPan) { 
@@ -37,7 +37,7 @@ export function setupMouseEvents() {
     requestRender();
   });
 
-  canvas.addEventListener('mouseleave', () => { 
+  canvas.addEventListener('mouseleave', async () => { 
     setHoverNode(null); 
     ttip.style.opacity = 0; 
     const { lastThumbShownForId, thumbDelayTimer, hideBigPreview, isPreviewPinned } = await import('./images.js');
@@ -107,7 +107,7 @@ export function setupKeyboardEvents() {
   }
 
   // Provider search
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', async (e) => {
     const active = document.activeElement;
     const tag = (active && active.tagName) || '';
     const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (active && active.isContentEditable === true);
@@ -122,7 +122,7 @@ export function setupKeyboardEvents() {
   });
 
   // Other shortcuts
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', async (e) => {
     const active = document.activeElement;
     const tag = (active && active.tagName) || '';
     const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (active && active.isContentEditable === true);

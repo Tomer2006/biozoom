@@ -1,4 +1,5 @@
 /* Camera and Animation */
+import { W, H } from './canvas.js';
 export const camera = { x: 0, y: 0, k: 1 };
 export const targetCam = { x: 0, y: 0, k: 1 };
 export let animating = false;
@@ -24,11 +25,9 @@ export function animateToCam(nx, ny, nk, dur = 700) {
 }
 
 export function worldToScreen(x, y) { 
-  const { W, H } = await import('./canvas.js');
   return [W/2 + (x - camera.x) * camera.k, H/2 + (y - camera.y) * camera.k]; 
 }
 
 export function screenToWorld(px, py) { 
-  const { W, H } = await import('./canvas.js');
   return [camera.x + (px - W/2) / camera.k, camera.y + (py - H/2) / camera.k]; 
 }
