@@ -1,0 +1,451 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Eukaryota": {
+        "Viridiplantae": {
+          "Streptophyta": {
+            "Mesostigmatophyceae": {
+              "Spirotaenia": {
+                "Spirotaenia condensata": {},
+                "Spirotaenia minuta": {},
+                "unclassified Spirotaenia": {
+                  "Spirotaenia sp. BC-2016": {},
+                  "Spirotaenia sp. CCAC 0214": {},
+                  "Spirotaenia sp.": {}
+                }
+              },
+              "Mesostigmatales": {
+                "Mesostigmataceae": {
+                  "Mesostigma": {
+                    "Mesostigma viride": {}
+                  }
+                }
+              },
+              "environmental samples": {
+                "uncultured mesostigmatophycean": {}
+              }
+            },
+            "Chlorokybophyceae": {
+              "Chlorokybales": {
+                "Chlorokybaceae": {
+                  "Chlorokybus": {
+                    "Chlorokybus atmophyticus": {},
+                    "unclassified Chlorokybus": {
+                      "Chlorokybus sp. cort11": {},
+                      "Chlorokybus sp.": {}
+                    },
+                    "Chlorokybus melkonianii": {},
+                    "Chlorokybus riethii": {},
+                    "Chlorokybus cerffii": {},
+                    "Chlorokybus bremeri": {}
+                  }
+                }
+              }
+            },
+            "Klebsormidiophyceae": {
+              "Klebsormidiales": {
+                "Klebsormidiaceae": {
+                  "Klebsormidium": {
+                    "Klebsormidium flaccidum": {},
+                    "Klebsormidium fluitans": {},
+                    "Klebsormidium nitens": {},
+                    "Klebsormidium subtilissimum": {},
+                    "Klebsormidium bilatum": {},
+                    "environmental samples": {
+                      "uncultured Klebsormidium sp.": {}
+                    },
+                    "Klebsormidium acidophilum": {},
+                    "Klebsormidium dissectum": {},
+                    "Klebsormidium crenulatum": {},
+                    "Klebsormidium elegans": {},
+                    "Klebsormidium mucosum": {},
+                    "Klebsormidium cf. bilatum TR 13": {},
+                    "Klebsormidium cf. crenulatum 'Crimea'": {},
+                    "Klebsormidium subtile": {},
+                    "Klebsormidium cf. flaccidum ACKU800": {},
+                    "Klebsormidium cf. flaccidum Biof4": {},
+                    "Klebsormidium cf. flaccidum Lira7": {},
+                    "Klebsormidium cf. flaccidum TR 44": {},
+                    "Klebsormidium africanum": {},
+                    "Klebsormidium karooense": {},
+                    "Klebsormidium vermiculatum": {},
+                    "Klebsormidium chilense": {},
+                    "Klebsormidium delicatum": {},
+                    "Klebsormidium deserticola": {},
+                    "Klebsormidium sylvaticum": {},
+                    "unclassified Klebsormidium": {
+                      "Klebsormidium sp.": {},
+                      "Klebsormidium sp. SAG 2065": {},
+                      "Klebsormidium sp. GALW015298": {},
+                      "Klebsormidium sp. GALW015300": {},
+                      "Klebsormidium sp. GALW015340": {},
+                      "Klebsormidium sp. GALW015441": {},
+                      "Klebsormidium sp. GALW015462": {},
+                      "Klebsormidium sp. GALW015463": {},
+                      "Klebsormidium sp. GALW015468": {},
+                      "Klebsormidium sp. GALW015472": {},
+                      "Klebsormidium sp. GALW015473": {},
+                      "Klebsormidium sp. GALW015478": {},
+                      "Klebsormidium sp. GALW015492": {},
+                      "Klebsormidium sp. GALW015493": {},
+                      "Klebsormidium sp. GALW015499": {},
+                      "Klebsormidium sp. GALW015548": {},
+                      "Klebsormidium sp. GALW015559": {},
+                      "Klebsormidium sp. GALW015560": {},
+                      "Klebsormidium sp. ROS85/1": {},
+                      "Klebsormidium sp. UNA00067477": {},
+                      "Klebsormidium sp. 14621.10.54": {},
+                      "Klebsormidium sp. 15051.6": {},
+                      "Klebsormidium sp. ACKU379": {},
+                      "Klebsormidium sp. ACKU799": {},
+                      "Klebsormidium sp. ACKU801": {},
+                      "Klebsormidium sp. Bacota": {},
+                      "Klebsormidium sp. Namibia 5": {},
+                      "Klebsormidium sp. SAG 2107": {},
+                      "Klebsormidium sp. SAG 2108": {},
+                      "Klebsormidium sp. SAG 2109": {},
+                      "Klebsormidium sp. SAG 2112": {},
+                      "Klebsormidium sp. SAG 2116": {},
+                      "Klebsormidium sp. TR 11": {},
+                      "Klebsormidium sp. TR 18": {},
+                      "Klebsormidium sp. TR 2": {},
+                      "Klebsormidium sp. TR 22": {},
+                      "Klebsormidium sp. TR 31": {},
+                      "Klebsormidium sp. TR 34": {},
+                      "Klebsormidium sp. TR 35": {},
+                      "Klebsormidium sp. TR 38": {},
+                      "Klebsormidium sp. K01": {},
+                      "Klebsormidium sp. K06": {},
+                      "Klebsormidium sp. K16": {},
+                      "Klebsormidium sp. K20": {},
+                      "Klebsormidium sp. K34": {},
+                      "Klebsormidium sp. K05": {},
+                      "Klebsormidium sp. K07": {},
+                      "Klebsormidium sp. K08": {},
+                      "Klebsormidium sp. K13": {},
+                      "Klebsormidium sp. K18": {},
+                      "Klebsormidium sp. K02": {},
+                      "Klebsormidium sp. K12": {},
+                      "Klebsormidium sp. K42": {},
+                      "Klebsormidium sp. K11": {},
+                      "Klebsormidium sp. K26": {},
+                      "Klebsormidium sp. K27": {},
+                      "Klebsormidium sp. K35": {},
+                      "Klebsormidium sp. K37": {},
+                      "Klebsormidium sp. K47": {},
+                      "Klebsormidium sp. K19": {},
+                      "Klebsormidium sp. K43": {},
+                      "Klebsormidium sp. K39": {},
+                      "Klebsormidium sp. K44": {},
+                      "Klebsormidium sp. K09": {},
+                      "Klebsormidium sp. K40": {},
+                      "Klebsormidium sp. CAUP J302": {},
+                      "Klebsormidium sp. K10": {},
+                      "Klebsormidium sp. K22": {},
+                      "Klebsormidium sp. K28": {},
+                      "Klebsormidium sp. CCAP 335/20": {},
+                      "Klebsormidium sp. GTD4b-2": {},
+                      "Klebsormidium sp. SAG 335-5": {},
+                      "Klebsormidium sp. ASIB V103": {},
+                      "Klebsormidium sp. Voels5": {},
+                      "Klebsormidium sp. St. Siegmund2": {},
+                      "Klebsormidium sp. Kuehtai1": {},
+                      "Klebsormidium sp. cort10": {},
+                      "Klebsormidium sp. ASIB V100": {},
+                      "Klebsormidium sp. Bremen": {},
+                      "Klebsormidium sp. Strassberg1": {},
+                      "Klebsormidium sp. Hohenzoll2": {},
+                      "Klebsormidium sp. Pitztal1": {},
+                      "Klebsormidium sp. St. Siegmund1": {},
+                      "Klebsormidium sp. St. Siegmund3": {},
+                      "Klebsormidium sp. Stubai1": {},
+                      "Klebsormidium sp. Kuehtai2": {},
+                      "Klebsormidium sp. BotG2": {},
+                      "Klebsormidium sp. BotG4": {},
+                      "Klebsormidium sp. ASIB V108": {},
+                      "Klebsormidium sp. AH2": {},
+                      "Klebsormidium sp. Strassberg2": {},
+                      "Klebsormidium sp. Strassberg3": {},
+                      "Klebsormidium sp. Stubai3": {},
+                      "Klebsormidium sp. Obergurgl": {},
+                      "Klebsormidium sp. Ueberlingalm": {},
+                      "Klebsormidium sp. Voels2": {},
+                      "Klebsormidium sp. Voels8": {},
+                      "Klebsormidium sp. Voels4": {},
+                      "Klebsormidium sp. Voels7": {},
+                      "Klebsormidium sp. BotG1": {},
+                      "Klebsormidium sp. Rauth2": {},
+                      "Klebsormidium sp. Oberau2": {},
+                      "Klebsormidium sp. Patscherkofel": {},
+                      "Klebsormidium sp. Hohe Mut": {},
+                      "Klebsormidium sp. Hohenzoll1": {},
+                      "Klebsormidium sp. Birgitzer Alm": {},
+                      "Klebsormidium sp. Pitztal2": {},
+                      "Klebsormidium sp. Rauth1": {},
+                      "Klebsormidium sp. Pitztal3": {},
+                      "Klebsormidium sp. AH1": {},
+                      "Klebsormidium sp. SAG 37.86": {},
+                      "Klebsormidium sp. TR42": {},
+                      "Klebsormidium sp. TR44": {},
+                      "Klebsormidium sp. SAG 32.91": {},
+                      "Klebsormidium sp. CCAP 335/15": {},
+                      "Klebsormidium sp. CCAP 335/13": {},
+                      "Klebsormidium sp. SAG 13.91": {},
+                      "Klebsormidium sp. SEG37-2": {},
+                      "Klebsormidium sp. SEG37-3": {},
+                      "Klebsormidium sp. AEW35-5": {},
+                      "Klebsormidium sp. SEW17-2": {},
+                      "Klebsormidium sp. AEG1-1": {},
+                      "Klebsormidium sp. AEG14-2": {},
+                      "Klebsormidium sp. AEW35-3": {},
+                      "Klebsormidium sp. SEG30-4": {},
+                      "Klebsormidium sp. AEG12-1": {},
+                      "Klebsormidium sp. HEG3-1": {},
+                      "Klebsormidium sp. AEG12-3": {},
+                      "Klebsormidium sp. AEG18-2": {},
+                      "Klebsormidium sp. SEG37-4": {},
+                      "Klebsormidium sp. AEW23-1": {},
+                      "Klebsormidium sp. HEW42-2": {},
+                      "Klebsormidium sp. HEW42-3": {},
+                      "Klebsormidium sp. HEW42-5": {},
+                      "Klebsormidium sp. HEW42-7": {},
+                      "Klebsormidium sp. SEG14-4": {},
+                      "Klebsormidium sp. SEG31-3": {},
+                      "Klebsormidium sp. AEW19-6": {},
+                      "Klebsormidium sp. AEG42-2": {},
+                      "Klebsormidium sp. HEW40-1": {},
+                      "Klebsormidium sp. HEW36-3": {},
+                      "Klebsormidium sp. SEG8-2": {},
+                      "Klebsormidium sp. SEG8-3": {},
+                      "Klebsormidium sp. AEG18-1": {},
+                      "Klebsormidium sp. SEG13-1": {},
+                      "Klebsormidium sp. SEG13-2": {},
+                      "Klebsormidium sp. AEW13-1": {},
+                      "Klebsormidium sp. AEW13-3": {},
+                      "Klebsormidium sp. AEW37-2": {},
+                      "Klebsormidium sp. HEW44-3": {},
+                      "Klebsormidium sp. AEW37-1": {},
+                      "Klebsormidium sp. SEW29-1": {},
+                      "Klebsormidium sp. AEW2-6": {},
+                      "Klebsormidium sp. AEW13-2": {},
+                      "Klebsormidium sp. SEW15-1": {},
+                      "Klebsormidium sp. SEW26-4": {},
+                      "Klebsormidium sp. SEW25-3": {},
+                      "Klebsormidium sp. SEW26-5": {},
+                      "Klebsormidium sp. SEW38-2": {},
+                      "Klebsormidium sp. SEW26-6": {},
+                      "Klebsormidium sp. SEW28-1": {},
+                      "Klebsormidium sp. SEW28-2": {},
+                      "Klebsormidium sp. SEW38-1": {},
+                      "Klebsormidium sp. SEW26-1": {},
+                      "Klebsormidium sp. AEW35-1": {},
+                      "Klebsormidium sp. AEW33-1": {},
+                      "Klebsormidium sp. AEW35-4": {},
+                      "Klebsormidium sp. AEW35-7": {},
+                      "Klebsormidium sp. AEW33-6": {},
+                      "Klebsormidium sp. HEW44-2": {},
+                      "Klebsormidium sp. HEW44-4": {},
+                      "Klebsormidium sp. HEW21-1": {},
+                      "Klebsormidium sp. AEW33-3": {},
+                      "Klebsormidium sp. HEW12-1": {},
+                      "Klebsormidium sp. HEW12-2": {},
+                      "Klebsormidium sp. HEW15-5": {},
+                      "Klebsormidium sp. HEW19-1": {},
+                      "Klebsormidium sp. SEW25-1": {},
+                      "Klebsormidium sp. SEW25-8": {},
+                      "Klebsormidium sp. HEW1-3": {},
+                      "Klebsormidium sp. HEW42-9": {},
+                      "Klebsormidium sp. HEW1-2": {},
+                      "Klebsormidium sp. HEW1-5": {},
+                      "Klebsormidium sp. HEW1-7": {},
+                      "Klebsormidium sp. SEW35-1": {},
+                      "Klebsormidium sp. HEW1-4": {},
+                      "Klebsormidium sp. HEW1-6": {},
+                      "Klebsormidium sp. SEW26-3": {},
+                      "Klebsormidium sp. SEW35-3": {},
+                      "Klebsormidium sp. SEW39-1": {},
+                      "Klebsormidium sp. SEW35-6": {},
+                      "Klebsormidium sp. SEW38-4": {},
+                      "Klebsormidium sp. JK1": {},
+                      "Klebsormidium sp. JKK12": {},
+                      "Klebsormidium sp. JKK15": {},
+                      "Klebsormidium sp. JKK16": {},
+                      "Klebsormidium sp. JKK17": {},
+                      "Klebsormidium sp. JKK18": {},
+                      "Klebsormidium sp. JKK2": {},
+                      "Klebsormidium sp. JP1": {},
+                      "Klebsormidium sp. JS1": {},
+                      "Klebsormidium sp. JS4": {},
+                      "Klebsormidium sp. JVK12": {},
+                      "Klebsormidium sp. JVK6": {},
+                      "Klebsormidium sp. JVK8": {},
+                      "Klebsormidium sp. K48": {},
+                      "Klebsormidium sp. UC49": {},
+                      "Klebsormidium sp. UC76": {},
+                      "Klebsormidium sp. UO02": {},
+                      "Klebsormidium sp. UO05": {},
+                      "Klebsormidium sp. UO06": {},
+                      "Klebsormidium sp. UO21": {},
+                      "Klebsormidium sp. UO31": {},
+                      "Klebsormidium sp. UO70": {},
+                      "Klebsormidium sp. UO71": {},
+                      "Klebsormidium sp. UW106": {},
+                      "Klebsormidium sp. UW111": {},
+                      "Klebsormidium sp. UW113": {},
+                      "Klebsormidium sp. UW201": {},
+                      "Klebsormidium sp. UW219": {},
+                      "Klebsormidium sp. W101": {},
+                      "Klebsormidium sp. W104": {},
+                      "Klebsormidium sp. W108": {},
+                      "Klebsormidium sp. W109": {},
+                      "Klebsormidium sp. W113": {},
+                      "Klebsormidium sp. W206": {},
+                      "Klebsormidium sp. W208": {},
+                      "Klebsormidium sp. W211": {},
+                      "Klebsormidium sp. W301": {},
+                      "Klebsormidium sp. W302": {},
+                      "Klebsormidium sp. W303": {},
+                      "Klebsormidium sp. W307": {},
+                      "Klebsormidium sp. W315": {},
+                      "Klebsormidium sp. W319": {},
+                      "Klebsormidium sp. W320": {},
+                      "Klebsormidium sp. W419": {},
+                      "Klebsormidium sp. LUK S50": {},
+                      "Klebsormidium sp. LUK S63": {},
+                      "Klebsormidium sp. 1 AS-2014": {},
+                      "Klebsormidium sp. 2 AS-2014": {},
+                      "Klebsormidium sp. 837I": {},
+                      "Klebsormidium sp. 834I": {},
+                      "Klebsormidium sp. S7": {},
+                      "Klebsormidium sp. DR-2016": {},
+                      "Klebsormidium sp. SAG 51.86": {},
+                      "Klebsormidium sp. AD31": {},
+                      "Klebsormidium sp. AD32": {},
+                      "Klebsormidium sp. AD336": {},
+                      "Klebsormidium sp. J06": {},
+                      "Klebsormidium sp. J07": {},
+                      "Klebsormidium sp. J11": {},
+                      "Klebsormidium sp. MA12": {},
+                      "Klebsormidium sp. MA16": {},
+                      "Klebsormidium sp. MA24": {},
+                      "Klebsormidium sp. P05": {},
+                      "Klebsormidium sp. P08": {},
+                      "Klebsormidium sp. P09": {},
+                      "Klebsormidium sp. Ru-10-2": {},
+                      "Klebsormidium sp. Ru-10-3": {},
+                      "Klebsormidium sp. NH-10.1": {},
+                      "Klebsormidium sp. NH-11": {},
+                      "Klebsormidium sp. NV-19.1": {},
+                      "Klebsormidium sp. Z-7-2": {},
+                      "Klebsormidium sp. Z-14-6": {},
+                      "Klebsormidium sp. Z-10-5": {},
+                      "Klebsormidium sp. WD-1-5": {},
+                      "Klebsormidium sp. P JS-2020": {},
+                      "Klebsormidium sp. Z JS-2020": {},
+                      "Klebsormidium sp. GA6": {},
+                      "Klebsormidium sp. GA16": {},
+                      "Klebsormidium sp. GA10": {},
+                      "Klebsormidium sp. ASYA19": {},
+                      "Klebsormidium sp. NC-DW": {},
+                      "Klebsormidium sp. BEA0030B": {},
+                      "Klebsormidium sp. PTT3KF2": {},
+                      "Klebsormidium sp. SEV1-VF17pt": {},
+                      "Klebsormidium sp. TAA2-JRJ3pt": {},
+                      "Klebsormidium sp. LDpt": {},
+                      "Klebsormidium sp. MB-2023a": {}
+                    }
+                  },
+                  "Interfilum": {
+                    "Interfilum terricola": {},
+                    "Interfilum paradoxum": {},
+                    "Interfilum massjukiae": {},
+                    "unclassified Interfilum": {
+                      "Interfilum sp. SAG 36.88": {},
+                      "Interfilum sp. SAG 2100": {},
+                      "Interfilum sp. SAG 2101": {},
+                      "Interfilum sp. SAG 2147": {},
+                      "Interfilum sp. LUK304": {},
+                      "Interfilum sp. LUK306": {},
+                      "Interfilum sp. LUK308": {},
+                      "Interfilum sp. LUK313": {},
+                      "Interfilum sp. LUK314": {},
+                      "Interfilum sp. LUK317": {},
+                      "Interfilum sp. TR 17": {},
+                      "Interfilum sp. SSK": {},
+                      "Interfilum sp. UTEX 177": {},
+                      "Interfilum sp. LC006-27.2": {},
+                      "Interfilum sp. NV-12": {},
+                      "Interfilum sp. GA10": {},
+                      "Interfilum sp. SAG 2652": {},
+                      "Interfilum sp.": {}
+                    }
+                  },
+                  "environmental samples": {
+                    "uncultured Klebsormidium": {},
+                    "Klebsormidium sp. enrichment culture clone GOGrpn_K09": {},
+                    "uncultured Interfilum": {}
+                  },
+                  "unclassified Klebsormidiaceae": {
+                    "Klebsormidiaceae sp.": {}
+                  }
+                },
+                "Elakatotrichaceae": {
+                  "Elakatothrix": {
+                    "Elakatothrix obtusata": {}
+                  }
+                },
+                "Klebsormidiales incertae sedis": {},
+                "unclassified Klebsormidiales": {
+                  "Klebsormidiales sp.": {}
+                }
+              },
+              "environmental samples": {
+                "uncultured Klebsormidiophyceae": {}
+              },
+              "unclassified Klebsormidiophyceae": {
+                "Klebsormidiophyceae sp.": {}
+              },
+              "Klebsormidiophyceae incertae sedis": {
+                "Streptofilum": {
+                  "Streptofilum capillatum": {},
+                  "unclassified Streptofilum": {
+                    "Streptofilum sp. BC4-VF8pt": {},
+                    "Streptofilum sp. ZNP2-VF4pt": {}
+                  },
+                  "Streptofilum arcticum": {}
+                }
+              },
+              "Entransiales": {
+                "Entransiaceae": {
+                  "Entransia": {
+                    "Entransia fimbriata": {},
+                    "unclassified Entransia": {
+                      "Entransia sp. UTEX LB 2793": {}
+                    }
+                  }
+                }
+              },
+              "Hormidiellales": {
+                "Hormidiellaceae": {
+                  "Hormidiella": {
+                    "Hormidiella attenuata": {},
+                    "Hormidiella parvula": {}
+                  },
+                  "Streptosarcina": {
+                    "Streptosarcina arenaria": {},
+                    "Streptosarcina costaricana": {},
+                    "unclassified Streptosarcina": {
+                      "Streptosarcina sp. SLS-2020": {},
+                      "Streptosarcina sp.": {}
+                    },
+                    "Streptosarcina moshanensis": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "root": {
+    "Viruses": {
+      "Riboviria": {
+        "Orthornavirae": {
+          "Negarnaviricota": {
+            "Polyploviricotina": {
+              "Insthoviricetes": {
+                "Articulavirales": {
+                  "Amnoonviridae": {
+                    "Tilapinevirus": {
+                      "Tilapinevirus tilapiae": {
+                        "Tilapia lake virus": {}
+                      }
+                    },
+                    "unclassified Amnoonviridae": {
+                      "Flavolineata virus": {},
+                      "Piscibus virus": {},
+                      "Fancy-tailed guppy virus": {},
+                      "Rainbow skink amnoonvirus": {},
+                      "Lipesoluc virus 1": {},
+                      "Lizard amnoonvirus 2": {},
+                      "Flatfish amnoonvirus 1": {},
+                      "Catfish amnoonvirus 1": {},
+                      "Lizard amnoonvirus 1": {},
+                      "Loach amnoonvirus 1": {},
+                      "Cod amnoonvirus 1": {},
+                      "Pufferfish amnoonvirus 1": {},
+                      "Muraenolepis amnoonvirus": {},
+                      "Slender scalyhead amnoonvirus": {},
+                      "Spot-less plunderfish amnoonvirus": {}
+                    }
+                  },
+                  "unclassified Articulavirales": {
+                    "Lauta virus": {},
+                    "Henan sediment articulavirus": {},
+                    "Sichuan sediment articulavirus": {},
+                    "Spider cheliceravirus 1": {},
+                    "Spider cheliceravirus 2": {},
+                    "Spider cheliceravirus 3": {},
+                    "Spider cheliceravirus 4": {},
+                    "Spider cheliceravirus 5": {},
+                    "Spider cheliceravirus 6": {},
+                    "Spider cheliceravirus 7": {},
+                    "Spider cheliceravirus 8": {},
+                    "Spider cheliceravirus 9": {},
+                    "Spider cheliceravirus 10": {},
+                    "Spider cheliceravirus 11": {},
+                    "Spider cheliceravirus 12": {},
+                    "Spider cheliceravirus 13": {},
+                    "Hydra cnidenomovirus 1": {},
+                    "Nudibranch cnidenomovirus 1": {},
+                    "Nudibranch cnidenomovirus 2": {},
+                    "Heliopora cnidenomovirus 2": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

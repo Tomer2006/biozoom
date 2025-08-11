@@ -1,0 +1,290 @@
+{
+  "root": {
+    "Viruses": {
+      "Riboviria": {
+        "Orthornavirae": {
+          "Birnaviridae": {
+            "Aquabirnavirus": {
+              "unclassified Aquabirnavirus": {
+                "Marine birnavirus": {},
+                "Flounder aquabirnavirus": {},
+                "Mummichog aquabirnavirus": {},
+                "Japanese aquabirnavirus genogroup 7": {
+                  "Flounder aquabirnavirus DS": {},
+                  "Aquabirnavirus AKK02JD": {},
+                  "Aquabirnavirus AKK02RS": {},
+                  "Aquabirnavirus AKK02SS": {},
+                  "Aquabirnavirus AKK02SC": {},
+                  "Aquabirnavirus Izu6": {},
+                  "Aquabirnavirus Izu18": {},
+                  "Aquabirnavirus Obama10": {},
+                  "Aquabirnavirus Obama29": {}
+                },
+                "Aquabirnavirus TAB98": {},
+                "Aquabirnavirus NZ10": {},
+                "Aquabirnavirus NZ6": {},
+                "Aquabirnavirus TAB02": {},
+                "Aquabirnavirus Garra/F73-11/IRL/2011": {},
+                "Aquabirnavirus genogroup VII": {},
+                "Victorian trout aquabirnavirus": {},
+                "Tasmanian aquabirnavirus": {},
+                "Aquabirnavirus sp.": {},
+                "Aquabirnavirus tellinae": {
+                  "Tellina virus 2": {}
+                }
+              },
+              "Aquabirnavirus salmonidae": {
+                "Infectious pancreatic necrosis virus": {
+                  "Infectious pancreatic necrosis virus - Jasper": {},
+                  "Infectious pancreatic necrosis virus - N1": {},
+                  "Infectious pancreatic necrosis virus - Sp": {},
+                  "Infectious pancreatic necrosis virus serotype A6": {},
+                  "Infectious pancreatic necrosis virus - He": {},
+                  "Infectious pancreatic necrosis virus serotype A5": {},
+                  "Infectious pancreatic necrosis virus - Mexico": {}
+                }
+              },
+              "Aquabirnavirus ascitae": {
+                "Yellowtail ascites virus": {
+                  "Marine birnavirus - AY-98": {},
+                  "Marine birnavirus - H1": {},
+                  "Yellowtail ascites virus - Y-6": {},
+                  "Yellowtail ascites virus - YT-01A": {},
+                  "Paralichthys olivaceus birnavirus": {}
+                }
+              }
+            },
+            "Avibirnavirus": {
+              "Avibirnavirus gumboroense": {
+                "Infectious bursal disease virus": {
+                  "Infectious bursal disease virus 52/70": {},
+                  "Infectious bursal disease virus 002-73/AUS": {},
+                  "Infectious bursal disease virus CU-1": {},
+                  "Infectious bursal disease virus OH": {},
+                  "Infectious bursal disease virus PBG-98": {},
+                  "Infectious bursal disease virus STC": {},
+                  "Infectious bursal disease virus E": {},
+                  "Infectious bursal disease virus IM": {},
+                  "Infectious bursal disease virus Beh2003": {},
+                  "Infectious bursal disease virus chicken/UK/UK661/1989": {},
+                  "Infectious bursal disease virus chicken/Cuba/Soroa/1998": {}
+                }
+              }
+            },
+            "Entomobirnavirus": {
+              "unclassified Entomobirnavirus": {
+                "Tetranychus urticae-associated entomobirnavirus": {},
+                "Port Bolivar virus": {},
+                "Rodent Entomobirnavirus 1": {},
+                "Rodent Entomobirnavirus 2": {},
+                "Rodent entomobirnavirus": {}
+              },
+              "Entomobirnavirus drosophilae": {
+                "Drosophila X virus": {
+                  "Drosophila x virus (isolate Chung)": {}
+                }
+              },
+              "Entomobirnavirus anophelae": {
+                "Mosquito X virus": {}
+              }
+            },
+            "unclassified Birnaviridae": {
+              "Birnavirus sp.": {},
+              "Drosophila melanogaster birnavirus SW-2009a": {},
+              "Chicken proventricular necrosis virus": {},
+              "Espirito Santo virus": {},
+              "Culex Y virus": {},
+              "Eridge virus": {},
+              "Wenling jack mackerels birnavirus": {},
+              "Wenling japanese topeshark birnavirus": {},
+              "Birnaviridae sp.": {},
+              "Aedes birnavirus": {},
+              "porcine birnavirus": {},
+              "Porcupine birnavirus": {},
+              "Heilongjiang sediment birna-like virus 1": {},
+              "Heilongjiang sediment birna-like virus 2": {},
+              "Heilongjiang sediment birna-like virus 3": {},
+              "Henan birna-like virus 2": {},
+              "Henan sediment birna-like virus 1": {},
+              "Jiangsu birna-like virus 3": {},
+              "Jiangsu sediment birna-like virus 1": {},
+              "Jiangsu sediment birna-like virus 2": {},
+              "Jiangsu sediment birna-like virus 4": {},
+              "Sichuan sediment birna-like virus 1": {},
+              "Sichuan sediment birna-like virus 2": {},
+              "Sichuan sediment birna-like virus 3": {},
+              "Sichuan sediment birna-like virus 4": {},
+              "Sichuan sediment birna-like virus 5": {},
+              "Sichuan sediment birna-like virus 6": {},
+              "Sichuan sediment birna-like virus 7": {},
+              "Sichuan sediment birna-like virus 8": {},
+              "Sichuan sediment birna-like virus 9": {},
+              "South China Sea birna-like virus": {},
+              "Xinjiang sediment birna-like virus 1": {},
+              "Xinjiang sediment birna-like virus 2": {},
+              "Zhejiang birna-like virus": {},
+              "Yunnan birna-like virus 1": {},
+              "Yunnan birna-like virus 2": {},
+              "Yunnan sediment birna-like virus 3": {},
+              "Botrytis cinerea binarnavirus 6": {},
+              "Largemouth bass birnavirus": {},
+              "Flumine birnavirus": {},
+              "Monilinia fructicola binarnavirus 1": {},
+              "Bat faecal associated birna-like virus": {},
+              "Pinctada birnavirus": {},
+              "Leptosphaeria biglobosa letobirnavirus 1": {},
+              "Astatotilapia burtoni birnavirus": {},
+              "Petrochromis fasciolatus birnavirus": {},
+              "Spider birna-like virus": {},
+              "Rocky Mountain birnavirus": {},
+              "Cambodia Culex birnavirus": {},
+              "Wufeng shrew birnavirus 1": {},
+              "Siniperca chuatsi birnavirus": {},
+              "Ripufisk virus": {},
+              "Ripudirl virus": {},
+              "Ripupon virus": {},
+              "Ripudont virus": {},
+              "Cryptotermes secundus picobirna-like virus 1": {},
+              "Cryptotermes secundus picobirna-like virus 2": {},
+              "Rhizoctonia solani megabirnavirus 4": {},
+              "Shrew picobirnavirus 1": {},
+              "Shrew picobirnavirus 2": {},
+              "Shrew picobirnavirus 3": {},
+              "Shrew picobirnavirus 4": {},
+              "Shrew picobirnavirus 5": {},
+              "Mus rat picobirnavirus": {},
+              "Mandarin fish birnavirus": {},
+              "Oryctes associated picobirnavirus": {},
+              "Qianjiang birna-like virus 1": {},
+              "Apodemus agrarius picobirna-like virus": {},
+              "Hebei birna-like virus 2": {},
+              "Hebei birna-like virus 1": {},
+              "Fukang entomobirnavirus": {},
+              "Potato rot nematode birnavirus 1": {}
+            },
+            "Blosnavirus": {
+              "Blosnavirus channae": {
+                "Blotched snakehead virus": {}
+              },
+              "Blosnavirus lati": {
+                "Lates calcarifer birnavirus": {}
+              }
+            },
+            "Dronavirus": {
+              "Dronavirus drosophilae": {
+                "Drosophila B birnavirus": {}
+              }
+            },
+            "Ronavirus": {
+              "Ronavirus rotiferae": {
+                "Rotifer birnavirus strain Palavas": {}
+              }
+            },
+            "Telnavirus": {
+              "Telnavirus tellinae": {
+                "Tellina virus 1": {}
+              }
+            }
+          },
+          "Permutotetraviridae": {
+            "Alphapermutotetravirus": {
+              "unclassified Alphapermutotetravirus": {
+                "Alphapermutotetravirus sp.": {}
+              },
+              "Alphapermutotetravirus euprosternae": {
+                "Euprosterna elaeasa virus": {}
+              },
+              "Alphapermutotetravirus thoseae": {
+                "Thosea asigna virus": {}
+              }
+            },
+            "unclassified Permutotetraviridae": {
+              "Drosophila melanogaster tetravirus SW-2009a": {},
+              "Newfield virus": {},
+              "Permutotetraviridae sp.": {},
+              "Culex permutotetra-like virus": {},
+              "Vespa velutina associated permutotetra-like virus 1": {},
+              "Vespa velutina associated permutotetra-like virus 2": {},
+              "Scaphoideus titanus permutotetra-like virus 1": {},
+              "Viola philippica permutotetra like virus": {},
+              "Aedes permutotetra-like virus 1": {},
+              "Aedes permutotetra-like virus 2": {},
+              "Soybean thrips permutotetra-like virus 2": {},
+              "Soybean thrips permutotetra-like virus 3": {},
+              "Soybean thrips permutotetra-like virus 1": {},
+              "Hypera postica associated permutotetravirus": {},
+              "Vespula vulgaris Permutotera-like virus 1": {},
+              "Leuven Tetra-like virus 1": {},
+              "Guiyang permutotetra-like virus 1": {},
+              "Guiyang permutotetra-like virus 2": {},
+              "Sanya permutotetra-like virus 1": {},
+              "Sanya permutotetra-like virus 2": {},
+              "Sanya permutotetra-like virus 3": {},
+              "Sanya permutotetravirus 1": {},
+              "Sanya permutotetravirus 2": {},
+              "Sanya permutotetravirus 3": {},
+              "Guiyang cletus punctiger permutotetra-like virus 1": {},
+              "Lasius neglectus permutotetra-like virus 1": {},
+              "Uzakla mosquito-associated permutotetra-like virus": {},
+              "XiangYun permutotetra-like virus": {},
+              "Inari permutotetravirus": {},
+              "Eriocheir sinensis permutotetra-like virus": {},
+              "Cheeloo tick virus 5": {},
+              "Chemarfal virus 91": {},
+              "Arachnid permutotetra-like virus": {},
+              "Harvestman permutotetra-like virus": {},
+              "Mite permutotetra-like virus": {},
+              "Pseudoscorpian permutotetra-like virus": {},
+              "Spider permutotetra-like virus": {},
+              "Bolivia permutotetra-like virus": {},
+              "Brazil permutotetra-like virus 1": {},
+              "Brazil permutotetra-like virus 2": {},
+              "Brazil permutotetra-like virus 3": {},
+              "Chile permutotetra-like virus": {},
+              "Jingmen bat permutotetravirus 1": {},
+              "Jingmen bat permutotetravirus 2": {},
+              "Jingmen bat permutotetravirus 3": {},
+              "Jingmen rodent permutotetravirus 1": {},
+              "Jingmen rodent permutotetravirus 2": {},
+              "Wenzhou bat permutotetravirus 1": {},
+              "Wenzhou bat permutotetravirus 2": {},
+              "Wenzhou bat permutotetravirus 3": {},
+              "Wenzhou bat permutotetravirus 4": {},
+              "Wufeng shrew permutotetravirus 1": {},
+              "Wufeng shrew permutotetravirus 10": {},
+              "Wufeng shrew permutotetravirus 11": {},
+              "Wufeng shrew permutotetravirus 12": {},
+              "Wufeng shrew permutotetravirus 13": {},
+              "Wufeng shrew permutotetravirus 14": {},
+              "Wufeng shrew permutotetravirus 15": {},
+              "Wufeng shrew permutotetravirus 16": {},
+              "Wufeng shrew permutotetravirus 17": {},
+              "Wufeng shrew permutotetravirus 2": {},
+              "Wufeng shrew permutotetravirus 3": {},
+              "Wufeng shrew permutotetravirus 4": {},
+              "Wufeng shrew permutotetravirus 5": {},
+              "Wufeng shrew permutotetravirus 6": {},
+              "Wufeng shrew permutotetravirus 7": {},
+              "Wufeng shrew permutotetravirus 8": {},
+              "Wufeng shrew permutotetravirus 9": {},
+              "Aphis aurantii permutotetra-like virus": {},
+              "Scaphytopius permutotetra-like virus": {},
+              "Medvezhye pound Haematopota Permuto-like virus": {},
+              "Macrobrachium rosenbergii permutotetra-like virus 1": {},
+              "Blattella germanica permutotetra-like virus 1": {},
+              "Cryptotermes secundus permutotetra-like virus 1": {},
+              "Macrotermes subhyalinus permutotetra-like virus 1": {},
+              "Reticulitermes flavipes permutotetra-like virus 1": {},
+              "Crocidura shantungensis permutotetravirus": {},
+              "Laodelphax striatellus permutotetra-like virus 1": {},
+              "Qianjiang permutotetra-like virus 1": {},
+              "Qianjiang permutotetra-like virus 2": {},
+              "Qianjiang permutotetra-like virus 3": {},
+              "Laodelphax striatellus permutotetra-like virus": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

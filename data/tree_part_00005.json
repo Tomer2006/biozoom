@@ -1,0 +1,215 @@
+{
+  "root": {
+    "Viruses": {
+      "Riboviria": {
+        "Orthornavirae": {
+          "Negarnaviricota": {
+            "Polyploviricotina": {
+              "Insthoviricetes": {
+                "Articulavirales": {
+                  "Orthomyxoviridae": {
+                    "Thogotovirus": {
+                      "unclassified Thogotovirus": {
+                        "Thogotovirus dhoriense": {
+                          "Dhori virus (strain Indian/1313/61)": {},
+                          "Batken virus": {}
+                        },
+                        "Thogotovirus thogotoense": {
+                          "Thogoto virus (isolate SiAr 126)": {}
+                        },
+                        "Aransas Bay virus": {},
+                        "Rondonia thogotovirus": {},
+                        "Soybean thrips thogotovirus 2": {},
+                        "Soybean thrips thogotovirus 1": {},
+                        "Apis thogotovirus 1": {},
+                        "Tiliqua thogotovirus": {},
+                        "Water boatmen thogotovirus 1": {},
+                        "Xibalbanus thogotovirus 1": {},
+                        "Locust thogotovirus 1": {},
+                        "Spider thogotovirus 1": {},
+                        "Melitaea didyma thogotovirus 1": {},
+                        "Xuecheng tick thogotovirus": {}
+                      },
+                      "Thogotovirus bourbonense": {
+                        "Bourbon virus": {}
+                      },
+                      "Thogotovirus josense": {
+                        "Jos virus": {}
+                      },
+                      "Thogotovirus ozense": {
+                        "Oz virus": {}
+                      },
+                      "Thogotovirus sinuense": {
+                        "Sinu virus": {}
+                      },
+                      "Thogotovirus thailandense": {
+                        "Thailand tick thogotovirus": {}
+                      },
+                      "Thogotovirus upoluense": {
+                        "Upolu virus": {}
+                      }
+                    },
+                    "unclassified Orthomyxoviridae": {
+                      "unidentified influenza virus": {},
+                      "Fowl plague virus": {},
+                      "Swine influenza virus": {},
+                      "Duck influenza virus": {},
+                      "Cygnet River virus": {},
+                      "Tilapia virus AD-2016": {},
+                      "Rainbow trout orthomyxovirus-2": {},
+                      "Orthomyxoviridae sp.": {},
+                      "Whidbey virus": {},
+                      "Barns Ness dog whelk orthomyxo-like virus 1": {},
+                      "Wenling orthomyxo-like virus 1": {},
+                      "Wenling orthomyxo-like virus 2": {},
+                      "Yancheng orthomyxo-like virus": {},
+                      "Wenling hagfish influenza virus": {},
+                      "Wuhan asiatic toad influenza virus": {},
+                      "Wuhan spiny eel influenza virus": {},
+                      "Photinus pyralis orthomyxo-like virus 1": {},
+                      "Photinus pyralis orthomyxo-like virus 2": {},
+                      "Varroa orthomyxovirus-1": {},
+                      "Bombus-associated virus Orth1": {},
+                      "Longchuan virus": {},
+                      "Lestrade virus": {},
+                      "Culex orthomyxo-like virus": {},
+                      "Splett orthomyxo-like virus": {},
+                      "Neke harbour virus": {},
+                      "Uumaja virus": {},
+                      "Coleopteran orthomyxo-related virus OKIAV158": {},
+                      "Coleopteran orthomyxo-related virus OKIAV168": {},
+                      "Coleopteran orthomyxo-related virus OKIAV179": {},
+                      "Coleopteran orthomyxo-related virus OKIAV184": {},
+                      "Coleopteran orthomyxo-related virus OKIAV185": {},
+                      "Coleopteran orthomyxo-related virus OKIAV186": {},
+                      "Coleopteran orthomyxo-related virus OKIAV196": {},
+                      "Coleopteran orthomyxo-related virus OKIAV200": {},
+                      "Hemipteran orthomyxo-related virus OKIAV182": {},
+                      "Hemipteran orthomyxo-related virus OKIAV183": {},
+                      "Hemipteran orthomyxo-related virus OKIAV188": {},
+                      "Hemipteran orthomyxo-related virus OKIAV191": {},
+                      "Hemipteran orthomyxo-related virus OKIAV205": {},
+                      "Dipteran orthomyxo-related virus OKIAV193": {},
+                      "Dipteran orthomyxo-related virus OKIAV195": {},
+                      "Dermapteran orthomyxo-related virus OKIAV170": {},
+                      "Lepidopteran orthomyxo-related virus OKIAV1731": {},
+                      "Lepidopteran orthomyxo-related virus OKIAV178": {},
+                      "Orthopteran orthomyxo-related virus OKIAV160": {},
+                      "Phasmatodean orthomyxo-related virus OKIAV167": {},
+                      "Phasmatodean orthomyxo-related virus OKIAV172": {},
+                      "Phasmatodean orthomyxo-related virus OKIAV198": {},
+                      "Siphonapteran orthomyxo-related virus OKIAV157": {},
+                      "Zygentoman orthomyxo-related virus OKIAV204": {},
+                      "Blattodean orthomyxo-related virus OKIAV181": {},
+                      "Hymenopteran orthomyxo-related virus OKIAV173": {},
+                      "Thrips tabaci orthomyxo-like virus 1": {},
+                      "Thrips tabaci associated orthomyxo-like virus 1": {},
+                      "Cane toad influenza-like virus": {},
+                      "Chum salmon influenza-like virus": {},
+                      "Ornate chorus frog influenza-like virus": {},
+                      "Salamander influenza-like virus": {},
+                      "Siamese algae-eater influenza-like virus": {},
+                      "Ganwon-do orthomyxo-like virus": {},
+                      "Goettingen orthomyxo-like virus": {},
+                      "Solling orthomyxo-like virus": {},
+                      "Hemipteran orthomyxo-related virus OKIAV187": {},
+                      "Hemipteran orthomyxo-related virus OKIAV211": {},
+                      "Hymenopteran orthomyxo-related virus OKIAV171": {},
+                      "Hymenopteran orthomyxo-related virus OKIAV174": {},
+                      "Hymenopteran orthomyxo-related virus OKIAV175": {},
+                      "Neuropteran orthomyxo-related virus OKIAV190": {},
+                      "Neuropteran orthomyxo-related virus OKIAV210": {},
+                      "Orthopteran orthomyxo-related virus OKIAV207": {},
+                      "Raphidiopteran orthomyxo-related virus OKIAV180": {},
+                      "Aedes detritus orthomyxo-like virus": {},
+                      "Culex modestus orthomyxo-like virus": {},
+                      "Culex pipiens orthomyxo-like virus": {},
+                      "Ohshima virus": {},
+                      "Insect orthomyxo-like virus 1": {},
+                      "Coloiado orthomyxo-like virus": {},
+                      "Cane toad associated orthomyxovirus": {},
+                      "Xiangshan orthomyxo-like virus": {},
+                      "Aedes orthomyxo-like virus 2": {},
+                      "Palmetto orthomyxo-like virus": {},
+                      "Pyongtaek Culex Orthomyxovirus": {},
+                      "Oba virus": {},
+                      "Beijing sediment orthomyxo-like virus": {},
+                      "Guangxi sediment orthomyxo-like virus": {},
+                      "Hainan orthomyxo-like virus 1": {},
+                      "Hainan orthomyxo-like virus 2": {},
+                      "Heilongjiang sediment orthomyxo-like virus": {},
+                      "Xinjiang sediment orthomyxo-like virus 1": {},
+                      "Xinjiang sediment orthomyxo-like virus 2": {},
+                      "Xinjiang sediment orthomyxo-like virus 4": {},
+                      "Xinjiang sediment orthomyxo-like virus 5": {},
+                      "Henan sediment orthomyxo-like virus": {},
+                      "Xinjiang orthomyxo-like virus 3": {},
+                      "Yunnan sediment orthomyxo-like virus": {},
+                      "Sichuan orthomyxo-like virus 1": {},
+                      "Bactrocera correcta Orthomyxo-like virus": {},
+                      "Bactrocera correcta orthomyxo-like virus isolate Bl": {},
+                      "Bactrocera correcta orthomyxo-like virus isolate Bz": {},
+                      "Bactrocera tryoni orthomyxo-like virus": {},
+                      "Halyomorpha halys orthomyxo-like virus 1": {},
+                      "Cheilodipterus quinquelineatus orthomyxovirus": {},
+                      "XiangYun orthomyxo-like virus 1": {},
+                      "XiangYun orthomyxo-like virus 2": {},
+                      "XiangYun orthomyxo-like virus 3": {},
+                      "XiangYun orthomyxo-like virus 4": {},
+                      "XiangYun orthomyxo-like virus 5": {},
+                      "Zhangzhou Ortho tick virus 1": {},
+                      "Dali Ortho tick virus 1": {},
+                      "Tongren Ortho tick virus 1": {},
+                      "Yanbian Ortho tick virus 1": {},
+                      "Yushu Ortho tick virus 1": {},
+                      "Linzhi Ortho tick virus 1": {},
+                      "Qingyang Ortho tick virus 1": {},
+                      "Chuzhou Ortho tick virus 1": {},
+                      "Zhangzhou Ortho tick virus 2": {},
+                      "Xiangxi Ortho tick virus 1": {},
+                      "Bat faecal associated orthomyxo-like virus 1": {},
+                      "Pangolin Orthomyxoviridae sp. B5": {},
+                      "Newt influenza virus": {},
+                      "Armigeres orthomyxo-like virus 1": {},
+                      "Cheeloo orthomyxo-like virus": {},
+                      "Arthropod orthomyxo-like virus": {},
+                      "Cockroach orthomyxo-like virus": {},
+                      "Cockroach orthomyxo-like virus 2": {},
+                      "Cockroach orthomyxo-like virus 3": {},
+                      "Mbeech associated orthomyxo-like virus": {},
+                      "Moth orthomyxo-like virus": {},
+                      "Spider orthomyxo-like virus": {},
+                      "Yunnan orthomyxo-like virus": {},
+                      "tick orthomyxovirus 1": {},
+                      "tick orthomyxovirus 2": {},
+                      "Wenzhou bat orthomyxovirus 1": {},
+                      "Apis orthomyxovirus 1": {},
+                      "Soldier fly associated orthomyxo-like virus": {},
+                      "Blattella germanica orthomyxovirus 1": {},
+                      "Cryptocercus meridianus orthomyxovirus 1": {},
+                      "Cryptocercus meridianus orthomyxovirus 2": {},
+                      "Neotermes castaneus orthomyxovirus 1": {},
+                      "Grass carp influenza-like virus": {},
+                      "Sturgeon influenza-like virus": {},
+                      "Flounder influenza-like virus": {},
+                      "Seahorse influenza-like virus": {},
+                      "Blue antimora orthomyxovirus": {},
+                      "Eelpouts orthomyxovirus": {},
+                      "Zebrasoma scopas orthomyxo-like virus": {},
+                      "Chicharrita del maiz orthomyxo-like virus": {},
+                      "Bafoussam mosquito orthomyxovirus 1": {},
+                      "Bafoussam mosquito orthomyxovirus 2": {},
+                      "Baisha tick virus": {},
+                      "Equine influenza virus": {},
+                      "Tajima tick virus": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
