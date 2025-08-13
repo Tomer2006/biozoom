@@ -1,0 +1,1692 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Eukaryota": {
+        "Viridiplantae": {
+          "Streptophyta": {
+            "Streptophytina": {
+              "Zygnematophyceae": {
+                "environmental samples": {
+                  "uncultured Zygnemophyceae": {}
+                },
+                "Spirogloeophycidae": {
+                  "Spirogloeales": {
+                    "Spirogloeaceae": {
+                      "Spirogloea": {
+                        "Spirogloea muscicola": {}
+                      }
+                    }
+                  }
+                },
+                "Zygnematophycidae": {
+                  "Zygnematales": {
+                    "Zygnemataceae": {
+                      "Mougeotia": {
+                        "Mougeotia scalaris": {},
+                        "Mougeotia transeaui": {},
+                        "Mougeotia drouetii": {},
+                        "unclassified Mougeotia": {
+                          "Mougeotia sp. UA-ARL 82-11": {},
+                          "Mougeotia sp. UTEX LB 758": {},
+                          "Mougeotia sp. SVCK 417": {},
+                          "Mougeotia sp. SVCK 240": {},
+                          "Mougeotia sp. SVCK 193": {},
+                          "Mougeotia sp. JHK-2006": {},
+                          "Mougeotia sp. JH0040": {},
+                          "Mougeotia sp. JH0304": {},
+                          "Mougeotia sp. M2055": {},
+                          "Mougeotia sp. 2 KCH47": {},
+                          "Mougeotia sp. 4 KCH175": {},
+                          "Mougeotia sp. 1 KCH223": {},
+                          "Mougeotia sp. 3 KCH258": {},
+                          "Mougeotia sp. UTEX 2496": {},
+                          "Mougeotia sp. NF-2013": {},
+                          "Mougeotia sp. NF-2012": {},
+                          "Mougeotia sp. 1 AS-2014": {},
+                          "Mougeotia sp. 2 AS-2014": {},
+                          "Mougeotia sp. 3 AS-2014": {},
+                          "Mougeotia sp. KLL-G011": {},
+                          "Mougeotia sp. Cave": {},
+                          "Mougeotia sp. OtiraGF1": {},
+                          "Mougeotia sp. BC-2016": {},
+                          "Mougeotia sp. MougUAS": {},
+                          "Mougeotia sp. MZCH-SVCK 240": {},
+                          "Mougeotia sp.": {},
+                          "Mougeotia sp. M2": {},
+                          "Mougeotia sp. CCAC 0197": {},
+                          "Mougeotia sp. OTU336": {},
+                          "Mougeotia sp. CCAC 3626": {},
+                          "Mougeotia sp. CCAP650/1": {}
+                        },
+                        "Mougeotia disjuncta": {}
+                      },
+                      "Zygnemopsis": {
+                        "Zygnemopsis minuta": {},
+                        "unclassified Zygnemopsis": {
+                          "Zygnemopsis sp. CCAP 699/1": {},
+                          "Zygnemopsis sp. MFZO": {},
+                          "Zygnemopsis sp. L CCALA 1068": {},
+                          "Zygnemopsis sp. BC-2016": {}
+                        }
+                      },
+                      "Netrium": {
+                        "Netrium digitus": {
+                          "Netrium digitus var. latum": {},
+                          "Netrium digitus var. lamellosum": {}
+                        },
+                        "Netrium oblongum": {},
+                        "unclassified Netrium": {
+                          "Netrium sp.": {}
+                        }
+                      },
+                      "Zygnema": {
+                        "Zygnema circumcarinatum": {},
+                        "Zygnema peliosporum": {},
+                        "Zygnema tunetanum": {},
+                        "Zygnema pseudogedeanum": {},
+                        "Zygnema cylindricum": {},
+                        "Zygnema aplanosporum": {},
+                        "Zygnema argillosum": {},
+                        "Zygnema californicum": {},
+                        "Zygnema carinthiacum": {},
+                        "Zygnema giganteum": {},
+                        "Zygnema irregulare": {},
+                        "Zygnema sterile": {},
+                        "Zygnema subcylindricum": {},
+                        "Zygnema insigne": {},
+                        "Zygnema leiospermum": {},
+                        "unclassified Zygnema": {
+                          "Zygnema sp. M-1384": {},
+                          "Zygnema sp. KA-2002": {},
+                          "Zygnema sp. M-1156": {},
+                          "Zygnema sp. JH0007": {},
+                          "Zygnema sp. JH0039": {},
+                          "Zygnema sp. JH0049": {},
+                          "Zygnema sp. JH0087": {},
+                          "Zygnema sp. ASW07067": {},
+                          "Zygnema sp. JH0006": {},
+                          "Zygnema sp. JH0044": {},
+                          "Zygnema sp. JH0076": {},
+                          "Zygnema sp. JH0305": {},
+                          "Zygnema sp. JH0312": {},
+                          "Zygnema sp. JH0453": {},
+                          "Zygnema sp. JH0644": {},
+                          "Zygnema sp. JH0729": {},
+                          "Zygnema sp. JH0764": {},
+                          "Zygnema sp. RS004": {},
+                          "Zygnema sp. SAG 2418": {},
+                          "Zygnema sp. SAG 2419": {},
+                          "Zygnema sp. 1 AS-2014": {},
+                          "Zygnema sp. 2 AS-2014": {},
+                          "Zygnema sp. Akatarawa": {},
+                          "Zygnema sp. Aparima": {},
+                          "Zygnema sp. Buller": {},
+                          "Zygnema sp. Canoe": {},
+                          "Zygnema sp. CobbDS": {},
+                          "Zygnema sp. Eglinton": {},
+                          "Zygnema sp. Fox": {},
+                          "Zygnema sp. Inangahua": {},
+                          "Zygnema sp. London": {},
+                          "Zygnema sp. Mahina2": {},
+                          "Zygnema sp. Mataura": {},
+                          "Zygnema sp. OldMill": {},
+                          "Zygnema sp. Pareora": {},
+                          "Zygnema sp. QueensReach": {},
+                          "Zygnema sp. Sullivans": {},
+                          "Zygnema sp. CCCryo 311-07": {},
+                          "Zygnema sp. 'B'": {
+                            "Zygnema sp. B CCALA 976": {}
+                          },
+                          "Zygnema sp. 'G'": {},
+                          "Zygnema sp. 'D'": {},
+                          "Zygnema sp. 'E'": {
+                            "Zygnema sp. E CCCryo 278-06": {}
+                          },
+                          "Zygnema sp. 'A'": {},
+                          "Zygnema sp. 'M'": {},
+                          "Zygnema sp. 'N'": {},
+                          "Zygnema sp. 'O'": {},
+                          "Zygnema sp. 'P'": {},
+                          "Zygnema sp. 'R'": {},
+                          "Zygnema sp. 'S'": {},
+                          "Zygnema sp. 'U'": {},
+                          "Zygnema sp. 'C'": {
+                            "Zygnema sp. C CCALA 880": {}
+                          },
+                          "Zygnema sp. Ananyeva 7oz": {},
+                          "Zygnema sp. TCC 815": {},
+                          "Zygnema clade 2": {
+                            "Zygnema sp. 'V'": {},
+                            "Zygnema sp. SAG 2642": {}
+                          },
+                          "Zygnema sp. K454": {},
+                          "Zygnema sp. K429": {},
+                          "Zygnema sp. K352": {},
+                          "Zygnema sp. K551": {},
+                          "Zygnema sp. K4310": {},
+                          "Zygnema sp. Kuehtai_8": {},
+                          "Zygnema sp. Kuehtai_5_7": {},
+                          "Zygnema sp. Kuehtai_4": {},
+                          "Zygnema sp. K437": {},
+                          "Zygnema sp. K4511": {},
+                          "Zygnema sp. K5": {},
+                          "Zygnema sp. Z1": {},
+                          "Zygnema sp. Z2": {},
+                          "Zygnema sp. Onguren7oz": {}
+                        },
+                        "Zygnema vaginatum": {},
+                        "Zygnema cf. cylindricum": {}
+                      },
+                      "Zygogonium": {
+                        "Zygogonium ericetorum": {},
+                        "Zygogonium angustum": {}
+                      },
+                      "Nucleotaenium": {
+                        "Nucleotaenium cylindricum": {},
+                        "Nucleotaenium eifelense": {}
+                      },
+                      "Planotaenium": {
+                        "Planotaenium interruptum": {},
+                        "Planotaenium ohtanii": {}
+                      },
+                      "Temnogametum": {
+                        "Temnogametum iztacalense": {}
+                      }
+                    },
+                    "Mesotaeniaceae": {
+                      "Mesotaenium": {
+                        "Mesotaenium caldariorum": {},
+                        "Mesotaenium endlicherianum": {},
+                        "Mesotaenium kramstae": {},
+                        "Mesotaenium cf. chlamydosporum M-2155": {},
+                        "Mesotaenium chlamydosporum": {},
+                        "Mesotaenium pyrenoidosum": {},
+                        "Mesotaenium berggrenii": {},
+                        "unclassified Mesotaenium": {
+                          "Mesotaenium sp. JH0031": {},
+                          "Mesotaenium sp. AG-2009-1": {},
+                          "Mesotaenium sp. AG-2009-2": {}
+                        },
+                        "Mesotaenium macrococcum": {}
+                      },
+                      "Cylindrocystis": {
+                        "Cylindrocystis brebissonii": {
+                          "Cylindrocystis brebissonii var. deserti": {}
+                        },
+                        "Cylindrocystis crassa": {},
+                        "Cylindrocystis cf. cushleckae M-2158": {},
+                        "Cylindrocystis cf. brebissonii M-2853": {},
+                        "Cylindrocystis cushleckae": {},
+                        "unclassified Cylindrocystis": {
+                          "Cylindrocystis sp. UTEX 1925": {},
+                          "Cylindrocystis sp. JH0038": {},
+                          "Cylindrocystis sp. M3004": {},
+                          "Cylindrocystis sp. M3009": {},
+                          "Cylindrocystis sp. M3014": {},
+                          "Cylindrocystis sp. M3015": {},
+                          "Cylindrocystis sp. M3019": {},
+                          "Cylindrocystis sp. BCP-LG2-VF30": {},
+                          "Cylindrocystis sp. EM-2014": {},
+                          "Cylindrocystis sp. VAZE": {},
+                          "Cylindrocystis sp. BC-2016": {},
+                          "Cylindrocystis sp. CFN": {},
+                          "Cylindrocystis sp. CWM": {},
+                          "Cylindrocystis sp. Fox6": {},
+                          "Cylindrocystis sp. Fox7": {},
+                          "Cylindrocystis sp. P2016": {},
+                          "Cylindrocystis sp. P2018": {},
+                          "Cylindrocystis sp. Sven": {},
+                          "Cylindrocystis sp.": {}
+                        }
+                      },
+                      "Roya": {
+                        "Roya anglica": {},
+                        "Roya obtusa": {}
+                      },
+                      "Ancylonema": {
+                        "Ancylonema nordenskioeldii": {},
+                        "Ancylonema alaskanum": {},
+                        "unclassified Ancylonema": {
+                          "Ancylonema sp. 2021exp2c2": {},
+                          "Ancylonema sp. 2021exp2c3": {},
+                          "Ancylonema sp. 2021exp2a2": {},
+                          "Ancylonema sp. 2021exp2b2": {},
+                          "Ancylonema sp. 2021exp2a3": {},
+                          "Ancylonema sp. 2021exp2b1": {},
+                          "Ancylonema sp. 2020exp1a1": {},
+                          "Ancylonema sp. 2020exp1b1": {},
+                          "Ancylonema sp. 2020exp1c1": {},
+                          "Ancylonema sp. 2020exp1c2": {},
+                          "Ancylonema sp. 2020exp1e1": {},
+                          "Ancylonema sp. 2020exp1d1": {},
+                          "Ancylonema sp. 2020exp1d2": {},
+                          "Ancylonema sp.": {}
+                        },
+                        "Ancylonema palustre": {}
+                      },
+                      "Tortitaenia": {
+                        "Tortitaenia obscura": {},
+                        "Tortitaenia alpina": {}
+                      }
+                    },
+                    "unclassified Zygnematales": {
+                      "Zygnematales sp.": {}
+                    },
+                    "Zygnematales incertae sedis": {},
+                    "environmental samples": {
+                      "uncultured Zygnematales": {},
+                      "uncultured Fottea": {},
+                      "uncultured Cylindrocystis": {},
+                      "uncultured Mesotaenium": {},
+                      "uncultured Mougeotia": {},
+                      "uncultured Spirogyra": {},
+                      "uncultured Zygnema": {},
+                      "uncultured Zygnemopsis": {},
+                      "uncultured Netrium": {}
+                    }
+                  },
+                  "Desmidiales": {
+                    "Desmidiaceae": {
+                      "Staurastrum": {
+                        "Staurastrum punctulatum": {
+                          "Staurastrum punctulatum var. pygmaeum": {}
+                        },
+                        "Staurastrum pingue": {},
+                        "Staurastrum arctiscon": {},
+                        "Staurastrum cristatum": {},
+                        "Staurastrum ophiura": {},
+                        "Staurastrum subavicula": {},
+                        "Staurastrum lapponicum": {},
+                        "Staurastrum margaritaceum": {},
+                        "Staurastrum orbiculare": {},
+                        "Staurastrum quadricornutum": {},
+                        "Staurastrum crenulatum": {},
+                        "Staurastrum galeatum": {},
+                        "Staurastrum natator": {},
+                        "Staurastrum subgemmulatum": {},
+                        "Staurastrum clepsydra": {},
+                        "Staurastrum isthmosum": {},
+                        "Staurastrum hexacerum": {
+                          "Staurastrum hexacerum var. aversum": {}
+                        },
+                        "Staurastrum iotanum": {},
+                        "Staurastrum dilatatum": {},
+                        "Staurastrum paradoxum": {},
+                        "Staurastrum sebaldii": {},
+                        "Staurastrum dispar": {},
+                        "Staurastrum polymorphum": {},
+                        "Staurastrum hirsutum": {},
+                        "Staurastrum pilosum": {},
+                        "Staurastrum majusculum": {},
+                        "Staurastrum capitulum": {},
+                        "Staurastrum pyramidatum": {},
+                        "Staurastrum alternans": {},
+                        "Staurastrum monticulosum": {},
+                        "Staurastrum simonyi": {},
+                        "Staurastrum maamense": {},
+                        "Staurastrum spongiosum": {},
+                        "Staurastrum brachiatum": {},
+                        "Staurastrum bieneanum": {},
+                        "Staurastrum affine": {},
+                        "Staurastrum hantzschii": {},
+                        "Staurastrum thunmarkii": {},
+                        "Staurastrum laeve": {
+                          "Staurastrum laeve var. latidivergens": {}
+                        },
+                        "Staurastrum cerastes": {},
+                        "Staurastrum asteroideum": {
+                          "Staurastrum asteroideum var. nanum": {}
+                        },
+                        "Staurastrum muticum": {},
+                        "Staurastrum cyclacanthum": {},
+                        "Staurastrum javanicum": {},
+                        "Staurastrum pseudotetracerum": {},
+                        "Staurastrum avicula": {
+                          "Staurastrum avicula var. lunatum": {},
+                          "Staurastrum avicula var. inerme": {}
+                        },
+                        "Staurastrum gracile": {},
+                        "Staurastrum gemelliparum": {},
+                        "Staurastrum brevispina": {
+                          "Staurastrum brevispina var. obversum": {}
+                        },
+                        "Staurastrum gladiosum": {},
+                        "Staurastrum polytrichum": {
+                          "Staurastrum polytrichum f. biseriatum": {}
+                        },
+                        "Staurastrum pseudosuecicum": {},
+                        "Staurastrum tetracerum": {
+                          "Staurastrum tetracerum f. trigona": {}
+                        },
+                        "Staurastrum pinnatum": {
+                          "Staurastrum pinnatum var. reductum": {}
+                        },
+                        "Staurastrum pseudosebaldi": {
+                          "Staurastrum pseudosebaldi var. basidenticulatum": {}
+                        },
+                        "Staurastrum rosei": {
+                          "Staurastrum rosei var. stemmatum": {}
+                        },
+                        "Staurastrum taylorii": {},
+                        "Staurastrum leptocladum": {},
+                        "Staurastrum sibiricum": {},
+                        "Staurastrum cingulum": {},
+                        "Staurastrum cyrtocerum": {
+                          "Staurastrum cyrtocerum var. brachycerum": {}
+                        },
+                        "unclassified Staurastrum": {
+                          "Staurastrum sp. M752": {},
+                          "Staurastrum sp. M753": {},
+                          "Staurastrum sp. desmid10": {},
+                          "Staurastrum sp. BBM-2004": {},
+                          "Staurastrum sp. KMMCC 1536": {},
+                          "Staurastrum sp. KMMCC 1537": {},
+                          "Staurastrum sp. STAU1": {}
+                        },
+                        "Staurastrum scabrum": {},
+                        "Staurastrum pseudofurcigerum": {},
+                        "Staurastrum boreale": {},
+                        "Staurastrum kouwetsii": {}
+                      },
+                      "Cosmarium": {
+                        "Cosmarium botrytis": {},
+                        "Cosmarium angulosum": {
+                          "Cosmarium angulosum f. rotundatum": {}
+                        },
+                        "Cosmarium fontarabiense": {},
+                        "Cosmarium granatum": {},
+                        "Cosmarium obtusatum": {},
+                        "Cosmarium rectangulare": {},
+                        "Cosmarium succisum": {},
+                        "Cosmarium tumidum": {},
+                        "Cosmarium undulatum": {},
+                        "Cosmarium contractum": {},
+                        "Cosmarium elegantissimum": {},
+                        "Cosmarium isthmium": {
+                          "Cosmarium isthmium f. hibernicum": {}
+                        },
+                        "Cosmarium lundellii": {},
+                        "Cosmarium ovale": {},
+                        "Cosmarium bioculatum": {},
+                        "Cosmarium cucumis": {
+                          "Cosmarium cucumis var. magnum": {}
+                        },
+                        "Cosmarium furcatospermum": {
+                          "Cosmarium furcatospermum var. koreanum": {}
+                        },
+                        "Cosmarium hammeri": {},
+                        "Cosmarium humile": {
+                          "Cosmarium humile var. substriatum": {}
+                        },
+                        "Cosmarium impressulum": {},
+                        "Cosmarium pachydermum": {
+                          "Cosmarium pachydermum f. parvum": {}
+                        },
+                        "Cosmarium quadrum": {
+                          "Cosmarium quadrum var. minus": {},
+                          "Cosmarium quadrum var. sublatum": {
+                            "Cosmarium quadrum f. dilatatum": {}
+                          }
+                        },
+                        "Cosmarium subcostatum": {},
+                        "Cosmarium subcucumis": {},
+                        "Cosmarium trilobulatum": {},
+                        "Cosmarium formosulum": {},
+                        "Cosmarium obsoletum": {},
+                        "Cosmarium boergesenii": {
+                          "Cosmarium boergesenii var. polymorphum": {}
+                        },
+                        "Cosmarium depressum": {},
+                        "Cosmarium dilatatum": {},
+                        "Cosmarium subprotumidum": {
+                          "Cosmarium subprotumidum var. gregoryi": {}
+                        },
+                        "Cosmarium subtumidum": {},
+                        "Cosmarium blyttii": {},
+                        "Cosmarium costatum": {},
+                        "Cosmarium tenue": {},
+                        "Cosmarium laeve": {},
+                        "Cosmarium levinotabile": {},
+                        "Cosmarium norimbergense": {
+                          "Cosmarium norimbergense var. depressum": {}
+                        },
+                        "Cosmarium exiguum": {},
+                        "Cosmarium auriculatum": {},
+                        "Cosmarium sexangulare": {},
+                        "Cosmarium dentatum": {},
+                        "Cosmarium debaryi": {},
+                        "Cosmarium reniforme": {},
+                        "Cosmarium bisphaericum": {},
+                        "Cosmarium pseudoconnatum": {},
+                        "Cosmarium melanosporum": {},
+                        "Cosmarium amoenum": {},
+                        "Cosmarium binum": {},
+                        "Cosmarium biretum": {},
+                        "Cosmarium broomei": {},
+                        "Cosmarium caelatum": {},
+                        "Cosmarium connatum": {},
+                        "Cosmarium crenatum": {},
+                        "Cosmarium cyclicum": {},
+                        "Cosmarium decedens": {},
+                        "Cosmarium difficile": {},
+                        "Cosmarium holmii": {},
+                        "Cosmarium maculatum": {},
+                        "Cosmarium margaritiferum": {},
+                        "Cosmarium meneghinii": {},
+                        "Cosmarium notabile": {
+                          "Cosmarium notabile var. medium": {}
+                        },
+                        "Cosmarium ochthodes": {},
+                        "Cosmarium ornatum": {},
+                        "Cosmarium perforatum": {},
+                        "Cosmarium phaseolus": {},
+                        "Cosmarium portianum": {},
+                        "Cosmarium protractum": {},
+                        "Cosmarium pseudonitidulum": {},
+                        "Cosmarium punctulatum": {},
+                        "Cosmarium quadratum": {},
+                        "Cosmarium regnellii": {},
+                        "Cosmarium sinostegos": {
+                          "Cosmarium sinostegos var. obtusus": {}
+                        },
+                        "Cosmarium sportella": {},
+                        "Cosmarium subcrenatum": {},
+                        "Cosmarium subgranatum": {},
+                        "Cosmarium subochthodes": {},
+                        "Cosmarium tessellatum": {},
+                        "Cosmarium tetraophthalmum": {},
+                        "Cosmarium tinctum": {},
+                        "Cosmarium trachypleurum": {},
+                        "Cosmarium vexatum": {},
+                        "Cosmarium moniliferum": {},
+                        "Cosmarium ocellatum": {},
+                        "Cosmarium polygonum": {},
+                        "Cosmarium praemorsum": {},
+                        "Cosmarium prominulum": {},
+                        "Cosmarium pseudoholmii": {},
+                        "Cosmarium pseudopyramidatum": {},
+                        "Cosmarium quadratulum": {},
+                        "Cosmarium retusiforme": {},
+                        "Cosmarium sphaeroideum": {},
+                        "Cosmarium sphagnicola": {},
+                        "Cosmarium tumens": {},
+                        "Cosmarium vogesiacum": {},
+                        "Cosmarium cf. tenue M3036": {},
+                        "Cosmarium askenasyi": {},
+                        "Cosmarium messikommeri": {},
+                        "Cosmarium galeritum": {
+                          "Cosmarium galeritum var. minus": {}
+                        },
+                        "Cosmarium turpinii": {},
+                        "unclassified Cosmarium": {
+                          "Cosmarium sp. ACKU 1232": {},
+                          "Cosmarium sp. JH0041": {},
+                          "Cosmarium sp. M 2731": {},
+                          "Cosmarium sp. M 2856": {},
+                          "Cosmarium sp. M 2093": {},
+                          "Cosmarium sp. M3061": {},
+                          "Cosmarium sp. M3058": {},
+                          "Cosmarium sp. M3107": {},
+                          "Cosmarium sp. M3066": {},
+                          "Cosmarium sp. 1 AAG-2009": {},
+                          "Cosmarium sp. 2 AAG-2009": {},
+                          "Cosmarium sp. KMMCC 1229": {},
+                          "Cosmarium sp. HYU-G001": {},
+                          "Cosmarium sp. ZAA3": {},
+                          "Cosmarium sp.": {}
+                        },
+                        "Cosmarium thwaitesii": {
+                          "Cosmarium thwaitesii var. penioides": {}
+                        },
+                        "Cosmarium cataractarum": {},
+                        "Cosmarium tatricum": {}
+                      },
+                      "Cosmocladium": {
+                        "Cosmocladium saxonicum": {},
+                        "Cosmocladium perissum": {},
+                        "Cosmocladium constrictum": {},
+                        "unclassified Cosmocladium": {
+                          "Cosmocladium sp. BC-2016": {},
+                          "Cosmocladium sp. ASW 07118": {}
+                        }
+                      },
+                      "Sphaerozosma": {
+                        "Sphaerozosma laeve": {
+                          "Sphaerozosma laeve var. micracantha": {}
+                        },
+                        "Sphaerozosma filiforme": {},
+                        "unclassified Sphaerozosma": {
+                          "Sphaerozosma sp. UTCC 284": {}
+                        }
+                      },
+                      "Onychonema": {
+                        "unclassified Onychonema": {
+                          "Onychonema sp. UTEX 'LB 832'": {}
+                        }
+                      },
+                      "Desmidium": {
+                        "Desmidium grevillei": {},
+                        "Desmidium swartzii": {},
+                        "Desmidium aptogonum": {
+                          "Desmidium aptogonum var. ehrenbergii": {}
+                        },
+                        "Desmidium baileyi": {},
+                        "Desmidium pseudostreptonema": {},
+                        "unclassified Desmidium": {
+                          "Desmidium sp. UTEX 'LB 612'": {}
+                        }
+                      },
+                      "Spondylosium": {
+                        "Spondylosium pulchellum": {},
+                        "Spondylosium panduriforme": {},
+                        "Spondylosium planum": {},
+                        "Spondylosium pulchrum": {},
+                        "Spondylosium secedens": {},
+                        "Spondylosium tetragonum": {},
+                        "Spondylosium luetkemuelleri": {}
+                      },
+                      "Groenbladia": {
+                        "Groenbladia undulata": {},
+                        "Groenbladia neglecta": {},
+                        "Groenbladia taylorii": {}
+                      },
+                      "Micrasterias": {
+                        "Micrasterias rotata": {},
+                        "Micrasterias crux-melitensis": {
+                          "Micrasterias crux-melitensis var. superflua": {},
+                          "Micrasterias crux-melitensis var. crux-melitensis": {},
+                          "Micrasterias crux-melitensis var. janeira": {}
+                        },
+                        "Micrasterias fimbriata": {
+                          "Micrasterias fimbriata var. spinosa": {}
+                        },
+                        "Micrasterias dickiei": {},
+                        "Micrasterias denticulata": {
+                          "Micrasterias denticulata var. angulosa": {}
+                        },
+                        "Micrasterias papillifera": {
+                          "Micrasterias papillifera var. mucronata": {}
+                        },
+                        "Micrasterias thomasiana": {
+                          "Micrasterias thomasiana var. notata": {},
+                          "Micrasterias cf. thomasiana var. notata M 2253": {}
+                        },
+                        "Micrasterias truncata": {
+                          "Micrasterias truncata var. pusilla": {},
+                          "Micrasterias truncata var. semiradiata": {},
+                          "Micrasterias truncata var. neodamensis": {}
+                        },
+                        "Micrasterias foliacea": {},
+                        "Micrasterias radiata": {},
+                        "Micrasterias ralfsii": {},
+                        "Micrasterias moebii": {},
+                        "Micrasterias radians": {
+                          "Micrasterias radians var. evoluta": {},
+                          "Micrasterias radians var. bogoriensis": {}
+                        },
+                        "Micrasterias decemdentata": {},
+                        "Micrasterias zeylanica": {},
+                        "Micrasterias apiculata": {},
+                        "Micrasterias depauperata": {
+                          "Micrasterias depauperata var. wollei": {}
+                        },
+                        "Micrasterias furcata": {
+                          "Micrasterias furcata var. dichotoma": {},
+                          "Micrasterias furcata var. gracillima": {}
+                        },
+                        "Micrasterias laticeps": {},
+                        "Micrasterias mahabuleshwarensis": {
+                          "Micrasterias mahabuleshwarensis var. dichotoma": {},
+                          "Micrasterias mahabuleshwarensis var. wallichii": {}
+                        },
+                        "Micrasterias muricata": {},
+                        "Micrasterias nordstedtiana": {},
+                        "Micrasterias pinnatifida": {},
+                        "Micrasterias radiosa": {},
+                        "Micrasterias brachyptera": {},
+                        "Micrasterias anomala": {},
+                        "Micrasterias americana": {},
+                        "Micrasterias ceratofera": {},
+                        "Micrasterias conferta": {},
+                        "Micrasterias hardyi": {},
+                        "Micrasterias jenneri": {},
+                        "Micrasterias novae-terrae": {},
+                        "Micrasterias swainei": {},
+                        "Micrasterias tetraptera": {},
+                        "Micrasterias torreyi": {},
+                        "Micrasterias tropica": {},
+                        "Micrasterias verrucosa": {},
+                        "Micrasterias semiradiata": {}
+                      },
+                      "Xanthidium": {
+                        "Xanthidium subhastiferum": {},
+                        "Xanthidium tumidum": {},
+                        "Xanthidium antilopaeum": {
+                          "Xanthidium antilopaeum var. polymazum": {},
+                          "Xanthidium antilopaeum var. antilopaeum": {},
+                          "Xanthidium antilopaeum var. depauperatum": {},
+                          "Xanthidium antilopaeum var. incrassatum": {},
+                          "Xanthidium antilopaeum var. laeve": {},
+                          "Xanthidium antilopaeum var. minneapoliense": {},
+                          "Xanthidium antilopaeum var. planum": {}
+                        },
+                        "Xanthidium armatum": {},
+                        "Xanthidium brebissonii": {},
+                        "Xanthidium hastiferum": {},
+                        "Xanthidium canadense": {},
+                        "Xanthidium cristatum": {
+                          "Xanthidium cristatum var. ornatum": {},
+                          "Xanthidium cristatum var. cristatum": {}
+                        },
+                        "Xanthidium uncinatum": {},
+                        "Xanthidium scrobiculatum": {},
+                        "Xanthidium basiornatum": {}
+                      },
+                      "Hyalotheca": {
+                        "Hyalotheca dissiliens": {},
+                        "Hyalotheca mucosa": {},
+                        "unclassified Hyalotheca": {
+                          "Hyalotheca sp. Whare": {}
+                        }
+                      },
+                      "Pleurotaenium": {
+                        "Pleurotaenium trabecula": {},
+                        "Pleurotaenium ehrenbergii": {
+                          "Pleurotaenium ehrenbergii var. columellare": {}
+                        },
+                        "Pleurotaenium baculoides": {},
+                        "Pleurotaenium constrictum": {},
+                        "Pleurotaenium archeri": {},
+                        "Pleurotaenium nodosum": {},
+                        "Pleurotaenium nodulosum": {},
+                        "Pleurotaenium ovatum": {},
+                        "unclassified Pleurotaenium": {
+                          "Pleurotaenium sp. Q18": {},
+                          "Pleurotaenium sp. H14": {},
+                          "Pleurotaenium sp. H39": {},
+                          "Pleurotaenium sp. J-E9": {},
+                          "Pleurotaenium sp. H38": {},
+                          "Pleurotaenium sp. H41": {}
+                        }
+                      },
+                      "Euastrum": {
+                        "Euastrum pectinatum": {},
+                        "Euastrum oblongum": {},
+                        "Euastrum pinnatum": {},
+                        "Euastrum humerosum": {
+                          "Euastrum humerosum var. affine": {}
+                        },
+                        "Euastrum crassum": {
+                          "Euastrum crassum var. michiganense": {}
+                        },
+                        "Euastrum intermedium": {},
+                        "Euastrum verrucosum": {},
+                        "Euastrum bidentatum": {},
+                        "Euastrum binale": {
+                          "Euastrum binale var. gutwinskii": {}
+                        },
+                        "Euastrum biverrucosum": {},
+                        "Euastrum divaricatum": {},
+                        "Euastrum germanicum": {},
+                        "Euastrum prowsei": {},
+                        "Euastrum spinulosum": {
+                          "Euastrum spinulosum var. henriquesii": {}
+                        },
+                        "Euastrum subalpinum": {},
+                        "Euastrum subhexalobum": {},
+                        "Euastrum substellatum": {},
+                        "Euastrum trigibberum": {},
+                        "Euastrum dubium": {},
+                        "Euastrum gayanum": {},
+                        "Euastrum vigrense": {},
+                        "Euastrum ansatum": {},
+                        "Euastrum sublobatum": {}
+                      },
+                      "Staurodesmus": {
+                        "Staurodesmus bulnheimii": {},
+                        "Staurodesmus mucronatus": {},
+                        "Staurodesmus dejectus": {},
+                        "Staurodesmus validus": {},
+                        "Staurodesmus convergens": {},
+                        "Staurodesmus triangularis": {},
+                        "Staurodesmus omearae": {},
+                        "Staurodesmus mamillatus": {},
+                        "Staurodesmus subulatus": {
+                          "Staurodesmus subulatus var. subaequalis": {}
+                        },
+                        "Staurodesmus extensus": {
+                          "Staurodesmus extensus var. isthmosus": {},
+                          "Staurodesmus extensus var. joshuae": {}
+                        },
+                        "Staurodesmus cuspidatus": {
+                          "Staurodesmus cuspidatus var. curvatus": {}
+                        },
+                        "Staurodesmus glaber": {},
+                        "Staurodesmus spencerianus": {},
+                        "Staurodesmus megacanthus": {},
+                        "Staurodesmus octocornis": {},
+                        "unclassified Staurodesmus": {
+                          "Staurodesmus sp. UTEX 'LB 2508'": {},
+                          "Staurodesmus sp. LO228-119": {},
+                          "Staurodesmus sp. M3069": {},
+                          "Staurodesmus sp. M3068": {},
+                          "Staurodesmus sp. AAG-2009": {},
+                          "Staurodesmus sp. M2404": {},
+                          "Staurodesmus sp.": {}
+                        }
+                      },
+                      "Actinotaenium": {
+                        "Actinotaenium cucurbita": {},
+                        "Actinotaenium curtum": {},
+                        "Actinotaenium phymatosporum": {},
+                        "Actinotaenium wollei": {},
+                        "Actinotaenium silvae-nigrae": {
+                          "Actinotaenium silvae-nigrae var. parallelum": {}
+                        },
+                        "Actinotaenium cucurbitinum": {},
+                        "Actinotaenium cruciferum": {},
+                        "Actinotaenium turgidum": {},
+                        "Actinotaenium cf. subglobosum M3026": {},
+                        "Actinotaenium diplosporum": {},
+                        "Actinotaenium inconspicuum": {},
+                        "unclassified Actinotaenium": {
+                          "Actinotaenium sp. 1 AAG-2009": {},
+                          "Actinotaenium sp. 2 AAG-2009": {},
+                          "Actinotaenium sp. M2390": {},
+                          "Actinotaenium sp. M3025": {}
+                        }
+                      },
+                      "Bambusina": {
+                        "Bambusina borreri": {}
+                      },
+                      "Haplotaenium": {
+                        "Haplotaenium minutum": {},
+                        "unclassified Haplotaenium": {
+                          "Haplotaenium sp. M3063": {}
+                        }
+                      },
+                      "Heimansia": {
+                        "Heimansia pusilla": {}
+                      },
+                      "Phymatodocis": {
+                        "Phymatodocis nordstedtiana": {}
+                      },
+                      "Tetmemorus": {
+                        "Tetmemorus brebissonii": {},
+                        "Tetmemorus laevis": {}
+                      },
+                      "Triploceras": {
+                        "Triploceras gracile": {}
+                      },
+                      "Arthrodesmus": {},
+                      "Teilingia": {
+                        "Teilingia granulata": {}
+                      },
+                      "Docidium": {
+                        "Docidium undulatum": {},
+                        "Docidium baculum": {}
+                      },
+                      "Triplastrum": {
+                        "Triplastrum simplex": {}
+                      },
+                      "environmental samples": {
+                        "uncultured Staurastrum": {},
+                        "uncultured Cosmarium": {},
+                        "uncultured Hyalotheca": {},
+                        "uncultured Staurodesmus": {},
+                        "uncultured Groenbladia": {},
+                        "uncultured Pleurotaenium": {},
+                        "uncultured Micrasterias": {},
+                        "uncultured Spondylosium": {},
+                        "uncultured Desmidium": {},
+                        "uncultured Cosmocladium": {}
+                      },
+                      "Oocardium": {
+                        "Oocardium stratum": {}
+                      },
+                      "unclassified Desmidiaceae": {
+                        "Desmidiaceae sp.": {}
+                      },
+                      "Pseudomicrasterias": {
+                        "Pseudomicrasterias arcuata": {},
+                        "Pseudomicrasterias perforata": {},
+                        "unclassified Pseudomicrasterias": {
+                          "Pseudomicrasterias sp. CCMA-719": {}
+                        }
+                      }
+                    },
+                    "Gonatozygaceae": {
+                      "Genicularina": {
+                        "Genicularina spirotaenia": {}
+                      },
+                      "Gonatozygon": {
+                        "Gonatozygon aculeatum": {},
+                        "Gonatozygon monotaenium": {},
+                        "Gonatozygon brebissonii": {
+                          "Gonatozygon brebissonii var. laeve": {}
+                        },
+                        "Gonatozygon kinahanii": {},
+                        "Gonatozygon pilosum": {},
+                        "unclassified Gonatozygon": {
+                          "Gonatozygon sp. Grisly": {}
+                        }
+                      },
+                      "environmental samples": {
+                        "uncultured Gonatozygon": {}
+                      }
+                    },
+                    "Peniaceae": {
+                      "Penium": {
+                        "Penium margaritaceum": {},
+                        "Penium cylindrus": {},
+                        "Penium exiguum": {},
+                        "Penium spirostriolatum": {},
+                        "Penium cf. didymocarpum JH0212": {},
+                        "Penium polymorphum": {}
+                      }
+                    },
+                    "Closteriaceae": {
+                      "Closterium": {
+                        "Closterium peracerosum-strigosum-littorale complex": {
+                          "Closterium peracerosum": {},
+                          "Closterium littorale": {},
+                          "unclassified Closterium peracerosum-strigosum-littorale complex": {
+                            "Closterium sp. NIES-52": {},
+                            "Closterium sp. NIES-68": {},
+                            "Closterium sp. ASA12-4": {},
+                            "Closterium sp. ASA13-14": {},
+                            "Closterium sp. ASA13-21": {},
+                            "Closterium sp. NIES-262": {},
+                            "Closterium sp. TW15-5": {},
+                            "Closterium sp. NIES-66": {},
+                            "Closterium sp. CpeDUO1": {},
+                            "Closterium sp. NIES-67": {},
+                            "Closterium sp. mating group I-E": {},
+                            "Closterium sp. SP-2021": {},
+                            "Closterium sp. 1 YT-2022": {},
+                            "Closterium sp. Naga37s-1": {},
+                            "Closterium sp. Shima19-9": {},
+                            "Closterium sp. Hana": {},
+                            "Closterium sp. Oda12-4-1": {},
+                            "Closterium sp. Biwa5-3": {},
+                            "Closterium sp. Izu12-7-4": {},
+                            "Closterium sp. Miya184-1": {},
+                            "Closterium sp. Mie54-1": {},
+                            "Closterium sp. Naga56-6": {},
+                            "Closterium sp. Oki21-8": {},
+                            "Closterium sp. Yama58-4": {},
+                            "Closterium sp. Oki23-2": {},
+                            "Closterium sp. Ho36-3": {}
+                          }
+                        },
+                        "Closterium ehrenbergii": {},
+                        "Closterium cornu": {},
+                        "Closterium acerosum": {},
+                        "Closterium moniliferum": {
+                          "Closterium moniliferum var. moniliferum": {}
+                        },
+                        "Closterium submoniliferum": {
+                          "Closterium submoniliferum var. malinvernianum": {}
+                        },
+                        "Closterium spinosporum": {
+                          "Closterium spinosporum var. spinosporum": {},
+                          "Closterium spinosporum var. malayense": {},
+                          "unclassified Closterium spinosporum": {
+                            "Closterium spinosporum var. ryukyuense (nom. inval.)": {},
+                            "Closterium spinosporum var. crassum (nom. inval.)": {}
+                          }
+                        },
+                        "Closterium calosporum": {
+                          "Closterium calosporum var. calosporum": {},
+                          "Closterium calosporum var. galiciense": {},
+                          "unclassified Closterium calosporum": {
+                            "Closterium calosporum var. himalayense (nom. inval.)": {}
+                          }
+                        },
+                        "Closterium tumidum": {},
+                        "Closterium pusillum": {
+                          "Closterium pusillum var. majus": {}
+                        },
+                        "Closterium gracile": {},
+                        "Closterium incurvum": {},
+                        "Closterium navicula": {},
+                        "Closterium pleurodermatum": {},
+                        "Closterium venus": {},
+                        "Closterium wallichii": {},
+                        "Closterium lunula": {},
+                        "Closterium libellula": {},
+                        "Closterium acutum": {},
+                        "Closterium striolatum": {},
+                        "Closterium baillyanum": {},
+                        "unclassified Closterium": {
+                          "Closterium selenastrum (nom. inval.)": {},
+                          "Closterium sp. EEC-2010": {},
+                          "Closterium sp. FACHB-326": {},
+                          "Closterium sp. NIES-4387": {},
+                          "Closterium sp. BEA 0704B": {},
+                          "Closterium sp. NIES-64": {},
+                          "Closterium sp. NIES-65": {},
+                          "Closterium sp. NIES-53": {},
+                          "Closterium sp. NIES-54": {},
+                          "Closterium sp. NIES-261": {},
+                          "Closterium sp. NIES-2666": {},
+                          "Closterium sp. NIES-4319": {},
+                          "Closterium sp. NIES-4320": {},
+                          "Closterium sp. NIES-4321": {},
+                          "Closterium sp. NIES-4581": {},
+                          "Closterium sp. NIES-4582": {},
+                          "Closterium sp. NIES-58": {},
+                          "Closterium sp. NIES-59": {},
+                          "Closterium sp. NIES-62": {},
+                          "Closterium sp. NIES-63": {},
+                          "Closterium sp. mating group II-A": {},
+                          "Closterium sp. mating group II-B": {},
+                          "Closterium sp.": {}
+                        },
+                        "Closterium setaceum": {},
+                        "Closterium pritchardianum": {},
+                        "Closterium strigosum": {}
+                      },
+                      "Spinoclosterium": {
+                        "Spinoclosterium cuspidatum": {}
+                      }
+                    },
+                    "environmental samples": {
+                      "uncultured Desmidiaceae": {},
+                      "uncultured Closteriaceae": {},
+                      "uncultured Peniaceae": {},
+                      "uncultured Closterium": {}
+                    },
+                    "unclassified Desmidiales": {
+                      "Desmidiales sp.": {}
+                    }
+                  },
+                  "Serritaeniales": {
+                    "Serritaeniaceae": {
+                      "Mougeotiopsis": {
+                        "Mougeotiopsis calospora": {}
+                      },
+                      "Serritaenia": {
+                        "Serritaenia braunii": {},
+                        "Serritaenia testaceovaginata": {},
+                        "unclassified Serritaenia": {
+                          "Serritaenia sp. 1 SH-2021": {},
+                          "Serritaenia sp. 2 SH-2021": {},
+                          "Serritaenia sp. 3 SH-2021": {},
+                          "Serritaenia sp. 4 SH-2021": {},
+                          "Serritaenia sp. 5 SH-2021": {},
+                          "Serritaenia sp. 6 SH-2021": {},
+                          "Serritaenia sp. 7 SH-2021": {}
+                        }
+                      }
+                    }
+                  },
+                  "Spirogyrales": {
+                    "Spirogyraceae": {
+                      "Spirogyra": {
+                        "Spirogyra maxima": {},
+                        "Spirogyra grevilleana": {},
+                        "Spirogyra chungkingensis": {},
+                        "Spirogyra communis": {},
+                        "Spirogyra condensata": {},
+                        "Spirogyra gracilis": {},
+                        "Spirogyra juergensii": {},
+                        "Spirogyra liana": {},
+                        "Spirogyra mienningensis": {},
+                        "Spirogyra notabilis": {},
+                        "Spirogyra occidentalis": {},
+                        "Spirogyra pratensis": {},
+                        "Spirogyra quadrilaminata": {},
+                        "Spirogyra varians": {},
+                        "Spirogyra africana": {},
+                        "Spirogyra decimina": {},
+                        "Spirogyra distenta": {},
+                        "Spirogyra dubia": {},
+                        "Spirogyra ellipsospora": {},
+                        "Spirogyra variformis": {},
+                        "Spirogyra weberi": {},
+                        "Spirogyra crassispina": {},
+                        "Spirogyra australica": {},
+                        "Spirogyra borgeana": {},
+                        "Spirogyra californica": {},
+                        "Spirogyra croasdaleae": {},
+                        "Spirogyra fluviatilis": {},
+                        "Spirogyra juliana": {},
+                        "Spirogyra elongata": {},
+                        "Spirogyra lutetiana": {},
+                        "Spirogyra majuscula": {},
+                        "Spirogyra parvula": {},
+                        "Spirogyra submaxima": {},
+                        "Spirogyra tenuissima": {},
+                        "Spirogyra teodoresci": {},
+                        "Spirogyra rivularis": {},
+                        "unclassified Spirogyra": {
+                          "Spirogyra sp.": {},
+                          "Spirogyra sp. SVCK 253": {},
+                          "Spirogyra sp. CLP-2000": {},
+                          "Spirogyra sp. KG0101": {},
+                          "Spirogyra sp. 'Postawele'": {},
+                          "Spirogyra sp. M-2157": {},
+                          "Spirogyra sp. M-1810": {},
+                          "Spirogyra sp. SAG 170.80": {},
+                          "Spirogyra sp. M-1761": {},
+                          "Spirogyra sp. M-1924": {},
+                          "Spirogyra sp. ARL 82 189": {},
+                          "Spirogyra sp. ARL 87 3": {},
+                          "Spirogyra sp. CFD JH0058": {},
+                          "Spirogyra sp. CFD JH0130": {},
+                          "Spirogyra sp. UWCC FW670": {},
+                          "Spirogyra sp. JHK-2006-1": {},
+                          "Spirogyra sp. JHK-2006-2": {},
+                          "Spirogyra sp. JHK-2006-3": {},
+                          "Spirogyra sp. JHK-2006-4": {},
+                          "Spirogyra sp. 00237": {},
+                          "Spirogyra sp. 00239": {},
+                          "Spirogyra sp. 00509": {},
+                          "Spirogyra sp. 00554": {},
+                          "Spirogyra sp. FWAC125": {},
+                          "Spirogyra sp. M1843": {},
+                          "Spirogyra sp. 169.80": {},
+                          "Spirogyra sp. clade B CC-2012": {},
+                          "Spirogyra sp. clade D CC-2012": {},
+                          "Spirogyra sp. clade D-E2 CC-2012": {},
+                          "Spirogyra sp. clade E CC-2012": {},
+                          "Spirogyra sp. clade G CC-2012": {},
+                          "Spirogyra sp. clade H CC-2012": {},
+                          "Spirogyra sp. clade F CC-2012": {},
+                          "Spirogyra sp. AB1": {},
+                          "Spirogyra sp. AB4": {},
+                          "Spirogyra sp. AN3A": {},
+                          "Spirogyra sp. ASW7076": {},
+                          "Spirogyra sp. ASW7208": {},
+                          "Spirogyra sp. BEA1": {},
+                          "Spirogyra sp. BGHII4": {},
+                          "Spirogyra sp. BGHK1": {},
+                          "Spirogyra sp. BGHK2": {},
+                          "Spirogyra sp. BTSA1": {},
+                          "Spirogyra sp. DRS3": {},
+                          "Spirogyra sp. EGR4": {},
+                          "Spirogyra sp. FBT1A": {},
+                          "Spirogyra sp. FIT3A": {},
+                          "Spirogyra sp. GBT1": {},
+                          "Spirogyra sp. GBT3": {},
+                          "Spirogyra sp. GRS1": {},
+                          "Spirogyra sp. GSB2": {},
+                          "Spirogyra sp. GTH1": {},
+                          "Spirogyra sp. GTH7": {},
+                          "Spirogyra sp. GUS1": {},
+                          "Spirogyra sp. IGH2": {},
+                          "Spirogyra sp. KRA2": {},
+                          "Spirogyra sp. KVW2": {},
+                          "Spirogyra sp. KVW4": {},
+                          "Spirogyra sp. KW1A": {},
+                          "Spirogyra sp. KW4A": {},
+                          "Spirogyra sp. KWA3": {},
+                          "Spirogyra sp. LL1": {},
+                          "Spirogyra sp. LL2": {},
+                          "Spirogyra sp. LSB4A": {},
+                          "Spirogyra sp. M3A": {},
+                          "Spirogyra sp. M5A": {},
+                          "Spirogyra sp. M6A": {},
+                          "Spirogyra sp. M9A": {},
+                          "Spirogyra sp. M9B": {},
+                          "Spirogyra sp. MD2-1": {},
+                          "Spirogyra sp. MDA1": {},
+                          "Spirogyra sp. MP9-1": {},
+                          "Spirogyra sp. MP92-3": {},
+                          "Spirogyra sp. MP92-6": {},
+                          "Spirogyra sp. MRT4A": {},
+                          "Spirogyra sp. NES3": {},
+                          "Spirogyra sp. NES4": {},
+                          "Spirogyra sp. NLH5": {},
+                          "Spirogyra sp. NLH6": {},
+                          "Spirogyra sp. OROSIVA1": {},
+                          "Spirogyra sp. PANA1": {},
+                          "Spirogyra sp. PLO1": {},
+                          "Spirogyra sp. REC2": {},
+                          "Spirogyra sp. REC3": {},
+                          "Spirogyra sp. ROE6": {},
+                          "Spirogyra sp. S1DD3A": {},
+                          "Spirogyra sp. S1Due2-2A": {},
+                          "Spirogyra sp. S1Due2A": {},
+                          "Spirogyra sp. SENA4": {},
+                          "Spirogyra sp. SENA7": {},
+                          "Spirogyra sp. SMS2": {},
+                          "Spirogyra sp. SNG1": {},
+                          "Spirogyra sp. SNG2": {},
+                          "Spirogyra sp. SNG3": {},
+                          "Spirogyra sp. SNG5": {},
+                          "Spirogyra sp. TCA2": {},
+                          "Spirogyra sp. TIS1": {},
+                          "Spirogyra sp. TIS3": {},
+                          "Spirogyra sp. TIS4": {},
+                          "Spirogyra sp. TOR4": {},
+                          "Spirogyra sp. TRS7": {},
+                          "Spirogyra sp. UMW4A": {},
+                          "Spirogyra sp. VNE2": {},
+                          "Spirogyra sp. WB5A": {},
+                          "Spirogyra sp. WNII3A": {},
+                          "Spirogyra sp. WNII4A": {},
+                          "Spirogyra sp. WNIII2A": {},
+                          "Spirogyra sp. WRH5": {},
+                          "Spirogyra sp. ZIP2": {},
+                          "Spirogyra sp. 10-2011": {},
+                          "Spirogyra sp. 12-2011": {},
+                          "Spirogyra sp. 13-2011": {},
+                          "Spirogyra sp. 14-2011": {},
+                          "Spirogyra sp. 16-2011": {},
+                          "Spirogyra sp. 25-2011": {},
+                          "Spirogyra sp. 27-2011": {},
+                          "Spirogyra sp. 30-2011": {},
+                          "Spirogyra sp. 33-2011": {},
+                          "Spirogyra sp. 35-2011": {},
+                          "Spirogyra sp. 38-2011": {},
+                          "Spirogyra sp. 9-2011": {},
+                          "Spirogyra sp. KCH251": {},
+                          "Spirogyra sp. KCH275": {},
+                          "Spirogyra sp. JH0056": {},
+                          "Spirogyra sp. JH0058": {},
+                          "Spirogyra sp. JH0130": {},
+                          "Spirogyra sp. JH0263": {},
+                          "Spirogyra sp. JH0278": {},
+                          "Spirogyra sp. JH0429": {},
+                          "Spirogyra sp. JH0553": {},
+                          "Spirogyra sp. JH0643": {},
+                          "Spirogyra sp. JH0728": {},
+                          "Spirogyra sp. JH0744": {},
+                          "Spirogyra sp. JH0763": {},
+                          "Spirogyra sp. JH0924": {},
+                          "Spirogyra sp. JH0936": {},
+                          "Spirogyra sp. JH0941": {},
+                          "Spirogyra sp. JH0944": {},
+                          "Spirogyra sp. JH0976": {},
+                          "Spirogyra sp. JH0977": {},
+                          "Spirogyra sp. JH0979": {},
+                          "Spirogyra sp. JH0980": {},
+                          "Spirogyra sp. JH0987": {},
+                          "Spirogyra sp. RSS020": {},
+                          "Spirogyra sp. RSS022": {},
+                          "Spirogyra sp. RSS029": {},
+                          "Spirogyra sp. RSS030": {},
+                          "Spirogyra sp. RSS035": {},
+                          "Spirogyra sp. RSS036": {},
+                          "Spirogyra sp. RSS037": {},
+                          "Spirogyra sp. RSS038": {},
+                          "Spirogyra sp. RSS039": {},
+                          "Spirogyra sp. MDM-2014": {},
+                          "Spirogyra sp. 1 AS-2014": {},
+                          "Spirogyra sp. 2 AS-2014": {},
+                          "Spirogyra sp. 3 AS-2014": {},
+                          "Spirogyra sp. 4 AS-2014": {},
+                          "Spirogyra sp. 5 AS-2014": {},
+                          "Spirogyra sp. 6 AS-2014": {},
+                          "Spirogyra sp. 7 AS-2014": {},
+                          "Spirogyra sp. 8 AS-2014": {},
+                          "Spirogyra sp. 9 AS-2014": {},
+                          "Spirogyra sp. 7076": {},
+                          "Spirogyra sp. 7208": {},
+                          "Spirogyra sp. M72": {},
+                          "Spirogyra sp. SENA2": {},
+                          "Spirogyra sp. AU1": {},
+                          "Spirogyra sp. Anatoki": {},
+                          "Spirogyra sp. Anatoki2": {},
+                          "Spirogyra sp. Andrews": {},
+                          "Spirogyra sp. AshSH1": {},
+                          "Spirogyra sp. BBirchC": {},
+                          "Spirogyra sp. BBirchM": {},
+                          "Spirogyra sp. Bealey": {},
+                          "Spirogyra sp. Broken": {},
+                          "Spirogyra sp. Bullock": {},
+                          "Spirogyra sp. BurtonAle": {},
+                          "Spirogyra sp. Cobbus2": {},
+                          "Spirogyra sp. Fantail": {},
+                          "Spirogyra sp. Fork": {},
+                          "Spirogyra sp. Hapuku": {},
+                          "Spirogyra sp. Harris": {},
+                          "Spirogyra sp. HindsMay": {},
+                          "Spirogyra sp. Hurunui": {},
+                          "Spirogyra sp. Irishmans": {},
+                          "Spirogyra sp. Jackson": {},
+                          "Spirogyra sp. JamesC": {},
+                          "Spirogyra sp. Kaikorai": {},
+                          "Spirogyra sp. KuraNI6": {},
+                          "Spirogyra sp. Levin": {},
+                          "Spirogyra sp. Liffey": {},
+                          "Spirogyra sp. MacMillan": {},
+                          "Spirogyra sp. Mahinapua": {},
+                          "Spirogyra sp. Mahitahi": {},
+                          "Spirogyra sp. Makawhio": {},
+                          "Spirogyra sp. Mararoa": {},
+                          "Spirogyra sp. Matakitaki": {},
+                          "Spirogyra sp. MeggatB": {},
+                          "Spirogyra sp. MeggatS": {},
+                          "Spirogyra sp. Moutere": {},
+                          "Spirogyra sp. Needles": {},
+                          "Spirogyra sp. Opouri": {},
+                          "Spirogyra sp. OvHillB": {},
+                          "Spirogyra sp. OvHillS": {},
+                          "Spirogyra sp. Owen": {},
+                          "Spirogyra sp. PHS": {},
+                          "Spirogyra sp. PHSrpt2": {},
+                          "Spirogyra sp. PaValley": {},
+                          "Spirogyra sp. Puhipuhi": {},
+                          "Spirogyra sp. RobinsonsRd": {},
+                          "Spirogyra sp. SAshMtS": {},
+                          "Spirogyra sp. Smacks": {},
+                          "Spirogyra sp. StyxScom": {},
+                          "Spirogyra sp. Takaka": {},
+                          "Spirogyra sp. Tima": {},
+                          "Spirogyra sp. TongNI4": {},
+                          "Spirogyra sp. TongNI5": {},
+                          "Spirogyra sp. UtopiaRd": {},
+                          "Spirogyra sp. Waikanae": {},
+                          "Spirogyra sp. Wairau": {},
+                          "Spirogyra sp. WhakaNI13": {},
+                          "Spirogyra sp. WyliesRd": {},
+                          "Spirogyra sp. PUL1": {},
+                          "Spirogyra sp. JIAC-WT-Spiro 1": {},
+                          "Spirogyra sp. ARS 09331-00001": {},
+                          "Spirogyra sp. ARS 08978-00011": {},
+                          "Spirogyra sp. ARS 09322-00001": {},
+                          "Spirogyra sp. ARS 09058-00002": {},
+                          "Spirogyra sp. ARS 09324-00002": {},
+                          "Spirogyra sp. ARS 09056-00002": {},
+                          "Spirogyra sp. ARS 08913-00015": {},
+                          "Spirogyra sp. ARS 08993-00001": {},
+                          "Spirogyra sp. ARS 09323-00001": {},
+                          "Spirogyra sp. ARS 09330-00002": {},
+                          "Spirogyra sp. ARS 09332-00001": {},
+                          "Spirogyra sp. ARS 08903-00001": {},
+                          "Spirogyra sp. ARS 09023-00021": {},
+                          "Spirogyra sp. ARS 09325-00001": {},
+                          "Spirogyra sp. ARS 08757-00001": {},
+                          "Spirogyra sp. ARS 08973-00001": {},
+                          "Spirogyra sp. ARS 08811-00002": {},
+                          "Spirogyra sp. ARS 08946-00017": {},
+                          "Spirogyra sp. ARS 09325-00002": {},
+                          "Spirogyra sp. ARS 09326-00002": {},
+                          "Spirogyra sp. ARS 09195-00001": {},
+                          "Spirogyra sp. ARS 09219-00001": {},
+                          "Spirogyra sp. 6 AS-2017": {},
+                          "Spirogyra sp. 9 AS-2017": {},
+                          "Spirogyra sp. 11 AS-2017": {},
+                          "Spirogyra sp. 14 AS-2017": {},
+                          "Spirogyra sp. 7 AS-2017": {},
+                          "Spirogyra sp. 5 AS-2017": {},
+                          "Spirogyra sp. 4 AS-2017": {},
+                          "Spirogyra sp. TT-2019": {},
+                          "Spirogyra sp. OTU167": {},
+                          "Spirogyra sp. Mincheva 1L": {},
+                          "Spirogyra sp. Mincheva 2L": {},
+                          "Spirogyra sp. Mincheva 3L": {},
+                          "Spirogyra sp. Mincheva 4L": {},
+                          "Spirogyra sp. Mincheva 5L": {},
+                          "Spirogyra sp. Ananyeva 2o": {},
+                          "Spirogyra sp. Ananyeva 3o": {},
+                          "Spirogyra sp. Karnaukhov 4_1_l_o": {},
+                          "Spirogyra sp. Ananyeva 6o": {},
+                          "Spirogyra sp. Ananyeva 5o": {},
+                          "Spirogyra sp. Efimov S_kr1": {},
+                          "Spirogyra sp. EDC SP-AU1": {},
+                          "Spirogyra sp. Listvyanka2L": {},
+                          "Spirogyra sp. Listvyanka1L": {},
+                          "Spirogyra sp. Onguren2": {},
+                          "Spirogyra sp. Listvyanka3L": {},
+                          "Spirogyra sp. Onguren3": {},
+                          "Spirogyra sp. 4_1_l_o": {},
+                          "Spirogyra sp. Listvyanka4L": {},
+                          "Spirogyra sp. Listvyanka5L": {},
+                          "Spirogyra sp. Onguren6o": {},
+                          "Spirogyra sp. Onguren5": {}
+                        },
+                        "Spirogyra setiformis": {},
+                        "Spirogyra chenii": {},
+                        "Spirogyra corrugata": {},
+                        "Spirogyra dentireticulata": {},
+                        "Spirogyra hopeiensis": {},
+                        "Spirogyra minuticrassoidea": {},
+                        "Spirogyra mirabilis": {},
+                        "Spirogyra pseudomaxima": {},
+                        "Spirogyra punctata": {},
+                        "Spirogyra semiornata": {},
+                        "Spirogyra neglecta": {},
+                        "Spirogyra tertia": {},
+                        "Spirogyra minuticrassispina": {}
+                      },
+                      "Sirogonium": {
+                        "Sirogonium melanosporum": {},
+                        "Sirogonium sticticum": {
+                          "Sirogonium sticticum var. tenuius": {}
+                        },
+                        "unclassified Sirogonium": {
+                          "Sirogonium sp. ARL 82 56": {},
+                          "Sirogonium sp. ARL 82 171": {},
+                          "Sirogonium sp. CFD JH0082": {},
+                          "Sirogonium sp. JH0082": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "unclassified Zygnematophyceae": {
+                  "Zygnematophyceae sp. N.004": {},
+                  "Zygnematophyceae sp. KH.2.sm": {},
+                  "Zygnematophyceae sp. ACOI.2703": {},
+                  "Zygnematophyceae sp. E.1": {},
+                  "Zygnematophyceae sp. KM.19b": {},
+                  "Zygnematophyceae sp. GSM.2.16.l": {},
+                  "Zygnematophyceae sp. LM.24": {},
+                  "Zygnematophyceae sp. N.109": {},
+                  "Zygnematophyceae sp. N.87": {},
+                  "Zygnematophyceae sp. POL.1": {},
+                  "Zygnematophyceae sp. CCAC.2215": {},
+                  "Zygnematophyceae sp. GSM.5D.r": {},
+                  "Zygnematophyceae sp. GSM.3.15": {},
+                  "Zygnematophyceae sp. GSM.2.3.s": {},
+                  "Zygnematophyceae sp. GSM.2.16.s1": {},
+                  "Zygnematophyceae sp. GSM.2.16.s2": {},
+                  "Zygnematophyceae sp.": {}
+                }
+              },
+              "Coleochaetophyceae": {
+                "Coleochaetales": {
+                  "Coleochaetaceae": {
+                    "Coleochaete": {
+                      "Coleochaete orbicularis": {},
+                      "Coleochaete scutata": {},
+                      "Coleochaete nitellarum": {},
+                      "Coleochaete sieminskiana": {},
+                      "Coleochaete pulvinata": {},
+                      "Coleochaete irregularis": {},
+                      "Coleochaete soluta": {},
+                      "Coleochaete conchata": {},
+                      "Coleochaete divergens": {},
+                      "Coleochaete circularis": {},
+                      "unclassified Coleochaete": {
+                        "Coleochaete sp.": {},
+                        "Coleochaete sp. 18a1": {},
+                        "Coleochaete sp. 18b3": {},
+                        "Coleochaete sp. 201d1": {},
+                        "Coleochaete sp. 40D2": {},
+                        "Coleochaete sp. 528a3": {},
+                        "Coleochaete sp. 327d3": {},
+                        "Coleochaete sp. 489a1": {},
+                        "Coleochaete sp. 57b6": {},
+                        "Coleochaete sp. CFD": {}
+                      }
+                    }
+                  },
+                  "Chaetosphaeridiaceae": {
+                    "Chaetosphaeridium": {
+                      "Chaetosphaeridium globosum": {},
+                      "Chaetosphaeridium ovalis": {},
+                      "Chaetosphaeridium pringsheimii": {},
+                      "unclassified Chaetosphaeridium": {
+                        "Chaetosphaeridium sp. 314c2": {},
+                        "Chaetosphaeridium sp. 7c2": {},
+                        "Chaetosphaeridium sp. 539a3": {},
+                        "Chaetosphaeridium sp.": {}
+                      }
+                    }
+                  },
+                  "environmental samples": {
+                    "uncultured Coleochaete": {}
+                  },
+                  "unclassified Coleochaetales": {
+                    "Coleochaetales sp.": {}
+                  }
+                }
+              },
+              "Charophyceae": {
+                "Charales": {
+                  "Characeae": {
+                    "Nitella": {
+                      "Nitella flexilis": {
+                        "Nitella flexilis var. bifurcata": {},
+                        "Nitella flexilis var. flexilis": {}
+                      },
+                      "Nitella axillaris": {},
+                      "Nitella translucens": {},
+                      "Nitella cristata": {
+                        "Nitella cristata var. ambigua": {}
+                      },
+                      "Nitella opaca": {},
+                      "Nitella praelonga": {},
+                      "Nitella capillaris": {},
+                      "Nitella pulchella": {},
+                      "Nitella furcata": {},
+                      "Nitella inversa": {},
+                      "Nitella gracilens": {},
+                      "Nitella pseudoflabellata": {},
+                      "Nitella hyalina": {},
+                      "Nitella spiciformis": {},
+                      "Nitella mucronata": {},
+                      "Nitella mirabilis": {},
+                      "Nitella acuminata": {},
+                      "Nitella tumulosa": {},
+                      "Nitella megaspora": {},
+                      "Nitella gracillima": {},
+                      "Nitella axilliformis": {},
+                      "Nitella japonica": {},
+                      "Nitella oligospira": {},
+                      "Nitella imperialis": {},
+                      "Nitella vieillardii": {},
+                      "Nitella morongii": {},
+                      "Nitella clavata": {},
+                      "Nitella comptonii": {},
+                      "Nitella aff. cristata KGK0129": {},
+                      "Nitella aff. cristata KGK0128": {},
+                      "Nitella aff. cristata (robust form)": {},
+                      "Nitella arthroglochin": {},
+                      "Nitella claytonii": {},
+                      "Nitella hookeri": {},
+                      "Nitella masoniae": {},
+                      "Nitella tricellularis": {},
+                      "Nitella rigida": {
+                        "Nitella rigida var. moriokae": {}
+                      },
+                      "Nitella capillata": {},
+                      "Nitella confervacea": {},
+                      "Nitella obtusa": {},
+                      "Nitella fuiana": {},
+                      "Nitella microcarpa": {},
+                      "Nitella flagellifera": {},
+                      "Nitella elegans": {},
+                      "Nitella megacephala": {},
+                      "unclassified Nitella": {
+                        "Nitella sp.": {},
+                        "Nitella sp. CL-2002": {},
+                        "Nitella sp. 00221": {},
+                        "Nitella sp. 1 AS-2014": {},
+                        "Nitella sp. 2 AS-2014": {},
+                        "Nitella sp. FU-CH193": {},
+                        "Nitella sp. FU-CH218": {},
+                        "Nitella sp. FU-CH307": {},
+                        "Nitella sp. RVR-2021": {},
+                        "Nitella sp. AP-2023a": {},
+                        "Nitella sp. Muramatsu 26452": {},
+                        "Nitella sp. VN-2024a": {}
+                      },
+                      "Nitella singaporensis": {},
+                      "Nitella sonderi": {},
+                      "Nitella gracilis": {},
+                      "Nitella syncarpa": {},
+                      "Nitella tenuissima": {},
+                      "Nitella wahlbergiana": {},
+                      "Nitella pluripapillifera": {}
+                    },
+                    "Chara": {
+                      "Chara connivens": {},
+                      "Chara australis": {},
+                      "Chara curtissii": {},
+                      "Chara hispida": {},
+                      "Chara hornemannii": {},
+                      "Chara corallina": {},
+                      "Chara muelleri": {},
+                      "Chara vulgaris": {
+                        "Chara vulgaris var. longibracteata": {}
+                      },
+                      "Chara andina": {},
+                      "Chara aspera": {},
+                      "Chara baltica": {
+                        "Chara baltica var. liljebladii": {}
+                      },
+                      "Chara braunii": {},
+                      "Chara brittonii": {},
+                      "Chara contraria": {
+                        "Chara contraria var. hispidula": {}
+                      },
+                      "Chara drouetii": {},
+                      "Chara fibrosa": {
+                        "Chara fibrosa subsp. flaccida": {},
+                        "Chara fibrosa subsp. benthamii": {}
+                      },
+                      "Chara foliolosa": {},
+                      "Chara globularis": {},
+                      "Chara haitensis": {},
+                      "Chara hydropithys": {},
+                      "Chara imperfecta": {},
+                      "Chara longifolia": {},
+                      "Chara preissii": {},
+                      "Chara stuartiana": {},
+                      "Chara tomentosa": {},
+                      "Chara vandalurensis": {},
+                      "Chara zeylanica": {},
+                      "Chara rusbyana": {},
+                      "Chara strigosa": {},
+                      "Chara canescens": {},
+                      "Chara gymnopitys": {},
+                      "Chara leptospora": {},
+                      "Chara altaica": {},
+                      "Chara kenoyeri": {},
+                      "Chara martiana": {},
+                      "Chara virgata": {},
+                      "Chara horrida": {},
+                      "Chara rudis": {},
+                      "Chara filiformis": {},
+                      "Chara globata": {},
+                      "Chara aculeolata": {},
+                      "Chara baueri": {},
+                      "Chara calveraensis": {},
+                      "Chara corfuensis": {},
+                      "Chara denudata": {},
+                      "Chara galioides": {},
+                      "Chara gymnophylla": {},
+                      "Chara ohridana": {},
+                      "Chara tenuispina": {},
+                      "Chara guairensis": {},
+                      "unclassified Chara": {
+                        "Chara sp. Huss-1993": {},
+                        "Chara sp. Qiu 96222": {},
+                        "Chara sp. CL-2002-2": {},
+                        "Chara sp. CL-2002-1": {},
+                        "Chara sp. DMS-2003": {},
+                        "Chara sp. AB-2015": {},
+                        "Chara sp. NIBRCR0000100094": {},
+                        "Chara sp. Zhengzhou": {},
+                        "Chara sp. NS18": {},
+                        "Chara sp. 14KW-01": {}
+                      },
+                      "Chara oryzae": {},
+                      "Chara lipkinii": {},
+                      "Chara papillosa": {},
+                      "Chara dissoluta": {},
+                      "Chara curta": {},
+                      "Chara fragifera": {},
+                      "Chara erythrogyna": {},
+                      "Chara neglecta": {}
+                    },
+                    "Lamprothamnium": {
+                      "Lamprothamnium macropogon": {},
+                      "Lamprothamnium cf. papulosum": {},
+                      "Lamprothamnium papulosum": {},
+                      "Lamprothamnium heraldii": {},
+                      "Lamprothamnium succinctum": {},
+                      "Lamprothamnium sardoum": {},
+                      "unclassified Lamprothamnium": {
+                        "Lamprothamnium sp.": {}
+                      }
+                    },
+                    "Tolypella": {
+                      "Tolypella porteri": {},
+                      "Tolypella nidifica": {},
+                      "Tolypella glomerata": {},
+                      "Tolypella boldii": {},
+                      "Tolypella stipitata": {},
+                      "Tolypella ramosissima": {},
+                      "Tolypella hispanica": {},
+                      "unclassified Tolypella": {
+                        "Tolypella sp. MC_R861": {},
+                        "Tolypella sp. MC_R839": {},
+                        "Tolypella sp. PBA-1704": {},
+                        "Tolypella sp. FR/F02-9": {},
+                        "Tolypella sp. KGK4854": {},
+                        "Tolypella sp. KGK4867": {},
+                        "Tolypella sp. RB1-1": {},
+                        "Tolypella sp. RB1-2": {},
+                        "Tolypella sp. RB12_15-1": {},
+                        "Tolypella sp. RB158": {},
+                        "Tolypella sp. RB17_19-1": {},
+                        "Tolypella sp. RB18_07-1": {},
+                        "Tolypella sp. RB2": {},
+                        "Tolypella sp. RB205-1": {},
+                        "Tolypella sp. RB205-2": {},
+                        "Tolypella sp. RB3": {},
+                        "Tolypella sp. RB40": {},
+                        "Tolypella sp. RB41": {},
+                        "Tolypella sp. RB42": {},
+                        "Tolypella sp. RB43": {},
+                        "Tolypella sp. RB45": {},
+                        "Tolypella sp. RB50": {},
+                        "Tolypella sp. RB6": {},
+                        "Tolypella sp. S80": {},
+                        "Tolypella sp. S81": {},
+                        "Tolypella sp. S82": {},
+                        "Tolypella sp. T101": {},
+                        "Tolypella sp. T68": {},
+                        "Tolypella sp. T89": {},
+                        "Tolypella sp. WP0065": {},
+                        "Tolypella sp. WP0092": {},
+                        "Tolypella sp. WP0415": {},
+                        "Tolypella sp. GR01-UW20": {},
+                        "Tolypella sp. KW2010-014": {},
+                        "Tolypella sp. NS54-Tg05": {},
+                        "Tolypella sp. NS56-Tg07": {},
+                        "Tolypella sp. KW2012-008": {}
+                      },
+                      "Tolypella salina": {},
+                      "Tolypella normaniana": {},
+                      "Tolypella mongolica": {}
+                    },
+                    "Nitellopsis": {
+                      "Nitellopsis obtusa": {}
+                    },
+                    "Lychnothamnus": {
+                      "Lychnothamnus barbatus": {},
+                      "Lychnothamnus fasciculatus": {}
+                    },
+                    "environmental samples": {
+                      "Characeae environmental sample": {}
+                    },
+                    "Sphaerochara": {
+                      "Sphaerochara intricata": {},
+                      "Sphaerochara prolifera": {},
+                      "Sphaerochara canadensis": {},
+                      "unclassified Sphaerochara": {}
+                    },
+                    "unclassified Characeae": {
+                      "Characeae sp.": {}
+                    }
+                  },
+                  "environmental samples": {
+                    "uncultured Chara": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

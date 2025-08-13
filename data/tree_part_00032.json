@@ -1,0 +1,2148 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Eukaryota": {
+        "Viridiplantae": {
+          "Streptophyta": {
+            "Streptophytina": {
+              "Embryophyta": {
+                "Tracheophyta": {
+                  "Euphyllophyta": {
+                    "Spermatophyta": {
+                      "unclassified Spermatophyta": {
+                        "Spermatophyta environmental sample": {},
+                        "spermatophyte root": {}
+                      },
+                      "Acrogymnospermae": {
+                        "Cycadopsida": {
+                          "Cycadidae": {
+                            "Cycadales": {
+                              "Zamiaceae": {
+                                "Encephalartos": {
+                                  "Encephalartos altensteinii": {},
+                                  "Encephalartos ferox": {
+                                    "Encephalartos ferox subsp. ferox": {},
+                                    "Encephalartos ferox subsp. emersus": {}
+                                  },
+                                  "Encephalartos arenarius": {},
+                                  "Encephalartos caffer": {},
+                                  "Encephalartos laevifolius": {},
+                                  "Encephalartos lebomboensis": {},
+                                  "Encephalartos barteri": {
+                                    "Encephalartos barteri subsp. allochrous": {},
+                                    "Encephalartos barteri subsp. barteri": {}
+                                  },
+                                  "Encephalartos horridus": {},
+                                  "Encephalartos villosus": {},
+                                  "Encephalartos aemulans": {},
+                                  "Encephalartos aplanatus": {},
+                                  "Encephalartos bubalinus": {},
+                                  "Encephalartos cerinus": {},
+                                  "Encephalartos chimanimaniensis": {},
+                                  "Encephalartos concinnus": {},
+                                  "Encephalartos cupidus": {},
+                                  "Encephalartos cycadifolius": {},
+                                  "Encephalartos dolomiticus": {},
+                                  "Encephalartos dyerianus": {},
+                                  "Encephalartos eugene-maraisii": {},
+                                  "Encephalartos ghellinckii": {},
+                                  "Encephalartos gratus": {},
+                                  "Encephalartos hildebrandtii": {},
+                                  "Encephalartos humilis": {},
+                                  "Encephalartos inopinus": {},
+                                  "Encephalartos kisambo": {},
+                                  "Encephalartos lanatus": {},
+                                  "Encephalartos latifrons": {},
+                                  "Encephalartos laurentianus": {},
+                                  "Encephalartos lehmannii": {},
+                                  "Encephalartos longifolius": {},
+                                  "Encephalartos manikensis": {},
+                                  "Encephalartos middelburgensis": {},
+                                  "Encephalartos msinganus": {},
+                                  "Encephalartos munchii": {},
+                                  "Encephalartos natalensis": {},
+                                  "Encephalartos ngoyanus": {},
+                                  "Encephalartos nubimontanus": {},
+                                  "Encephalartos paucidentatus": {},
+                                  "Encephalartos princeps": {},
+                                  "Encephalartos pterogonus": {},
+                                  "Encephalartos sclavoi": {},
+                                  "Encephalartos senticosus": {},
+                                  "Encephalartos septentrionalis": {},
+                                  "Encephalartos tegulaneus": {
+                                    "Encephalartos tegulaneus subsp. tegulaneus": {},
+                                    "Encephalartos tegulaneus subsp. powysii": {}
+                                  },
+                                  "Encephalartos transvenosus": {},
+                                  "Encephalartos trispinosus": {},
+                                  "Encephalartos turneri": {},
+                                  "Encephalartos umbeluziensis": {},
+                                  "Encephalartos whitelockii": {},
+                                  "Encephalartos woodii": {},
+                                  "Encephalartos hirsutus": {},
+                                  "Encephalartos heenanii": {},
+                                  "Encephalartos horridus x Encephalartos longifolius": {},
+                                  "Encephalartos friderici-guilielmi": {},
+                                  "Encephalartos macrostrobilus": {},
+                                  "Encephalartos schaijesii": {},
+                                  "Encephalartos schmitzii": {},
+                                  "Encephalartos ituriensis": {},
+                                  "Encephalartos brevifoliolatus": {},
+                                  "Encephalartos equatorialis": {},
+                                  "Encephalartos marunguensis": {},
+                                  "Encephalartos poggei": {},
+                                  "Encephalartos relictus": {},
+                                  "Encephalartos kanga": {},
+                                  "Encephalartos natalensis x Encephalartos woodii": {},
+                                  "Encephalartos striatus": {},
+                                  "Encephalartos paucidentatus x Encephalartos heenanii": {},
+                                  "Encephalartos delucanus": {},
+                                  "unclassified Encephalartos": {
+                                    "Encephalartos sp.": {},
+                                    "Encephalartos sp. CS-2007": {},
+                                    "Encephalartos sp. UCBG 67.0423": {},
+                                    "Encephalartos sp. 1446": {},
+                                    "Encephalartos sp. PR-2011": {},
+                                    "Encephalartos sp. PR913": {},
+                                    "Encephalartos sp. JL-2017": {},
+                                    "Encephalartos sp. SD-2023a": {}
+                                  },
+                                  "Encephalartos mackenziei": {},
+                                  "Encephalartos flavistrobilus": {}
+                                },
+                                "Zamia": {
+                                  "Zamia pumila": {},
+                                  "Zamia integrifolia": {},
+                                  "Zamia pygmaea": {},
+                                  "Zamia inermis": {},
+                                  "Zamia fischeri": {},
+                                  "Zamia furfuracea": {},
+                                  "Zamia restrepoi": {},
+                                  "Zamia acuminata": {},
+                                  "Zamia boliviana": {},
+                                  "Zamia cremnophila": {},
+                                  "Zamia dressleri": {},
+                                  "Zamia encephalartoides": {},
+                                  "Zamia gentryi": {},
+                                  "Zamia herrerae": {},
+                                  "Zamia ipetiensis": {},
+                                  "Zamia lecointei": {},
+                                  "Zamia loddigesii": {},
+                                  "Zamia manicata": {},
+                                  "Zamia muricata": {},
+                                  "Zamia neurophyllidia": {},
+                                  "Zamia obliqua": {},
+                                  "Zamia paucijuga": {},
+                                  "Zamia poeppigiana": {},
+                                  "Zamia polymorpha": {},
+                                  "Zamia portoricensis": {},
+                                  "Zamia pseudomonticola": {},
+                                  "Zamia pseudoparasitica": {},
+                                  "Zamia purpurea": {},
+                                  "Zamia roezlii": {},
+                                  "Zamia skinneri": {},
+                                  "Zamia soconuscensis": {},
+                                  "Zamia spartea": {},
+                                  "Zamia standleyi": {},
+                                  "Zamia variegata": {},
+                                  "Zamia verschaffeltii": {},
+                                  "Zamia wallisii": {},
+                                  "Zamia fairchildiana": {},
+                                  "Zamia angustifolia": {},
+                                  "Zamia amblyphyllidia": {},
+                                  "Zamia vazquezii": {},
+                                  "Zamia katzeriana": {},
+                                  "Zamia lacandona": {},
+                                  "Zamia picta": {},
+                                  "Zamia cunaria": {},
+                                  "Zamia elegantissima": {},
+                                  "Zamia prasina": {},
+                                  "Zamia tuerckheimii": {},
+                                  "Zamia chigua": {},
+                                  "Zamia hymenophyllidia": {},
+                                  "Zamia kickxii": {},
+                                  "Zamia lawsoniana": {},
+                                  "Zamia erosa": {},
+                                  "Zamia imperialis": {},
+                                  "Zamia lindenii": {},
+                                  "Zamia amazonum": {},
+                                  "Zamia amplifolia": {},
+                                  "Zamia decumbens": {},
+                                  "Zamia disodon": {},
+                                  "Zamia grijalvensis": {},
+                                  "Zamia hamannii": {},
+                                  "Zamia huilensis": {},
+                                  "Zamia incognita": {},
+                                  "Zamia lindleyi": {},
+                                  "Zamia macrochiera": {},
+                                  "Zamia meermanii": {},
+                                  "Zamia melanorrhachis": {},
+                                  "Zamia nana": {},
+                                  "Zamia nesophila": {},
+                                  "Zamia oligodonta": {},
+                                  "Zamia onan-reyesii": {},
+                                  "Zamia pyrophylla": {},
+                                  "Zamia sandovalii": {},
+                                  "Zamia stevensonii": {},
+                                  "Zamia tolimensis": {},
+                                  "Zamia urep": {},
+                                  "unclassified Zamia": {
+                                    "Zamia sp.": {},
+                                    "Zamia sp. Qiu 09001": {},
+                                    "Zamia sp. OP29": {},
+                                    "Zamia sp. DESL-2014": {},
+                                    "Zamia sp. JL-2017": {},
+                                    "Zamia sp. PE SAM": {}
+                                  },
+                                  "Zamia oreillyi": {},
+                                  "Zamia paucifoliolata": {},
+                                  "Zamia sinuensis": {},
+                                  "Zamia montana": {},
+                                  "Zamia monticola": {},
+                                  "Zamia stricta": {},
+                                  "Zamia ulei": {},
+                                  "Zamia orinoquiensis": {},
+                                  "Zamia aff. monticola SD-2023": {}
+                                },
+                                "Stangeria": {
+                                  "Stangeria eriopus": {},
+                                  "unclassified Stangeria": {
+                                    "Stangeria sp. JL-2017": {}
+                                  }
+                                },
+                                "Ceratozamia": {
+                                  "Ceratozamia mexicana": {
+                                    "Ceratozamia mexicana var. mexicana": {}
+                                  },
+                                  "Ceratozamia miqueliana": {},
+                                  "Ceratozamia norstogii": {},
+                                  "Ceratozamia hildae": {},
+                                  "Ceratozamia alvarezii": {},
+                                  "Ceratozamia brevifrons": {},
+                                  "Ceratozamia euryphyllidia": {},
+                                  "Ceratozamia kuesteriana": {},
+                                  "Ceratozamia matudae": {},
+                                  "Ceratozamia microstrobila": {},
+                                  "Ceratozamia mirandae": {},
+                                  "Ceratozamia mixeorum": {},
+                                  "Ceratozamia morettii": {},
+                                  "Ceratozamia sabatoi": {},
+                                  "Ceratozamia whitelockiana": {},
+                                  "Ceratozamia zaragozae": {},
+                                  "Ceratozamia zoquorum": {},
+                                  "Ceratozamia robusta": {},
+                                  "Ceratozamia becerrae": {},
+                                  "Ceratozamia decumbens": {},
+                                  "Ceratozamia chimalapensis": {},
+                                  "Ceratozamia huastecorum": {},
+                                  "Ceratozamia latifolia": {},
+                                  "Ceratozamia vovidesii": {},
+                                  "Ceratozamia fuscoviridis": {},
+                                  "Ceratozamia santillanii": {},
+                                  "Ceratozamia subroseophylla": {},
+                                  "Ceratozamia hondurensis": {},
+                                  "unclassified Ceratozamia": {
+                                    "Ceratozamia sp. 82-439.01": {},
+                                    "Ceratozamia sp. 99-045.01": {},
+                                    "Ceratozamia sp. 99-049.01": {},
+                                    "Ceratozamia sp. 99-055.01": {},
+                                    "Ceratozamia sp. 85-011.01": {},
+                                    "Ceratozamia sp. JL-2017": {},
+                                    "Ceratozamia sp. LOX": {},
+                                    "Ceratozamia sp. HUAY": {},
+                                    "Ceratozamia sp. Ledesma 20858": {}
+                                  },
+                                  "Ceratozamia tenuis": {},
+                                  "Ceratozamia chamberlainii": {},
+                                  "Ceratozamia delucana": {},
+                                  "Ceratozamia leptoceras": {},
+                                  "Ceratozamia totonacorum": {},
+                                  "Ceratozamia osbornei": {},
+                                  "Ceratozamia oliversacksii": {},
+                                  "Ceratozamia aurantiaca": {},
+                                  "Ceratozamia sancheziae": {}
+                                },
+                                "Dioon": {
+                                  "Dioon edule": {},
+                                  "Dioon rzedowskii": {},
+                                  "Dioon spinulosum": {},
+                                  "Dioon mejiae": {},
+                                  "Dioon califanoi": {},
+                                  "Dioon purpusii": {},
+                                  "Dioon tomasellii": {},
+                                  "Dioon holmgrenii": {},
+                                  "Dioon merolae": {},
+                                  "Dioon angustifolium": {},
+                                  "Dioon argenteum": {},
+                                  "Dioon caputoi": {},
+                                  "Dioon sonorense": {},
+                                  "Dioon stevensonii": {},
+                                  "Dioon planifolium": {},
+                                  "unclassified Dioon": {
+                                    "Dioon sp. CR-2001": {},
+                                    "Dioon sp. JL-2017": {},
+                                    "Dioon sp. IBUNAM:MEXU: 1253505": {},
+                                    "Dioon sp. IBUNAM:MEXU: 1349621": {}
+                                  },
+                                  "Dioon vovidesii": {}
+                                },
+                                "Macrozamia": {
+                                  "Macrozamia communis": {},
+                                  "Macrozamia moorei": {},
+                                  "Macrozamia dyeri": {},
+                                  "Macrozamia lucida": {},
+                                  "Macrozamia elegans": {},
+                                  "Macrozamia fraseri": {},
+                                  "Macrozamia pauli-guilielmi": {},
+                                  "Macrozamia glaucophylla": {},
+                                  "Macrozamia polymorpha": {},
+                                  "Macrozamia fawcettii": {},
+                                  "Macrozamia macdonnellii": {},
+                                  "Macrozamia miquelii": {},
+                                  "Macrozamia platyrhachis": {},
+                                  "Macrozamia reducta": {},
+                                  "Macrozamia riedlei": {},
+                                  "Macrozamia secunda": {},
+                                  "Macrozamia spiralis": {},
+                                  "Macrozamia concinna": {},
+                                  "Macrozamia fearnsidei": {},
+                                  "Macrozamia macleayi": {},
+                                  "Macrozamia mountperriensis": {},
+                                  "Macrozamia parcifolia": {},
+                                  "Macrozamia serpentina": {},
+                                  "Macrozamia crassifolia": {},
+                                  "Macrozamia diplomera": {},
+                                  "Macrozamia douglasii": {},
+                                  "Macrozamia flexuosa": {},
+                                  "Macrozamia johnsonii": {},
+                                  "Macrozamia lomandroides": {},
+                                  "Macrozamia montana": {},
+                                  "Macrozamia plurinervia": {},
+                                  "Macrozamia stenomera": {},
+                                  "Macrozamia longispina": {},
+                                  "Macrozamia longispina x Macrozamia macleayi": {},
+                                  "Macrozamia lucida x Macrozamia macleayi": {},
+                                  "Macrozamia occidua": {},
+                                  "Macrozamia conferta": {},
+                                  "Macrozamia machinii": {},
+                                  "Macrozamia heteromera": {},
+                                  "Macrozamia viridis": {},
+                                  "Macrozamia cardiacensis": {},
+                                  "Macrozamia cranei": {},
+                                  "Macrozamia humilis": {},
+                                  "unclassified Macrozamia": {
+                                    "Macrozamia sp. Tamworth": {},
+                                    "Macrozamia sp. Amiens": {},
+                                    "Macrozamia sp. Kroombit": {},
+                                    "Macrozamia sp. Warialda": {},
+                                    "Macrozamia sp. JL-2017": {}
+                                  }
+                                },
+                                "Microcycas": {
+                                  "Microcycas calocoma": {}
+                                },
+                                "Lepidozamia": {
+                                  "Lepidozamia peroffskyana": {},
+                                  "Lepidozamia hopei": {},
+                                  "unclassified Lepidozamia": {
+                                    "Lepidozamia sp. JL-2017": {}
+                                  }
+                                }
+                              },
+                              "Cycadaceae": {
+                                "Cycas": {
+                                  "Cycas revoluta": {},
+                                  "Cycas circinalis": {},
+                                  "Cycas taitungensis": {},
+                                  "Cycas rumphii": {},
+                                  "Cycas panzhihuaensis": {},
+                                  "Cycas changjiangensis": {},
+                                  "Cycas bifida": {},
+                                  "Cycas fairylakea": {},
+                                  "Cycas media": {
+                                    "Cycas media subsp. media": {},
+                                    "Cycas media subsp. ensata": {},
+                                    "Cycas media subsp. banksii": {}
+                                  },
+                                  "Cycas multipinnata": {},
+                                  "Cycas siamensis": {},
+                                  "Cycas taiwaniana": {},
+                                  "Cycas wadei": {},
+                                  "Cycas edentata": {},
+                                  "Cycas micronesica": {},
+                                  "Cycas seemannii": {},
+                                  "Cycas thouarsii": {},
+                                  "Cycas angulata": {},
+                                  "Cycas pectinata": {},
+                                  "Cycas micholitzii": {},
+                                  "Cycas furfuracea": {},
+                                  "Cycas tanqingii": {},
+                                  "Cycas guizhouensis": {},
+                                  "Cycas simplicipinna": {},
+                                  "Cycas ophiolitica": {},
+                                  "Cycas platyphylla": {},
+                                  "Cycas debaoensis": {},
+                                  "Cycas hainanensis": {},
+                                  "Cycas megacarpa": {},
+                                  "Cycas elephantipes": {},
+                                  "Cycas clivicola": {
+                                    "Cycas clivicola subsp. lutea": {},
+                                    "Cycas clivicola subsp. clivicola": {}
+                                  },
+                                  "Cycas couttsiana": {},
+                                  "Cycas balansae": {},
+                                  "Cycas chamaoensis": {},
+                                  "Cycas condaoensis": {},
+                                  "Cycas curranii": {},
+                                  "Cycas hoabinhensis": {},
+                                  "Cycas lindstromii": {},
+                                  "Cycas nongnoochiae": {},
+                                  "Cycas pranburiensis": {},
+                                  "Cycas segmentifida": {},
+                                  "Cycas sexseminifera": {},
+                                  "Cycas tansachana": {},
+                                  "Cycas zeylanica": {},
+                                  "Cycas aculeata": {},
+                                  "Cycas apoa": {},
+                                  "Cycas armstrongii": {},
+                                  "Cycas basaltica": {},
+                                  "Cycas beddomei": {},
+                                  "Cycas bougainvilleana": {},
+                                  "Cycas brachycantha": {},
+                                  "Cycas cairnsiana": {},
+                                  "Cycas calcicola": {},
+                                  "Cycas chamberlainii": {},
+                                  "Cycas chevalieri": {},
+                                  "Cycas collina": {},
+                                  "Cycas diannanensis": {},
+                                  "Cycas dolichophylla": {},
+                                  "Cycas elongata": {},
+                                  "Cycas ferruginea": {},
+                                  "Cycas fugax": {},
+                                  "Cycas hongheensis": {},
+                                  "Cycas litoralis": {},
+                                  "Cycas maconochiei": {
+                                    "Cycas maconochiei subsp. lanata": {},
+                                    "Cycas maconochiei subsp. maconochiei": {},
+                                    "Cycas maconochiei subsp. viridis": {}
+                                  },
+                                  "Cycas macrocarpa": {},
+                                  "Cycas petraea": {},
+                                  "Cycas riuminiana": {},
+                                  "Cycas schumanniana": {},
+                                  "Cycas semota": {},
+                                  "Cycas sphaerica": {},
+                                  "Cycas szechuanensis": {},
+                                  "Cycas tropophylla": {},
+                                  "Cycas xipholepis": {},
+                                  "Cycas yorkiana": {},
+                                  "Cycas campestris": {},
+                                  "Cycas javana": {},
+                                  "Cycas nathorstii": {},
+                                  "Cycas parvula": {},
+                                  "Cycas silvestris": {},
+                                  "Cycas chenii": {},
+                                  "Cycas pachypoda": {},
+                                  "Cycas tuckeri": {},
+                                  "Cycas annaikalensis": {},
+                                  "Cycas aenigma": {},
+                                  "Cycas saxatilis": {},
+                                  "Cycas indica": {},
+                                  "Cycas papuana": {},
+                                  "Cycas x multifrondis": {},
+                                  "Cycas nitida": {},
+                                  "Cycas arnhemica": {
+                                    "Cycas arnhemica subsp. muninga": {}
+                                  },
+                                  "Cycas badensis": {},
+                                  "Cycas brunnea": {},
+                                  "Cycas conferta": {},
+                                  "Cycas desolata": {},
+                                  "Cycas falcata": {},
+                                  "Cycas glauca": {},
+                                  "Cycas inermis": {},
+                                  "Cycas lacrimans": {},
+                                  "Cycas laotica": {},
+                                  "Cycas lingshuigensis": {},
+                                  "Cycas longipetiolula": {},
+                                  "Cycas montana": {},
+                                  "Cycas multiovula": {},
+                                  "Cycas orientis": {},
+                                  "Cycas pruinosa": {},
+                                  "Cycas sancti-lasallei": {},
+                                  "Cycas scratchleyana": {},
+                                  "Cycas shanyaensis": {},
+                                  "Cycas shiwandashanica": {},
+                                  "Cycas sundaica": {},
+                                  "Cycas truncata": {},
+                                  "Cycas vespertilio": {},
+                                  "Cycas zambalensis": {},
+                                  "Cycas pschannae": {},
+                                  "Cycas arenicola": {},
+                                  "Cycas canalis": {},
+                                  "unclassified Cycas": {
+                                    "Cycas sp. 'wilailak'": {},
+                                    "Cycas sp. 'sarabury'": {},
+                                    "Cycas sp. Sulawesi 11333": {},
+                                    "Cycas sp. R63": {},
+                                    "Cycas sp. R96": {},
+                                    "Cycas sp. R118": {},
+                                    "Cycas sp. R119": {},
+                                    "Cycas sp. SD-2023a": {}
+                                  },
+                                  "Cycas sainathii": {},
+                                  "Cycas baiseensis": {},
+                                  "Cycas cantafolia": {},
+                                  "Cycas distans": {},
+                                  "Cycas lane-poolei": {},
+                                  "Cycas orixensis": {},
+                                  "Cycas terryana": {},
+                                  "Cycas crassipes": {},
+                                  "Cycas longisporophylla": {},
+                                  "Cycas longlinensis": {},
+                                  "Cycas bglswamyi": {},
+                                  "Cycas seshachalamensis": {}
+                                },
+                                "Bowenia": {
+                                  "Bowenia serrulata": {},
+                                  "Bowenia spectabilis": {}
+                                }
+                              },
+                              "Stangeriaceae": {}
+                            }
+                          }
+                        },
+                        "Gnetopsida": {
+                          "environmental samples": {
+                            "Gnetophyta environmental sample": {}
+                          },
+                          "Gnetidae": {
+                            "Welwitschiales": {
+                              "Welwitschiaceae": {
+                                "Welwitschia": {
+                                  "Welwitschia mirabilis": {}
+                                }
+                              }
+                            },
+                            "Gnetales": {
+                              "Gnetaceae": {
+                                "Gnetum": {
+                                  "Gnetum montanum": {},
+                                  "Gnetum gnemon": {
+                                    "Gnetum gnemon var. brunonianum": {}
+                                  },
+                                  "Gnetum ula": {},
+                                  "Gnetum leyboldii": {
+                                    "Gnetum leyboldii var. woodsonianum": {}
+                                  },
+                                  "Gnetum parvifolium": {},
+                                  "Gnetum africanum": {},
+                                  "Gnetum nodiflorum": {},
+                                  "Gnetum urens": {},
+                                  "Gnetum indicum": {},
+                                  "Gnetum costatum": {},
+                                  "Gnetum cuspidatum": {},
+                                  "Gnetum hainanense": {},
+                                  "Gnetum klossii": {},
+                                  "Gnetum latifolium": {},
+                                  "Gnetum macrostachyum": {},
+                                  "Gnetum neglectum": {},
+                                  "Gnetum diminutum": {},
+                                  "Gnetum gnemonoides": {},
+                                  "Gnetum aff. microcarpum Won 526": {},
+                                  "Gnetum aff. microcarpum Won 533": {},
+                                  "Gnetum aff. latifolium Won 545": {},
+                                  "Gnetum aff. latifolium SAN151116": {},
+                                  "Gnetum hainanense s.l. Won 511": {},
+                                  "Gnetum hainanense s.l. Won 555": {},
+                                  "Gnetum hainanense s.l. Won & Maxwell 580": {},
+                                  "Gnetum hainanense s.l. Won 600": {},
+                                  "Gnetum microstachyum": {},
+                                  "Gnetum paniculatum": {},
+                                  "Gnetum acutum": {},
+                                  "Gnetum raya": {},
+                                  "Gnetum tenuifolium": {},
+                                  "Gnetum aff. gnemon Won 514": {},
+                                  "Gnetum aff. schwackeanum Won 512": {},
+                                  "Gnetum hainanense s.l. RBGE 19550226": {},
+                                  "Gnetum hainanense s.l. Won & Gang 600": {},
+                                  "Gnetum leptostachyum": {},
+                                  "Gnetum luofuense": {},
+                                  "Gnetum schwackeanum": {},
+                                  "Gnetum aff. diminutum Poster & Won SAN 151128": {},
+                                  "Gnetum aff. tenuifolium Lian V0080": {},
+                                  "Gnetum buchholzianum": {},
+                                  "Gnetum camporum": {},
+                                  "Gnetum edule": {},
+                                  "Gnetum pendulum": {},
+                                  "Gnetum catasphaericum": {},
+                                  "Gnetum formosum": {},
+                                  "Gnetum giganteum": {},
+                                  "Gnetum gracilipes": {},
+                                  "Gnetum aff. gracilipes Won et al. 10561": {},
+                                  "Gnetum aff. latifolium Won 566": {},
+                                  "Gnetum aff. leptostachyum Postar & Won 151116": {},
+                                  "Gnetum aff. leptostachyum Won 545": {},
+                                  "Gnetum aff. leptostachyum Won 560": {},
+                                  "Gnetum aff. gracilipes Won et al. 6665": {},
+                                  "Gnetum aff. gracilipes Won et al. 8306": {},
+                                  "Gnetum aff. gracilipes Won et al. 13240": {},
+                                  "Gnetum aff. gracilipes Won et al. 8198": {},
+                                  "Gnetum aff. gracilipes Won et al. 8747": {},
+                                  "Gnetum aff. gracilipes Won et al. 12478": {},
+                                  "Gnetum aff. gracilipes Won et al. 12263": {},
+                                  "Gnetum globosum": {},
+                                  "unclassified Gnetum": {
+                                    "Gnetum sp. Takeuchi et al. 7049": {},
+                                    "Gnetum sp. Harder et al. 5621": {},
+                                    "Gnetum sp. Won 512": {},
+                                    "Gnetum sp. JH-2017": {}
+                                  },
+                                  "Gnetum chinense": {}
+                                },
+                                "environmental samples": {
+                                  "Gnetum environmental sample": {}
+                                }
+                              }
+                            },
+                            "Ephedrales": {
+                              "Ephedraceae": {
+                                "Ephedra": {
+                                  "Ephedra kokanica": {},
+                                  "Ephedra distachya": {
+                                    "Ephedra distachya subsp. helvetica": {}
+                                  },
+                                  "Ephedra tweediana": {},
+                                  "Ephedra altissima": {
+                                    "Ephedra altissima var. algerica": {}
+                                  },
+                                  "Ephedra sinica": {
+                                    "Ephedra sinica var. pumila": {}
+                                  },
+                                  "Ephedra major": {
+                                    "Ephedra major subsp. procera": {},
+                                    "Ephedra major subsp. major": {}
+                                  },
+                                  "Ephedra antisyphilitica": {},
+                                  "Ephedra trifurca": {},
+                                  "Ephedra gerardiana": {},
+                                  "Ephedra torreyana": {
+                                    "Ephedra torreyana var. powelliorum": {}
+                                  },
+                                  "Ephedra californica": {},
+                                  "Ephedra saxatilis": {
+                                    "Ephedra saxatilis var. sikkimensis": {},
+                                    "Ephedra saxatilis var. mairei": {}
+                                  },
+                                  "Ephedra fragilis": {},
+                                  "Ephedra viridis": {},
+                                  "Ephedra foeminea": {},
+                                  "Ephedra americana": {},
+                                  "Ephedra monosperma": {},
+                                  "Ephedra frustillata": {},
+                                  "Ephedra intermedia": {
+                                    "Ephedra intermedia var. tibetica": {}
+                                  },
+                                  "Ephedra minuta": {},
+                                  "Ephedra equisetina": {},
+                                  "Ephedra andina": {},
+                                  "Ephedra aphylla": {},
+                                  "Ephedra aspera": {},
+                                  "Ephedra coryi": {},
+                                  "Ephedra cutleri": {},
+                                  "Ephedra fasciculata": {},
+                                  "Ephedra lomatolepis": {},
+                                  "Ephedra nevadensis": {},
+                                  "Ephedra pedunculata": {},
+                                  "Ephedra sarcocarpa": {},
+                                  "Ephedra chilensis": {},
+                                  "Ephedra przewalskii": {},
+                                  "Ephedra likiangensis": {},
+                                  "Ephedra laristanica": {},
+                                  "Ephedra fedtschenkoae": {},
+                                  "Ephedra somalensis": {},
+                                  "Ephedra strobilacea": {},
+                                  "Ephedra regeliana": {},
+                                  "Ephedra transitoria": {},
+                                  "Ephedra funerea": {},
+                                  "Ephedra ochreata": {},
+                                  "Ephedra gracilis": {},
+                                  "Ephedra rupestris": {},
+                                  "Ephedra triandra": {},
+                                  "Ephedra multiflora": {},
+                                  "Ephedra breana": {},
+                                  "Ephedra boelckei": {},
+                                  "Ephedra compacta": {},
+                                  "Ephedra pachyclada": {
+                                    "Ephedra pachyclada subsp. sinaica": {}
+                                  },
+                                  "Ephedra alata": {},
+                                  "Ephedra foliata": {},
+                                  "Ephedra ciliata": {},
+                                  "Ephedra campylopoda": {},
+                                  "Ephedra rhytidosperma": {},
+                                  "Ephedra dahurica": {},
+                                  "Ephedra milleri": {},
+                                  "Ephedra botschantzevii": {},
+                                  "Ephedra aff. likiangensis Miehe 04-165-17": {},
+                                  "Ephedra pseudodistachya": {},
+                                  "Ephedra tilhoana": {},
+                                  "Ephedra rituensis": {},
+                                  "unclassified Ephedra": {
+                                    "Ephedra sp.": {},
+                                    "Ephedra sp. CR08": {},
+                                    "Ephedra sp. CR33": {},
+                                    "Ephedra sp. CB": {},
+                                    "Ephedra sp. EM": {},
+                                    "Ephedra sp. LS": {},
+                                    "Ephedra sp. Ickert-Bond 753": {},
+                                    "Ephedra sp. Price 1416": {},
+                                    "Ephedra sp. Price 1419": {},
+                                    "Ephedra sp. Tibet-7": {},
+                                    "Ephedra sp. Tibet-5": {},
+                                    "Ephedra sp. M-ESP1": {},
+                                    "Ephedra sp. Borna s.n.": {},
+                                    "Ephedra sp. Miehe 00-119-17": {},
+                                    "Ephedra sp. MS-2018": {}
+                                  },
+                                  "Ephedra karumanchiana": {}
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Ginkgoopsida": {
+                          "Ginkgoidae": {
+                            "Ginkgoales": {
+                              "Ginkgoaceae": {
+                                "Ginkgo": {
+                                  "Ginkgo biloba": {}
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Pinopsida": {
+                          "Pinidae": {
+                            "Conifers II": {
+                              "Araucariales": {
+                                "Podocarpaceae": {
+                                  "Podocarpus": {
+                                    "Podocarpus henkelii": {},
+                                    "Podocarpus costalis": {},
+                                    "Podocarpus totara": {
+                                      "Podocarpus totara var. waihoensis": {}
+                                    },
+                                    "Podocarpus macrophyllus": {
+                                      "Podocarpus macrophyllus var. maki": {},
+                                      "Podocarpus macrophyllus var. angustifolius": {},
+                                      "Podocarpus macrophyllus var. macrophyllus": {}
+                                    },
+                                    "Podocarpus neriifolius": {},
+                                    "Podocarpus elatus": {},
+                                    "Podocarpus milanjianus": {},
+                                    "Podocarpus acutifolius": {},
+                                    "Podocarpus brassii": {
+                                      "Podocarpus brassii var. brassii": {},
+                                      "Podocarpus brassii var. humilis": {}
+                                    },
+                                    "Podocarpus cunninghamii": {},
+                                    "Podocarpus dispermus": {},
+                                    "Podocarpus drouynianus": {},
+                                    "Podocarpus fasciculus": {},
+                                    "Podocarpus gnidioides": {},
+                                    "Podocarpus grayae": {},
+                                    "Podocarpus hallii": {},
+                                    "Podocarpus latifolius": {},
+                                    "Podocarpus lawrencei": {},
+                                    "Podocarpus longifoliolatus": {},
+                                    "Podocarpus lucienii": {},
+                                    "Podocarpus matudae": {
+                                      "Podocarpus matudae var. reichei": {}
+                                    },
+                                    "Podocarpus nivalis": {},
+                                    "Podocarpus novae-caledoniae": {},
+                                    "Podocarpus nubigenus": {},
+                                    "Podocarpus parlatorei": {},
+                                    "Podocarpus polyspermus": {},
+                                    "Podocarpus polystachyus": {},
+                                    "Podocarpus salignus": {},
+                                    "Podocarpus smithii": {},
+                                    "Podocarpus spinulosus": {},
+                                    "Podocarpus aff. degeneri MtLoftyBG": {},
+                                    "Podocarpus aff. insularis MH6612": {},
+                                    "Podocarpus aff. pilgeri MH6655": {},
+                                    "Podocarpus forrestii": {},
+                                    "Podocarpus cf. sylvestris 19842691A": {},
+                                    "Podocarpus guatemalensis": {},
+                                    "Podocarpus oleifolius": {
+                                      "Podocarpus oleifolius var. macrostachys": {},
+                                      "Podocarpus oleifolius var. costaricensis": {}
+                                    },
+                                    "Podocarpus annamiensis": {},
+                                    "Podocarpus coriaceus": {},
+                                    "Podocarpus archboldii": {},
+                                    "Podocarpus nakaii": {},
+                                    "Podocarpus degeneri": {},
+                                    "Podocarpus insularis": {},
+                                    "Podocarpus pilgeri": {},
+                                    "Podocarpus sylvestris": {},
+                                    "Podocarpus affinis": {},
+                                    "Podocarpus angustifolius": {},
+                                    "Podocarpus aristulatus": {},
+                                    "Podocarpus beecherae": {},
+                                    "Podocarpus brevifolius": {},
+                                    "Podocarpus chingianus": {},
+                                    "Podocarpus costaricensis": {},
+                                    "Podocarpus ekmanii": {},
+                                    "Podocarpus elongatus": {},
+                                    "Podocarpus hispaniolensis": {},
+                                    "Podocarpus lambertii": {},
+                                    "Podocarpus purdieanus": {},
+                                    "Podocarpus ramosii": {},
+                                    "Podocarpus rubens": {},
+                                    "Podocarpus rumphii": {},
+                                    "Podocarpus salomoniensis": {},
+                                    "Podocarpus sellowii": {},
+                                    "Podocarpus spathoides": {},
+                                    "Podocarpus subtropicalis": {},
+                                    "Podocarpus trinitensis": {},
+                                    "Podocarpus urbanii": {},
+                                    "Podocarpus barretoi": {},
+                                    "Podocarpus bracteatus": {},
+                                    "Podocarpus brasiliensis": {},
+                                    "Podocarpus capuronii": {},
+                                    "Podocarpus celatus": {},
+                                    "Podocarpus cf. rubens PK-2012": {},
+                                    "Podocarpus crassigemmis": {},
+                                    "Podocarpus decipiens": {},
+                                    "Podocarpus decumbens": {},
+                                    "Podocarpus deflexus": {},
+                                    "Podocarpus gibbsiae": {},
+                                    "Podocarpus glaucus": {},
+                                    "Podocarpus ledermannii": {},
+                                    "Podocarpus madagascariensis": {
+                                      "Podocarpus madagascariensis var. madagascariensis": {}
+                                    },
+                                    "Podocarpus magnifolius": {},
+                                    "Podocarpus pallidus": {},
+                                    "Podocarpus philippinensis": {},
+                                    "Podocarpus pseudobracteatus": {},
+                                    "Podocarpus rusbyi": {},
+                                    "Podocarpus sprucei": {},
+                                    "Podocarpus thailandensis": {},
+                                    "Podocarpus atjehensis": {},
+                                    "Podocarpus cf. spathoides DPL-2013": {},
+                                    "Podocarpus glomeratus": {},
+                                    "Podocarpus micropedunculatus": {},
+                                    "Podocarpus rostratus": {},
+                                    "Podocarpus salicifolius": {},
+                                    "Podocarpus tepuiensis": {},
+                                    "Podocarpus teysmannii": {},
+                                    "Podocarpus transiens": {},
+                                    "Podocarpus ingensis": {},
+                                    "Podocarpus laubenfelsii": {},
+                                    "Podocarpus lophatus": {},
+                                    "unclassified Podocarpus": {
+                                      "Podocarpus sp. 'New Caledonia'": {},
+                                      "Podocarpus sp. PK-2012a": {}
+                                    }
+                                  },
+                                  "Nageia": {
+                                    "Nageia nagi": {},
+                                    "Nageia nankoensis": {},
+                                    "Nageia fleuryi": {},
+                                    "Nageia wallichiana": {},
+                                    "Nageia formosensis": {},
+                                    "Nageia cf. motleyi PK-2012": {},
+                                    "Nageia motleyi": {},
+                                    "Nageia cf. nankoensis DPL-2013": {},
+                                    "unclassified Nageia": {
+                                      "Nageia sp. NTT-2019": {}
+                                    }
+                                  },
+                                  "Dacrycarpus": {
+                                    "Dacrycarpus imbricatus": {
+                                      "Dacrycarpus imbricatus var. patulus": {},
+                                      "Dacrycarpus imbricatus var. robustus": {}
+                                    },
+                                    "Dacrycarpus dacrydioides": {},
+                                    "Dacrycarpus cumingii": {},
+                                    "Dacrycarpus vieillardii": {},
+                                    "Dacrycarpus compactus": {},
+                                    "Dacrycarpus cinctus": {},
+                                    "Dacrycarpus kinabaluensis": {},
+                                    "Dacrycarpus expansus": {}
+                                  },
+                                  "Phyllocladus": {
+                                    "Phyllocladus trichomanoides": {
+                                      "Phyllocladus trichomanoides var. trichomanoides": {}
+                                    },
+                                    "Phyllocladus hypophyllus": {},
+                                    "Phyllocladus alpinus": {},
+                                    "Phyllocladus aspleniifolius": {},
+                                    "Phyllocladus toatoa": {}
+                                  },
+                                  "Dacrydium": {
+                                    "Dacrydium cupressinum": {},
+                                    "Dacrydium araucarioides": {},
+                                    "Dacrydium balansae": {},
+                                    "Dacrydium guillauminii": {},
+                                    "Dacrydium pectinatum": {},
+                                    "Dacrydium elatum": {},
+                                    "Dacrydium beccarii": {},
+                                    "Dacrydium lycopodioides": {},
+                                    "Dacrydium magnum": {},
+                                    "Dacrydium nausoriense": {},
+                                    "Dacrydium nidulum": {},
+                                    "Dacrydium xanthandrum": {},
+                                    "Dacrydium gibbsiae": {},
+                                    "Dacrydium x suprinii": {},
+                                    "Dacrydium comosum": {},
+                                    "Dacrydium gracile": {}
+                                  },
+                                  "Lagarostrobos": {
+                                    "Lagarostrobos franklinii": {}
+                                  },
+                                  "Microcachrys": {
+                                    "Microcachrys tetragona": {}
+                                  },
+                                  "Microstrobos": {
+                                    "Microstrobos niphophilus": {}
+                                  },
+                                  "Parasitaxus": {
+                                    "Parasitaxus usta": {}
+                                  },
+                                  "Prumnopitys": {
+                                    "Prumnopitys taxifolia": {},
+                                    "Prumnopitys andina": {},
+                                    "Prumnopitys amara": {},
+                                    "Prumnopitys montana": {}
+                                  },
+                                  "Saxegothaea": {
+                                    "Saxegothaea conspicua": {}
+                                  },
+                                  "Acmopyle": {
+                                    "Acmopyle pancheri": {},
+                                    "Acmopyle sahniana": {}
+                                  },
+                                  "Falcatifolium": {
+                                    "Falcatifolium taxoides": {},
+                                    "Falcatifolium papuanum": {},
+                                    "Falcatifolium gruezoi": {},
+                                    "Falcatifolium falciforme": {
+                                      "Falcatifolium falciforme var. falciforme": {}
+                                    }
+                                  },
+                                  "Retrophyllum": {
+                                    "Retrophyllum minus": {},
+                                    "Retrophyllum comptonii": {},
+                                    "Retrophyllum rospigliosii": {},
+                                    "Retrophyllum vitiense": {},
+                                    "Retrophyllum piresii": {}
+                                  },
+                                  "Afrocarpus": {
+                                    "Afrocarpus falcatus": {},
+                                    "Afrocarpus gracilior": {},
+                                    "Afrocarpus gaussenii": {},
+                                    "Afrocarpus mannii": {},
+                                    "Afrocarpus dawei": {},
+                                    "Afrocarpus usambarensis": {}
+                                  },
+                                  "Halocarpus": {
+                                    "Halocarpus bidwillii": {},
+                                    "Halocarpus biformis": {},
+                                    "Halocarpus kirkii": {}
+                                  },
+                                  "Lepidothamnus": {
+                                    "Lepidothamnus fonkii": {},
+                                    "Lepidothamnus laxifolius": {},
+                                    "Lepidothamnus intermedius": {},
+                                    "unclassified Lepidothamnus": {
+                                      "Lepidothamnus sp. 1KP": {}
+                                    }
+                                  },
+                                  "Sundacarpus": {},
+                                  "Manoao": {
+                                    "Manoao colensoi": {}
+                                  },
+                                  "Pherosphaera": {
+                                    "Pherosphaera fitzgeraldii": {},
+                                    "Pherosphaera hookeriana": {}
+                                  },
+                                  "Pectinopitys": {
+                                    "Pectinopitys ferruginea": {},
+                                    "Pectinopitys ferruginoides": {},
+                                    "Pectinopitys ladei": {},
+                                    "Pectinopitys harmsiana": {},
+                                    "Pectinopitys exigua": {}
+                                  }
+                                },
+                                "Araucariaceae": {
+                                  "Araucaria": {
+                                    "Araucaria heterophylla": {},
+                                    "Araucaria araucana": {},
+                                    "Araucaria excelsa": {},
+                                    "Araucaria angustifolia": {},
+                                    "Araucaria bidwillii": {},
+                                    "Araucaria cunninghamii": {
+                                      "Araucaria cunninghamii var. cunninghamii": {}
+                                    },
+                                    "Araucaria hunsteinii": {},
+                                    "Araucaria muelleri": {},
+                                    "Araucaria bernieri": {},
+                                    "Araucaria biramulata": {},
+                                    "Araucaria columnaris": {},
+                                    "Araucaria humboldtensis": {},
+                                    "Araucaria laubenfelsii": {},
+                                    "Araucaria luxurians": {},
+                                    "Araucaria montana": {},
+                                    "Araucaria nemorosa": {},
+                                    "Araucaria rulei": {},
+                                    "Araucaria schmidii": {},
+                                    "Araucaria scopulorum": {},
+                                    "Araucaria subulata": {},
+                                    "Araucaria cf. bernieri MR-2014": {},
+                                    "unclassified Araucaria": {
+                                      "Araucaria sp. BC-2016": {},
+                                      "Araucaria sp. DNAS-2FF-249051": {}
+                                    }
+                                  },
+                                  "Agathis": {
+                                    "Agathis borneensis": {},
+                                    "Agathis lanceolata": {},
+                                    "Agathis macrophylla": {},
+                                    "Agathis ovata": {},
+                                    "Agathis moorei": {},
+                                    "Agathis australis": {},
+                                    "Agathis palmerstonii": {},
+                                    "Agathis dammara": {},
+                                    "Agathis montana de Laub., 1969": {},
+                                    "Agathis obtusa": {},
+                                    "Agathis robusta": {},
+                                    "Agathis vitiensis": {},
+                                    "Agathis atropurpurea": {},
+                                    "Agathis microstachya": {},
+                                    "Agathis brownii": {},
+                                    "Agathis alba": {},
+                                    "Agathis philippinensis": {},
+                                    "Agathis corbassonii": {},
+                                    "Agathis silbae": {},
+                                    "Agathis endertii": {},
+                                    "Agathis labillardierei": {},
+                                    "Agathis lenticula": {}
+                                  },
+                                  "Wollemia": {
+                                    "Wollemia nobilis": {}
+                                  }
+                                }
+                              },
+                              "Cupressales": {
+                                "Cupressaceae": {
+                                  "Thuja": {
+                                    "Thuja plicata": {},
+                                    "Thuja occidentalis": {},
+                                    "Thuja standishii": {},
+                                    "Thuja koraiensis": {},
+                                    "Thuja sutchuenensis": {},
+                                    "unclassified Thuja": {
+                                      "Thuja sp. RM-2019": {}
+                                    }
+                                  },
+                                  "Cryptomeria": {
+                                    "Cryptomeria japonica": {
+                                      "Cryptomeria japonica var. sinensis": {},
+                                      "Cryptomeria japonica var. radicans": {}
+                                    },
+                                    "unclassified Cryptomeria": {
+                                      "Cryptomeria sp.": {}
+                                    }
+                                  },
+                                  "Metasequoia": {
+                                    "Metasequoia glyptostroboides": {}
+                                  },
+                                  "Juniperus": {
+                                    "Juniperus ashei": {},
+                                    "Juniperus virginiana": {
+                                      "Juniperus virginiana var. silicicola": {}
+                                    },
+                                    "Juniperus chinensis": {
+                                      "Juniperus chinensis var. chinensis": {},
+                                      "Juniperus chinensis var. sargentii": {},
+                                      "Juniperus chinensis var. tsukusiensis": {}
+                                    },
+                                    "Juniperus communis": {
+                                      "Juniperus communis subsp. hemisphaerica": {},
+                                      "Juniperus communis subsp. communis": {
+                                        "Juniperus communis var. communis": {},
+                                        "Juniperus communis var. saxatilis": {},
+                                        "Juniperus communis var. depressa": {},
+                                        "Juniperus communis var. oblonga": {}
+                                      },
+                                      "Juniperus communis var. hondoensis": {}
+                                    },
+                                    "Juniperus phoenicea": {},
+                                    "Juniperus procera": {},
+                                    "Juniperus oxycedrus": {
+                                      "Juniperus oxycedrus subsp. oxycedrus": {
+                                        "Juniperus oxycedrus var. badia": {},
+                                        "Juniperus oxycedrus var. oxycedrus": {}
+                                      }
+                                    },
+                                    "Juniperus rigida": {
+                                      "Juniperus rigida var. conferta": {},
+                                      "Juniperus rigida var. rigida": {}
+                                    },
+                                    "Juniperus drupacea": {},
+                                    "Juniperus osteosperma": {},
+                                    "Juniperus occidentalis": {},
+                                    "Juniperus pinchotii": {},
+                                    "Juniperus saltillensis": {},
+                                    "Juniperus californica": {},
+                                    "Juniperus navicularis": {},
+                                    "Juniperus macrocarpa": {},
+                                    "Juniperus thurifera": {},
+                                    "Juniperus sabina": {
+                                      "Juniperus sabina var. arenaria": {},
+                                      "Juniperus sabina var. davurica": {},
+                                      "Juniperus sabina var. sabina": {},
+                                      "Juniperus sabina var. balkanensis": {},
+                                      "Juniperus sabina var. balkanensis x Juniperus thurifera": {}
+                                    },
+                                    "Juniperus deltoides": {},
+                                    "Juniperus przewalskii": {
+                                      "Juniperus przewalskii subsp. pendula": {}
+                                    },
+                                    "Juniperus tibetica": {},
+                                    "Juniperus deppeana": {
+                                      "Juniperus deppeana var. gamboana": {},
+                                      "Juniperus deppeana var. deppeana": {},
+                                      "Juniperus deppeana var. robusta": {},
+                                      "Juniperus deppeana var. zacatecensis": {}
+                                    },
+                                    "Juniperus pseudosabina": {},
+                                    "Juniperus coahuilensis": {},
+                                    "Juniperus arizonica": {},
+                                    "Juniperus indica": {
+                                      "Juniperus indica var. caespitosa": {},
+                                      "Juniperus indica var. rushforthiana": {}
+                                    },
+                                    "Juniperus communis x Juniperus nana": {},
+                                    "Juniperus morrisonicola": {},
+                                    "Juniperus formosana": {
+                                      "Juniperus formosana var. formosana": {},
+                                      "Juniperus formosana var. mairei": {}
+                                    },
+                                    "Juniperus squamata": {
+                                      "Juniperus squamata subsp. fargesii": {}
+                                    },
+                                    "Juniperus maritima": {},
+                                    "Juniperus scopulorum": {},
+                                    "Juniperus pingii": {
+                                      "Juniperus pingii var. wilsonii": {}
+                                    },
+                                    "Juniperus saltuaria": {},
+                                    "Juniperus barbadensis": {
+                                      "Juniperus barbadensis var. lucayana": {}
+                                    },
+                                    "Juniperus flaccida": {},
+                                    "Juniperus monosperma": {},
+                                    "Juniperus monticola": {},
+                                    "Juniperus gaussenii": {},
+                                    "Juniperus durangensis": {},
+                                    "Juniperus jaliscana": {},
+                                    "Juniperus martinezii": {},
+                                    "Juniperus recurva": {},
+                                    "Juniperus horizontalis": {},
+                                    "Juniperus blancoi": {
+                                      "Juniperus blancoi var. huehuentensis": {},
+                                      "Juniperus blancoi var. blancoi": {}
+                                    },
+                                    "Juniperus mucronata": {
+                                      "Juniperus mucronata var. mucronata": {}
+                                    },
+                                    "Juniperus procumbens": {},
+                                    "Juniperus cedrus": {},
+                                    "Juniperus brevifolia": {},
+                                    "Juniperus excelsa": {},
+                                    "Juniperus angosturana": {},
+                                    "Juniperus bermudiana": {},
+                                    "Juniperus comitana": {},
+                                    "Juniperus convallium": {
+                                      "Juniperus convallium var. microsperma": {}
+                                    },
+                                    "Juniperus gracilior": {},
+                                    "Juniperus komarovii": {},
+                                    "Juniperus polycarpos": {
+                                      "Juniperus polycarpos var. turcomanica": {},
+                                      "Juniperus polycarpos var. polycarpos": {}
+                                    },
+                                    "Juniperus coxii": {},
+                                    "Juniperus saxicola": {},
+                                    "Juniperus semiglobosa": {},
+                                    "Juniperus taxifolia": {
+                                      "Juniperus taxifolia var. lutchuensis": {}
+                                    },
+                                    "Juniperus turbinata": {},
+                                    "Juniperus seravschanica": {},
+                                    "Juniperus maderensis": {},
+                                    "Juniperus grandis": {},
+                                    "Juniperus foetidissima": {},
+                                    "Juniperus zanonii": {},
+                                    "Juniperus standleyi": {},
+                                    "Juniperus erectopatens": {},
+                                    "unclassified Juniperus": {
+                                      "Juniperus sp. Qiu 96270": {},
+                                      "Juniperus hybrid sp. LO-2009": {},
+                                      "Juniperus sp. NE-2017": {},
+                                      "Juniperus sp. PMNH 043878": {},
+                                      "Juniperus sp. PMNH 043880": {},
+                                      "Juniperus sp. PMNH 043882": {},
+                                      "Juniperus hybrid cultivar": {},
+                                      "Juniperus sp.": {}
+                                    },
+                                    "Juniperus sabina x Juniperus thurifera": {},
+                                    "Juniperus x cerropastorensis": {},
+                                    "Juniperus canariensis": {}
+                                  },
+                                  "Taxodium": {
+                                    "Taxodium distichum": {
+                                      "Taxodium distichum var. imbricarium": {},
+                                      "Taxodium distichum var. distichum": {}
+                                    },
+                                    "Taxodium mucronatum": {},
+                                    "unclassified Taxodium": {
+                                      "Taxodium sp. 'Zhongshanshan'": {}
+                                    }
+                                  },
+                                  "Callitris": {
+                                    "Callitris rhomboidea": {},
+                                    "Callitris pancheri": {},
+                                    "Callitris acuminata": {},
+                                    "Callitris gracilis": {
+                                      "Callitris gracilis subsp. murrayensis": {},
+                                      "Callitris gracilis subsp. gracilis": {}
+                                    },
+                                    "Callitris glaucophylla": {},
+                                    "Callitris intratropica": {},
+                                    "Callitris columellaris": {},
+                                    "Callitris canescens": {},
+                                    "Callitris muelleri": {},
+                                    "Callitris pyramidalis": {},
+                                    "Callitris macleayana": {},
+                                    "Callitris sulcata": {},
+                                    "Callitris drummondii": {},
+                                    "Callitris endlicheri": {},
+                                    "Callitris tuberculata": {},
+                                    "Callitris oblonga": {
+                                      "Callitris oblonga subsp. corangensis": {},
+                                      "Callitris oblonga subsp. oblonga": {},
+                                      "Callitris oblonga subsp. parva": {}
+                                    },
+                                    "Callitris preissii": {},
+                                    "Callitris verrucosa": {},
+                                    "Callitris glauca": {},
+                                    "Callitris arenaria": {},
+                                    "Callitris baileyi": {},
+                                    "Callitris monticola": {},
+                                    "Callitris roei": {},
+                                    "Callitris neocaledonica": {},
+                                    "unclassified Callitris": {
+                                      "Callitris sp. 'Emerald Creek'": {},
+                                      "Callitris sp. 'Paluma'": {},
+                                      "Callitris sp. Costion 1641": {}
+                                    }
+                                  },
+                                  "Calocedrus": {
+                                    "Calocedrus decurrens": {},
+                                    "Calocedrus formosana": {},
+                                    "Calocedrus macrolepis": {},
+                                    "Calocedrus rupestris": {}
+                                  },
+                                  "Chamaecyparis": {
+                                    "Chamaecyparis obtusa": {
+                                      "Chamaecyparis obtusa var. formosana": {},
+                                      "Chamaecyparis obtusa var. obtusa": {}
+                                    },
+                                    "Chamaecyparis lawsoniana": {},
+                                    "Chamaecyparis hodginsii": {},
+                                    "Chamaecyparis pisifera": {},
+                                    "Chamaecyparis formosensis": {},
+                                    "Chamaecyparis thyoides": {
+                                      "Chamaecyparis thyoides subsp. henryae": {},
+                                      "Chamaecyparis thyoides subsp. thyoides": {}
+                                    },
+                                    "Chamaecyparis obtusa x Chamaecyparis pisifera": {}
+                                  },
+                                  "Cupressus": {
+                                    "Cupressus sempervirens": {},
+                                    "Cupressus corneyana": {},
+                                    "Cupressus duclouxiana": {},
+                                    "Cupressus cashmeriana": {},
+                                    "Cupressus atlantica": {},
+                                    "Cupressus austrotibetica": {},
+                                    "Cupressus chengiana": {
+                                      "Cupressus chengiana var. chengiana": {},
+                                      "Cupressus chengiana var. kansouensis": {}
+                                    },
+                                    "Cupressus dupreziana": {},
+                                    "Cupressus gigantea": {},
+                                    "Cupressus jiangensis": {},
+                                    "Cupressus tonkinensis": {},
+                                    "Cupressus torulosa": {},
+                                    "Cupressus austrotibetica x Cupressus cashmeriana": {},
+                                    "Cupressus assamica": {},
+                                    "Cupressus darjeelingensis": {},
+                                    "unclassified Cupressus": {
+                                      "Cupressus sp. HHG-2001": {},
+                                      "Cupressus sp. US:3540622": {}
+                                    }
+                                  },
+                                  "Diselma": {
+                                    "Diselma archeri": {}
+                                  },
+                                  "Libocedrus": {
+                                    "Libocedrus plumosa": {},
+                                    "Libocedrus bidwillii": {},
+                                    "Libocedrus yateensis": {},
+                                    "Libocedrus austrocaledonica": {},
+                                    "Libocedrus chevalieri": {},
+                                    "unclassified Libocedrus": {
+                                      "Libocedrus sp. QBW-2007": {}
+                                    }
+                                  },
+                                  "Microbiota": {
+                                    "Microbiota decussata": {}
+                                  },
+                                  "Platycladus": {
+                                    "Platycladus orientalis": {},
+                                    "unclassified Platycladus": {
+                                      "Platycladus sp. BOP010375": {}
+                                    }
+                                  },
+                                  "Tetraclinis": {
+                                    "Tetraclinis articulata": {},
+                                    "unclassified Tetraclinis": {
+                                      "Tetraclinis sp. BC-2016": {},
+                                      "Tetraclinis sp. 1KP": {}
+                                    }
+                                  },
+                                  "Thujopsis": {
+                                    "Thujopsis dolabrata": {
+                                      "Thujopsis dolabrata var. hondae": {}
+                                    }
+                                  },
+                                  "Widdringtonia": {
+                                    "Widdringtonia cedarbergensis": {},
+                                    "Widdringtonia schwarzii": {},
+                                    "Widdringtonia nodiflora": {},
+                                    "Widdringtonia whytei": {}
+                                  },
+                                  "Athrotaxis": {
+                                    "Athrotaxis laxifolia": {},
+                                    "Athrotaxis selaginoides": {},
+                                    "Athrotaxis cupressoides": {}
+                                  },
+                                  "Cunninghamia": {
+                                    "Cunninghamia lanceolata": {
+                                      "Cunninghamia lanceolata var. konishii": {}
+                                    },
+                                    "Cunninghamia unicanaliculata": {
+                                      "Cunninghamia unicanaliculata var. pyramidalis": {}
+                                    }
+                                  },
+                                  "Glyptostrobus": {
+                                    "Glyptostrobus pensilis": {}
+                                  },
+                                  "Sequoia": {
+                                    "Sequoia sempervirens": {}
+                                  },
+                                  "Taiwania": {
+                                    "Taiwania cryptomerioides": {},
+                                    "Taiwania flousiana": {}
+                                  },
+                                  "Fokienia": {},
+                                  "Neocallitropsis": {},
+                                  "Sequoiadendron": {
+                                    "Sequoiadendron giganteum": {}
+                                  },
+                                  "Actinostrobus": {},
+                                  "Austrocedrus": {
+                                    "Austrocedrus chilensis": {}
+                                  },
+                                  "Fitzroya": {
+                                    "Fitzroya cupressoides": {}
+                                  },
+                                  "Papuacedrus": {
+                                    "Papuacedrus papuana": {}
+                                  },
+                                  "Pilgerodendron": {
+                                    "Pilgerodendron uviferum": {}
+                                  },
+                                  "Xanthocyparis": {},
+                                  "Callitropsis": {
+                                    "Callitropsis funebris": {},
+                                    "Callitropsis nootkatensis": {},
+                                    "Callitropsis vietnamensis": {}
+                                  },
+                                  "Hesperocyparis": {
+                                    "Hesperocyparis glabra": {},
+                                    "Hesperocyparis sargentii": {},
+                                    "Hesperocyparis nevadensis": {},
+                                    "Hesperocyparis stephensonii": {},
+                                    "Hesperocyparis forbesii": {},
+                                    "Hesperocyparis montana": {},
+                                    "Hesperocyparis arizonica": {
+                                      "Hesperocyparis arizonica var. arizonica": {}
+                                    },
+                                    "Hesperocyparis macrocarpa": {},
+                                    "Hesperocyparis goveniana": {
+                                      "Hesperocyparis goveniana var. abramsiana": {},
+                                      "Hesperocyparis goveniana var. goveniana": {}
+                                    },
+                                    "Hesperocyparis lusitanica": {
+                                      "Hesperocyparis lusitanica var. lusitanica": {}
+                                    },
+                                    "Hesperocyparis macnabiana": {},
+                                    "Hesperocyparis pygmaea": {},
+                                    "Hesperocyparis bakeri": {},
+                                    "Hesperocyparis benthamii": {},
+                                    "Hesperocyparis guadalupensis": {
+                                      "Hesperocyparis guadalupensis var. guadalupensis": {}
+                                    },
+                                    "Hesperocyparis lindleyi": {}
+                                  },
+                                  "environmental samples": {
+                                    "Cupressus environmental sample": {}
+                                  },
+                                  "x Hesperotropsis": {
+                                    "x Hesperotropsis leylandii": {}
+                                  },
+                                  "unclassified Cupressaceae": {
+                                    "Cupressaceae sp. A804-0502-01": {},
+                                    "Cupressaceae sp. A804-0502-02": {},
+                                    "Cupressaceae sp. A804-0502-03": {},
+                                    "Cupressaceae sp. A804M02-04": {},
+                                    "Cupressaceae sp. A804M02-05": {},
+                                    "Cupressaceae sp. A804M02-06": {},
+                                    "Cupressaceae sp. A804M02-07": {},
+                                    "Cupressaceae sp. A804M02-08": {},
+                                    "Cupressaceae sp. A804M02-09": {},
+                                    "Cupressaceae sp.": {}
+                                  }
+                                },
+                                "Taxaceae": {
+                                  "Amentotaxus": {
+                                    "Amentotaxus argotaenia": {},
+                                    "Amentotaxus formosana": {},
+                                    "Amentotaxus yunnanensis": {},
+                                    "Amentotaxus poilanei": {},
+                                    "Amentotaxus hatuyenensis": {},
+                                    "unclassified Amentotaxus": {
+                                      "Amentotaxus sp. BOP010495": {},
+                                      "Amentotaxus sp. GX-5-4": {},
+                                      "Amentotaxus sp. GX-5-8": {},
+                                      "Amentotaxus sp. CKF250": {},
+                                      "Amentotaxus sp. GLM-123943": {},
+                                      "Amentotaxus sp. GX-5-1": {},
+                                      "Amentotaxus sp. GLM-06209": {}
+                                    }
+                                  },
+                                  "Taxus": {
+                                    "Taxus baccata": {},
+                                    "Taxus chinensis": {},
+                                    "Taxus brevifolia": {},
+                                    "Taxus x media": {},
+                                    "Taxus canadensis": {},
+                                    "Taxus cuspidata": {
+                                      "Taxus cuspidata var. nana": {},
+                                      "Taxus cuspidata var. cuspidata": {},
+                                      "Taxus cuspidata var. latifolia": {}
+                                    },
+                                    "Taxus mairei": {},
+                                    "Taxus wallichiana": {
+                                      "Taxus wallichiana var. wallichiana": {},
+                                      "Taxus wallichiana var. yunnanensis": {}
+                                    },
+                                    "Taxus floridana": {},
+                                    "Taxus globosa": {},
+                                    "Taxus x hunnewelliana": {},
+                                    "Taxus fuana": {},
+                                    "Taxus sumatrana": {},
+                                    "Taxus celebica": {},
+                                    "Taxus contorta": {},
+                                    "Taxus florinii": {},
+                                    "Taxus phytonii": {},
+                                    "unclassified Taxus": {
+                                      "Taxus sp. HHG-2001": {},
+                                      "Taxus sp. YGQ-2016": {},
+                                      "Taxus sp. 'Qinling type'": {},
+                                      "Taxus sp. 'Emei type'": {},
+                                      "Taxus sp. 'Huangshan type'": {},
+                                      "Taxus sp. PC-2019": {},
+                                      "Taxus sp.": {},
+                                      "Taxus sp. 'Yunman type'": {},
+                                      "Taxus sp. 'Mandiya type'": {},
+                                      "Taxus sp. SW-2025a": {}
+                                    },
+                                    "Taxus calcicola": {}
+                                  },
+                                  "Cephalotaxus": {
+                                    "Cephalotaxus harringtonia": {
+                                      "Cephalotaxus harringtonia var. wilsoniana": {},
+                                      "Cephalotaxus harringtonia var. nana": {},
+                                      "Cephalotaxus harringtonia var. harringtonia": {}
+                                    },
+                                    "Cephalotaxus fortunei": {
+                                      "Cephalotaxus fortunei var. alpina": {}
+                                    },
+                                    "Cephalotaxus mannii": {},
+                                    "Cephalotaxus sinensis": {
+                                      "Cephalotaxus sinensis var. sinensis": {}
+                                    },
+                                    "Cephalotaxus oliveri": {},
+                                    "Cephalotaxus hainanensis": {},
+                                    "Cephalotaxus drupacea": {},
+                                    "Cephalotaxus latifolia": {},
+                                    "Cephalotaxus griffithii": {},
+                                    "Cephalotaxus koreana": {},
+                                    "Cephalotaxus lanceolata": {},
+                                    "unclassified Cephalotaxus": {
+                                      "Cephalotaxus sp. JW-2022a": {}
+                                    }
+                                  },
+                                  "Torreya": {
+                                    "Torreya nucifera": {
+                                      "Torreya nucifera var. nucifera": {},
+                                      "Torreya nucifera var. radicans": {}
+                                    },
+                                    "Torreya grandis": {},
+                                    "Torreya californica": {},
+                                    "Torreya fargesii": {
+                                      "Torreya fargesii var. yunnanensis": {}
+                                    },
+                                    "Torreya jackii": {},
+                                    "Torreya taxifolia": {},
+                                    "Torreya parvifolia": {},
+                                    "unclassified Torreya": {
+                                      "Torreya sp. P25 PMC-2018": {},
+                                      "Torreya sp. PC-2019": {}
+                                    },
+                                    "Torreya dapanshanica": {},
+                                    "Torreya jiulongshanensis": {}
+                                  },
+                                  "Austrotaxus": {
+                                    "Austrotaxus spicata": {}
+                                  },
+                                  "Pseudotaxus": {
+                                    "Pseudotaxus chienii": {}
+                                  }
+                                },
+                                "Sciadopityaceae": {
+                                  "Sciadopitys": {
+                                    "Sciadopitys verticillata": {}
+                                  }
+                                }
+                              }
+                            },
+                            "Conifers I": {
+                              "Pinales": {
+                                "Pinaceae": {
+                                  "Abies": {
+                                    "Abies magnifica": {
+                                      "Abies magnifica var. shastensis": {}
+                                    },
+                                    "Abies lasiocarpa": {
+                                      "Abies lasiocarpa var. bifolia": {},
+                                      "Abies lasiocarpa var. arizonica": {}
+                                    },
+                                    "Abies alba": {},
+                                    "Abies grandis": {},
+                                    "Abies pinsapo": {
+                                      "Abies pinsapo var. marocana": {},
+                                      "Abies pinsapo var. pinsapo": {},
+                                      "Abies pinsapo var. tazaotana": {}
+                                    },
+                                    "Abies bracteata": {},
+                                    "Abies cephalonica": {},
+                                    "Abies firma": {},
+                                    "Abies homolepis": {
+                                      "Abies homolepis var. umbellata": {}
+                                    },
+                                    "Abies veitchii": {},
+                                    "Abies mariesii": {},
+                                    "Abies sachalinensis": {
+                                      "Abies sachalinensis var. gracilis": {},
+                                      "Abies sachalinensis var. sachalinensis": {}
+                                    },
+                                    "Abies numidica": {},
+                                    "Abies balsamea": {
+                                      "Abies balsamea var. phanerolepis": {}
+                                    },
+                                    "Abies fabri": {},
+                                    "Abies fargesii": {
+                                      "Abies fargesii var. faxoniana": {}
+                                    },
+                                    "Abies holophylla": {},
+                                    "Abies sibirica": {
+                                      "Abies sibirica subsp. semenovii": {}
+                                    },
+                                    "Abies koreana": {
+                                      "Abies koreana f. chlorocarpa": {},
+                                      "Abies koreana f. rubrocarpa": {},
+                                      "Abies koreana f. nigrocarpa": {}
+                                    },
+                                    "Abies nephrolepis": {},
+                                    "Abies fraseri": {},
+                                    "Abies concolor": {},
+                                    "Abies amabilis": {},
+                                    "Abies procera": {},
+                                    "Abies nebrodensis": {},
+                                    "Abies nordmanniana": {
+                                      "Abies nordmanniana subsp. equi-trojani": {
+                                        "Abies nordmanniana var. bornmuelleriana": {}
+                                      }
+                                    },
+                                    "Abies beshanzuensis": {
+                                      "Abies beshanzuensis var. ziyuanensis": {}
+                                    },
+                                    "Abies cilicica": {},
+                                    "Abies spectabilis": {},
+                                    "Abies kawakamii": {},
+                                    "Abies chensiensis": {},
+                                    "Abies delavayi": {
+                                      "Abies delavayi subsp. fansipanensis": {},
+                                      "Abies delavayi var. motuoensis": {}
+                                    },
+                                    "Abies densa": {},
+                                    "Abies durangensis": {
+                                      "Abies durangensis var. coahuilensis": {}
+                                    },
+                                    "Abies flinckii": {},
+                                    "Abies forrestii": {
+                                      "Abies forrestii var. chengii": {}
+                                    },
+                                    "Abies guatemalensis": {},
+                                    "Abies pindrow": {
+                                      "Abies pindrow var. brevifolia": {}
+                                    },
+                                    "Abies religiosa": {
+                                      "Abies religiosa var. colimensis": {}
+                                    },
+                                    "Abies hidalgensis": {},
+                                    "Abies hickelii": {},
+                                    "Abies lowiana": {},
+                                    "Abies borisii-regis": {},
+                                    "Abies fanjingshanensis": {},
+                                    "Abies yuanbaoshanensis": {},
+                                    "Abies ernestii": {
+                                      "Abies ernestii var. salouenensis": {}
+                                    },
+                                    "Abies ferreana": {},
+                                    "Abies georgei": {
+                                      "Abies georgei var. smithii": {}
+                                    },
+                                    "Abies recurvata": {},
+                                    "Abies squamata": {},
+                                    "Abies nukiangensis": {},
+                                    "Abies vejarii": {},
+                                    "Abies jaliscana": {},
+                                    "unclassified Abies": {
+                                      "Abies sp. LiujqAB21": {},
+                                      "Abies sp. 1 YH-2012": {},
+                                      "Abies sp. 2 YH-2012": {},
+                                      "Abies sp.": {},
+                                      "Abies sp. ES-2022": {}
+                                    },
+                                    "Abies chayuensis": {},
+                                    "Abies fordei": {}
+                                  },
+                                  "Cedrus": {
+                                    "Cedrus deodara": {},
+                                    "Cedrus libani": {},
+                                    "Cedrus atlantica": {},
+                                    "Cedrus brevifolia": {},
+                                    "unclassified Cedrus": {
+                                      "Cedrus sp. AC-2017": {},
+                                      "Cedrus sp. MBD-2019": {}
+                                    }
+                                  },
+                                  "Keteleeria": {
+                                    "Keteleeria davidiana": {
+                                      "Keteleeria davidiana var. calcarea": {},
+                                      "Keteleeria davidiana var. formosana": {},
+                                      "Keteleeria davidiana var. chienpeii": {}
+                                    },
+                                    "Keteleeria evelyniana": {
+                                      "Keteleeria evelyniana var. roulletii": {},
+                                      "Keteleeria evelyniana var. pendula": {}
+                                    },
+                                    "Keteleeria hainanensis": {},
+                                    "Keteleeria fortunei": {
+                                      "Keteleeria fortunei var. cyclolepis": {},
+                                      "Keteleeria fortunei var. oblonga": {},
+                                      "Keteleeria fortunei var. xerophila": {}
+                                    },
+                                    "Keteleeria pubescens": {}
+                                  },
+                                  "Larix": {
+                                    "Larix laricina": {},
+                                    "Larix occidentalis": {},
+                                    "Larix x marschlinsii": {},
+                                    "Larix kaempferi": {},
+                                    "Larix sibirica": {
+                                      "Larix sibirica subsp. altaica": {}
+                                    },
+                                    "Larix decidua": {
+                                      "Larix decidua var. polonica": {},
+                                      "Larix decidua subsp. decidua": {}
+                                    },
+                                    "Larix griffithii": {
+                                      "Larix griffithii var. speciosa": {}
+                                    },
+                                    "Larix lyallii": {},
+                                    "Larix gmelinii": {
+                                      "Larix gmelinii var. japonica": {},
+                                      "Larix gmelinii var. principis-rupprechtii": {},
+                                      "Larix gmelinii var. olgensis": {},
+                                      "Larix gmelinii var. gmelinii": {}
+                                    },
+                                    "Larix potaninii": {
+                                      "Larix potaninii var. chinensis": {},
+                                      "Larix potaninii var. macrocarpa": {},
+                                      "Larix potaninii var. australis": {},
+                                      "Larix potaninii var. potaninii": {}
+                                    },
+                                    "Larix sukaczewii": {},
+                                    "Larix czekanowskii": {},
+                                    "Larix himalaica": {},
+                                    "Larix mastersiana": {},
+                                    "Larix gmelinii var. olgensis x Larix kaempferi": {},
+                                    "Larix cajanderi": {},
+                                    "Larix kamtschatica": {},
+                                    "Larix dahurica": {},
+                                    "Larix x maritima": {},
+                                    "unclassified Larix": {
+                                      "Larix sp.": {},
+                                      "Larix sp. WSU-cult": {}
+                                    },
+                                    "Larix kongboensis": {}
+                                  },
+                                  "Picea": {
+                                    "Picea abies": {
+                                      "Picea abies var. abies": {}
+                                    },
+                                    "Picea glauca": {},
+                                    "Picea pungens": {},
+                                    "Picea sitchensis": {},
+                                    "Picea rubens": {},
+                                    "Picea engelmannii": {},
+                                    "Picea mariana": {},
+                                    "Picea omorika": {},
+                                    "Picea mexicana": {},
+                                    "Picea jezoensis": {
+                                      "Picea jezoensis subsp. hondoensis": {},
+                                      "Picea jezoensis subsp. jezoensis": {
+                                        "Picea jezoensis var. jezoensis": {}
+                                      }
+                                    },
+                                    "Picea morrisonicola": {},
+                                    "Picea breweriana": {},
+                                    "Picea smithiana": {},
+                                    "Picea alcoquiana": {},
+                                    "Picea glehnii": {},
+                                    "Picea koyamae": {},
+                                    "Picea maximowiczii": {
+                                      "Picea maximowiczii var. senanensis": {}
+                                    },
+                                    "Picea torano": {},
+                                    "Picea shirasawae": {},
+                                    "Picea wilsonii": {},
+                                    "Picea chihuahuana": {},
+                                    "Picea asperata": {
+                                      "Picea asperata var. aurantiaca": {}
+                                    },
+                                    "Picea schrenkiana": {
+                                      "Picea schrenkiana var. tianschanica": {}
+                                    },
+                                    "Picea spinulosa": {},
+                                    "Picea orientalis": {},
+                                    "Picea engelmannii x Picea sitchensis": {},
+                                    "Picea mariana x Picea rubens": {},
+                                    "Picea likiangensis": {
+                                      "Picea likiangensis var. rubescens": {},
+                                      "Picea likiangensis var. hirtella": {},
+                                      "Picea likiangensis var. likiangensis": {},
+                                      "Picea likiangensis var. montigena": {}
+                                    },
+                                    "Picea koraiensis": {},
+                                    "Picea meyeri": {
+                                      "Picea meyeri var. mongolica": {},
+                                      "Picea meyeri var. meyeri": {}
+                                    },
+                                    "Picea retroflexa": {},
+                                    "Picea brachytyla": {
+                                      "Picea brachytyla var. complanata": {},
+                                      "Picea brachytyla var. brachytyla": {}
+                                    },
+                                    "Picea purpurea": {},
+                                    "Picea crassifolia": {},
+                                    "Picea obovata": {},
+                                    "Picea neoveitchii": {},
+                                    "Picea farreri": {},
+                                    "Picea engelmannii x Picea glauca": {},
+                                    "Picea martinezii": {},
+                                    "Picea x lutzii": {},
+                                    "Picea glauca x P. engelmannii x P. sitchensis": {},
+                                    "Picea x notha": {},
+                                    "Picea x fennica": {},
+                                    "unclassified Picea": {
+                                      "Picea sp. H1 BAC-2010": {},
+                                      "Picea sp. H2 BAC-2010": {},
+                                      "Picea sp. H3 BAC-2010": {},
+                                      "Picea sp. BOP010364": {},
+                                      "Picea sp. BOP010365": {},
+                                      "Picea sp. BOP010366": {},
+                                      "Picea sp. BOP010391": {},
+                                      "Picea sp. 1 NZ-2015": {},
+                                      "Picea sp. 2 NZ-2015": {},
+                                      "Picea sp.": {}
+                                    },
+                                    "Picea glauca x Picea engelmannii": {},
+                                    "Picea linzhiensis": {}
+                                  },
+                                  "Pinus": {
+                                    "Pinus subgen. Pinus": {
+                                      "Pinus contorta": {
+                                        "Pinus contorta subsp. contorta": {
+                                          "Pinus contorta var. bolanderi": {},
+                                          "Pinus contorta var. latifolia": {}
+                                        },
+                                        "Pinus contorta subsp. murrayana": {}
+                                      },
+                                      "Pinus pinea": {},
+                                      "Pinus radiata": {
+                                        "Pinus radiata var. binata": {},
+                                        "Pinus radiata var. radiata": {}
+                                      },
+                                      "Pinus sylvestris": {
+                                        "Pinus sylvestris var. mongolica": {},
+                                        "Pinus sylvestris var. sylvestris": {},
+                                        "Pinus sylvestris var. hamata": {},
+                                        "Pinus sylvestris var. sylvestriformis": {},
+                                        "Pinus sylvestris subsp. lapponica": {},
+                                        "Pinus sylvestris subsp. engadinensis": {}
+                                      },
+                                      "Pinus thunbergii": {},
+                                      "Pinus coulteri": {},
+                                      "Pinus taeda": {},
+                                      "Pinus banksiana": {},
+                                      "Pinus mugo": {
+                                        "Pinus mugo subsp. uncinata": {},
+                                        "Pinus mugo subsp. rotundata": {},
+                                        "Pinus mugo subsp. mugo": {}
+                                      },
+                                      "Pinus luchuensis": {},
+                                      "Pinus elliottii": {
+                                        "Pinus elliottii var. elliottii": {},
+                                        "Pinus elliottii var. densa": {}
+                                      },
+                                      "Pinus palustris": {},
+                                      "Pinus canariensis": {},
+                                      "Pinus resinosa": {},
+                                      "Pinus arizonica": {
+                                        "Pinus arizonica var. cooperi": {},
+                                        "Pinus arizonica var. arizonica": {},
+                                        "Pinus arizonica var. stormiae": {}
+                                      },
+                                      "Pinus durangensis": {},
+                                      "Pinus engelmannii": {
+                                        "Pinus engelmannii var. blancoi": {}
+                                      },
+                                      "Pinus jeffreyi": {},
+                                      "Pinus ponderosa": {
+                                        "Pinus ponderosa var. washoensis": {},
+                                        "Pinus ponderosa var. ponderosa": {},
+                                        "Pinus ponderosa var. scopulorum": {},
+                                        "Pinus ponderosa var. benthamiana": {}
+                                      },
+                                      "Pinus nigra": {
+                                        "Pinus nigra subsp. laricio": {},
+                                        "Pinus nigra subsp. nigra": {
+                                          "Pinus nigra var. nigra": {}
+                                        },
+                                        "Pinus nigra subsp. salzmannii": {},
+                                        "Pinus nigra subsp. pallasiana": {}
+                                      },
+                                      "Pinus caribaea": {
+                                        "Pinus caribaea var. bahamensis": {},
+                                        "Pinus caribaea var. caribaea": {},
+                                        "Pinus caribaea var. hondurensis": {}
+                                      },
+                                      "Pinus attenuata": {},
+                                      "Pinus douglasiana": {},
+                                      "Pinus echinata": {},
+                                      "Pinus halepensis": {},
+                                      "Pinus hartwegii": {
+                                        "Pinus hartwegii var. rudis": {}
+                                      },
+                                      "Pinus kesiya": {
+                                        "Pinus kesiya var. langbianensis": {}
+                                      },
+                                      "Pinus leiophylla": {
+                                        "Pinus leiophylla var. chihuahuana": {}
+                                      },
+                                      "Pinus lumholtzii": {},
+                                      "Pinus merkusii": {},
+                                      "Pinus montezumae": {
+                                        "Pinus montezumae var. montezumae": {}
+                                      },
+                                      "Pinus patula": {
+                                        "Pinus patula var. longipedunculata": {},
+                                        "Pinus patula var. patula": {}
+                                      },
+                                      "Pinus pinaster": {
+                                        "Pinus pinaster subsp. escarena": {}
+                                      },
+                                      "Pinus roxburghii": {},
+                                      "Pinus teocote": {},
+                                      "Pinus tropicalis": {},
+                                      "Pinus virginiana": {},
+                                      "Pinus densiflora": {
+                                        "Pinus densiflora var. ussuriensis": {},
+                                        "Pinus densiflora var. densiflora": {},
+                                        "Pinus densiflora var. zhangwuensis": {}
+                                      },
+                                      "Pinus brutia": {
+                                        "Pinus brutia subsp. brutia": {
+                                          "Pinus brutia var. pityusa": {},
+                                          "Pinus brutia var. eldarica": {}
+                                        }
+                                      },
+                                      "Pinus hwangshanensis": {},
+                                      "Pinus heldreichii": {
+                                        "Pinus heldreichii var. leucodermis": {}
+                                      },
+                                      "Pinus massoniana": {
+                                        "Pinus massoniana var. massoniana": {}
+                                      },
+                                      "Pinus tabuliformis": {
+                                        "Pinus tabuliformis var. henryi": {},
+                                        "Pinus tabuliformis var. tabuliformis": {},
+                                        "Pinus tabuliformis var. mukdensis": {}
+                                      },
+                                      "Pinus yunnanensis": {
+                                        "Pinus yunnanensis var. pygmaea": {},
+                                        "Pinus yunnanensis var. tenuifolia": {}
+                                      },
+                                      "Pinus tecunumanii": {},
+                                      "Pinus cubensis": {},
+                                      "Pinus maestrensis": {},
+                                      "Pinus pungens": {},
+                                      "Pinus rigida": {},
+                                      "Pinus oocarpa": {
+                                        "Pinus oocarpa var. trifoliata": {}
+                                      },
+                                      "Pinus herrerae": {},
+                                      "Pinus muricata": {},
+                                      "Pinus serotina": {},
+                                      "Pinus densata": {},
+                                      "Pinus lawsonii": {},
+                                      "Pinus pseudostrobus": {
+                                        "Pinus pseudostrobus var. apulcensis": {},
+                                        "Pinus pseudostrobus var. estevezii": {},
+                                        "Pinus pseudostrobus var. pseudostrobus": {}
+                                      },
+                                      "Pinus clausa": {},
+                                      "Pinus maximinoi": {},
+                                      "Pinus taiwanensis": {},
+                                      "Pinus sabiniana": {},
+                                      "Pinus torreyana": {
+                                        "Pinus torreyana subsp. insularis": {},
+                                        "Pinus torreyana subsp. torreyana": {}
+                                      },
+                                      "Pinus devoniana": {},
+                                      "Pinus occidentalis": {},
+                                      "Pinus greggii": {},
+                                      "Pinus pringlei": {},
+                                      "Pinus glabra": {},
+                                      "Pinus praetermissa": {},
+                                      "Pinus pseudostrobus x Pinus montezumae": {},
+                                      "Pinus jaliscana": {},
+                                      "Pinus rigida x Pinus x rigitaeda": {},
+                                      "Pinus x rigitaeda": {},
+                                      "Pinus nubicola": {},
+                                      "Pinus latteri": {},
+                                      "Pinus fragilissima": {},
+                                      "Pinus luzmariae": {},
+                                      "Pinus brutia x Pinus halepensis": {},
+                                      "Pinus georginae": {},
+                                      "Pinus rigida x Pinus taeda": {},
+                                      "Pinus x rhaetica": {},
+                                      "Pinus crassicorticea": {},
+                                      "Pinus brachyptera": {},
+                                      "Pinus taeda x Pinus caribaea": {},
+                                      "Pinus elliottii x Pinus caribaea": {}
+                                    },
+                                    "Pinus subgen. Strobus": {
+                                      "Pinus balfouriana": {},
+                                      "Pinus edulis": {
+                                        "Pinus edulis var. fallax": {}
+                                      },
+                                      "Pinus wallichiana": {},
+                                      "Pinus krempfii": {},
+                                      "Pinus lambertiana": {},
+                                      "Pinus longaeva": {},
+                                      "Pinus monticola": {},
+                                      "Pinus strobus": {},
+                                      "Pinus cembra": {},
+                                      "Pinus sibirica": {},
+                                      "Pinus albicaulis": {},
+                                      "Pinus aristata": {},
+                                      "Pinus ayacahuite": {
+                                        "Pinus ayacahuite var. veitchii": {},
+                                        "Pinus ayacahuite var. ayacahuite": {}
+                                      },
+                                      "Pinus bungeana": {},
+                                      "Pinus cembroides": {
+                                        "Pinus cembroides subsp. lagunae": {},
+                                        "Pinus cembroides subsp. orizabensis": {}
+                                      },
+                                      "Pinus chiapensis": {},
+                                      "Pinus culminicola": {},
+                                      "Pinus gerardiana": {},
+                                      "Pinus johannis": {},
+                                      "Pinus kwangtungensis": {
+                                        "Pinus kwangtungensis var. kwangtungensis": {}
+                                      },
+                                      "Pinus maximartinezii": {},
+                                      "Pinus nelsonii": {},
+                                      "Pinus parviflora": {
+                                        "Pinus parviflora var. pentaphylla": {},
+                                        "Pinus parviflora var. parviflora": {}
+                                      },
+                                      "Pinus peuce": {},
+                                      "Pinus pinceana": {},
+                                      "Pinus pumila": {},
+                                      "Pinus rzedowskii": {},
+                                      "Pinus koraiensis": {},
+                                      "Pinus armandii": {
+                                        "Pinus armandii var. armandii": {},
+                                        "Pinus armandii var. mastersiana": {}
+                                      },
+                                      "Pinus morrisonicola": {},
+                                      "Pinus discolor": {},
+                                      "Pinus flexilis": {},
+                                      "Pinus juarezensis": {},
+                                      "Pinus monophylla": {},
+                                      "Pinus quadrifolia": {},
+                                      "Pinus remota": {},
+                                      "Pinus squamata": {},
+                                      "Pinus wangii": {},
+                                      "Pinus fenzeliana": {},
+                                      "Pinus bhutanica": {},
+                                      "Pinus dalatensis": {},
+                                      "Pinus strobiformis": {},
+                                      "Pinus dabeshanensis": {},
+                                      "Pinus yecorensis": {},
+                                      "Pinus cf. armandii SH-2011": {},
+                                      "Pinus cf. gerardiana SH-2011": {},
+                                      "Pinus cf. koraiensis SH-2011": {},
+                                      "Pinus cf. cembra SH-2011": {},
+                                      "Pinus cf. pumila SH-2011": {},
+                                      "Pinus amamiana": {},
+                                      "Pinus sibirica x Pinus pumila": {},
+                                      "Pinus strobus x Pinus wallichiana": {},
+                                      "Pinus strobiformis x Pinus flexilis": {},
+                                      "unclassified Pinus subgen. Strobus": {
+                                        "Pinus sp. SH-2011": {}
+                                      }
+                                    },
+                                    "unclassified Pinus": {
+                                      "Pinus sp. Qiu 94013": {},
+                                      "Pinus sp. AAW-2009a": {},
+                                      "Pinus sp. EP2140012": {},
+                                      "Pinus sp. ASM-2014": {},
+                                      "Pinus sp. BOP010396": {},
+                                      "Pinus sp. BOP010400": {},
+                                      "Pinus sp. BOP010480": {},
+                                      "Pinus sp. BOP017543": {},
+                                      "Pinus sp. BOP017841": {},
+                                      "Pinus sp. 1 NZ-2015": {},
+                                      "Pinus sp. 2 NZ-2015": {},
+                                      "Pinus sp. 3 NZ-2015": {},
+                                      "Pinus sp. FH-2020": {},
+                                      "Pinus sp.": {},
+                                      "Pinus sp. HZ466": {}
+                                    }
+                                  },
+                                  "Pseudolarix": {
+                                    "Pseudolarix amabilis": {},
+                                    "unclassified Pseudolarix": {
+                                      "Pseudolarix sp. 'chienii'": {}
+                                    }
+                                  },
+                                  "Pseudotsuga": {
+                                    "Pseudotsuga menziesii": {
+                                      "Pseudotsuga menziesii var. menziesii": {},
+                                      "Pseudotsuga menziesii var. glauca": {}
+                                    },
+                                    "Pseudotsuga japonica": {},
+                                    "Pseudotsuga macrocarpa": {},
+                                    "Pseudotsuga sinensis": {
+                                      "Pseudotsuga sinensis var. wilsoniana": {},
+                                      "Pseudotsuga sinensis var. gaussenii": {},
+                                      "Pseudotsuga sinensis var. brevifolia": {}
+                                    },
+                                    "Pseudotsuga forrestii": {}
+                                  },
+                                  "Tsuga": {
+                                    "Tsuga heterophylla": {},
+                                    "Tsuga canadensis": {},
+                                    "Tsuga diversifolia": {},
+                                    "Tsuga chinensis": {
+                                      "Tsuga chinensis var. tchekiangensis": {},
+                                      "Tsuga chinensis var. robusta": {}
+                                    },
+                                    "Tsuga mertensiana": {},
+                                    "Tsuga dumosa": {},
+                                    "Tsuga forrestii": {},
+                                    "Tsuga caroliniana": {},
+                                    "Tsuga sieboldii": {},
+                                    "Tsuga ulleungensis": {}
+                                  },
+                                  "Cathaya": {
+                                    "Cathaya argyrophylla": {}
+                                  },
+                                  "Nothotsuga": {
+                                    "Nothotsuga longibracteata": {}
+                                  },
+                                  "unclassified Pinaceae": {
+                                    "Pinaceae sp.": {}
+                                  },
+                                  "environmental samples": {
+                                    "Pinus environmental sample": {},
+                                    "Picea environmental sample": {},
+                                    "Abies environmental sample": {},
+                                    "Tsuga environmental sample": {}
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "environmental samples": {
+                            "conifer environmental sample": {}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

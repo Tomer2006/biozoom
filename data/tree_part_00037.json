@@ -1,0 +1,120 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Eukaryota": {
+        "Viridiplantae": {
+          "unclassified Viridiplantae": {
+            "Viridiplantae sp. ZAA2": {},
+            "Viridiplantae sp. AZH1": {},
+            "Viridiplantae sp. AZS1": {},
+            "Viridiplantae sp. DHK-2018": {},
+            "Viridiplantae sp.": {
+              "[Loriellopsis cavernicola] MR-40": {}
+            }
+          },
+          "environmental samples": {
+            "uncultured chlorobiont P3-2": {},
+            "uncultured chloroplast GU3A": {},
+            "uncultured chloroplast GU6B": {},
+            "uncultured chloroplast GU10F": {},
+            "Viridiplantae environmental sample": {}
+          },
+          "Prasinodermophyta": {
+            "Palmophyllophyceae": {
+              "Prasinococcales": {
+                "environmental samples": {
+                  "uncultured Prasinococcales": {}
+                },
+                "unclassified Prasinococcales": {
+                  "Prasinococcales sp. RCC474": {},
+                  "Prasinococcales sp.": {}
+                },
+                "Prasinococcaceae": {
+                  "Prasinococcus": {
+                    "Prasinococcus capsulatus": {},
+                    "unclassified Prasinococcus": {
+                      "Prasinococcus sp. CCMP1194": {},
+                      "Prasinococcus sp. CCMP1202": {},
+                      "Prasinococcus sp. CCMP1614": {},
+                      "Prasinococcus sp. MBIC11010": {},
+                      "Prasinococcus sp. MBIC11013": {},
+                      "Prasinococcus sp. RCC859": {},
+                      "Prasinococcus sp. EGEMACC 50": {},
+                      "Prasinococcus sp. RCC1960": {},
+                      "Prasinococcus sp. RCC2349": {},
+                      "Prasinococcus sp. RCC2357": {},
+                      "Prasinococcus sp. RCC2359": {},
+                      "Prasinococcus sp. RCC896": {},
+                      "Prasinococcus sp. RCC1962": {},
+                      "Prasinococcus sp. RCC2356": {},
+                      "Prasinococcus sp. RCC2684": {},
+                      "Prasinococcus sp. RCC2685": {},
+                      "Prasinococcus sp. RCC2687": {},
+                      "Prasinococcus sp. RCC2693": {},
+                      "Prasinococcus sp. RCC2694": {},
+                      "Prasinococcus sp. RCC2695": {},
+                      "Prasinococcus sp. RCC388": {},
+                      "Prasinococcus sp. RCC473": {},
+                      "Prasinococcus sp. RCC520": {},
+                      "Prasinococcus sp. RCC6305": {},
+                      "Prasinococcus sp.": {}
+                    }
+                  },
+                  "unclassified Prasinococcaceae": {
+                    "Prasinococcaceae sp. CCMP 1430": {},
+                    "Prasinococcaceae sp.": {}
+                  }
+                }
+              },
+              "Palmophyllales": {
+                "Palmophyllaceae": {
+                  "Palmophyllum": {
+                    "Palmophyllum umbracola": {},
+                    "Palmophyllum crassum": {}
+                  },
+                  "Verdigellas": {
+                    "Verdigellas peltata": {},
+                    "Verdigellas discoidea": {}
+                  },
+                  "Palmoclathrus": {}
+                }
+              }
+            },
+            "Prasinodermophyceae": {
+              "Prasinodermales": {
+                "Prasinodermaceae": {
+                  "Prasinoderma": {
+                    "Prasinoderma coloniale": {},
+                    "Prasinoderma singulare": {},
+                    "unclassified Prasinoderma": {
+                      "Prasinoderma sp. MBIC10059": {},
+                      "Prasinoderma sp. MBIC10474": {},
+                      "Prasinoderma sp. MBIC10655": {},
+                      "Prasinoderma sp. MBIC10712": {},
+                      "Prasinoderma sp. MBIC10713": {},
+                      "Prasinoderma sp. MBIC10719": {},
+                      "Prasinoderma sp. MBIC10721": {},
+                      "Prasinoderma sp. MBIC10728": {},
+                      "Prasinoderma sp. CCMP1220": {},
+                      "Prasinoderma sp. RCC907": {},
+                      "Prasinoderma sp. RCC916": {},
+                      "Prasinoderma sp. MBTD-CMFRI-S056": {},
+                      "Prasinoderma sp. MBTD-CMFRI-S070": {},
+                      "Prasinoderma sp. RCC1959": {},
+                      "Prasinoderma sp. RCC710": {},
+                      "Prasinoderma sp. RCC2686": {},
+                      "Prasinoderma sp. RCC714": {},
+                      "Prasinoderma sp. NBRC 102842": {},
+                      "Prasinoderma sp. MBIC10622": {},
+                      "Prasinoderma sp.": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

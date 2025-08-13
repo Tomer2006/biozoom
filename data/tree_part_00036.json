@@ -1,0 +1,19 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Eukaryota": {
+        "Viridiplantae": {
+          "Streptophyta": {
+            "unclassified Streptophyta": {
+              "Streptophyta sp. 100_UnivF-1183": {},
+              "Streptophyta sp.": {}
+            },
+            "environmental samples": {
+              "uncultured Streptophyta": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

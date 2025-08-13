@@ -1,0 +1,2763 @@
+{
+  "root": {
+    "cellular organisms": {
+      "Bacteria": {
+        "Fusobacteriati": {
+          "Fusobacteriota": {
+            "unclassified Fusobacteriota": {
+              "cf. Propionigenium sp. MGP-13AN": {},
+              "Fusobacteria bacterium Ko711": {},
+              "Fusobacteria bacterium srb1u": {},
+              "Fusobacteria bacterium oral taxon 210": {},
+              "Fusobacteria bacterium oral taxon 220": {},
+              "Fusobacteria bacterium oral taxon A71": {},
+              "Fusobacteriota bacterium": {},
+              "Fusobacteria bacterium ZRK30": {}
+            },
+            "environmental samples": {
+              "Leptotrichia-like sp. oral clone BB002": {},
+              "Leptotrichia-like sp. oral clone BB135": {},
+              "uncultured Fusobacteriota bacterium": {},
+              "Fusobacteria bacterium enrichment culture clone 4.17a Bac band 2": {},
+              "Fusobacteria bacterium enrichment culture clone 4.17b Bac band 8": {}
+            },
+            "Fusobacteriia": {
+              "Fusobacteriales": {
+                "Fusobacteriaceae": {
+                  "Fusobacterium": {
+                    "Fusobacterium gonidiaformans": {
+                      "Fusobacterium gonidiaformans 3-1-5R": {},
+                      "Fusobacterium gonidiaformans ATCC 25563": {}
+                    },
+                    "Fusobacterium mortiferum": {
+                      "Fusobacterium mortiferum ATCC 9817": {}
+                    },
+                    "Fusobacterium nucleatum": {
+                      "Fusobacterium nucleatum subsp. nucleatum": {
+                        "Fusobacterium nucleatum subsp. nucleatum ATCC 25586": {},
+                        "Fusobacterium nucleatum subsp. nucleatum ATCC 23726": {},
+                        "Fusobacterium nucleatum subsp. nucleatum ChDC F316": {}
+                      },
+                      "Fusobacterium nucleatum E9_12": {},
+                      "Fusobacterium nucleatum CTI-1": {},
+                      "Fusobacterium nucleatum CTI-2": {},
+                      "Fusobacterium nucleatum CTI-3": {},
+                      "Fusobacterium nucleatum CC53": {},
+                      "Fusobacterium nucleatum CTI-5": {},
+                      "Fusobacterium nucleatum CTI-6": {},
+                      "Fusobacterium nucleatum CTI-7": {},
+                      "Fusobacterium nucleatum 13_3C": {},
+                      "Fusobacterium nucleatum YWH7053": {},
+                      "Fusobacterium nucleatum YWH7054": {},
+                      "Fusobacterium nucleatum YWH7055": {},
+                      "Fusobacterium nucleatum YWH7056": {},
+                      "Fusobacterium nucleatum YWH7199": {},
+                      "Fusobacterium nucleatum W1481": {}
+                    },
+                    "Fusobacterium perfoetens": {
+                      "Fusobacterium perfoetens ATCC 29250": {}
+                    },
+                    "Fusobacterium russii": {
+                      "Fusobacterium russii ATCC 25533": {}
+                    },
+                    "Fusobacterium simiae": {},
+                    "Fusobacterium varium": {
+                      "Fusobacterium varium ATCC 27725": {}
+                    },
+                    "Fusobacterium necrogenes": {},
+                    "Fusobacterium necrophorum": {
+                      "Fusobacterium necrophorum subsp. funduliforme": {
+                        "Fusobacterium necrophorum subsp. funduliforme 1_1_36S": {},
+                        "Fusobacterium necrophorum subsp. funduliforme ATCC 51357": {},
+                        "Fusobacterium necrophorum subsp. funduliforme Fnf 1007": {},
+                        "Fusobacterium necrophorum subsp. funduliforme B35": {}
+                      },
+                      "Fusobacterium necrophorum subsp. necrophorum": {},
+                      "Fusobacterium necrophorum D12": {},
+                      "Fusobacterium necrophorum HUN048": {},
+                      "Fusobacterium necrophorum BL": {},
+                      "Fusobacterium necrophorum DJ-1": {},
+                      "Fusobacterium necrophorum BFTR-1": {},
+                      "Fusobacterium necrophorum DAB": {},
+                      "Fusobacterium necrophorum BFTR-2": {},
+                      "Fusobacterium necrophorum DJ-2": {}
+                    },
+                    "Fusobacterium periodonticum": {
+                      "Fusobacterium periodonticum 2_1_31": {},
+                      "Fusobacterium periodonticum 1_1_41FAA": {},
+                      "Fusobacterium periodonticum ATCC 33693": {},
+                      "Fusobacterium periodonticum D10": {}
+                    },
+                    "Fusobacterium ulcerans": {
+                      "Fusobacterium ulcerans 12-1B": {},
+                      "Fusobacterium ulcerans ATCC 49185": {},
+                      "Fusobacterium ulcerans AC2_8_11_AN_D5_FAA_7": {}
+                    },
+                    "Fusobacterium polymorphum": {
+                      "Fusobacterium polymorphum ATCC 10953": {},
+                      "Fusobacterium polymorphum F0401": {}
+                    },
+                    "Fusobacterium animalis": {
+                      "Fusobacterium animalis 11_3_2": {},
+                      "Fusobacterium animalis 7_1": {},
+                      "Fusobacterium animalis 21_1A": {},
+                      "Fusobacterium animalis 3_1_33": {},
+                      "Fusobacterium animalis 4_8": {},
+                      "Fusobacterium animalis D11": {},
+                      "Fusobacterium animalis ATCC 51191": {},
+                      "Fusobacterium animalis F0419": {},
+                      "Fusobacterium animalis ChDC F324": {}
+                    },
+                    "Fusobacterium naviforme": {},
+                    "environmental samples": {
+                      "uncultured Fusobacterium kps68f": {},
+                      "uncultured Fusobacterium FS1": {},
+                      "Fusobacterium sp. oral clone AJ050": {},
+                      "Fusobacterium sp. oral clone CY024": {},
+                      "Fusobacterium sp. oral clone CZ006": {},
+                      "Fusobacterium sp. oral clone I035": {},
+                      "Fusobacterium sp. oral clone R002": {},
+                      "uncultured Fusobacterium sp.": {},
+                      "Fusobacterium sp. oral clone EU021": {},
+                      "Fusobacterium sp. oral clone BS011": {},
+                      "Fusobacterium sp. oral clone EX123": {},
+                      "Fusobacterium sp. oral clone EX162": {},
+                      "Fusobacterium sp. oral clone BP1-7": {},
+                      "Fusobacterium sp. oral clone BP1-9": {},
+                      "Fusobacterium sp. oral clone BP1-40": {},
+                      "Fusobacterium sp. oral clone BP1-70": {},
+                      "Fusobacterium sp. oral clone BP2-1": {},
+                      "Fusobacterium sp. oral clone BP2-18": {},
+                      "Fusobacterium sp. oral clone BP2-65": {},
+                      "Fusobacterium sp. oral clone BP2-79": {},
+                      "Fusobacterium sp. oral clone BP2-86": {},
+                      "Fusobacterium sp. oral clone ASCF06": {},
+                      "Fusobacterium sp. oral clone ASCF11": {},
+                      "Fusobacterium sp. enrichment culture DGGE band 49": {},
+                      "Fusobacterium sp. enrichment culture DGGE band 51": {},
+                      "Fusobacterium sp. enrichment culture DGGE band 8": {},
+                      "Fusobacterium sp. enrichment culture DGGE band 9": {},
+                      "Fusobacterium sp. oral clone 19-23": {}
+                    },
+                    "Fusobacterium equinum": {},
+                    "Fusobacterium vincentii": {
+                      "Fusobacterium vincentii ATCC 49256": {},
+                      "Fusobacterium vincentii 3_1_27": {},
+                      "Fusobacterium vincentii 3_1_36A2": {},
+                      "Fusobacterium vincentii 4_1_13": {},
+                      "Fusobacterium vincentii ATCC 51190": {},
+                      "Fusobacterium vincentii ChDC F8": {}
+                    },
+                    "Fusobacterium genomosp. C1": {},
+                    "Fusobacterium genomosp. C2": {},
+                    "Fusobacterium canifelinum": {},
+                    "Fusobacterium hwasookii": {
+                      "Fusobacterium hwasookii ChDC F128": {},
+                      "Fusobacterium hwasookii ChDC F145": {},
+                      "Fusobacterium hwasookii ChDC F174": {},
+                      "Fusobacterium hwasookii ChDC F206": {},
+                      "Fusobacterium hwasookii ChDC F300": {}
+                    },
+                    "Fusobacterium gastrosuis": {},
+                    "Fusobacterium massiliense": {},
+                    "unclassified Fusobacterium": {
+                      "Fusobacterium sp.": {},
+                      "Fusobacterium sp. CB14": {},
+                      "Fusobacterium sp. CO5": {},
+                      "Fusobacterium sp. CO6": {},
+                      "Fusobacterium sp. OMZ 978": {},
+                      "Fusobacterium sp. OMZ 989": {},
+                      "Fusobacterium sp. OMZ 982": {},
+                      "Fusobacterium sp. RMA 1065": {},
+                      "Fusobacterium sp. RMA 2453": {},
+                      "Fusobacterium sp. cp06.22": {},
+                      "Fusobacterium sp. Ulm 11": {},
+                      "Fusobacterium sp. FH02": {},
+                      "Fusobacterium sp. FH03": {},
+                      "Fusobacterium sp. FH04": {},
+                      "Fusobacterium sp. FH05": {},
+                      "Fusobacterium sp. FH06": {},
+                      "Fusobacterium sp. FH11": {},
+                      "Fusobacterium sp. FH19": {},
+                      "Fusobacterium sp. FH20": {},
+                      "Fusobacterium sp. FHM108": {},
+                      "Fusobacterium sp. HFU1": {},
+                      "Fusobacterium sp. CSL-7530": {},
+                      "Fusobacterium sp. DJF_B100": {},
+                      "Fusobacterium sp. oral taxon 203": {},
+                      "Fusobacterium sp. SRBBR3": {},
+                      "Fusobacterium sp. oral taxon 205": {},
+                      "Fusobacterium sp. oral taxon 370": {
+                        "Fusobacterium sp. oral taxon 370 str. F0437": {}
+                      },
+                      "Fusobacterium sp. oral taxon A11": {},
+                      "Fusobacterium sp. oral taxon A42": {},
+                      "Fusobacterium sp. oral taxon C10": {},
+                      "Fusobacterium sp. oral taxon D47": {},
+                      "Fusobacterium sp. oral taxon D68": {},
+                      "Fusobacterium sp. oral taxon D78": {},
+                      "Fusobacterium sp. oral taxon D95": {},
+                      "Fusobacterium sp. oral taxon E22": {},
+                      "Fusobacterium sp. oral taxon G17": {},
+                      "Fusobacterium sp. oral taxon H27": {},
+                      "Fusobacterium sp. oral taxon H28": {},
+                      "Fusobacterium sp. 3019/04": {},
+                      "Fusobacterium sp. SRBBR5": {},
+                      "Fusobacterium sp. HGFU1": {},
+                      "Fusobacterium sp. HGFU10": {},
+                      "Fusobacterium sp. HGFU11": {},
+                      "Fusobacterium sp. HGFU12": {},
+                      "Fusobacterium sp. HGFU13": {},
+                      "Fusobacterium sp. HGFU2": {},
+                      "Fusobacterium sp. HGFU3": {},
+                      "Fusobacterium sp. HGFU4": {},
+                      "Fusobacterium sp. HGFU5": {},
+                      "Fusobacterium sp. HGFU6": {},
+                      "Fusobacterium sp. HGFU7": {},
+                      "Fusobacterium sp. HGFU8": {},
+                      "Fusobacterium sp. HGFU9": {},
+                      "Fusobacterium sp. CM55": {},
+                      "Fusobacterium sp. CM66": {},
+                      "Fusobacterium sp. AC18": {},
+                      "Fusobacterium sp. ACB2": {},
+                      "Fusobacterium sp. AS2": {},
+                      "Fusobacterium sp. CM1": {},
+                      "Fusobacterium sp. CM21": {},
+                      "Fusobacterium sp. CM22": {},
+                      "Fusobacterium sp. OBRC1": {},
+                      "Fusobacterium sp. mare31": {},
+                      "Fusobacterium sp. canine oral taxon 169": {},
+                      "Fusobacterium sp. canine oral taxon 189": {},
+                      "Fusobacterium sp. canine oral taxon 236": {},
+                      "Fusobacterium sp. ACC1": {},
+                      "Fusobacterium sp. S4-BM11": {},
+                      "Fusobacterium sp. S4-C1": {},
+                      "Fusobacterium sp. CAG:439": {},
+                      "Fusobacterium sp. CAG:649": {},
+                      "Fusobacterium sp. CAG:815": {},
+                      "Fusobacterium sp. HGA0206": {},
+                      "Fusobacterium sp. HGA0208": {},
+                      "Fusobacterium sp. HGA0209": {},
+                      "Fusobacterium sp. HGA0210": {},
+                      "Fusobacterium sp. HGA0211": {},
+                      "Fusobacterium sp. HGA0221": {},
+                      "Fusobacterium sp. HGA0233": {},
+                      "Fusobacterium sp. HGA0238": {},
+                      "Fusobacterium sp. HGA0240": {},
+                      "Fusobacterium sp. HGA0241": {},
+                      "Fusobacterium sp. canine oral taxon 439": {},
+                      "Fusobacterium sp. C34": {},
+                      "Fusobacterium sp. R36": {},
+                      "Fusobacterium sp. feline oral taxon 120": {},
+                      "Fusobacterium sp. HMSC073F01": {},
+                      "Fusobacterium sp. HMSC064B12": {},
+                      "Fusobacterium sp. HMSC064C03": {},
+                      "Fusobacterium sp. HMSC065F01": {},
+                      "Fusobacterium sp. HMSC064B11": {},
+                      "Fusobacterium sp. PH5-29": {},
+                      "Fusobacterium sp. FuSL": {},
+                      "Fusobacterium sp. MC_43": {},
+                      "Fusobacterium sp. B57-13": {},
+                      "Fusobacterium sp. Aarhus": {},
+                      "Fusobacterium sp. N4-2": {},
+                      "Fusobacterium sp. Marseille-P3599": {},
+                      "Fusobacterium sp. WD": {},
+                      "Fusobacterium sp. C1": {},
+                      "Fusobacterium sp. B1827739-B": {},
+                      "Fusobacterium sp. FSA-380-WT-2B": {},
+                      "Fusobacterium sp. IOR10": {},
+                      "Fusobacterium sp. FSA-380-WT-3A": {},
+                      "Fusobacterium sp. SB021": {},
+                      "Fusobacterium sp. 1001295B_180824_G3": {},
+                      "Fusobacterium sp. DD1": {},
+                      "Fusobacterium sp. DD2": {},
+                      "Fusobacterium sp. DD3": {},
+                      "Fusobacterium sp. DD4": {},
+                      "Fusobacterium sp. DD6": {},
+                      "Fusobacterium sp. DD10": {},
+                      "Fusobacterium sp. DD12": {},
+                      "Fusobacterium sp. DD13": {},
+                      "Fusobacterium sp. DD14": {},
+                      "Fusobacterium sp. DD17": {},
+                      "Fusobacterium sp. DD25": {},
+                      "Fusobacterium sp. DD26": {},
+                      "Fusobacterium sp. DD28": {},
+                      "Fusobacterium sp. DD29": {},
+                      "Fusobacterium sp. DD40": {},
+                      "Fusobacterium sp. DD43": {},
+                      "Fusobacterium sp. DD45": {},
+                      "Fusobacterium sp. EM8": {},
+                      "Fusobacterium sp. PH5-44": {},
+                      "Fusobacterium sp. PH5-7": {},
+                      "Fusobacterium sp. Marseille-Q7035": {},
+                      "Fusobacterium sp. 27098_8_59": {},
+                      "Fusobacterium sp. JB019": {},
+                      "Fusobacterium sp. JB020": {},
+                      "Fusobacterium sp. JB021": {},
+                      "Fusobacterium sp. SYSU M8D902": {},
+                      "Fusobacterium sp. HC1336": {},
+                      "Fusobacterium sp. OT7": {},
+                      "Fusobacterium sp. PD17": {},
+                      "Fusobacterium sp. PD18": {},
+                      "Fusobacterium sp. PD19": {},
+                      "Fusobacterium sp. MFO224": {},
+                      "Fusobacterium sp. FUJ02688": {}
+                    },
+                    "Fusobacterium pseudoperiodonticum": {},
+                    "Fusobacterium watanabei": {},
+                    "Fusobacterium hominis": {},
+                    "Candidatus Fusobacterium pullicola": {},
+                    "Fusobacterium paranimalis": {}
+                  },
+                  "Propionigenium": {
+                    "Propionigenium modestum": {},
+                    "Propionigenium maris": {
+                      "Propionigenium maris DSM 9537": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Propionigenium sp.": {}
+                    },
+                    "unclassified Propionigenium": {
+                      "Propionigenium sp. MA-9": {},
+                      "Propionigenium sp. B21-1": {},
+                      "Propionigenium sp.": {}
+                    }
+                  },
+                  "Ilyobacter": {
+                    "Ilyobacter polytropus": {
+                      "Ilyobacter polytropus DSM 2926": {}
+                    },
+                    "Ilyobacter insuetus": {},
+                    "Ilyobacter tartaricus": {},
+                    "Ilyobacter psychrophilus": {},
+                    "environmental samples": {
+                      "uncultured Ilyobacter sp.": {}
+                    },
+                    "Ilyobacter delafieldii": {},
+                    "unclassified Ilyobacter": {
+                      "Ilyobacter sp. FOUR-1": {},
+                      "Ilyobacter sp.": {}
+                    }
+                  },
+                  "Cetobacterium": {
+                    "Cetobacterium ceti": {},
+                    "Cetobacterium somerae": {
+                      "Cetobacterium somerae ATCC BAA-474": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Cetobacterium sp.": {}
+                    },
+                    "unclassified Cetobacterium": {
+                      "Cetobacterium sp. ZF1NB02": {},
+                      "Cetobacterium sp. ZF1NC04": {},
+                      "Cetobacterium sp. ZF1ND03": {},
+                      "Cetobacterium sp. ZF1NG03": {},
+                      "Cetobacterium sp. ZF1NH01": {},
+                      "Cetobacterium sp. ZF1NH03": {},
+                      "Cetobacterium sp. ZOR0034": {},
+                      "Cetobacterium sp. ZWU0022": {},
+                      "Cetobacterium sp. AJ-9": {},
+                      "Cetobacterium sp. UBA6069": {},
+                      "Cetobacterium sp. UBA6070": {},
+                      "Cetobacterium sp.": {},
+                      "Cetobacterium sp. 2A": {},
+                      "Cetobacterium sp. 2G large": {},
+                      "Cetobacterium sp. 8H": {},
+                      "Cetobacterium sp. NK01": {},
+                      "Cetobacterium sp. SF1": {}
+                    },
+                    "Candidatus Cetobacterium colombiensis": {}
+                  },
+                  "unclassified Fusobacteriaceae": {
+                    "Fusobacteriaceae bacterium DJF_B254": {},
+                    "Fusobacteriaceae bacterium SL-2013-9": {},
+                    "Fusobacteriaceae bacterium F3": {},
+                    "Fusobacteriaceae bacterium UBA2433": {},
+                    "Fusobacteriaceae bacterium": {},
+                    "Fusobacteriaceae bacterium AM62-09pH9A": {},
+                    "Fusobacteriaceae bacterium AM62-5ACA": {},
+                    "Fusobacteriaceae bacterium AM92-04CMCA": {},
+                    "Fusobacteriaceae bacterium OF49-07CM05A": {},
+                    "Fusobacteriaceae bacterium OF49-11b3TA": {}
+                  },
+                  "environmental samples": {
+                    "uncultured Fusobacteriaceae bacterium": {}
+                  },
+                  "Psychrilyobacter": {
+                    "Psychrilyobacter atlanticus": {
+                      "Psychrilyobacter atlanticus DSM 19335": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Psychrilyobacter sp.": {}
+                    },
+                    "Psychrilyobacter piezotolerans": {},
+                    "Psychrilyobacter haliotis": {},
+                    "unclassified Psychrilyobacter": {
+                      "Psychrilyobacter sp. STAB703": {},
+                      "Psychrilyobacter sp. STAB704": {},
+                      "Psychrilyobacter sp. MA-31": {},
+                      "Psychrilyobacter sp. 4SWWE-11": {},
+                      "Psychrilyobacter sp. B57-02": {},
+                      "Psychrilyobacter sp. S5": {},
+                      "Psychrilyobacter sp.": {}
+                    }
+                  },
+                  "Hypnocyclicus": {
+                    "Hypnocyclicus thermotrophus": {}
+                  },
+                  "Fusobacteriaceae incertae sedis": {
+                    "Candidatus Stercorousia": {
+                      "Candidatus Stercorousia faecigallinarum": {},
+                      "unclassified Candidatus Stercorousia": {
+                        "Candidatus Stercorousia sp.": {},
+                        "Candidatus Stercorousia sp. T1900044772_TS20190238_bin.136": {},
+                        "Candidatus Stercorousia sp. T1900045354_YK20190044_bin.212": {},
+                        "Candidatus Stercorousia sp. TP20200814-DZC93_DT2009055421-1_bin.177": {}
+                      }
+                    }
+                  }
+                },
+                "environmental samples": {
+                  "uncultured Fusobacteriales bacterium": {}
+                },
+                "Leptotrichiaceae": {
+                  "Leptotrichia": {
+                    "Leptotrichia buccalis": {
+                      "Leptotrichia buccalis C-1013-b": {}
+                    },
+                    "Leptotrichia trevisanii": {
+                      "Leptotrichia trevisanii DSM 22070": {}
+                    },
+                    "environmental samples": {
+                      "Leptotrichia sp. oral clone DA069": {},
+                      "Leptotrichia sp. oral clone F138": {},
+                      "Leptotrichia sp. oral clone BU064": {},
+                      "uncultured Leptotrichia sp.": {},
+                      "Leptotrichia sp. oral clone FB074": {},
+                      "Leptotrichia sp. oral clone EI013": {},
+                      "Leptotrichia sp. oral clone EI022": {},
+                      "Leptotrichia sp. oral clone DR011": {},
+                      "Leptotrichia sp. oral clone FP036": {},
+                      "Leptotrichia sp. oral clone EX103": {},
+                      "Leptotrichia sp. oral clone P2PB_51 P1": {},
+                      "Leptotrichia sp. oral clone IK040": {},
+                      "Leptotrichia sp. oral clone GT018": {},
+                      "Leptotrichia sp. oral clone GT020": {},
+                      "Leptotrichia sp. oral clone HE012": {},
+                      "Leptotrichia sp. oral clone BP1-13": {},
+                      "Leptotrichia sp. oral clone BP2-21": {},
+                      "Leptotrichia sp. oral clone BP2-24": {},
+                      "Leptotrichia sp. oral clone BP2-51": {},
+                      "Leptotrichia sp. oral clone BP2-70": {},
+                      "Leptotrichia sp. oral clone BP2-81": {},
+                      "Leptotrichia sp. oral clone BP2-89": {},
+                      "Leptotrichia sp. oral clone BP2-91": {},
+                      "Leptotrichia sp. oral clone HE052": {},
+                      "Leptotrichia sp. oral clone 8-43": {},
+                      "Leptotrichia sp. oral clone 19-33": {},
+                      "Leptotrichia sp. oral clone 25-46": {}
+                    },
+                    "Leptotrichia wadei": {
+                      "Leptotrichia wadei F0279": {},
+                      "Leptotrichia wadei DSM 19758": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0192": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0194": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0195": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0196": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0197": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0198": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0199": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0200": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0201": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0202": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0204": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0206": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0207": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0208": {},
+                      "Leptotrichia wadei HMP_JCVI_SC0210": {}
+                    },
+                    "Leptotrichia hofstadii": {
+                      "Leptotrichia hofstadii F0254": {},
+                      "Leptotrichia hofstadii DSM 21651": {}
+                    },
+                    "Leptotrichia shahii": {
+                      "Leptotrichia shahii DSM 19757": {}
+                    },
+                    "Leptotrichia genomosp. C1": {},
+                    "Leptotrichia hongkongensis": {},
+                    "Leptotrichia massiliensis": {},
+                    "unclassified Leptotrichia": {
+                      "Leptotrichia sp.": {},
+                      "Leptotrichia sp. oral isolate A39FD": {},
+                      "Leptotrichia sp. oral strain FAC5": {},
+                      "Leptotrichia sp. LB32": {},
+                      "Leptotrichia sp. 0110 93918": {},
+                      "Leptotrichia sp. cp05.18": {},
+                      "Leptotrichia sp. cp06.24": {},
+                      "Leptotrichia sp. Ulm D": {},
+                      "Leptotrichia sp. 'Oral Taxon 847'": {},
+                      "Leptotrichia sp. oral taxon 219": {
+                        "Leptotrichia sp. oral taxon 219 str. D22": {}
+                      },
+                      "Leptotrichia sp. oral taxon 225": {
+                        "Leptotrichia sp. oral taxon 225 str. F0581": {}
+                      },
+                      "Leptotrichia sp. oral taxon 212": {},
+                      "Leptotrichia sp. oral taxon 213": {},
+                      "Leptotrichia sp. oral taxon 215": {
+                        "Leptotrichia sp. oral taxon 215 str. W9775": {}
+                      },
+                      "Leptotrichia sp. oral taxon 217": {},
+                      "Leptotrichia sp. oral taxon 218": {},
+                      "Leptotrichia sp. oral taxon 221": {},
+                      "Leptotrichia sp. oral taxon 223": {},
+                      "Leptotrichia sp. oral taxon 392": {},
+                      "Leptotrichia sp. oral taxon 417": {},
+                      "Leptotrichia sp. oral taxon 462": {},
+                      "Leptotrichia sp. oral taxon 463": {},
+                      "Leptotrichia sp. oral taxon 498": {},
+                      "Leptotrichia sp. oral taxon A45": {},
+                      "Leptotrichia sp. oral taxon B57": {},
+                      "Leptotrichia sp. oral taxon H22": {},
+                      "Leptotrichia sp. PG10": {},
+                      "Leptotrichia sp. PTE15": {},
+                      "Leptotrichia sp. 316386/08": {},
+                      "Leptotrichia sp. canine oral taxon 294": {},
+                      "Leptotrichia sp. canine oral taxon 319": {},
+                      "Leptotrichia sp. canine oral taxon 345": {},
+                      "Leptotrichia sp. 'ARUP UnID 386'": {},
+                      "Leptotrichia sp. 'ARUP UnID 387'": {},
+                      "Leptotrichia sp. 'ARUP UnID 388'": {},
+                      "Leptotrichia sp. 'ARUP UnID 389'": {},
+                      "Leptotrichia sp. oral taxon 879": {
+                        "Leptotrichia sp. oral taxon 879 str. F0557": {}
+                      },
+                      "Leptotrichia sp. OTH 64": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0106": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0108": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0118": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0138": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0174": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0193": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0231": {},
+                      "Leptotrichia sp. HMP_JCVI_SC0238": {},
+                      "Leptotrichia sp. oral taxon 847": {},
+                      "Leptotrichia sp. OH3620_COT-345": {},
+                      "Leptotrichia sp. HMT-225": {},
+                      "Leptotrichia sp. SK-5": {}
+                    },
+                    "Leptotrichia rugosa": {},
+                    "Leptotrichia mesophila": {},
+                    "Leptotrichia alba": {}
+                  },
+                  "Sebaldella": {
+                    "Sebaldella termitidis": {
+                      "Sebaldella termitidis ATCC 33386": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Sebaldella sp.": {}
+                    },
+                    "unclassified Sebaldella": {
+                      "Sebaldella sp. INBio2556N": {},
+                      "Sebaldella sp.": {},
+                      "Sebaldella sp. S0638": {}
+                    }
+                  },
+                  "Streptobacillus": {
+                    "Streptobacillus moniliformis": {
+                      "Streptobacillus moniliformis DSM 12112": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Streptobacillus sp.": {}
+                    },
+                    "Streptobacillus felis": {},
+                    "Streptobacillus notomytis": {},
+                    "Streptobacillus ratti": {},
+                    "unclassified Streptobacillus": {
+                      "Streptobacillus sp. canine oral taxon 370": {},
+                      "Streptobacillus sp. SHKLO-2015": {},
+                      "Streptobacillus sp.": {}
+                    },
+                    "Streptobacillus canis": {}
+                  },
+                  "Sneathia": {
+                    "Sneathia sanguinegens": {},
+                    "Sneathia vaginalis": {},
+                    "environmental samples": {
+                      "uncultured Sneathia sp.": {}
+                    },
+                    "unclassified Sneathia": {
+                      "Sneathia sp.": {},
+                      "Sneathia sp. DSM 16630": {},
+                      "Sneathia sp. DSM 16631": {},
+                      "Sneathia sp. USB_NOVA_34": {}
+                    }
+                  },
+                  "unclassified Leptotrichiaceae": {
+                    "Leptotrichiaceae bacterium UTK MI 14-3285": {},
+                    "Leptotrichiaceae bacterium": {}
+                  },
+                  "environmental samples": {
+                    "uncultured Leptotrichiaceae bacterium": {}
+                  },
+                  "Caviibacter": {
+                    "Caviibacter abscessus": {},
+                    "environmental samples": {
+                      "uncultured Caviibacter sp.": {}
+                    },
+                    "unclassified Caviibacter": {
+                      "Caviibacter sp.": {}
+                    }
+                  },
+                  "Oceanivirga": {
+                    "Oceanivirga miroungae": {},
+                    "Oceanivirga salmonicida": {},
+                    "unclassified Oceanivirga": {
+                      "Oceanivirga sp.": {}
+                    }
+                  },
+                  "Pseudoleptotrichia": {
+                    "Pseudoleptotrichia goodfellowii": {
+                      "Pseudoleptotrichia goodfellowii D28": {},
+                      "Pseudoleptotrichia goodfellowii F0264": {},
+                      "Pseudoleptotrichia goodfellowii DSM 19756": {}
+                    },
+                    "unclassified Pseudoleptotrichia": {
+                      "Pseudoleptotrichia sp.": {}
+                    }
+                  },
+                  "Pseudostreptobacillus": {
+                    "Pseudostreptobacillus hongkongensis": {}
+                  }
+                },
+                "unclassified Fusobacteriales": {
+                  "Fusobacteriales bacterium 'ARUP UnID 390'": {},
+                  "Fusobacteriales bacterium 'ARUP UnID 391'": {},
+                  "Fusobacteriales bacterium": {}
+                },
+                "Haliovirgaceae": {
+                  "Haliovirga": {
+                    "Haliovirga abyssi": {}
+                  }
+                }
+              },
+              "unclassified Fusobacteriia": {
+                "Fusobacteriia bacterium UBA1095": {},
+                "Fusobacteriia bacterium UBA1674": {},
+                "Fusobacteriia bacterium UBA1975": {},
+                "Fusobacteriia bacterium UBA6774": {},
+                "Fusobacteriia bacterium UBA816": {},
+                "Fusobacteriia bacterium 4572_132": {},
+                "Fusobacteriia bacterium 4572_74": {},
+                "Fusobacteriia bacterium": {}
+              }
+            }
+          }
+        },
+        "Thermotogati": {
+          "Deinococcota": {
+            "environmental samples": {
+              "unidentified eubacterium P36b": {},
+              "Deinococcus-like McMurdo Dry Valley bacterium 1": {},
+              "Deinococcus-like south pole bacterium 1": {},
+              "uncultured Deinococcota bacterium": {}
+            },
+            "unclassified Deinococcota": {
+              "bacterium S119": {},
+              "Deinococcus-Thermus bacterium JGI 0000112-G17": {},
+              "Deinococcota bacterium": {},
+              "Deinococcota bacterium DY0809b": {}
+            },
+            "Deinococci": {
+              "Thermales": {
+                "Thermaceae": {
+                  "Thermus": {
+                    "Thermus aquaticus": {
+                      "Thermus aquaticus Y51MC23": {}
+                    },
+                    "Thermus caldophilus": {},
+                    "Thermus thermophilus": {
+                      "Thermus thermophilus HB27": {},
+                      "Thermus thermophilus HB8": {},
+                      "Thermus thermophilus SG0.5JP17-16": {},
+                      "Thermus thermophilus JL-18": {},
+                      "Thermus thermophilus ATCC 33923": {}
+                    },
+                    "Thermus filiformis": {},
+                    "Thermus scotoductus": {
+                      "Thermus scotoductus SA-01": {},
+                      "Thermus scotoductus DSM 8553": {},
+                      "Thermus scotoductus KI2": {}
+                    },
+                    "Thermus brockianus": {},
+                    "Thermus oshimai": {
+                      "Thermus oshimai JL-2": {},
+                      "Thermus oshimai DSM 12092": {}
+                    },
+                    "environmental samples": {
+                      "uncultured eubacterium H21.73.f": {},
+                      "Thermus sp. env.OS_ac7'": {},
+                      "uncultured Thermus sp.": {},
+                      "Thermus sp. enrichment culture clone phylotype P20": {}
+                    },
+                    "Thermus igniterrae": {
+                      "Thermus igniterrae ATCC 700962": {}
+                    },
+                    "Thermus antranikianii": {
+                      "Thermus antranikianii DSM 12462": {}
+                    },
+                    "Thermus nonproteolyticus": {},
+                    "Thermus rehai": {},
+                    "Thermus kawarayensis": {
+                      "Thermus kawarayensis JCM 12314": {}
+                    },
+                    "Thermus yunnanensis": {},
+                    "Thermus murrieta": {},
+                    "Thermus parvatiensis": {},
+                    "Thermus arciformis": {},
+                    "Thermus composti": {},
+                    "Thermus islandicus": {
+                      "Thermus islandicus DSM 21543": {}
+                    },
+                    "Thermus eggertssonii": {},
+                    "Thermus anatoliensis": {},
+                    "Thermus tengchongensis": {
+                      "Thermus tengchongensis YIM 77401": {}
+                    },
+                    "Thermus caliditerrae": {},
+                    "Thermus amyloliquefaciens": {},
+                    "Thermus sediminis": {},
+                    "Thermus caldifontis": {},
+                    "Thermus tenuipuniceus": {},
+                    "Thermus caldilimi": {},
+                    "Thermus thermamylovorans": {},
+                    "unclassified Thermus": {
+                      "Thermus sp.": {},
+                      "Thermus sp. Rt41A": {},
+                      "Thermus sp. Tok6A1": {},
+                      "Thermus sp. SM32": {},
+                      "Thermus sp. YS45": {},
+                      "Thermus sp. AK13D21": {},
+                      "Thermus sp. T2": {},
+                      "Thermus sp. 71": {},
+                      "Thermus sp. IM6501": {},
+                      "Thermus sp. A4": {},
+                      "Thermus sp. FD3041": {},
+                      "Thermus sp. AK16D": {},
+                      "Thermus sp. Vil3": {},
+                      "Thermus sp. OH1": {},
+                      "Thermus sp. OH2": {},
+                      "Thermus sp. OH3": {},
+                      "Thermus sp. OH4": {},
+                      "Thermus sp. OH5": {},
+                      "Thermus sp. OH6": {},
+                      "Thermus sp. EOH1": {},
+                      "Thermus sp. EOH2": {},
+                      "Thermus sp. EOH3": {},
+                      "Thermus sp. EOH4": {},
+                      "Thermus sp. EOH5": {},
+                      "Thermus sp. EOH6": {},
+                      "Thermus sp. PA1": {},
+                      "Thermus sp. PA2": {},
+                      "Thermus sp. PA3": {},
+                      "Thermus sp. PA4": {},
+                      "Thermus sp. PA5": {},
+                      "Thermus sp. PA6": {},
+                      "Thermus sp. EPA1": {},
+                      "Thermus sp. EPA2": {},
+                      "Thermus sp. EPA3": {},
+                      "Thermus sp. EPA4": {},
+                      "Thermus sp. EPA5": {},
+                      "Thermus sp. EPA6": {},
+                      "Thermus sp. Z-1": {},
+                      "Thermus sp. SRI-96": {},
+                      "Thermus sp. SRI-248": {},
+                      "Thermus sp. SRI-1E1": {},
+                      "Thermus sp. NTU-024": {},
+                      "Thermus sp. IT-7254": {},
+                      "Thermus sp. C4": {},
+                      "Thermus sp. OlB-335": {},
+                      "Thermus sp. OlB-343": {},
+                      "Thermus sp. HR13": {},
+                      "Thermus sp. Y70-05": {},
+                      "Thermus sp. Y70-06": {},
+                      "Thermus sp. Y70-07": {},
+                      "Thermus sp. R70-06": {},
+                      "Thermus sp. R70-07": {},
+                      "Thermus sp. G70-05": {},
+                      "Thermus sp. G70-06": {},
+                      "Thermus sp. G70-07": {},
+                      "Thermus sp. G70-08": {},
+                      "Thermus sp. B70-04": {},
+                      "Thermus sp. B70-05": {},
+                      "Thermus sp. Y55-07": {},
+                      "Thermus sp. Y55-08": {},
+                      "Thermus sp. Y55-09": {},
+                      "Thermus sp. Y55-10": {},
+                      "Thermus sp. Y55-11": {},
+                      "Thermus sp. Y55-12": {},
+                      "Thermus sp. R55-10": {},
+                      "Thermus sp. manikaranii": {},
+                      "Thermus sp. TB1": {},
+                      "Thermus sp. RH-914": {},
+                      "Thermus sp. RH-1214": {},
+                      "Thermus sp. RH-1514": {},
+                      "Thermus sp. IB-21": {},
+                      "Thermus sp. YBJ-1": {},
+                      "Thermus sp. TK10": {},
+                      "Thermus sp. R": {},
+                      "Thermus sp. ATCC 27737": {},
+                      "Thermus sp. KI-P1": {},
+                      "Thermus sp. RH-0401": {},
+                      "Thermus sp. RH-0402": {},
+                      "Thermus sp. RH-0403": {},
+                      "Thermus sp. RH-0404": {},
+                      "Thermus sp. RH-0405": {},
+                      "Thermus sp. RH-0406": {},
+                      "Thermus sp. SPS-217": {},
+                      "Thermus sp. TibetanG7": {},
+                      "Thermus sp. GD52": {},
+                      "Thermus sp. E26": {},
+                      "Thermus sp. T351": {},
+                      "Thermus sp. manalii": {},
+                      "Thermus sp. XZZH6": {},
+                      "Thermus sp. XZZH4": {},
+                      "Thermus sp. GD31": {},
+                      "Thermus sp. GD21": {},
+                      "Thermus sp. AA/04": {},
+                      "Thermus sp. GH5": {},
+                      "Thermus sp. GW": {},
+                      "Thermus sp. DT": {},
+                      "Thermus sp. A03C": {},
+                      "Thermus sp. 4C": {},
+                      "Thermus sp. K03": {},
+                      "Thermus sp. dNBae-1X": {},
+                      "Thermus sp. ATN1": {},
+                      "Thermus sp. BXR": {},
+                      "Thermus sp. BXW": {},
+                      "Thermus sp. Y1": {},
+                      "Thermus sp. Y10": {},
+                      "Thermus sp. Y12": {},
+                      "Thermus sp. Y13": {},
+                      "Thermus sp. Y14": {},
+                      "Thermus sp. Y3": {},
+                      "Thermus sp. Y5": {},
+                      "Thermus sp. Y7": {},
+                      "Thermus sp. WQ-R1": {},
+                      "Thermus sp. Y1(2008)": {},
+                      "Thermus sp. MKB": {},
+                      "Thermus sp. MKW": {},
+                      "Thermus sp. Fiji3.A1": {},
+                      "Thermus sp. NMX2.A1": {},
+                      "Thermus sp. OH.A2": {},
+                      "Thermus sp. Tok23.A1": {},
+                      "Thermus sp. Tp10.A2": {},
+                      "Thermus sp. Wai28.A1": {},
+                      "Thermus sp. YSP2A.A1": {},
+                      "Thermus sp. YS 8-13": {},
+                      "Thermus sp. TC4": {},
+                      "Thermus sp. TC10": {},
+                      "Thermus sp. WSUX8": {},
+                      "Thermus sp. WSUX9": {},
+                      "Thermus sp. WSUZ3": {},
+                      "Thermus sp. JM1": {},
+                      "Thermus sp. NWH60": {},
+                      "Thermus sp. 93170": {},
+                      "Thermus sp. ITI 346": {},
+                      "Thermus sp. KTL03": {},
+                      "Thermus sp. IC-171": {},
+                      "Thermus sp. IC-174": {},
+                      "Thermus sp. O-3-1": {},
+                      "Thermus sp. CCB_US3_UF1": {},
+                      "Thermus sp. TA1": {},
+                      "Thermus sp. NAD": {},
+                      "Thermus sp. JCM 17653": {},
+                      "Thermus sp. WG": {},
+                      "Thermus sp. YIM-HQ106": {},
+                      "Thermus sp. YIM-HQ393": {},
+                      "Thermus sp. YIM-HQ4-1": {},
+                      "Thermus sp. YIM-HQ422": {},
+                      "Thermus sp. KI2": {},
+                      "Thermus sp. KI7": {},
+                      "Thermus sp. PSS8": {},
+                      "Thermus sp. SR55-6": {},
+                      "Thermus sp. SR60-1": {},
+                      "Thermus sp. 2.9": {},
+                      "Thermus sp. TH1": {},
+                      "Thermus sp. TH2": {},
+                      "Thermus sp. FyFern_54": {},
+                      "Thermus sp. HM103": {},
+                      "Thermus sp. YIM 72307": {},
+                      "Thermus sp. PS18": {},
+                      "Thermus sp. NEB1569": {},
+                      "Thermus sp. LT1-2-5": {},
+                      "Thermus sp. FJN-A": {}
+                    },
+                    "Thermus brevis": {},
+                    "Thermus altitudinis": {},
+                    "Thermus albus": {},
+                    "Thermus thalpophilus": {},
+                    "Thermus hydrothermalis": {},
+                    "Thermus neutrinimicus": {}
+                  },
+                  "Meiothermus": {
+                    "Meiothermus ruber": {
+                      "Meiothermus ruber DSM 1279": {},
+                      "Meiothermus ruber H328": {}
+                    },
+                    "Meiothermus cerbereus": {
+                      "Meiothermus cerbereus DSM 11376": {}
+                    },
+                    "Meiothermus rosaceus": {},
+                    "environmental samples": {
+                      "uncultured Meiothermus sp.": {},
+                      "Meiothermus sp. enrichment culture clone phylotype P21": {},
+                      "Meiothermus sp. enrichment culture clone GBS9": {},
+                      "Meiothermus sp. enrichment culture clone JAC10": {}
+                    },
+                    "Meiothermus taiwanensis": {
+                      "Meiothermus taiwanensis DSM 14542": {},
+                      "Meiothermus taiwanensis WR-220": {}
+                    },
+                    "unclassified Meiothermus": {
+                      "Meiothermus sp. R55-11": {},
+                      "Meiothermus sp. I40": {},
+                      "Meiothermus sp. L-s-R2A-4C.2": {},
+                      "Meiothermus sp. L-s-R2A-4C.1": {},
+                      "Meiothermus sp. L-s-R2A-4B.2.1": {},
+                      "Meiothermus sp. L-s-R2A-4B.2.3": {},
+                      "Meiothermus sp. L-s-PMW-4B.2.1": {},
+                      "Meiothermus sp. L-s-PMW-4B.2.2": {},
+                      "Meiothermus sp. L-s-PMW-4C.1": {},
+                      "Meiothermus sp. L-s-PMW-11.1": {},
+                      "Meiothermus sp. L-bf-PMW-16.2.2": {},
+                      "Meiothermus sp. L-bf-PV-PMW-3B.1": {},
+                      "Meiothermus sp. L-s-R2A-3B.2": {},
+                      "Meiothermus sp. L-bf-PV-PMW-3B.2.3": {},
+                      "Meiothermus sp. L-bf-PMW-16.1.2.1": {},
+                      "Meiothermus sp. JN41005": {},
+                      "Meiothermus sp. B-maf-R2A-1": {},
+                      "Meiothermus sp. B-maf-R2A5-3": {},
+                      "Meiothermus sp. C-PA5-5c": {},
+                      "Meiothermus sp. C-jv-PA-1": {},
+                      "Meiothermus sp. B-R2A-5": {},
+                      "Meiothermus sp. B-R2A-6": {},
+                      "Meiothermus sp. B-R2A5-50-1": {},
+                      "Meiothermus sp. B-R2A5-50-3": {},
+                      "Meiothermus sp. S2-bf-R2A-7": {},
+                      "Meiothermus sp. P266": {},
+                      "Meiothermus sp. A1": {},
+                      "Meiothermus sp. SK3-2": {},
+                      "Meiothermus sp. TG17": {},
+                      "Meiothermus sp. MspI": {},
+                      "Meiothermus sp. Pnk-1": {},
+                      "Meiothermus sp. KTL01": {},
+                      "Meiothermus sp. TG2": {},
+                      "Meiothermus sp. M.TG17": {},
+                      "Meiothermus sp. M.tgx2": {},
+                      "Meiothermus sp. M.tgx38": {},
+                      "Meiothermus sp. M.tgx4": {},
+                      "Meiothermus sp. M.tgx6": {},
+                      "Meiothermus sp. M.tgx66": {},
+                      "Meiothermus sp. M.tgx67": {},
+                      "Meiothermus sp. M.tgx68": {},
+                      "Meiothermus sp. KI8": {},
+                      "Meiothermus sp. KI9": {},
+                      "Meiothermus sp. PS4": {},
+                      "Meiothermus sp. PS9": {},
+                      "Meiothermus sp. PSS6": {},
+                      "Meiothermus sp. PSS7": {},
+                      "Meiothermus sp. MS01": {},
+                      "Meiothermus sp. R2": {},
+                      "Meiothermus sp.": {},
+                      "Meiothermus sp. QL-1": {},
+                      "Meiothermus sp. PNK-Is4": {},
+                      "Meiothermus sp. CFH 77666": {},
+                      "Meiothermus sp. LV3608BK": {}
+                    },
+                    "Meiothermus rufus": {
+                      "Meiothermus rufus DSM 22234": {}
+                    },
+                    "Meiothermus granaticius": {
+                      "Meiothermus granaticius NBRC 107808": {}
+                    },
+                    "Meiothermus hypogaeus": {
+                      "Meiothermus hypogaeus NBRC 106114": {}
+                    },
+                    "Meiothermus luteus": {}
+                  },
+                  "environmental samples": {
+                    "unidentified Thermus OPB19": {},
+                    "unidentified Thermus OPB31": {},
+                    "unidentified Thermus OPB32": {},
+                    "unidentified Thermus OPS15": {},
+                    "unidentified Thermus OPS25": {},
+                    "unidentified Thermus OPS8A": {},
+                    "unidentified Thermus OPT60": {},
+                    "uncultured Thermaceae bacterium": {}
+                  },
+                  "Marinithermus": {
+                    "Marinithermus hydrothermalis": {
+                      "Marinithermus hydrothermalis DSM 14884": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Marinithermus sp.": {}
+                    },
+                    "unclassified Marinithermus": {
+                      "Marinithermus sp. Ae55-4C-S": {}
+                    }
+                  },
+                  "Vulcanithermus": {
+                    "Vulcanithermus mediatlanticus": {
+                      "Vulcanithermus mediatlanticus DSM 14978": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Vulcanithermus sp.": {}
+                    },
+                    "unclassified Vulcanithermus": {
+                      "Vulcanithermus sp. 0H70-SC-S": {},
+                      "Vulcanithermus sp. BF2T511": {},
+                      "Vulcanithermus sp. BF2T1422": {}
+                    }
+                  },
+                  "Oceanithermus": {
+                    "Oceanithermus profundus": {
+                      "Oceanithermus profundus DSM 14977": {}
+                    },
+                    "Oceanithermus desulfurans": {
+                      "Oceanithermus desulfurans NBRC 100063": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Oceanithermus sp.": {}
+                    },
+                    "unclassified Oceanithermus": {
+                      "Oceanithermus sp. E9S70-O": {},
+                      "Oceanithermus sp. ABE5-2": {},
+                      "Oceanithermus sp. MN-3n": {},
+                      "Oceanithermus sp. TAMO-4o": {},
+                      "Oceanithermus sp.": {}
+                    }
+                  },
+                  "unclassified Thermaceae": {
+                    "Thermaceae bacterium": {}
+                  },
+                  "Rhabdothermus": {
+                    "Rhabdothermus arcticus": {},
+                    "environmental samples": {
+                      "uncultured Rhabdothermus sp.": {}
+                    }
+                  },
+                  "Calidithermus": {
+                    "Calidithermus chliarophilus": {
+                      "Calidithermus chliarophilus DSM 9957": {}
+                    },
+                    "Calidithermus timidus": {
+                      "Calidithermus timidus DSM 17022": {}
+                    },
+                    "Calidithermus terrae": {},
+                    "Calidithermus roseus": {},
+                    "unclassified Calidithermus": {
+                      "Calidithermus sp.": {}
+                    }
+                  },
+                  "Allomeiothermus": {
+                    "Allomeiothermus silvanus": {
+                      "Allomeiothermus silvanus DSM 9946": {}
+                    },
+                    "environmental samples": {}
+                  }
+                },
+                "environmental samples": {
+                  "uncultured Thermales bacterium": {}
+                },
+                "unclassified Thermales": {
+                  "Thermales bacterium 01QDZ": {},
+                  "Thermales bacterium 01QDU": {},
+                  "Thermales bacterium": {}
+                }
+              },
+              "Deinococcales": {
+                "Deinococcaceae": {
+                  "Deinococcus": {
+                    "Deinococcus radiodurans": {
+                      "Deinococcus radiodurans R1 = ATCC 13939 = DSM 20539": {}
+                    },
+                    "Deinococcus radiophilus": {},
+                    "Deinococcus proteolyticus": {
+                      "Deinococcus proteolyticus MRP": {}
+                    },
+                    "Deinococcus radiopugnans": {
+                      "Deinococcus radiopugnans ATCC 19172": {}
+                    },
+                    "Deinococcus grandis": {
+                      "Deinococcus grandis SK125": {}
+                    },
+                    "Deinococcus geothermalis": {
+                      "Deinococcus geothermalis DSM 11300": {}
+                    },
+                    "Deinococcus murrayi": {
+                      "Deinococcus murrayi DSM 11303": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Deinococcus sp.": {},
+                      "Deinococcus sp. oral clone CB003": {},
+                      "Deinococcus sp. enrichment culture": {}
+                    },
+                    "Deinococcus aetherius": {},
+                    "Deinococcus aerius": {},
+                    "Deinococcus indicus": {},
+                    "Deinococcus frigens": {
+                      "Deinococcus frigens DSM 12807": {}
+                    },
+                    "Deinococcus saxicola": {},
+                    "Deinococcus marmoris": {
+                      "Deinococcus marmoris DSM 12784": {}
+                    },
+                    "Deinococcus hohokamensis": {},
+                    "Deinococcus navajonensis": {},
+                    "Deinococcus hopiensis": {
+                      "Deinococcus hopiensis KR-140": {}
+                    },
+                    "Deinococcus apachensis": {
+                      "Deinococcus apachensis DSM 19763": {}
+                    },
+                    "Deinococcus maricopensis": {
+                      "Deinococcus maricopensis DSM 21211": {}
+                    },
+                    "Deinococcus pimensis": {
+                      "Deinococcus pimensis DSM 21231": {}
+                    },
+                    "Deinococcus yavapaiensis": {
+                      "Deinococcus yavapaiensis KR-236": {}
+                    },
+                    "Deinococcus papagonensis": {},
+                    "Deinococcus sonorensis": {
+                      "Deinococcus sonorensis KR-87": {}
+                    },
+                    "Deinococcus deserti": {
+                      "Deinococcus deserti VCD115": {}
+                    },
+                    "Deinococcus ficus": {
+                      "Deinococcus ficus DSM 19119": {}
+                    },
+                    "Deinococcus aquaticus": {},
+                    "Deinococcus yunweiensis": {},
+                    "Deinococcus sahariens": {},
+                    "Deinococcus depolymerans": {},
+                    "Deinococcus misasensis": {
+                      "Deinococcus misasensis DSM 22328": {}
+                    },
+                    "Deinococcus roseus": {},
+                    "Deinococcus lacus": {},
+                    "Deinococcus aquiradiocola": {},
+                    "Deinococcus piscis": {},
+                    "Deinococcus cellulosilyticus": {
+                      "Deinococcus cellulosilyticus NBRC 106333 = KACC 11606": {}
+                    },
+                    "Deinococcus peraridilitoris": {
+                      "Deinococcus peraridilitoris DSM 19664": {}
+                    },
+                    "Deinococcus xinjiangensis": {},
+                    "Deinococcus alpinitundrae": {},
+                    "Deinococcus altitudinis": {},
+                    "Deinococcus claudionis": {},
+                    "Deinococcus radiomollis": {},
+                    "Deinococcus guangxiensis": {},
+                    "Deinococcus aquivivus": {},
+                    "Deinococcus gobiensis": {
+                      "Deinococcus gobiensis I-0": {}
+                    },
+                    "Deinococcus aquatilis": {
+                      "Deinococcus aquatilis DSM 23025": {}
+                    },
+                    "Deinococcus aerolatus": {},
+                    "Deinococcus aerophilus": {},
+                    "Deinococcus taklimakanensis": {},
+                    "Deinococcus soli (ex Zhang et al. 2011)": {},
+                    "Deinococcus caeni": {},
+                    "Deinococcus humi": {},
+                    "Deinococcus citri": {},
+                    "Deinococcus reticulitermitis": {},
+                    "Deinococcus wulumuqiensis": {
+                      "Deinococcus wulumuqiensis R12": {},
+                      "Deinococcus wulumuqiensis R13": {}
+                    },
+                    "Deinococcus daejeonensis": {},
+                    "Deinococcus enclensis": {},
+                    "Deinococcus metalli": {},
+                    "Deinococcus puniceus": {},
+                    "Deinococcus metallilatus": {},
+                    "Deinococcus carri": {},
+                    "Deinococcus antarcticus": {},
+                    "Deinococcus radiotolerans": {},
+                    "Deinococcus soli (ex Cha et al. 2016)": {},
+                    "Deinococcus arenae": {},
+                    "Deinococcus phoenicis": {},
+                    "Deinococcus radioresistens": {},
+                    "Deinococcus xianganensis": {},
+                    "Deinococcus populi": {},
+                    "Deinococcus aluminii": {},
+                    "Deinococcus multiflagellatus": {},
+                    "Deinococcus budaensis": {},
+                    "Deinococcus malanensis": {},
+                    "Deinococcus planocerae": {},
+                    "Deinococcus petrolearius": {},
+                    "Deinococcus actinosclerus": {},
+                    "Deinococcus oregonensis": {},
+                    "Deinococcus seoulensis": {},
+                    "Deinococcus knuensis": {},
+                    "Deinococcus ruber": {},
+                    "Deinococcus persicinus": {},
+                    "Deinococcus sedimenti": {},
+                    "Deinococcus rubrus": {},
+                    "Deinococcus gammatolerans": {},
+                    "Deinococcus rubellus": {},
+                    "Deinococcus terrigena": {},
+                    "Deinococcus koreense": {},
+                    "Deinococcus hibisci": {},
+                    "Deinococcus koreensis": {},
+                    "Deinococcus rufus": {},
+                    "Deinococcus arcticus": {},
+                    "Deinococcus irradiatisoli": {},
+                    "Deinococcus cavernae": {},
+                    "Deinococcus psychrotolerans": {},
+                    "Deinococcus fonticola": {},
+                    "Deinococcus detaillensis": {},
+                    "unclassified Deinococcus": {
+                      "Deinococcus sp.": {},
+                      "Deinococcus sp. 1172b": {},
+                      "Deinococcus sp. B.E4-4": {},
+                      "Deinococcus sp. 7b-1": {},
+                      "Deinococcus sp. 7c-1": {},
+                      "Deinococcus sp. 34/20": {},
+                      "Deinococcus sp. GBb9": {},
+                      "Deinococcus sp. '7.3 MW-1'": {},
+                      "Deinococcus sp. '14.2 MW-6'": {},
+                      "Deinococcus sp. '14.2 MW-13'": {},
+                      "Deinococcus sp. '14.2 MW-21'": {},
+                      "Deinococcus sp. '14.2 MW-25'": {},
+                      "Deinococcus sp. '14.5 MW-9'": {},
+                      "Deinococcus sp. '14.5 MW-20'": {},
+                      "Deinococcus sp. '14.5 MW-21'": {},
+                      "Deinococcus sp. '14.5 MW-23'": {},
+                      "Deinococcus sp. '5.5 MW-6'": {},
+                      "Deinococcus sp. '7.3 MW-11'": {},
+                      "Deinococcus sp. '7.5 MW-4'": {},
+                      "Deinococcus sp. '6.5 MW-4'": {},
+                      "Deinococcus sp. '6.5 MW-8'": {},
+                      "Deinococcus sp. 14 pro": {},
+                      "Deinococcus sp. iso 2": {},
+                      "Deinococcus sp. iso 4": {},
+                      "Deinococcus sp. iso 15": {},
+                      "Deinococcus sp. iso 38": {},
+                      "Deinococcus sp. iso C": {},
+                      "Deinococcus sp. CRR": {},
+                      "Deinococcus sp. G8": {},
+                      "Deinococcus sp. X2": {},
+                      "Deinococcus sp. 6": {},
+                      "Deinococcus sp. 3a": {},
+                      "Deinococcus sp. 42NP10": {},
+                      "Deinococcus sp. 11ND3": {},
+                      "Deinococcus sp. DaeR-4": {},
+                      "Deinococcus sp. Antarctic IS15": {},
+                      "Deinococcus sp. TDMA-21": {},
+                      "Deinococcus sp. IMCC1715": {},
+                      "Deinococcus sp. IMCC1761": {},
+                      "Deinococcus sp. BAC-N11": {},
+                      "Deinococcus sp. GPTSA100-24": {},
+                      "Deinococcus sp. I8": {},
+                      "Deinococcus sp. VTT E-052909": {},
+                      "Deinococcus sp. A62": {},
+                      "Deinococcus sp. SSRS5-4": {},
+                      "Deinococcus sp. SSRS5-5": {},
+                      "Deinococcus sp. SSRS5-6-2": {},
+                      "Deinococcus sp. SSRS6-1": {},
+                      "Deinococcus sp. P3": {},
+                      "Deinococcus sp. X17": {},
+                      "Deinococcus sp. 35": {},
+                      "Deinococcus sp. 39": {},
+                      "Deinococcus sp. 1A2": {},
+                      "Deinococcus sp. 1A3": {},
+                      "Deinococcus sp. 1A7": {},
+                      "Deinococcus sp. 1B1": {},
+                      "Deinococcus sp. 1B3": {},
+                      "Deinococcus sp. 2A2": {},
+                      "Deinococcus sp. 2A5": {},
+                      "Deinococcus sp. 3A1": {},
+                      "Deinococcus sp. 3A5": {},
+                      "Deinococcus sp. 4B4": {},
+                      "Deinococcus sp. 4B6": {},
+                      "Deinococcus sp. 5A4": {},
+                      "Deinococcus sp. 5A5": {},
+                      "Deinococcus sp. 6A2": {},
+                      "Deinococcus sp. 6A4-1": {},
+                      "Deinococcus sp. 6A4-2": {},
+                      "Deinococcus sp. MH01": {},
+                      "Deinococcus sp. MH44": {},
+                      "Deinococcus sp. MH50": {},
+                      "Deinococcus sp. PA234": {},
+                      "Deinococcus sp. PA211": {},
+                      "Deinococcus sp. 1A1": {},
+                      "Deinococcus sp. 1A6": {},
+                      "Deinococcus sp. 3B1": {},
+                      "Deinococcus sp. 4A4": {},
+                      "Deinococcus sp. 4A6": {},
+                      "Deinococcus sp. AKB-2008-RU1": {},
+                      "Deinococcus sp. 37": {},
+                      "Deinococcus sp. P2K-49": {},
+                      "Deinococcus sp. 1": {},
+                      "Deinococcus sp. 10": {},
+                      "Deinococcus sp. 11": {},
+                      "Deinococcus sp. 12": {},
+                      "Deinococcus sp. 13": {},
+                      "Deinococcus sp. 16": {},
+                      "Deinococcus sp. 17": {},
+                      "Deinococcus sp. 19": {},
+                      "Deinococcus sp. 20": {},
+                      "Deinococcus sp. 20A": {},
+                      "Deinococcus sp. 21": {},
+                      "Deinococcus sp. 23": {},
+                      "Deinococcus sp. 24": {},
+                      "Deinococcus sp. 25": {},
+                      "Deinococcus sp. 26": {},
+                      "Deinococcus sp. 27": {},
+                      "Deinococcus sp. 28": {},
+                      "Deinococcus sp. 29": {},
+                      "Deinococcus sp. 3": {},
+                      "Deinococcus sp. 31": {},
+                      "Deinococcus sp. 32": {},
+                      "Deinococcus sp. 33": {},
+                      "Deinococcus sp. 36": {},
+                      "Deinococcus sp. 42": {},
+                      "Deinococcus sp. 43": {},
+                      "Deinococcus sp. 44": {},
+                      "Deinococcus sp. 45": {},
+                      "Deinococcus sp. 46": {},
+                      "Deinococcus sp. 47": {},
+                      "Deinococcus sp. 5": {},
+                      "Deinococcus sp. 7": {},
+                      "Deinococcus sp. 8": {},
+                      "Deinococcus sp. 9": {},
+                      "Deinococcus sp. 37(2008)": {},
+                      "Deinococcus sp. RCML-5": {},
+                      "Deinococcus sp. SB5B4": {},
+                      "Deinococcus sp. BBN3L-01d": {},
+                      "Deinococcus sp. DLS-73": {},
+                      "Deinococcus sp. OS1-8": {},
+                      "Deinococcus sp. S34": {},
+                      "Deinococcus sp. RA45": {},
+                      "Deinococcus sp. BE4-4": {},
+                      "Deinococcus sp. YIM 75723": {},
+                      "Deinococcus sp. oral taxon C45": {},
+                      "Deinococcus sp. oral taxon F48": {},
+                      "Deinococcus sp. oral taxon F57": {},
+                      "Deinococcus sp. Lab-1": {},
+                      "Deinococcus sp. 25(2010)": {},
+                      "Deinococcus sp. PMR-B": {},
+                      "Deinococcus sp. MBIC3950": {},
+                      "Deinococcus sp. R-36711": {},
+                      "Deinococcus sp. R-43890": {},
+                      "Deinococcus sp. R-36479": {},
+                      "Deinococcus sp. R-36366": {},
+                      "Deinococcus sp. R-36206": {},
+                      "Deinococcus sp. R-36489": {},
+                      "Deinococcus sp. R-38476": {},
+                      "Deinococcus sp. R-36713": {},
+                      "Deinococcus sp. R-36590": {},
+                      "Deinococcus sp. R-36685": {},
+                      "Deinococcus sp. VUG-A62": {},
+                      "Deinococcus sp. B-G-NA11": {},
+                      "Deinococcus sp. B-G-PYD7": {},
+                      "Deinococcus sp. 50A(2010)": {},
+                      "Deinococcus sp. R-37627": {},
+                      "Deinococcus sp. R-38289": {},
+                      "Deinococcus sp. R-38506": {},
+                      "Deinococcus sp. R-41609": {},
+                      "Deinococcus sp. R-44264": {},
+                      "Deinococcus sp. S-bf-PMW-8.5.1": {},
+                      "Deinococcus sp. Grk4": {},
+                      "Deinococcus sp. SB1-1": {},
+                      "Deinococcus sp. Grk2": {},
+                      "Deinococcus sp. Grk5": {},
+                      "Deinococcus sp. WLSH-55": {},
+                      "Deinococcus sp. WLSH-57": {},
+                      "Deinococcus sp. WLSH-59": {},
+                      "Deinococcus sp. DJM2D3": {},
+                      "Deinococcus sp. LT7CD": {},
+                      "Deinococcus sp. R07": {},
+                      "Deinococcus sp. R10": {},
+                      "Deinococcus sp. R12": {},
+                      "Deinococcus sp. R14": {},
+                      "Deinococcus sp. MJH51": {},
+                      "Deinococcus sp. MJH53": {},
+                      "Deinococcus sp. MJN19": {},
+                      "Deinococcus sp. MJk7": {},
+                      "Deinococcus sp. A23.3": {},
+                      "Deinococcus sp. ESNP7_II": {},
+                      "Deinococcus sp. MN12-1": {},
+                      "Deinococcus sp. MN12-4": {},
+                      "Deinococcus sp. MN4-8": {},
+                      "Deinococcus sp. 1PNM-2": {},
+                      "Deinococcus sp. 9PNM-15": {},
+                      "Deinococcus sp. 9PNM-3": {},
+                      "Deinococcus sp. HJ-30-11": {},
+                      "Deinococcus sp. GM37AC4a L1": {},
+                      "Deinococcus sp. GM37AC4a L2": {},
+                      "Deinococcus sp. KP32": {},
+                      "Deinococcus sp. DY32": {},
+                      "Deinococcus sp. DY34": {},
+                      "Deinococcus sp. DY49": {},
+                      "Deinococcus sp. Bacteria_121": {},
+                      "Deinococcus sp. Bacteria_122": {},
+                      "Deinococcus sp. Bacteria_123": {},
+                      "Deinococcus sp. Bacteria_124": {},
+                      "Deinococcus sp. Bacteria_19": {},
+                      "Deinococcus sp. DY25": {},
+                      "Deinococcus sp. DY37": {},
+                      "Deinococcus sp. AS93": {},
+                      "Deinococcus sp. UDEC-P1": {},
+                      "Deinococcus sp. 17(2012)": {},
+                      "Deinococcus sp. SON-1304": {},
+                      "Deinococcus sp. SON-1312": {},
+                      "Deinococcus sp. BJC16-A7": {},
+                      "Deinococcus sp. MDT1-38": {},
+                      "Deinococcus sp. TMT3-39-2": {},
+                      "Deinococcus sp. HME8654": {},
+                      "Deinococcus sp. A-BP1": {},
+                      "Deinococcus sp. UAC-61": {},
+                      "Deinococcus sp. UAC-72": {},
+                      "Deinococcus sp. UAC-77": {},
+                      "Deinococcus sp. H9": {},
+                      "Deinococcus sp. N3": {},
+                      "Deinococcus sp. AcK": {},
+                      "Deinococcus sp. W47": {},
+                      "Deinococcus sp. SQ27": {},
+                      "Deinococcus sp. W1.10-137-3": {},
+                      "Deinococcus sp. BR1": {},
+                      "Deinococcus sp. PL14": {},
+                      "Deinococcus sp. YT1": {},
+                      "Deinococcus sp. YT2": {},
+                      "Deinococcus sp. Ri1Ps_4760": {},
+                      "Deinococcus sp. J-6": {},
+                      "Deinococcus sp. A2-51": {},
+                      "Deinococcus sp. A2-599": {},
+                      "Deinococcus sp. A2-75": {},
+                      "Deinococcus sp. ND25": {},
+                      "Deinococcus sp. Rai3": {},
+                      "Deinococcus sp. PK1": {},
+                      "Deinococcus sp. PK4": {},
+                      "Deinococcus sp. 77": {},
+                      "Deinococcus sp. 149(2013)": {},
+                      "Deinococcus sp. LD4": {},
+                      "Deinococcus sp. M_Sw_oHS_07/11_5_2(2)": {},
+                      "Deinococcus sp. M_Sw_oHS_08/11_11_1(1)": {},
+                      "Deinococcus sp. M_Sw_oHS_10/10_11_1(1)": {},
+                      "Deinococcus sp. B205-O2": {},
+                      "Deinococcus sp. B205-P6": {},
+                      "Deinococcus sp. LD5": {},
+                      "Deinococcus sp. Lor16": {},
+                      "Deinococcus sp. Ume64": {},
+                      "Deinococcus sp. PAMC 26562": {},
+                      "Deinococcus sp. RL": {},
+                      "Deinococcus sp. YIM137": {},
+                      "Deinococcus sp. AMHQH187": {},
+                      "Deinococcus sp. JSM 2215060": {},
+                      "Deinococcus sp. JSM 2215105": {},
+                      "Deinococcus sp. JSM 2215109": {},
+                      "Deinococcus sp. YIM 77859": {},
+                      "Deinococcus sp. JSM 2155001": {},
+                      "Deinococcus sp. JSM 2175012": {},
+                      "Deinococcus sp. TWP2.2A": {},
+                      "Deinococcus sp. NA202": {},
+                      "Deinococcus sp. r3": {},
+                      "Deinococcus sp. AN16": {},
+                      "Deinococcus sp. NA409": {},
+                      "Deinococcus sp. BM1": {},
+                      "Deinococcus sp. BS333": {},
+                      "Deinococcus sp. DG13-2": {},
+                      "Deinococcus sp. JJ521": {},
+                      "Deinococcus sp. ID0609": {},
+                      "Deinococcus sp. WMA-LM30": {},
+                      "Deinococcus sp. NCIM 5456": {},
+                      "Deinococcus sp. BAR13": {},
+                      "Deinococcus sp. UR1": {},
+                      "Deinococcus sp. FyFern_53": {},
+                      "Deinococcus sp. G8(2015)": {},
+                      "Deinococcus sp. JSM 2145010": {},
+                      "Deinococcus sp. JSM 2175016": {},
+                      "Deinococcus sp. Leaf326": {},
+                      "Deinococcus sp. UYEF24": {},
+                      "Deinococcus sp. SL2-6": {},
+                      "Deinococcus sp. Ant 1": {},
+                      "Deinococcus sp. EAC2": {},
+                      "Deinococcus sp. XYY-2015": {},
+                      "Deinococcus sp. A2-6": {},
+                      "Deinococcus sp. AL6": {},
+                      "Deinococcus sp. X2(2016)": {},
+                      "Deinococcus sp. IMCC25603": {},
+                      "Deinococcus sp. H48": {},
+                      "Deinococcus sp. BAB-5380": {},
+                      "Deinococcus sp. BAB-5400": {},
+                      "Deinococcus sp. 16F3N": {},
+                      "Deinococcus sp. 16F4B": {},
+                      "Deinococcus sp. 16F4D": {},
+                      "Deinococcus sp. 16F6B": {},
+                      "Deinococcus sp. 16F6I": {},
+                      "Deinococcus sp. KC 159": {},
+                      "Deinococcus sp. LM3": {},
+                      "Deinococcus sp. NW-56": {},
+                      "Deinococcus sp. RM": {},
+                      "Deinococcus sp. DB0503": {},
+                      "Deinococcus sp. JMULE3": {},
+                      "Deinococcus sp. S9": {},
+                      "Deinococcus sp. Arct2-2": {},
+                      "Deinococcus sp. KSM4-11": {},
+                      "Deinococcus sp. AJ005": {},
+                      "Deinococcus sp. 6YEL10": {},
+                      "Deinococcus sp. 23YEL01": {},
+                      "Deinococcus sp. 12RED42": {},
+                      "Deinococcus sp. 6GRE01": {},
+                      "Deinococcus sp. 14RED07": {},
+                      "Deinococcus sp. D7000": {},
+                      "Deinococcus sp. GbtcB9": {},
+                      "Deinococcus sp. LYS064": {},
+                      "Deinococcus sp. SYSU M41301": {},
+                      "Deinococcus sp. RIT780": {},
+                      "Deinococcus sp. HSC-46F16": {},
+                      "Deinococcus sp. CKS1": {},
+                      "Deinococcus sp. MS8": {},
+                      "Deinococcus sp. NPKL16": {},
+                      "Deinococcus sp. KNUC1210": {},
+                      "Deinococcus sp. QL22": {},
+                      "Deinococcus sp. Marseille-Q6407": {},
+                      "Deinococcus sp. SL84": {},
+                      "Deinococcus sp. AB2017081": {},
+                      "Deinococcus sp. VB142": {},
+                      "Deinococcus sp. YIM 134068": {},
+                      "Deinococcus sp. SM5_A1": {},
+                      "Deinococcus sp. CRBC_G1968": {},
+                      "Deinococcus sp. CRBC_G2022": {},
+                      "Deinococcus sp. CRBC_G2690": {},
+                      "Deinococcus sp. VB343": {},
+                      "Deinococcus sp. A31D244": {},
+                      "Deinococcus sp. ME38": {},
+                      "Deinococcus sp. VB345": {}
+                    },
+                    "Deinococcus terrestris": {},
+                    "Deinococcus kurensis": {},
+                    "Deinococcus arboris": {},
+                    "Deinococcus taeanensis": {},
+                    "Deinococcus aestuarii": {},
+                    "Deinococcus aquaedulcis": {},
+                    "Deinococcus betulae": {},
+                    "Deinococcus arenicola": {},
+                    "Deinococcus rhizophilus": {}
+                  },
+                  "unclassified Deinococcaceae": {
+                    "cf. Deinococcus sp. ANRS1-1": {},
+                    "bacterium Ellin6033": {},
+                    "glacier bacterium FJI28": {},
+                    "bacterium Ellin510": {},
+                    "bacterium Ellin512": {},
+                    "Deinococcaceae bacterium TDMA-uv54": {},
+                    "Deinococcaceae bacterium MH55": {},
+                    "Deinococcaceae bacterium 28-1PB": {},
+                    "Deinococcaceae bacterium UBA6957": {},
+                    "Deinococcaceae bacterium": {}
+                  },
+                  "environmental samples": {
+                    "uncultured Deinococcaceae bacterium": {}
+                  },
+                  "Deinobacterium": {
+                    "Deinobacterium chartae": {},
+                    "environmental samples": {
+                      "uncultured Deinobacterium sp.": {}
+                    }
+                  }
+                },
+                "environmental samples": {
+                  "uncultured Deinococcales bacterium": {}
+                },
+                "unclassified Deinococcales": {
+                  "Deinococcales bacterium": {}
+                }
+              },
+              "environmental samples": {
+                "uncultured Deinococci bacterium": {}
+              },
+              "unclassified Deinococci": {
+                "Deinococci bacterium": {}
+              },
+              "Trueperales": {
+                "Trueperaceae": {
+                  "Truepera": {
+                    "Truepera radiovictrix": {
+                      "Truepera radiovictrix DSM 17093": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Truepera sp.": {}
+                    },
+                    "unclassified Truepera": {
+                      "Truepera sp. S1-66-100": {},
+                      "Truepera sp. bin119": {},
+                      "Truepera sp.": {}
+                    }
+                  },
+                  "environmental samples": {
+                    "uncultured Trueperaceae bacterium": {}
+                  },
+                  "unclassified Trueperaceae": {
+                    "Trueperaceae bacterium": {}
+                  }
+                },
+                "unclassified Trueperales": {
+                  "Trueperales bacterium": {}
+                }
+              }
+            }
+          },
+          "Thermotogota": {
+            "Thermotogae": {
+              "Thermotogales": {
+                "environmental samples": {
+                  "unidentified Thermotogales OPB7": {},
+                  "unidentified Thermotogales OPB85": {},
+                  "unidentified Thermotogales OPS49A": {},
+                  "unidentified Thermotogales OPS66": {},
+                  "unidentified Thermotogales OPS69B": {},
+                  "unidentified Thermotogales OPS196B": {},
+                  "uncultured Thermotogales bacterium": {},
+                  "Thermotogales bacterium enrichment culture clone D2CL_Bac_16S_Clone11": {},
+                  "Thermotogales bacterium enrichment culture clone 05mlsbRT.46": {},
+                  "Thermotogales bacterium enrichment culture clone DF.35": {},
+                  "Thermotogales bacterium enrichment culture clone DF.52": {},
+                  "Thermotogales bacterium enrichment culture clone DF.65.52": {},
+                  "Thermotogales bacterium enrichment culture clone DF.RT.35.46.65": {},
+                  "Thermotogales bacterium enrichment culture clone FC.14C.RT.30.35": {},
+                  "Thermotogales bacterium enrichment culture clone GrosA.RT.35.46.65": {},
+                  "Thermotogales bacterium enrichment culture clone HF.30.35.46.52.65": {},
+                  "Thermotogales bacterium enrichment culture clone HF.46": {},
+                  "Thermotogales bacterium enrichment culture clone HF.RT.30.35.46": {},
+                  "Thermotogales bacterium enrichment culture clone HWH.52": {},
+                  "Thermotogales bacterium enrichment culture clone HWH.RT": {},
+                  "Thermotogales bacterium enrichment culture clone TAR2.A.RT.46": {},
+                  "Thermotogales bacterium enrichment culture clone TAR2.C1 RT": {},
+                  "Thermotogales bacterium enrichment culture clone TAR2.C2 RT": {},
+                  "Thermotogales bacterium enrichment culture clone TAR6.8.A.RT": {},
+                  "Thermotogales bacterium enrichment culture clone TAR6.8.C1 RT": {},
+                  "Thermotogales bacterium enrichment culture clone VNC3B005": {},
+                  "Thermotogales bacterium enrichment culture clone B4129": {},
+                  "Thermotogales bacterium enrichment culture clone B11-B-66": {},
+                  "Thermotogales bacterium enrichment culture clone B13-B-100": {},
+                  "Thermotogales bacterium enrichment culture clone SB1-30": {},
+                  "Thermotogales bacterium enrichment culture": {}
+                },
+                "Thermotogaceae": {
+                  "Thermotoga": {
+                    "Thermotoga maritima": {
+                      "Thermotoga maritima MSB8": {}
+                    },
+                    "Thermotoga neapolitana": {
+                      "Thermotoga neapolitana DSM 4359": {},
+                      "Thermotoga neapolitana 2812A": {},
+                      "Thermotoga neapolitana Mcl": {},
+                      "Thermotoga neapolitana LA10": {}
+                    },
+                    "Thermotoga petrophila": {
+                      "Thermotoga petrophila RKU-1": {},
+                      "Thermotoga petrophila RKU-10": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Thermotoga sp.": {},
+                      "Thermotoga sp. enrichment clone T5": {},
+                      "Thermotoga sp. enrichment clone R10": {},
+                      "Thermotoga sp. enrichment clone R13": {},
+                      "Thermotoga sp. enrichment clone R21": {},
+                      "Thermotoga sp. enrichment clone R85": {},
+                      "Thermotoga sp. enrichment culture clone C11": {},
+                      "Thermotoga sp. enrichment culture": {}
+                    },
+                    "Thermotoga caldifontis": {
+                      "Thermotoga caldifontis AZM44c09": {}
+                    },
+                    "Thermotoga profunda": {
+                      "Thermotoga profunda AZM34c06": {}
+                    },
+                    "unclassified Thermotoga": {
+                      "Thermotoga sp.": {},
+                      "Thermotoga sp. RQ7": {
+                        "Thermotoga sp. RQ7 NT055_1": {},
+                        "Thermotoga sp. RQ7 NT055_4": {},
+                        "Thermotoga sp. RQ7 NT055_5": {},
+                        "Thermotoga sp. RQ7 NT055_6": {},
+                        "Thermotoga sp. RQ7 NT110_1": {},
+                        "Thermotoga sp. RQ7 NT110_2": {},
+                        "Thermotoga sp. RQ7 NT110_3": {},
+                        "Thermotoga sp. RQ7 NT110_5": {},
+                        "Thermotoga sp. RQ7 NT110_6": {},
+                        "Thermotoga sp. RQ7 NT110_7": {},
+                        "Thermotoga sp. RQ7 NT167_5": {},
+                        "Thermotoga sp. RQ7 NT167_6": {},
+                        "Thermotoga sp. RQ7 NT167_7": {},
+                        "Thermotoga sp. RQ7 NT167_8": {},
+                        "Thermotoga sp. RQ7 NT220_1": {},
+                        "Thermotoga sp. RQ7 NT220_5": {},
+                        "Thermotoga sp. RQ7 NT220_6": {},
+                        "Thermotoga sp. RQ7 NT270_2": {},
+                        "Thermotoga sp. RQ7 NT270_4": {},
+                        "Thermotoga sp. RQ7 NT270_5": {},
+                        "Thermotoga sp. RQ7 NT270_6": {},
+                        "Thermotoga sp. RQ7 NT270_8": {},
+                        "Thermotoga sp. RQ7 NT331_1": {},
+                        "Thermotoga sp. RQ7 NT331_3": {},
+                        "Thermotoga sp. RQ7 NT331_5": {},
+                        "Thermotoga sp. RQ7 NT331_6": {},
+                        "Thermotoga sp. RQ7 NT331_7": {},
+                        "Thermotoga sp. RQ7 NT331_8": {},
+                        "Thermotoga sp. RQ7 NT055_8": {}
+                      },
+                      "Thermotoga sp. SG1": {},
+                      "Thermotoga sp. RQ2": {},
+                      "Thermotoga sp. KOL6": {},
+                      "Thermotoga sp. FjSS3-B.1": {},
+                      "Thermotoga sp. SL7": {},
+                      "Thermotoga sp. G1": {},
+                      "Thermotoga sp. G2": {},
+                      "Thermotoga sp. LA4": {},
+                      "Thermotoga sp. VMA1/L2B": {},
+                      "Thermotoga sp. TCEL2": {},
+                      "Thermotoga sp. df2-1": {},
+                      "Thermotoga sp. 1864opik": {},
+                      "Thermotoga sp. Fe85_1_2B": {},
+                      "Thermotoga sp. KU1": {},
+                      "Thermotoga sp. MI9": {},
+                      "Thermotoga sp. KU10": {},
+                      "Thermotoga sp. KU11": {},
+                      "Thermotoga sp. MB 1": {},
+                      "Thermotoga sp. FC1002": {},
+                      "Thermotoga sp. Cell2": {},
+                      "Thermotoga sp. 2812B": {},
+                      "Thermotoga sp. EMP": {},
+                      "Thermotoga sp. TBGT1766": {},
+                      "Thermotoga sp. Mc24": {},
+                      "Thermotoga sp. Xyl54": {},
+                      "Thermotoga sp. TKM 83SO-W1": {},
+                      "Thermotoga sp. TKM 70SO-W2": {},
+                      "Thermotoga sp. TBXY761": {},
+                      "Thermotoga sp. TBGT1765": {},
+                      "Thermotoga sp. AV18": {},
+                      "Thermotoga sp. NTLA3": {},
+                      "Thermotoga sp. SG7": {},
+                      "Thermotoga sp. SR1": {},
+                      "Thermotoga sp. A7A": {},
+                      "Thermotoga sp. PD524": {},
+                      "Thermotoga sp. FA002": {},
+                      "Thermotoga sp. FA003": {},
+                      "Thermotoga sp. FC203": {},
+                      "Thermotoga sp. PD517": {},
+                      "Thermotoga sp. PD522": {},
+                      "Thermotoga sp. TBYP3.1.4.1": {},
+                      "Thermotoga sp. 50_64": {},
+                      "Thermotoga sp. 50_1627": {},
+                      "Thermotoga sp. 47_83": {},
+                      "Thermotoga sp. 38H-to": {},
+                      "Thermotoga sp. Ku-13t": {},
+                      "Thermotoga sp. 4484_232": {},
+                      "Thermotoga sp. RQ7 NT055_3": {},
+                      "Thermotoga sp. RQ7 NT167_2": {},
+                      "Thermotoga sp. RQ7 NT220_4": {},
+                      "Thermotoga sp. RQ7 NT270_7": {}
+                    }
+                  },
+                  "Thermopallium": {
+                    "Thermopallium natronophilum": {}
+                  },
+                  "unclassified Thermotogaceae": {
+                    "Thermotogaceae bacterium 17bR": {},
+                    "Thermotogaceae bacterium 30bM": {},
+                    "Thermotogaceae bacterium 4bZ": {},
+                    "Thermotogaceae bacterium DTU111": {},
+                    "Thermotogaceae bacterium": {}
+                  },
+                  "environmental samples": {
+                    "uncultured Thermotogaceae bacterium": {},
+                    "Thermotogaceae bacterium enrichment culture clone B3112": {},
+                    "Thermotogaceae bacterium enrichment culture clone B31121": {},
+                    "Thermotogaceae bacterium enrichment culture clone B31176": {},
+                    "Thermotogaceae bacterium enrichment culture clone B312111": {},
+                    "Thermotogaceae bacterium enrichment culture clone B312114": {},
+                    "Thermotogaceae bacterium enrichment culture clone B312116": {},
+                    "Thermotogaceae bacterium enrichment culture clone B312127": {},
+                    "Thermotogaceae bacterium enrichment culture clone B312130": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB1_28": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB_109": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB_23": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB_65": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB_66": {},
+                    "Thermotogaceae bacterium enrichment culture clone HB_80": {},
+                    "Thermotogaceae bacterium enrichment culture clone L35B_1": {},
+                    "Thermotogaceae bacterium enrichment culture clone L35B_150": {},
+                    "Thermotogaceae bacterium enrichment culture clone L35B_60": {},
+                    "Thermotogaceae bacterium enrichment culture clone L35B_8": {},
+                    "Thermotogaceae bacterium enrichment culture clone L55B-22": {},
+                    "Thermotogaceae bacterium enrichment culture clone L55B-72": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_12": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_15": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_25": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_28": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_42": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_44": {},
+                    "Thermotogaceae bacterium enrichment culture clone LB1_46": {}
+                  },
+                  "Pseudothermotoga": {
+                    "Pseudothermotoga elfii": {
+                      "Pseudothermotoga elfii DSM 9442 = NBRC 107921": {}
+                    },
+                    "Pseudothermotoga subterranea": {
+                      "Pseudothermotoga subterranea DSM 9912 = NBRC 107924": {}
+                    },
+                    "Pseudothermotoga hypogea": {
+                      "Pseudothermotoga hypogea DSM 11164 = NBRC 106472": {}
+                    },
+                    "Pseudothermotoga thermarum": {
+                      "Pseudothermotoga thermarum DSM 5069": {}
+                    },
+                    "Pseudothermotoga lettingae": {
+                      "Pseudothermotoga lettingae TMO": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Pseudothermotoga sp.": {}
+                    },
+                    "unclassified Pseudothermotoga": {
+                      "Pseudothermotoga sp.": {},
+                      "Pseudothermotoga sp. U03pept": {}
+                    }
+                  }
+                },
+                "unclassified Thermotogales": {
+                  "bacterial str. vp56": {},
+                  "bacterial str. vp424": {},
+                  "Thermotogales str. SRI-251": {},
+                  "Thermotogales str. SRI-15": {},
+                  "Thermotogales str. AM1110": {},
+                  "Thermotogales str. AM1111": {},
+                  "Thermotogales str. AM1112": {},
+                  "Thermotogales str. AM1113": {},
+                  "Thermotogales str. BHI80-139": {},
+                  "Thermotogales str. Dex60-32": {},
+                  "Thermotogales str. Dex60-136": {},
+                  "Thermotogales bacterium Apb9": {},
+                  "Thermotogales bacterium T17b-19": {},
+                  "Thermotogales bacterium T30b-17": {},
+                  "Thermotogales bacterium Ag70": {},
+                  "Thermotogales bacterium Ag55": {},
+                  "Thermotogales bacterium 46_20": {},
+                  "Thermotogales bacterium Thermo_01": {},
+                  "Thermotogales bacterium Thermo_02": {},
+                  "Thermotogales bacterium V2YE51": {},
+                  "Thermotogales bacterium EBM-19": {},
+                  "Thermotogales bacterium EBM-48": {},
+                  "Thermotogales bacterium": {}
+                },
+                "Fervidobacteriaceae": {
+                  "Thermosipho": {
+                    "Thermosipho africanus": {
+                      "Thermosipho africanus Ob7": {},
+                      "Thermosipho africanus TCF52B": {},
+                      "Thermosipho africanus H17ap60334": {}
+                    },
+                    "Thermosipho melanesiensis": {
+                      "Thermosipho melanesiensis BI429": {}
+                    },
+                    "Thermosipho japonicus": {},
+                    "Thermosipho geolei": {},
+                    "Thermosipho ferriphilus": {},
+                    "Thermosipho atlanticus": {
+                      "Thermosipho atlanticus DSM 15807": {}
+                    },
+                    "Thermosipho globiformans": {},
+                    "environmental samples": {
+                      "uncultured Thermosipho sp.": {}
+                    },
+                    "Thermosipho affectus": {},
+                    "Thermosipho activus": {},
+                    "Thermosipho ferrireducens": {},
+                    "unclassified Thermosipho (in: thermotogales)": {
+                      "Thermosipho sp. TBA5": {},
+                      "Thermosipho sp. DSM 6568": {},
+                      "Thermosipho sp. MV1063": {},
+                      "Thermosipho sp. FD1": {},
+                      "Thermosipho sp. AT1272": {},
+                      "Thermosipho sp. TH70-3": {},
+                      "Thermosipho sp. 2F70-1": {},
+                      "Thermosipho sp. LD-2008": {},
+                      "Thermosipho sp. G60": {},
+                      "Thermosipho sp. 1070": {},
+                      "Thermosipho sp. 1063": {},
+                      "Thermosipho sp. 1074": {},
+                      "Thermosipho sp. 1223": {},
+                      "Thermosipho sp. 1244": {},
+                      "Thermosipho sp. (in: thermotogales)": {},
+                      "Thermosipho sp. FR-w03": {}
+                    }
+                  },
+                  "Fervidobacterium": {
+                    "Fervidobacterium islandicum": {},
+                    "Fervidobacterium nodosum": {
+                      "Fervidobacterium nodosum Rt17-B1": {}
+                    },
+                    "Fervidobacterium gondwanense": {
+                      "Fervidobacterium gondwanense DSM 13020": {}
+                    },
+                    "Fervidobacterium pennivorans": {
+                      "Fervidobacterium pennivorans DSM 9078": {},
+                      "Fervidobacterium pennivorans subsp. keratinolyticus": {},
+                      "Fervidobacterium pennivorans subsp. shakshaketiis": {},
+                      "Fervidobacterium pennivorans subsp. carthaginiensis": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Fervidobacterium sp.": {},
+                      "Fervidobacterium sp. enrichment culture clone AD_hydA_2": {},
+                      "Fervidobacterium sp. enrichment culture": {}
+                    },
+                    "Fervidobacterium changbaicum": {
+                      "Fervidobacterium changbaicum DSM 17883": {}
+                    },
+                    "Fervidobacterium riparium": {},
+                    "Fervidobacterium thailandense": {},
+                    "unclassified Fervidobacterium": {
+                      "Fervidobacterium sp. YNP": {},
+                      "Fervidobacterium sp. CBS-2": {},
+                      "Fervidobacterium sp. CBS-3": {},
+                      "Fervidobacterium sp. CBS-4": {},
+                      "Fervidobacterium sp. R8": {},
+                      "Fervidobacterium sp. TC1": {},
+                      "Fervidobacterium sp. TC12": {},
+                      "Fervidobacterium sp. TC25": {},
+                      "Fervidobacterium sp. TC3": {},
+                      "Fervidobacterium sp. TC4": {},
+                      "Fervidobacterium sp. OH-65": {},
+                      "Fervidobacterium sp. SC_NGM5_G05": {},
+                      "Fervidobacterium sp. SC_NGM5_O18": {},
+                      "Fervidobacterium sp. FA004": {},
+                      "Fervidobacterium sp. FC201": {},
+                      "Fervidobacterium sp. FC202": {},
+                      "Fervidobacterium sp. FC302": {},
+                      "Fervidobacterium sp. FC303": {},
+                      "Fervidobacterium sp. JS401": {},
+                      "Fervidobacterium sp. JS504": {},
+                      "Fervidobacterium sp. JS602": {},
+                      "Fervidobacterium sp. PD501": {},
+                      "Fervidobacterium sp. PD502": {},
+                      "Fervidobacterium sp. PD504": {},
+                      "Fervidobacterium sp. 2310opik-2": {},
+                      "Fervidobacterium sp.": {},
+                      "Fervidobacterium sp. UBA5816": {},
+                      "Fervidobacterium sp. UBA5837": {},
+                      "Fervidobacterium sp. UBA6216": {}
+                    },
+                    "Fervidobacterium ngatamarikiense": {}
+                  },
+                  "unclassified Fervidobacteriaceae": {
+                    "Fervidobacteriaceae bacterium": {}
+                  }
+                }
+              },
+              "environmental samples": {
+                "uncultured Thermotogae bacterium": {},
+                "Thermotogae bacterium enrichment culture clone 128MTBE": {},
+                "Thermotogae bacterium enrichment culture clone 250MTBE": {},
+                "Thermotogae bacterium enrichment culture clone H12_1_17": {},
+                "Thermotogae bacterium enrichment culture clone H12_1_22": {},
+                "Thermotogae bacterium enrichment culture clone H12_1_24": {},
+                "Thermotogae bacterium enrichment culture clone H12_1_27": {},
+                "Thermotogae bacterium enrichment culture clone H12_1_33": {},
+                "Thermotogae bacterium enrichment culture clone H12_2_47": {},
+                "Thermotogae bacterium enrichment culture clone H12_2_53": {},
+                "Thermotogae bacterium enrichment culture clone L11_1_23": {},
+                "Thermotogae bacterium enrichment culture clone L11_1_3": {},
+                "Thermotogae bacterium enrichment culture clone L11_1_40": {},
+                "Thermotogae bacterium enrichment culture clone L11_1_5": {},
+                "Thermotogae bacterium enrichment culture clone L11_1_9": {},
+                "Thermotogae bacterium enrichment culture clone L11_2_60": {},
+                "Thermotogae bacterium enrichment culture clone L11_2_65": {},
+                "Thermotogae bacterium enrichment culture clone L11_2_76": {},
+                "Thermotogae bacterium enrichment culture clone B6_23": {},
+                "Thermotogae bacterium enrichment culture clone B6_42": {},
+                "Thermotogae bacterium enrichment culture clone B6_46": {},
+                "Thermotogae bacterium enrichment culture clone B6_64": {},
+                "Thermotogae bacterium enrichment culture clone B6_89": {},
+                "Thermotogae bacterium enrichment culture clone B6_98": {},
+                "Thermotogae bacterium enrichment culture clone BSK_10": {},
+                "Thermotogae bacterium enrichment culture clone BSK_100": {},
+                "Thermotogae bacterium enrichment culture clone BSK_104": {},
+                "Thermotogae bacterium enrichment culture clone BSK_109": {},
+                "Thermotogae bacterium enrichment culture clone BSK_110": {},
+                "Thermotogae bacterium enrichment culture clone BSK_115": {},
+                "Thermotogae bacterium enrichment culture clone BSK_117": {},
+                "Thermotogae bacterium enrichment culture clone BSK_12": {},
+                "Thermotogae bacterium enrichment culture clone BSK_124": {},
+                "Thermotogae bacterium enrichment culture clone BSK_126": {},
+                "Thermotogae bacterium enrichment culture clone BSK_128": {},
+                "Thermotogae bacterium enrichment culture clone BSK_129": {},
+                "Thermotogae bacterium enrichment culture clone BSK_13": {},
+                "Thermotogae bacterium enrichment culture clone BSK_131": {},
+                "Thermotogae bacterium enrichment culture clone BSK_133": {},
+                "Thermotogae bacterium enrichment culture clone BSK_135": {},
+                "Thermotogae bacterium enrichment culture clone BSK_16": {},
+                "Thermotogae bacterium enrichment culture clone BSK_18": {},
+                "Thermotogae bacterium enrichment culture clone BSK_21": {},
+                "Thermotogae bacterium enrichment culture clone BSK_24": {},
+                "Thermotogae bacterium enrichment culture clone BSK_25": {},
+                "Thermotogae bacterium enrichment culture clone BSK_26": {},
+                "Thermotogae bacterium enrichment culture clone BSK_29": {},
+                "Thermotogae bacterium enrichment culture clone BSK_3": {},
+                "Thermotogae bacterium enrichment culture clone BSK_32": {},
+                "Thermotogae bacterium enrichment culture clone BSK_34": {},
+                "Thermotogae bacterium enrichment culture clone BSK_39": {},
+                "Thermotogae bacterium enrichment culture clone BSK_4": {},
+                "Thermotogae bacterium enrichment culture clone BSK_45": {},
+                "Thermotogae bacterium enrichment culture clone BSK_50": {},
+                "Thermotogae bacterium enrichment culture clone BSK_53": {},
+                "Thermotogae bacterium enrichment culture clone BSK_54": {},
+                "Thermotogae bacterium enrichment culture clone BSK_57": {},
+                "Thermotogae bacterium enrichment culture clone BSK_59": {},
+                "Thermotogae bacterium enrichment culture clone BSK_6": {},
+                "Thermotogae bacterium enrichment culture clone BSK_61": {},
+                "Thermotogae bacterium enrichment culture clone BSK_62": {},
+                "Thermotogae bacterium enrichment culture clone BSK_64": {},
+                "Thermotogae bacterium enrichment culture clone BSK_66": {},
+                "Thermotogae bacterium enrichment culture clone BSK_68": {},
+                "Thermotogae bacterium enrichment culture clone BSK_71": {},
+                "Thermotogae bacterium enrichment culture clone BSK_73": {},
+                "Thermotogae bacterium enrichment culture clone BSK_75": {},
+                "Thermotogae bacterium enrichment culture clone BSK_76": {},
+                "Thermotogae bacterium enrichment culture clone BSK_80": {},
+                "Thermotogae bacterium enrichment culture clone BSK_82": {},
+                "Thermotogae bacterium enrichment culture clone BSK_84": {},
+                "Thermotogae bacterium enrichment culture clone BSK_85": {},
+                "Thermotogae bacterium enrichment culture clone BSK_9": {},
+                "Thermotogae bacterium enrichment culture clone BSK_90": {},
+                "Thermotogae bacterium enrichment culture clone BSK_91": {},
+                "Thermotogae bacterium enrichment culture": {}
+              },
+              "Kosmotogales": {
+                "Kosmotogaceae": {
+                  "Kosmotoga": {
+                    "Kosmotoga shengliensis": {},
+                    "Kosmotoga olearia": {
+                      "Kosmotoga olearia TBF 19.5.1": {}
+                    },
+                    "Kosmotoga arenicorallina": {
+                      "Kosmotoga arenicorallina S304": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Kosmotoga sp.": {},
+                      "Kosmotoga sp. enrichment culture": {}
+                    },
+                    "Kosmotoga pacifica": {},
+                    "unclassified Kosmotoga": {
+                      "Kosmotoga sp. DU53": {},
+                      "Kosmotoga sp.": {}
+                    }
+                  },
+                  "Mesotoga": {
+                    "Mesotoga prima": {
+                      "Mesotoga prima MesG1.Ag.4.2": {}
+                    },
+                    "unclassified Mesotoga": {
+                      "Mesotoga bacterium PhosAc3": {},
+                      "Mesotoga sp. Brook.08.YT.4.2.5.4.": {},
+                      "Mesotoga sp. H07pep5.2": {},
+                      "Mesotoga sp. TolDC": {},
+                      "Mesotoga sp. Brook.08.YT.4.2.5.2.": {},
+                      "Mesotoga sp. Brook.08.YT.4.2.5.1": {},
+                      "Mesotoga sp. Brook.08.105.5.1": {},
+                      "Mesotoga sp. H07.pep.5.3": {},
+                      "Mesotoga sp. BH458_6_3_2_1": {},
+                      "Mesotoga sp. HF07.pep.5.2.highcov": {},
+                      "Mesotoga sp. H07pep.5.4": {},
+                      "Mesotoga sp. SC_4PWL113PWK15": {},
+                      "Mesotoga sp. SC_3PWM13N19": {},
+                      "Mesotoga sp. SC_4PWA21": {},
+                      "Mesotoga sp. SC_NapDC": {},
+                      "Mesotoga sp. SC_NapDC2": {},
+                      "Mesotoga sp. B105.6.4": {},
+                      "Mesotoga sp. SC_NapDC3": {},
+                      "Mesotoga sp. UBA5557": {},
+                      "Mesotoga sp. UBA5825": {},
+                      "Mesotoga sp. UBA5847": {},
+                      "Mesotoga sp. UBA6090": {},
+                      "Mesotoga sp.": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Mesotoga sp.": {},
+                      "Mesotoga sp. enrichment culture": {}
+                    },
+                    "Mesotoga infera": {}
+                  },
+                  "unclassified Kosmotogaceae": {
+                    "Kosmotogaceae bacterium UBA1373": {},
+                    "Kosmotogaceae bacterium UBA6818": {},
+                    "Kosmotogaceae bacterium": {},
+                    "Kosmotogaceae bacterium E05-009": {},
+                    "Kosmotogaceae bacterium E05-047": {}
+                  },
+                  "environmental samples": {
+                    "uncultured Kosmotogaceae bacterium": {}
+                  }
+                },
+                "unclassified Kosmotogales": {
+                  "Kosmotogales bacterium": {}
+                }
+              },
+              "Petrotogales": {
+                "Petrotogaceae": {
+                  "Geotoga": {
+                    "Geotoga petraea": {},
+                    "Geotoga subterranea": {},
+                    "Geotoga aestuarianus": {},
+                    "environmental samples": {
+                      "uncultured Geotoga sp.": {}
+                    },
+                    "unclassified Geotoga": {
+                      "Geotoga sp. TC452": {},
+                      "Geotoga sp. MEFN": {},
+                      "Geotoga sp. MEFP": {},
+                      "Geotoga sp. MEFR": {},
+                      "Geotoga sp.": {}
+                    }
+                  },
+                  "Petrotoga": {
+                    "Petrotoga miotherma": {
+                      "Petrotoga miotherma DSM 10691": {}
+                    },
+                    "Petrotoga mobilis": {
+                      "Petrotoga mobilis SJ95": {}
+                    },
+                    "Petrotoga sibirica": {
+                      "Petrotoga sibirica DSM 13575": {}
+                    },
+                    "Petrotoga olearia": {
+                      "Petrotoga olearia DSM 13574": {}
+                    },
+                    "Petrotoga mexicana": {
+                      "Petrotoga mexicana DSM 14811": {}
+                    },
+                    "Petrotoga halophila": {
+                      "Petrotoga halophila DSM 16923": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Petrotoga sp.": {},
+                      "Petrotoga sp. enrichment culture clone SEQ61_Clone2EP1_ANA": {},
+                      "Petrotoga sp. enrichment culture clone SEQ61_Clone3BP1_ANA": {},
+                      "Petrotoga sp. enrichment culture clone SEQ62_Clone4ahex_ANA": {},
+                      "Petrotoga sp. enrichment culture clone SEQ63_Clone3fhex_ANA": {},
+                      "Petrotoga sp. enrichment culture clone SEQ64_Clone2DHEX_ANA": {},
+                      "Petrotoga sp. enrichment culture": {}
+                    },
+                    "Petrotoga japonica": {},
+                    "unclassified Petrotoga": {
+                      "Petrotoga sp. 64g3": {},
+                      "Petrotoga sp. Sch_Z2_3": {},
+                      "Petrotoga sp. Sch_Z3_22": {},
+                      "Petrotoga sp. HWH.PT.55.6.1": {},
+                      "Petrotoga sp. 9PW.55.5.1": {},
+                      "Petrotoga sp. 8T1HF07.NaAc.6.1": {},
+                      "Petrotoga sp. 9PWA.NaAc.5.4": {},
+                      "Petrotoga sp. 9T1HF07.CasAA.8.2": {},
+                      "Petrotoga sp. HWHPT.55.6.3": {},
+                      "Petrotoga sp. SL27": {},
+                      "Petrotoga sp. Shatin.DS.tank11.9.2.9.3": {},
+                      "Petrotoga sp. HKA.pet.4.5": {},
+                      "Petrotoga sp. HF07.4.1": {},
+                      "Petrotoga sp. 75010": {},
+                      "Petrotoga sp. 7509": {},
+                      "Petrotoga sp. LPV1": {},
+                      "Petrotoga sp. LPV3": {},
+                      "Petrotoga sp. OKU6": {},
+                      "Petrotoga sp. UBA3917": {},
+                      "Petrotoga sp. UBA5851": {},
+                      "Petrotoga sp.": {}
+                    }
+                  },
+                  "Marinitoga": {
+                    "Marinitoga camini": {},
+                    "Marinitoga piezophila": {
+                      "Marinitoga piezophila KA3": {}
+                    },
+                    "Marinitoga hydrogenitolerans": {
+                      "Marinitoga hydrogenitolerans DSM 16785": {}
+                    },
+                    "Marinitoga okinawensis": {},
+                    "Marinitoga litoralis": {},
+                    "Marinitoga arctica": {},
+                    "Marinitoga lauensis": {},
+                    "unclassified Marinitoga": {
+                      "Marinitoga sp. 1155": {},
+                      "Marinitoga sp. 1197": {},
+                      "Marinitoga sp. 1137": {},
+                      "Marinitoga sp. 1135": {},
+                      "Marinitoga sp. 1138": {},
+                      "Marinitoga sp. 1154": {},
+                      "Marinitoga sp. 38H-ov": {},
+                      "Marinitoga sp.": {},
+                      "Marinitoga sp. 4572_148": {}
+                    },
+                    "Marinitoga aeolica": {}
+                  },
+                  "Oceanotoga": {
+                    "Oceanotoga teriensis": {},
+                    "environmental samples": {
+                      "uncultured Oceanotoga sp.": {}
+                    },
+                    "unclassified Oceanotoga": {
+                      "Oceanotoga sp. JC186": {},
+                      "Oceanotoga sp.": {},
+                      "Oceanotoga sp. DSM 15011": {}
+                    }
+                  },
+                  "Defluviitoga": {
+                    "Defluviitoga tunisiensis": {},
+                    "environmental samples": {
+                      "uncultured Defluviitoga sp.": {}
+                    },
+                    "unclassified Defluviitoga": {
+                      "Defluviitoga sp.": {}
+                    }
+                  },
+                  "Tepiditoga": {
+                    "Tepiditoga spiralis": {},
+                    "unclassified Tepiditoga": {
+                      "Tepiditoga sp.": {}
+                    }
+                  },
+                  "unclassified Petrotogaceae": {
+                    "Petrotogaceae bacterium": {}
+                  }
+                },
+                "unclassified Petrotogales": {
+                  "Petrotogales bacterium": {}
+                }
+              },
+              "Mesoaciditogales": {
+                "Mesoaciditogaceae": {
+                  "Mesoaciditoga": {
+                    "Mesoaciditoga lauensis": {
+                      "Mesoaciditoga lauensis cd-1655R = DSM 25116": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Mesoaciditoga sp.": {}
+                    },
+                    "unclassified Mesoaciditoga": {
+                      "Mesoaciditoga sp.": {}
+                    }
+                  },
+                  "Athalassotoga": {
+                    "Athalassotoga saccharophila": {},
+                    "unclassified Athalassotoga": {
+                      "Athalassotoga sp.": {}
+                    }
+                  },
+                  "unclassified Mesoaciditogaceae": {
+                    "Mesoaciditogaceae bacterium": {}
+                  }
+                },
+                "unclassified Mesoaciditogales": {
+                  "Mesoaciditogales bacterium": {}
+                }
+              }
+            },
+            "unclassified Thermotogota": {
+              "Thermotogota bacterium JGI 0000106-O11": {},
+              "Thermotogota bacterium ADurb.Bin062": {},
+              "Thermotogota bacterium": {},
+              "Thermotogota bacterium JGI CrystG Apr3-1-J9": {}
+            }
+          },
+          "Synergistota": {
+            "environmental samples": {
+              "uncultured Synergistota bacterium": {},
+              "Synergistetes oral clone A2F_22": {},
+              "Synergistetes oral clone A3G_2": {},
+              "Synergistetes oral clone A2G_10": {},
+              "Synergistetes oral clone A3G_7": {},
+              "Synergistetes oral clone A6A_39": {},
+              "Synergistetes oral clone OTU3.1": {},
+              "Synergistetes bacterium enrichment culture clone VNC3B092": {},
+              "Synergistetes bacterium enrichment culture clone DhR^2/LM-F01": {},
+              "Synergistetes oral clone 05 5 E04": {},
+              "Synergistetes oral clone 03 5 D05": {},
+              "Synergistetes oral clone 20-67": {},
+              "Synergistetes oral clone 20-42": {},
+              "Synergistetes bacterium enrichment culture clone H12_1_1": {},
+              "Synergistetes bacterium enrichment culture clone H12_1_14": {},
+              "Synergistetes bacterium enrichment culture clone H12_1_21": {},
+              "Synergistetes bacterium enrichment culture clone H12_1_32": {},
+              "Synergistetes bacterium enrichment culture clone H12_1_4": {},
+              "Synergistetes bacterium enrichment culture clone H12_2_54": {},
+              "Synergistetes bacterium enrichment culture clone H12_2_56": {},
+              "Synergistetes bacterium enrichment culture clone H12_2_58": {},
+              "Synergistetes bacterium enrichment culture clone L11_1_25": {},
+              "Synergistetes bacterium enrichment culture clone L11_1_35": {},
+              "Synergistetes bacterium enrichment culture clone L11_1_36": {},
+              "Synergistetes bacterium enrichment culture clone L11_1_6": {},
+              "Synergistetes bacterium enrichment culture clone L11_2_51": {},
+              "Synergistetes bacterium enrichment culture clone L11_2_67": {},
+              "Synergistetes bacterium enrichment culture clone L55B-109": {},
+              "Synergistetes bacterium enrichment culture clone L55B-112": {},
+              "Synergistetes bacterium enrichment culture clone L55B-119": {},
+              "Synergistetes bacterium enrichment culture clone L55B-126": {},
+              "Synergistetes bacterium enrichment culture clone L55B-2": {},
+              "Synergistetes bacterium enrichment culture clone L55B-54": {},
+              "Synergistetes bacterium enrichment culture clone L55B-82": {},
+              "Synergistetes bacterium enrichment culture clone L55B-86": {},
+              "Synergistetes bacterium enrichment culture": {}
+            },
+            "unclassified Synergistota": {
+              "Flexistipes sp. E3_33": {},
+              "Synergistetes bacterium GK-MMP1": {},
+              "Synergistetes bacterium LBVCM1157": {},
+              "Synergistetes bacterium oral taxon 358": {},
+              "Synergistetes bacterium oral taxon 359": {},
+              "Synergistetes bacterium oral taxon 360": {},
+              "Synergistetes bacterium oral taxon 361": {},
+              "Synergistetes bacterium oral taxon 362": {},
+              "Synergistetes bacterium oral taxon 363": {},
+              "Synergistetes bacterium oral taxon 452": {},
+              "Synergistetes bacterium oral taxon 453": {},
+              "Synergistetes bacterium oral taxon B52": {},
+              "Synergistetes bacterium oral taxon D48": {},
+              "Synergistetes bacterium oral taxon D62": {},
+              "Synergistetes bacterium oral taxon D64": {},
+              "Synergistetes bacterium oral taxon D65": {},
+              "Synergistetes bacterium oral taxon E08": {},
+              "Synergistetes bacterium oral taxon F67": {},
+              "Synergistetes bacterium oral taxon G36": {},
+              "Synergistetes bacterium MFA1": {},
+              "Synergistetes bacterium JGI 0000079-D21": {},
+              "Synergistetes bacterium JGI 0000059-A07": {},
+              "Synergistetes bacterium EF1": {},
+              "Synergistetes bacterium MFA2": {},
+              "Synergistetes bacterium RK1": {},
+              "Synergistetes bacterium WGK1": {},
+              "Synergistetes bacterium ADurb.Bin155": {},
+              "Synergistetes bacterium ADurb.Bin520": {},
+              "Synergistetes bacterium ADurb.BinA166": {},
+              "Synergistetes bacterium HGW-Synergistetes-1": {},
+              "Synergistetes bacterium HGW-Synergistetes-2": {},
+              "Synergistota bacterium": {}
+            },
+            "Synergistia": {
+              "Synergistales": {
+                "Synergistaceae": {
+                  "Synergistes": {
+                    "Synergistes jonesii": {},
+                    "environmental samples": {
+                      "uncultured bacterium tbr1-2": {},
+                      "uncultured bacterium tbr4-7": {},
+                      "uncultured bacterium mle1-42": {},
+                      "uncultured bacterium mle1-5": {},
+                      "uncultured Synergistes sp.": {},
+                      "Synergistes sp. enrichment culture clone B4153": {},
+                      "Synergistes sp. enrichment culture clone RB1a": {},
+                      "Synergistes sp. enrichment culture clone B4-58": {}
+                    },
+                    "Synergistes genomosp. C1": {},
+                    "unclassified Synergistes": {
+                      "Synergistes sp. RMA 14605": {},
+                      "Synergistes sp. RMA 16088": {},
+                      "Synergistes sp. RMA 15677": {},
+                      "Synergistes sp. RMA 16406": {},
+                      "Synergistes sp. RMA 16290": {},
+                      "Synergistes sp. RMA 14551": {},
+                      "Synergistes sp. RMA 10849": {},
+                      "Synergistes sp. NML05A017": {},
+                      "Synergistes sp. NML060450": {},
+                      "Synergistes sp. NML96A088": {},
+                      "Synergistes sp. 3_1_syn1": {},
+                      "Synergistes sp. 22-5-S_12_D6_FAA": {},
+                      "Synergistes sp. CNM 1720-08": {},
+                      "Synergistes sp. CNM 470-10": {},
+                      "Synergistes sp. Zagget9": {},
+                      "Synergistes sp.": {}
+                    }
+                  },
+                  "Aminomonas": {
+                    "Aminomonas paucivorans": {
+                      "Aminomonas paucivorans DSM 12260": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Aminomonas sp.": {}
+                    }
+                  },
+                  "Thermanaerovibrio": {
+                    "Thermanaerovibrio acidaminovorans": {
+                      "Thermanaerovibrio acidaminovorans DSM 6589": {}
+                    },
+                    "Thermanaerovibrio velox": {
+                      "Thermanaerovibrio velox DSM 12556": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Thermanaerovibrio sp.": {}
+                    },
+                    "unclassified Thermanaerovibrio": {
+                      "Thermanaerovibrio sp. Gela": {},
+                      "Thermanaerovibrio sp. R101": {}
+                    }
+                  },
+                  "Candidatus Tammella": {
+                    "Candidatus Tammella caduceiae": {},
+                    "unclassified Candidatus Tammella": {
+                      "environmental samples": {
+                        "uncultured Candidatus Tammella sp.": {}
+                      }
+                    }
+                  },
+                  "Cloacibacillus": {
+                    "Cloacibacillus evryensis": {
+                      "Cloacibacillus evryensis DSM 19522": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Cloacibacillus sp.": {}
+                    },
+                    "Cloacibacillus porcorum": {},
+                    "unclassified Cloacibacillus": {
+                      "Cloacibacillus sp. An23": {},
+                      "Cloacibacillus sp.": {},
+                      "Cloacibacillus sp. DZ-S5": {}
+                    }
+                  },
+                  "environmental samples": {
+                    "uncultured Synergistaceae bacterium": {},
+                    "Synergistaceae bacterium enrichment culture clone B31171": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_119": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_136": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_148": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_3": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_35": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_44": {},
+                    "Synergistaceae bacterium enrichment culture clone B6_95": {},
+                    "Synergistaceae bacterium enrichment culture clone HB1_14": {},
+                    "Synergistaceae bacterium enrichment culture clone HB1_16": {},
+                    "Synergistaceae bacterium enrichment culture clone HB1_22": {},
+                    "Synergistaceae bacterium enrichment culture clone HB1_6": {},
+                    "Synergistaceae bacterium enrichment culture clone HB_1": {},
+                    "Synergistaceae bacterium enrichment culture clone HB_100": {},
+                    "Synergistaceae bacterium enrichment culture clone HB_74": {},
+                    "Synergistaceae bacterium enrichment culture clone HB_82": {},
+                    "Synergistaceae bacterium enrichment culture clone L35B_49": {},
+                    "Synergistaceae bacterium enrichment culture clone LB1_1": {},
+                    "Synergistaceae bacterium enrichment culture clone LB1_2": {},
+                    "Synergistaceae bacterium enrichment culture clone LB1_21": {},
+                    "Synergistaceae bacterium enrichment culture clone LB2_10": {},
+                    "Synergistaceae bacterium enrichment culture": {},
+                    "Synergistaceae bacterium DZ-S5": {}
+                  },
+                  "unclassified Synergistaceae": {
+                    "Synergistaceae bacterium JGI 0000059-A07": {},
+                    "Synergistaceae bacterium G13": {},
+                    "Synergistaceae bacterium G9": {},
+                    "Synergistaceae bacterium UBA1037": {},
+                    "Synergistaceae bacterium UBA1358": {},
+                    "Synergistaceae bacterium UBA1704": {},
+                    "Synergistaceae bacterium UBA1876": {},
+                    "Synergistaceae bacterium UBA2204": {},
+                    "Synergistaceae bacterium UBA2244": {},
+                    "Synergistaceae bacterium UBA2252": {},
+                    "Synergistaceae bacterium UBA4066": {},
+                    "Synergistaceae bacterium UBA4088": {},
+                    "Synergistaceae bacterium UBA4794": {},
+                    "Synergistaceae bacterium UBA4921": {},
+                    "Synergistaceae bacterium UBA5240": {},
+                    "Synergistaceae bacterium UBA5258": {},
+                    "Synergistaceae bacterium UBA5276": {},
+                    "Synergistaceae bacterium UBA5302": {},
+                    "Synergistaceae bacterium UBA5331": {},
+                    "Synergistaceae bacterium UBA5549": {},
+                    "Synergistaceae bacterium UBA5551": {},
+                    "Synergistaceae bacterium UBA5555": {},
+                    "Synergistaceae bacterium UBA5560": {},
+                    "Synergistaceae bacterium UBA5731": {},
+                    "Synergistaceae bacterium UBA5768": {},
+                    "Synergistaceae bacterium UBA5827": {},
+                    "Synergistaceae bacterium UBA5850": {},
+                    "Synergistaceae bacterium UBA6083": {},
+                    "Synergistaceae bacterium UBA6101": {},
+                    "Synergistaceae bacterium UBA6237": {},
+                    "Synergistaceae bacterium UBA6804": {},
+                    "Synergistaceae bacterium": {},
+                    "Synergistaceae bacterium OttesenSCG-928-I11": {},
+                    "Synergistaceae bacterium OttesenSCG-928-D05": {}
+                  },
+                  "Pacaella": {
+                    "Pacaella massiliensis": {}
+                  },
+                  "Synergistaceae incertae sedis": {
+                    "Candidatus Caccocola": {
+                      "Candidatus Caccocola faecigallinarum": {},
+                      "Candidatus Caccocola faecipullorum": {}
+                    }
+                  },
+                  "Candidatus Equadaptatus": {
+                    "Candidatus Equadaptatus faecalis": {}
+                  },
+                  "Caenicola": {
+                    "Caenicola nitritireducens": {}
+                  }
+                },
+                "environmental samples": {
+                  "uncultured Synergistales bacterium": {},
+                  "Synergistales bacterium enrichment culture clone BSK_107": {},
+                  "Synergistales bacterium enrichment culture clone BSK_31": {},
+                  "Synergistales bacterium enrichment culture clone BSK_77": {}
+                },
+                "unclassified Synergistales": {
+                  "Synergistales bacterium canine oral taxon 094": {},
+                  "Synergistales bacterium canine oral taxon 138": {},
+                  "Synergistales bacterium canine oral taxon 178": {},
+                  "Synergistales bacterium canine oral taxon 179": {},
+                  "Synergistales bacterium canine oral taxon 180": {},
+                  "Synergistales bacterium canine oral taxon 203": {},
+                  "Synergistales bacterium canine oral taxon 204": {},
+                  "Synergistales bacterium canine oral taxon 205": {},
+                  "Synergistales bacterium canine oral taxon 231": {},
+                  "Synergistales bacterium canine oral taxon 242": {},
+                  "Synergistales bacterium canine oral taxon 243": {},
+                  "Synergistales bacterium canine oral taxon 244": {},
+                  "Synergistales bacterium canine oral taxon 390": {},
+                  "Synergistales bacterium 54_24": {},
+                  "Synergistales bacterium 53_16": {},
+                  "Synergistales bacterium 58_81": {},
+                  "Synergistales bacterium 57_84": {},
+                  "Synergistales bacterium 54_9": {},
+                  "Synergistales bacterium Syner_01": {},
+                  "Synergistales bacterium Syner_02": {},
+                  "Synergistales bacterium Syner_03": {},
+                  "Synergistales bacterium": {}
+                },
+                "Aminithiophilaceae": {
+                  "Aminithiophilus": {
+                    "environmental samples": {},
+                    "Aminithiophilus ramosus": {}
+                  },
+                  "unclassified Aminithiophilaceae": {
+                    "Aminithiophilaceae bacterium": {}
+                  }
+                },
+                "Acetomicrobiaceae": {
+                  "Acetomicrobium": {
+                    "Acetomicrobium flavidum": {},
+                    "Acetomicrobium mobile": {
+                      "Acetomicrobium mobile DSM 13181": {}
+                    },
+                    "Acetomicrobium hydrogeniformans": {
+                      "Acetomicrobium hydrogeniformans ATCC BAA-1850": {}
+                    },
+                    "Acetomicrobium thermoterrenum": {
+                      "Acetomicrobium thermoterrenum DSM 13490": {}
+                    },
+                    "environmental samples": {
+                      "Acetomicrobium sp. enrichment culture clone SEQ14_Clone7EP1_ANA": {},
+                      "Acetomicrobium sp. enrichment culture clone SEQ3_Clone1CP1_ANA": {},
+                      "uncultured Acetomicrobium sp.": {},
+                      "Acetomicrobium sp. enrichment culture": {}
+                    },
+                    "unclassified Acetomicrobium": {
+                      "Acetomicrobium sp. TERI 001": {},
+                      "Acetomicrobium sp. TERIGK01": {},
+                      "Acetomicrobium sp. TERIGK02": {},
+                      "Acetomicrobium sp. TERIGK03": {},
+                      "Acetomicrobium sp. TERIGK13": {},
+                      "Acetomicrobium sp. TERIGK53": {},
+                      "Acetomicrobium sp.": {},
+                      "Acetomicrobium sp. UBA3949": {},
+                      "Acetomicrobium sp. UBA5826": {},
+                      "Acetomicrobium sp. S15 = DSM 107314": {},
+                      "Acetomicrobium sp. CY-2": {}
+                    }
+                  }
+                },
+                "Aminobacteriaceae": {
+                  "Aminobacterium": {
+                    "Aminobacterium mobile": {
+                      "Aminobacterium mobile DSM 12262": {}
+                    },
+                    "Aminobacterium colombiense": {
+                      "Aminobacterium colombiense DSM 12261": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Aminobacterium sp.": {},
+                      "Aminobacterium sp. enrichment culture": {}
+                    },
+                    "Aminobacterium thunnarium": {},
+                    "unclassified Aminobacterium": {
+                      "Aminobacterium sp. S12-27-1-3-5": {},
+                      "Aminobacterium sp.": {},
+                      "Aminobacterium sp. EBM-42": {},
+                      "Aminobacterium sp. UBA1031": {},
+                      "Aminobacterium sp. UBA4834": {},
+                      "Aminobacterium sp. UBA4902": {},
+                      "Aminobacterium sp. UBA4908": {},
+                      "Aminobacterium sp. UBA4919": {},
+                      "Aminobacterium sp. UBA4934": {},
+                      "Aminobacterium sp. UBA4987": {},
+                      "Aminobacterium sp. UBA5257": {},
+                      "Aminobacterium sp. UBA5277": {},
+                      "Aminobacterium sp. UBA5367": {},
+                      "Aminobacterium sp. UBA5393": {},
+                      "Aminobacterium sp. UBA5410": {},
+                      "Aminobacterium sp. UBA5437": {},
+                      "Aminobacterium sp. UBA5475": {},
+                      "Aminobacterium sp. UBA5495": {},
+                      "Aminobacterium sp. UBA5514": {},
+                      "Aminobacterium sp. UBA5845": {},
+                      "Aminobacterium sp. MB27-C1": {}
+                    }
+                  },
+                  "Aminivibrio": {
+                    "Aminivibrio pyruvatiphilus": {},
+                    "environmental samples": {
+                      "uncultured Aminivibrio sp.": {}
+                    },
+                    "unclassified Aminivibrio": {
+                      "Aminivibrio sp.": {}
+                    }
+                  },
+                  "Fretibacterium": {
+                    "Fretibacterium fastidiosum": {},
+                    "Fretibacterium feline oral taxon 222": {},
+                    "environmental samples": {
+                      "uncultured Fretibacterium sp.": {}
+                    },
+                    "unclassified Fretibacterium": {
+                      "Fretibacterium sp. feline oral taxon 215": {},
+                      "Fretibacterium sp. feline oral taxon 218": {},
+                      "Fretibacterium sp. feline oral taxon 223": {},
+                      "Fretibacterium sp. OH1220_COT-178": {},
+                      "Fretibacterium sp.": {}
+                    }
+                  },
+                  "Lactivibrio": {
+                    "Lactivibrio alcoholicus": {},
+                    "environmental samples": {
+                      "uncultured Lactivibrio sp.": {}
+                    }
+                  },
+                  "unclassified Aminobacteriaceae": {
+                    "Aminobacteriaceae bacterium": {}
+                  }
+                },
+                "Dethiosulfovibrionaceae": {
+                  "Dethiosulfovibrio": {
+                    "Dethiosulfovibrio peptidovorans": {
+                      "Dethiosulfovibrio peptidovorans DSM 11002": {}
+                    },
+                    "environmental samples": {
+                      "uncultured bacterium o18g5": {},
+                      "uncultured Dethiosulfovibrio sp.": {}
+                    },
+                    "Dethiosulfovibrio marinus": {},
+                    "Dethiosulfovibrio russensis": {},
+                    "Dethiosulfovibrio acidaminovorans": {},
+                    "Dethiosulfovibrio salsuginis": {},
+                    "unclassified Dethiosulfovibrio": {
+                      "Dethiosulfovibrio sp. F2": {},
+                      "Dethiosulfovibrio sp.": {}
+                    },
+                    "Dethiosulfovibrio faecalis": {}
+                  },
+                  "Jonquetella": {
+                    "Jonquetella anthropi": {
+                      "Jonquetella anthropi E3_33 E1": {},
+                      "Jonquetella anthropi DSM 22815": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Jonquetella sp.": {}
+                    },
+                    "unclassified Jonquetella": {
+                      "Jonquetella sp. BV3C21": {},
+                      "Jonquetella sp. BV3C4": {}
+                    }
+                  },
+                  "Pyramidobacter": {
+                    "Pyramidobacter piscolens": {
+                      "Pyramidobacter piscolens W5455": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Pyramidobacter sp.": {}
+                    },
+                    "Pyramidobacter porci": {},
+                    "unclassified Pyramidobacter": {
+                      "Pyramidobacter sp. RSAA-1": {},
+                      "Pyramidobacter sp. RSAA-3": {},
+                      "Pyramidobacter sp. RSAA-4": {},
+                      "Pyramidobacter sp. C12-8": {},
+                      "Pyramidobacter sp.": {},
+                      "Pyramidobacter sp. CG50-2": {},
+                      "Pyramidobacter sp. YE332": {}
+                    }
+                  },
+                  "Rarimicrobium": {
+                    "Rarimicrobium hominis": {}
+                  }
+                },
+                "Thermovirgaceae": {
+                  "Thermovirga": {
+                    "Thermovirga lienii": {
+                      "Thermovirga lienii DSM 17291": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Thermovirga sp.": {},
+                      "Thermovirga sp. enrichment culture clone B4-40": {}
+                    },
+                    "unclassified Thermovirga": {
+                      "Thermovirga sp.": {}
+                    }
+                  },
+                  "unclassified Thermovirgaceae": {
+                    "Thermovirgaceae bacterium": {},
+                    "Thermovirgaceae bacterium E05-007": {},
+                    "Thermovirgaceae bacterium E05-019": {}
+                  }
+                },
+                "Aminiphilaceae": {
+                  "Aminiphilus": {
+                    "Aminiphilus circumscriptus": {
+                      "Aminiphilus circumscriptus DSM 16581": {}
+                    },
+                    "environmental samples": {
+                      "uncultured Aminiphilus sp.": {}
+                    },
+                    "unclassified Aminiphilus": {
+                      "Aminiphilus sp.": {}
+                    }
+                  },
+                  "unclassified Aminiphilaceae": {
+                    "Aminiphilaceae bacterium": {}
+                  },
+                  "Aminirod": {
+                    "Aminirod propionatiphilus": {}
+                  }
+                }
+              },
+              "environmental samples": {
+                "uncultured Synergistia bacterium": {}
+              }
+            },
+            "Synergistota incertae sedis": {
+              "Thermosynergistaceae": {
+                "Thermosynergistes": {
+                  "Thermosynergistes pyruvativorans": {},
+                  "unclassified Thermosynergistes": {
+                    "Thermosynergistes sp.": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
