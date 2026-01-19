@@ -1,209 +1,145 @@
-# 🌿 InfiniteSpecies
 
-Welcome to **InfiniteSpecies**! 🧬 An interactive circle-packing visualization for exploring biological taxonomy data, powered by React and D3.js. Navigate from high-level domains down to individual species with smooth zooming, search capabilities, and integrated web resources. 🎯
+---
 
-## 📋 Table of Contents
+# 🧬 InfiniteSpecies
 
-- [🌐 Live App](#-live-app)
-- [✨ Key Features](#-key-features)
-- [🚀 Quick Start](#-quick-start)
-- [🎮 Controls](#-controls)
-- [🖥️ UI Overview](#️-ui-overview)
-- [📊 Data Loading](#-data-loading)
-- [🔧 Technical Architecture](#-technical-architecture)
-- [🔗 Deep Linking & Sharing](#-deep-linking--sharing)
-- [🛠️ Troubleshooting](#️-troubleshooting)
-- [🎯 Use Cases](#-use-cases)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+**InfiniteSpecies** is a high-performance, interactive visualization of the biological Tree of Life. It utilizes a hybrid **React + HTML5 Canvas** engine to render millions of organisms in a zoomable "circle-packing" layout, allowing users to navigate seamlessly from high-level domains down to individual species.
 
-## 🌐 Live App
-- **🌐 Live Site**: Visit [https://infinitespecies.com/](https://infinitespecies.com/) 🚀
-- **💻 Local Development**: Run `npm run dev` and visit `http://localhost:3000`
+![Timeline 1 - FPS (1) - CROP - Videobolt net](https://github.com/user-attachments/assets/b832fd34-a71e-4fb2-bf48-864efe5e9bf2)
 
+ 
 ## ✨ Key Features
 
-- 🌍 **Landing Page**: Beautiful animated landing with quick access to exploration and help
-- 🔍 **Interactive Tree Navigation**: Click nodes to filter view to specific subtrees without camera movement
-- 🔎 **Smart Search**: Real-time search with multi-result dropdown and navigation
-- 🖼️ **Image Previews**: Wikipedia thumbnails for hovered organisms
-- 🧭 **Informative Tooltips**: Shows name, formatted leaf count (e.g., "1,000,000 leaves"), and level
-- 🌐 **External Integration**: Quick access to Google, Wikipedia, GBIF, NCBI, CoL, and iNaturalist
-- 🔗 **Deep Linking**: Share exact views via URL hash - every navigation state is preserved
-- 📱 **Mobile Support**: Full touch support with pan, pinch zoom, tap, and long press gestures
+* 
+**🔭 Deep Zoom Exploration:** Navigate through millions of nodes with smooth, hardware-accelerated zooming and panning.
 
-### 🚀 Quick Start
 
-**Prerequisites:** 📋
-- Node.js 18+ and npm
+* 
+**⚡ Hybrid Rendering Engine:** Uses D3.js for layout math and HTML5 Canvas for rendering to achieve 60FPS performance on large datasets.
 
-**Installation:** 🖥️
+
+* 
+**🔎 Smart Search:** Fuzzy search functionality to find organisms by scientific name, with visual "pulse" guidance to the result.
+
+
+* 
+**📖 Integrated Knowledge:** Hover over nodes to see Wikipedia thumbnails and summaries, or deep-link to external databases (GBIF, NCBI, iNaturalist).
+
+
+* **🔗 Deep Linking:** Every view state is URL-shareable. Send a link to a specific species, and the app restores the exact zoom level and position.
+
+
+* 
+**📱 Mobile Ready:** Fully responsive with touch gestures for pinch-zoom and panning.
+
+
+
+## 🎮 Controls
+
+| Action | Desktop | Mobile/Touch |
+| --- | --- | --- |
+| **Zoom In** | Scroll Up / Left Click (on group) | Pinch Out |
+| **Zoom Out** | Scroll Down / Right Click | Pinch In / Long Press |
+| **Pan View** | Middle Click Drag / Drag | Drag |
+| **Fit Node** | `F` Key | Double Tap |
+| **Search** | `S` Key | Button in UI |
+| **Reset** | `R` Key | Menu > Reset |
+
+See the full control list in the app by pressing `?` or `F1`.
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+
+* Node.js 18+
+* npm
+
+### Local Development
+
+1. **Clone the repository**
 ```bash
-# Clone the repository
-git clone https://github.com/Tomer2006/infinitespecies.git
+git clone https://github.com/yourusername/infinitespecies.git
 cd infinitespecies
 
-# Install dependencies
+```
+
+
+2. **Install dependencies**
+```bash
 npm install
 
-# Start development server
+```
+
+
+3. **Start the development server**
+```bash
 npm run dev
 
-# Then visit: http://localhost:5173/ 🌐
 ```
 
-**Build for Production:** 📦
+
+Open `http://localhost:3000` to view it in the browser.
+
+
+
+### Production Build
+
 ```bash
-# Create optimized build
 npm run build
-
-# Preview production build
 npm run preview
+
 ```
 
-### 🎮 Controls
+## 🏗️ Architecture
 
-- **🖱️ Left Click**: Update tree view to show only clicked subtree (no camera movement) 🌳
-- **🖱️ Right Click / 📱 Long Press**: Navigate to parent node ⬆️
-- **🖱️ Mouse Wheel / 📱 Pinch**: Smooth zoom 🔄
-- **🖱️ Middle Drag / 📱 Drag**: Pan the view 📍
-- **📱 Double Tap**: Fit current node in view
-- **⌨️ S**: Web search for hovered/current organism
-- **⌨️ R**: Reset to root view
-- **⌨️ F**: Fit current node in view
-- **⌨️ ?** or **F1**: Toggle help overlay
-- **⌨️ Escape**: Close modals
+This project uses a specialized architecture to handle the visualization of millions of nodes:
 
-### 🖥️ UI Overview
-
-- **🌍 Landing Page**: Animated entry point with "Start Exploration", Help, and About options
-- **📋 Top bar** (after starting):
-  - `🏠 Menu`: Return to landing page
-  - `🔗 Provider select + 🌐 Web Search`: open selected provider for hovered/current node
-  - `🔍 Search field`: find by name (supports partial matches)
-  - `📋 Copy Link`: copy a deep link to the current view (URL hash)
-  - `🔄 Reset`: back to root
-- **🍞 Breadcrumbs**: click any crumb to navigate up (also updates the URL hash for deep linking)
-- **💬 Tooltip**: shows organism name, formatted leaf count (e.g., "1,000,000 leaves"), and level
-
-### 📊 Data Loading
-
-The application loads pre-baked taxonomy data from `public/data/manifest.json` with split files for optimal performance. The default dataset uses the **OpenTree of Life** taxonomy, but the application also supports NCBI taxonomy and custom JSON data formats.
-
-#### 🚀 Large Dataset Handling
-
-This application supports **large taxonomy datasets** 📊 through intelligent data splitting and progressive loading. The current demo uses **5 split files** 📦 totaling ~456MB of pre-baked layout data with **4.5 million nodes** from the OpenTree of Life taxonomy. 🧬
-
-**Current Split Configuration:** ⚙️
-- 📄 **5 files** (~90MB each)
-- ⚡ **Parallel loading** with progress tracking
-- 🔗 **Seamless merging** - appears as single dataset to user
-
-**Technical Details:** 🔧
-- 📊 **Pre-baked layouts**: D3 circle-packing calculated offline for instant rendering
-- 💾 **Efficient memory usage**: Optimized data structures and cleanup
-- ☁️ **Web-ready**: Suitable for static hosting platforms (Netlify, Vercel)
-
-### 🔧 Technical Architecture
-
-**Tech Stack:** 🛠️
-- ⚛️ **React 18**: Modern component-based UI architecture
-- 📘 **TypeScript**: Type-safe development experience
-- ⚡ **Vite**: Lightning-fast development and optimized builds
-- 🎬 **Framer Motion**: Smooth animations and transitions
-- 📊 **D3.js**: Hierarchical circle packing visualization
-
-**Project Structure:** 📁
-```
-src/
-├── components/          # React UI components
-│   ├── AboutModal.tsx   # About information modal
-│   ├── Breadcrumbs.tsx  # Navigation breadcrumbs
-│   ├── HelpModal.tsx    # Help/keyboard shortcuts modal
-│   ├── LandingPage.tsx  # Animated landing page
-│   ├── LoadingOverlay.tsx # Progress loading overlay
-│   ├── MobileBlocker.tsx  # Mobile device warning
-│   ├── Stage.tsx        # Main canvas container
-│   ├── Toast.tsx        # Toast notifications
-│   └── Topbar.tsx       # Top navigation bar
-├── hooks/
-│   └── useToast.ts      # Toast notification hook
-├── modules/             # Core visualization engine (JS)
-│   ├── camera.js        # Pan/zoom camera system
-│   ├── canvas.js        # Canvas management
-│   ├── data.js          # Data loading orchestration
-│   ├── deeplink.js      # URL hash navigation
-│   ├── navigation.js    # Node navigation
-│   ├── render.js        # Circle packing renderer
-│   ├── search.js        # Search functionality
-│   └── ...              # Additional modules
-├── styles/
-│   └── index.css        # Global styles
-├── App.tsx              # Main application component
-└── main.tsx             # React entry point
-```
-
-**Core Visualization Engine:** ⚙️
-- 📊 **D3.js Pack Layout**: Hierarchical circle packing with size proportional to descendant count
-- 🏷️ **Smart Label Rendering**: Dynamic label placement with collision avoidance and size-based priority
-- 🎥 **Smooth Camera System**: Hardware-accelerated pan/zoom with easing and momentum
-- 🎯 **Efficient Hit Testing**: Fast mouse interaction with spatial indexing
-
-**Performance Optimizations:** ⚡
-- 🌳 **Subtree Pruning**: Hierarchical traversal skips entire subtrees when nodes are too small on screen
-- 👁️ **Viewport Culling**: Whole circles culled when off-screen
-- 📏 **Level-of-Detail**: Three-tier LOD system (detail/medium/simple/skip) based on screen size
-- 🎨 **Canvas-Based Rendering**: Direct 2D canvas with optimized state management
-- 🔒 **DPR Clamp**: Caps devicePixelRatio for stability on HiDPI screens
-- ⏱️ **Work Caps**: Hard caps on max nodes per frame (9000) and max labels per frame (180)
-- 💬 **Zero-Redraw UI**: Tooltip and big preview are DOM-only and don't trigger canvas re-renders
-- 🧠 **Memory Management**: Progressive cleanup and text cache optimization
-
-**Key Design Principles:** 🏗️
-- 🧩 **Hybrid Architecture**: React UI components + optimized JS visualization modules
-- 🎯 **Separation of Concerns**: Clear boundaries between data, rendering, and interaction
-- ⚡ **Performance First**: Optimized for large datasets with LOD and memory management
-- 🌑 **Dark UI Theme**: Consistent dark mode interface for better user experience
-- 📱 **Progressive Enhancement**: Works on all devices with graceful degradation
-
-### 🔗 Deep Linking & Sharing
-
-The application automatically tracks your navigation state in the URL for seamless sharing: 🌐
-
-- 🔗 **URL Format**: `#/Life/Eukaryota/Animalia/Chordata/Mammalia/...`
-- 📤 **Share anywhere**: Use "Copy Link" button to get a shareable URL
-- 🔖 **Bookmark-friendly**: Every view is a unique, restorable URL
-- ✅ **Path validation**: Automatically handles invalid or outdated paths
-
-**Examples:** 📋
-- `#/` - Root view (Life) 🌍
-- `#/Life/cellular%20organisms/Eukaryota` - Navigate to Eukaryotes 🦠
-- `#/Life/cellular%20organisms/Eukaryota/Opisthokonta/Metazoa` - Jump to Animals 🐘
+* 
+**Data Pipeline (`/tools`)**: Raw taxonomy dumps (from OpenTree or NCBI) are processed, "baked" into a D3 packing layout offline, and split into sharded JSON chunks.
 
 
-### 🎯 Use Cases
+* 
+**Core Engine (`/src/modules`)**: A vanilla JS engine handles the render loop, spatial indexing (`picking.js`), and camera physics (`camera.js`) to avoid React render cycle overhead.
 
-**Research & Education:** 🔬
-- 🌳 **Taxonomy Exploration**: Navigate the OpenTree of Life's complete taxonomy (4.5+ million nodes)
-- 📚 **Educational Tool**: Visual learning aid for biological classification
-- 🔬 **Research Reference**: Quick access to external databases (GBIF, NCBI, Wikipedia, iNaturalist, etc.)
-- 🔄 **Multiple Data Sources**: Supports OpenTree of Life, NCBI taxonomy, and custom JSON data
+
+* 
+**UI Layer (`/src/components`)**: React handles the HUD, modals, search state, and URL routing, overlaying the canvas.
 
 
 
-InfiniteSpecies follows modern web development practices: 💻
+## 🧬 Data Sources
 
-- ⚛️ **React 18**: Component-based UI with hooks
-- 📘 **TypeScript**: Type-safe components and interfaces
-- ⚡ **Vite**: Fast HMR and optimized builds
-- 📊 **D3.js**: Circle packing visualization
-- 🎬 **Framer Motion**: Smooth animations
-- ♿ **Accessibility**: Keyboard navigation and semantic HTML
-- 🎨 **Dark Theme**: Consistent dark UI design throughout
+The visualization is compatible with:
 
-**Development Commands:** 🖥️
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run preview  # Preview production build
-```
+* 
+**Open Tree of Life:** The default dataset.
+
+
+* 
+**NCBI Taxonomy:** Tools provided to convert NCBI dumps.
+
+
+* 
+**Custom JSON:** You can load your own hierarchy via the "Load JSON" feature in the app.
+
+
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+ See `package.json` for more information.
+
+---
+
+<div align="center">
+<p>Built with ❤️ using React, D3, and Biology</p>
+</div>
