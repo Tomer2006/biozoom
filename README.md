@@ -10,26 +10,26 @@
  
 ## ✨ Key Features
 
-* 
+
 **🔭 Deep Zoom Exploration:** Navigate through millions of nodes with smooth, hardware-accelerated zooming and panning.
 
 
-* 
+
 **⚡ Hybrid Rendering Engine:** Uses D3.js for layout math and HTML5 Canvas for rendering to achieve 60FPS performance on large datasets.
 
 
-* 
+ 
 **🔎 Smart Search:** Fuzzy search functionality to find organisms by scientific name, with visual "pulse" guidance to the result.
 
 
-* 
+ 
 **📖 Integrated Knowledge:** Hover over nodes to see Wikipedia thumbnails and summaries, or deep-link to external databases (GBIF, NCBI, iNaturalist).
 
 
 * **🔗 Deep Linking:** Every view state is URL-shareable. Send a link to a specific species, and the app restores the exact zoom level and position.
 
 
-* 
+ 
 **📱 Mobile Ready:** Fully responsive with touch gestures for pinch-zoom and panning.
 
 
@@ -94,15 +94,15 @@ npm run preview
 
 This project uses a specialized architecture to handle the visualization of millions of nodes:
 
-* 
+ 
 **Data Pipeline (`/tools`)**: Raw taxonomy dumps (from OpenTree or NCBI) are processed, "baked" into a D3 packing layout offline, and split into sharded JSON chunks.
 
 
-* 
+  
 **Core Engine (`/src/modules`)**: A vanilla JS engine handles the render loop, spatial indexing (`picking.js`), and camera physics (`camera.js`) to avoid React render cycle overhead.
 
 
-* 
+
 **UI Layer (`/src/components`)**: React handles the HUD, modals, search state, and URL routing, overlaying the canvas.
 
 
@@ -111,28 +111,19 @@ This project uses a specialized architecture to handle the visualization of mill
 
 The visualization is compatible with:
 
-* 
+ 
 **Open Tree of Life:** The default dataset.
 
 
-* 
+ 
 **NCBI Taxonomy:** Tools provided to convert NCBI dumps.
 
 
-* 
+ 
 **Custom JSON:** You can load your own hierarchy via the "Load JSON" feature in the app.
 
 
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📄 License
 
