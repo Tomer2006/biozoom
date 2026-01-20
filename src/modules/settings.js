@@ -180,21 +180,7 @@ export const perf = {
     
     // Color palette presets
     presets: {
-      // Preset 1: Original Tableau 10 colors
-      tableau10: [
-        'rgb(31, 118, 180)', // Blue
-        'rgb(255, 126, 14)', // Orange
-        'rgb(214, 39, 39)', // Red
-        'rgb(44, 160, 44)', // Green
-        'rgb(23, 189, 207)', // Teal
-        'rgb(189, 189, 34)', // Yellow
-        'rgb(147, 103, 189)', // Purple
-        'rgb(227, 119, 195)', // Pink
-        'rgb(140, 86, 75)', // Brown
-        'rgb(127, 127, 127)'  // Gray
-        ],
-      
-      // Preset 2: 38 colors from light blue to dark blue
+      // Preset 1: 38 colors from light blue to dark blue (DEFAULT)
       blueGradient: [
         'rgb(184, 211, 238)', // 1 - Start color
         'rgb(178, 204, 232)', // 2
@@ -235,7 +221,21 @@ export const perf = {
         'rgb(0, 0, 46)',      // 37
         'rgb(0, 0, 45)'       // 38 - Darkest blue (near black)
       ],
-      
+
+      // Preset 2: Original Tableau 10 colors
+      tableau10: [
+        'rgb(31, 118, 180)', // Blue
+        'rgb(255, 126, 14)', // Orange
+        'rgb(214, 39, 39)', // Red
+        'rgb(44, 160, 44)', // Green
+        'rgb(23, 189, 207)', // Teal
+        'rgb(189, 189, 34)', // Yellow
+        'rgb(147, 103, 189)', // Purple
+        'rgb(227, 119, 195)', // Pink
+        'rgb(140, 86, 75)', // Brown
+        'rgb(127, 127, 127)'  // Gray
+        ],
+
       // Preset 3: 37 colors alternating dark-light, getting darker each flip
       blueZigzag: [
         'rgb(50, 80, 140)',   // 1 - Dark
@@ -291,6 +291,10 @@ export const perf = {
     
     // Font presets (Google Fonts + System Fonts)
     presets: {
+      helvetica: {
+        name: 'Helvetica',
+        import: null  // System font, no import needed
+      },
       inter: {
         name: 'Inter',
         import: 'Inter:wght@300;400;500;600;700;800'
@@ -322,10 +326,6 @@ export const perf = {
       lato: {
         name: 'Lato',
         import: 'Lato:wght@300;400;700'
-      },
-      helvetica: {
-        name: 'Helvetica',
-        import: null  // System font, no import needed
       }
     },
     
