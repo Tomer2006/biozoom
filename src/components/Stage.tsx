@@ -569,11 +569,10 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         <div className="legend">
           <div className="legend-title">Controls</div>
           <ul>
-            <li><kbd>Left Click</kbd> Zoom into a group (desktop only)</li>
-            <li><kbd>Right Click</kbd> / <kbd>Long Press</kbd> Zoom out to parent</li>
-            <li><kbd>Wheel</kbd> / <kbd>Pinch</kbd> Smooth zoom</li>
-            <li><kbd>Middle Drag</kbd> / <kbd>Drag</kbd> Pan the view</li>
-            <li><kbd>Double Tap</kbd> Fit hovered/current</li>
+            <li><kbd>Left Click</kbd> Zoom into a group</li>
+            <li><kbd>Right Click</kbd> Zoom out to parent</li>
+            <li><kbd>Wheel</kbd> Smooth zoom</li>
+            <li><kbd>Middle Drag</kbd> Pan the view</li>
             <li><kbd>Enter</kbd> Search; pick a result</li>
             <li><kbd>F</kbd> Fit hovered/current</li>
             <li><kbd>R</kbd> Reset to root</li>
