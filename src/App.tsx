@@ -7,7 +7,6 @@ import Stage from './components/Stage'
 import LoadingOverlay from './components/LoadingOverlay'
 import HelpModal from './components/HelpModal'
 import AboutModal from './components/AboutModal'
-import JsonModal from './components/JsonModal'
 import SettingsModal from './components/SettingsModal'
 import ToastContainer from './components/Toast'
 import { useToast } from './hooks/useToast'
@@ -68,7 +67,6 @@ export default function App() {
 
   const [helpOpen, setHelpOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
-  const [jsonOpen, setJsonOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   const toast = useToast()
@@ -110,17 +108,13 @@ export default function App() {
 
       // Handle Escape key - close modals or clear search
       if (e.key === 'Escape' || e.code === 'Escape') {
-        // Don't prevent default if typing in a textarea (like JsonModal)
         // Allow Escape to work normally in text inputs
         if (isTyping && target.tagName === 'TEXTAREA') {
           return // Let textarea handle Escape normally
         }
         
         // Close modals in order of priority
-        if (jsonOpen) {
-          e.preventDefault()
-          setJsonOpen(false)
-        } else if (helpOpen) {
+        if (helpOpen) {
           e.preventDefault()
           setHelpOpen(false)
         } else if (aboutOpen) {
@@ -152,7 +146,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [helpOpen, aboutOpen, jsonOpen])
+  }, [helpOpen, aboutOpen])
 
   const updateBreadcrumbs = useCallback((node: any) => {
     if (!node) {
@@ -303,9 +297,9 @@ export default function App() {
         }
       }
 
-      // All failed, show JSON modal
+      // All failed
       hideLoading()
-      setJsonOpen(true)
+      console.error('Failed to load data from all candidates')
     } catch (err) {
       hideLoading()
       console.error('Error starting exploration:', err)
@@ -363,25 +357,6 @@ export default function App() {
     }
   }
 
-  const handleJsonLoad = async (text: string) => {
-    try {
-      showLoading('Parsing custom JSON…')
-      await loadFromJSONText(text)
-      hideLoading()
-      setJsonOpen(false)
-      
-      state.layoutChanged = true
-      fitNodeInView(state.DATA_ROOT)
-      tick()
-      
-      if (state.DATA_ROOT) {
-        updateBreadcrumbs(state.DATA_ROOT)
-      }
-    } catch (err) {
-      hideLoading()
-      throw err
-    }
-  }
 
   // Mobile blocker disabled
   // if (isMobile) {
@@ -440,15 +415,6 @@ export default function App() {
 
       <AnimatePresence>
         {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {jsonOpen && (
-          <JsonModal
-            onClose={() => setJsonOpen(false)}
-            onLoad={handleJsonLoad}
-          />
-        )}
       </AnimatePresence>
 
       <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />

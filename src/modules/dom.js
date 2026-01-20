@@ -50,15 +50,7 @@ export const progressPct = { get current() { return document.getElementById('pro
 export const stageInfo = { get current() { return document.getElementById('stageInfo'); } };
 export const loadingTimer = { get current() { return document.getElementById('loadingTimer'); } };
 
-export const jsonModal = { get current() { return document.getElementById('jsonModal'); } };
-export const loadBtn = { get current() { return document.getElementById('loadBtn'); } };
 export const backToMenuBtn = { get current() { return document.getElementById('backToMenuBtn'); } };
-export const cancelLoadBtn = { get current() { return document.getElementById('cancelLoadBtn'); } };
-export const applyLoadBtn = { get current() { return document.getElementById('applyLoadBtn'); } };
-export const insertSampleBtn = { get current() { return document.getElementById('insertSampleBtn'); } };
-export const fileInput = { get current() { return document.getElementById('fileInput'); } };
-export const jsonText = { get current() { return document.getElementById('jsonText'); } };
-export const loadError = { get current() { return document.getElementById('loadError'); } };
 
 export const searchInputEl = { get current() { return document.getElementById('searchInput'); } };
 export const searchResultsEl = { get current() { return document.getElementById('searchResults'); } };

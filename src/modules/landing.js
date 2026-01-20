@@ -109,16 +109,11 @@ async function initData() {
 
   console.error('💥 [LANDING] ALL CANDIDATES FAILED');
 
-  // If all else fails, prompt user to load their own JSON
+  // If all else fails
   hideLoading();
-  const modal = document.getElementById('jsonModal');
-  if (modal) {
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-  }
   const label = document.getElementById('progressLabel');
   if (label) {
-    label.textContent = 'No data found. Use Load JSON to import your taxonomy.';
+    label.textContent = 'No data found.';
   }
 }
 

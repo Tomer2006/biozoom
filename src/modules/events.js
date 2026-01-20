@@ -38,8 +38,7 @@ import { logInfo, logDebug, logTrace } from './logger.js';
 import { openProviderSearch } from './providers.js';
 import { fitNodeInView, goToNode, updateCurrentNodeOnly } from './navigation.js';
 import { handleSearch } from './search.js';
-import { showLoading, hideLoading, isCurrentlyLoading } from './loading.js';
-import { loadFromJSONText } from './data.js';
+import { isCurrentlyLoading } from './loading.js';
 import { getNodePath } from './deeplink.js';
 import { hideBigPreview } from './preview.js';
 import { perf } from './settings.js';
@@ -323,22 +322,6 @@ export function initEvents() {
     // No canvas re-render needed - highlight is now CSS-based
   });
 
-  // JSON modal and loader
-  function openModal() {
-    const modal = document.getElementById('jsonModal');
-    if (!modal) return;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-  }
-  function closeModal() {
-    const modal = document.getElementById('jsonModal');
-    if (!modal) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    if (loadError) loadError.textContent = '';
-  }
-
-  loadBtn?.addEventListener('click', () => openModal());
   backToMenuBtn?.addEventListener('click', async () => {
     // Hide topbar and show landing page
     const topbar = document.querySelector('.topbar');
@@ -379,78 +362,6 @@ export function initEvents() {
     if (state.DATA_ROOT) {
       // Use animate=false for instant reset so it's ready when they come back
       await goToNode(state.DATA_ROOT, false);
-    }
-  });
-  cancelLoadBtn?.addEventListener('click', () => closeModal());
-  insertSampleBtn?.addEventListener('click', () => {
-    jsonText.value = JSON.stringify(
-      {
-        name: 'Life',
-        children: [
-          {
-            name: 'Eukarya',
-            children: [
-              {
-                name: 'Animalia',
-                children: [
-                  {
-                    name: 'Chordata',
-                    children: [
-                      {
-                        name: 'Mammalia',
-                        children: [
-                          {
-                            name: 'Primates',
-                            children: [
-                              { name: 'Hominidae', children: [{ name: 'Homo', children: [{ name: 'Homo sapiens' }] }] }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      null,
-      2
-    );
-  });
-  fileInput?.addEventListener('change', () => {
-    if (loadError) loadError.textContent = '';
-    const f = fileInput.files && fileInput.files[0];
-    if (!f) return;
-    const reader = new FileReader();
-    reader.onerror = () => {
-      if (loadError) loadError.textContent = 'Failed to read file.';
-    };
-    reader.onload = e => {
-      jsonText.value = e.target.result;
-    };
-    reader.readAsText(f);
-  });
-  applyLoadBtn?.addEventListener('click', async () => {
-    try {
-      if (loadError) loadError.textContent = '';
-      const text = jsonText.value.trim();
-      if (!text) {
-        if (loadError) loadError.textContent = 'Please paste JSON or choose a file.';
-        return;
-      }
-      closeModal();
-      showLoading('Parsing custom JSON…');
-      await loadFromJSONText(text);
-      hideLoading();
-      state.layoutChanged = true;
-      fitNodeInView(state.DATA_ROOT);
-      requestRender();
-    } catch (err) {
-      hideLoading();
-      openModal();
-      if (loadError) loadError.textContent = err.message || String(err);
     }
   });
 

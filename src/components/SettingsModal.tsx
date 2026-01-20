@@ -169,7 +169,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 
                 {/* Color Preview */}
                 <div className="settings-color-preview">
-                  {perf.colors.presets[currentColorPreset as keyof typeof perf.colors.presets]?.slice(0, 10).map((color: string, i: number) => (
+                  {(perf.colors.presets[currentColorPreset as keyof typeof perf.colors.presets] || []).slice(0, 10).map((color: string, i: number) => (
                     <div
                       key={i}
                       className="settings-color-swatch"

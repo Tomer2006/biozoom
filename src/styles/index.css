@@ -1023,6 +1023,31 @@ body {
   gap: var(--space-sm);
 }
 
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.modal-close svg {
+  width: 20px;
+  height: 20px;
+}
+
 .modal-body {
   flex: 1;
   padding: var(--space-lg);
@@ -1090,22 +1115,6 @@ body {
   color: var(--text-secondary);
 }
 
-/* JSON Modal Specific */
-.json-modal .modal {
-  width: min(900px, 95vw);
-}
-
-.json-modal .modal-body {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: var(--space-md);
-}
-
-@media (max-width: 700px) {
-  .json-modal .modal-body {
-    grid-template-columns: 1fr;
-  }
-}
 
 .json-textarea {
   width: 100%;
