@@ -112,8 +112,14 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     const name = node.name || 'Unknown'
     let meta = ''
     
-    if (node._leaves) {
-      meta = `${node._leaves.toLocaleString()} leaves`
+    // Only show species count for leaf nodes (actual species)
+    // Leaf nodes have no children, so _leaves === 1 for a single species
+    const isLeafNode = !node.children || node.children.length === 0
+    if (isLeafNode && node._leaves === 1) {
+      meta = '1 species'
+    } else if (node._leaves && node._leaves > 1) {
+      // For groups, show the count (may include subspecies, but represents species-level diversity)
+      meta = `${node._leaves.toLocaleString()} species`
     }
     if (node.level !== undefined) {
       meta += meta ? ` • Level ${node.level}` : `Level ${node.level}`
