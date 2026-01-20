@@ -17,7 +17,6 @@ export default function LoadingOverlay({
     <div className="loading-overlay">
       <div className="loading-card">
         <div className="loading-brand">
-          <div className="loading-logo">🧬</div>
           <div className="loading-brand-text">
             <div className="loading-brand-title">InfiniteSpecies</div>
             <div className="loading-brand-sub">Tree of Life Explorer</div>

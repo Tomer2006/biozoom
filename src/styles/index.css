@@ -920,7 +920,7 @@ body {
 .loading-brand-title {
   font-size: 1.25rem;
   font-weight: 800;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #5b8def 0%, #4a7dd8 50%, #3a6dc3 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
