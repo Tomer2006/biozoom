@@ -33,7 +33,7 @@ export default function AboutModal({ onClose }: AboutModalProps) {
 
         <div className="modal-body">
           <div className="modal-section">
-            <h4>🧬 InfiniteSpecies</h4>
+            <h4>InfiniteSpecies</h4>
             <p>
               InfiniteSpecies is an interactive web application for exploring the Tree of Life.
               It provides a zoomable, interactive visualization of taxonomic relationships
