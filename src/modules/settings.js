@@ -287,10 +287,14 @@ export const perf = {
   // Font configuration
   fonts: {
     // Change this to switch between presets: 'inter', 'roboto', 'sourceSans', 'poppins', 'nunito', 'workSans', 'dmSans', 'lato', 'helvetica'
-    currentPreset: 'helvetica',
+    currentPreset: 'roboto',
     
     // Font presets (Google Fonts + System Fonts)
     presets: {
+      roboto: {
+        name: 'Roboto',
+        import: 'Roboto:wght@300;400;500;700'
+      },
       helvetica: {
         name: 'Helvetica',
         import: null  // System font, no import needed
@@ -298,10 +302,6 @@ export const perf = {
       inter: {
         name: 'Inter',
         import: 'Inter:wght@300;400;500;600;700;800'
-      },
-      roboto: {
-        name: 'Roboto',
-        import: 'Roboto:wght@300;400;500;700'
       },
       sourceSans: {
         name: 'Source Sans 3',
