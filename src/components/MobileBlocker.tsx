@@ -72,7 +72,7 @@ export default function MobileBlocker() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          🌍 Explore 2.3 million species on a larger screen
+          Explore 2.3 million species on a larger screen
         </motion.div>
       </div>
 

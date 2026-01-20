@@ -42,7 +42,6 @@ export default function LandingPage({ onStart, onHelp, onAbout, onSettings }: La
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="landing-start-icon">🌍</span>
           <span className="landing-start-text">Start Exploration</span>
           <span className="landing-start-hint">Usually takes 10 seconds to load</span>
         </motion.button>
