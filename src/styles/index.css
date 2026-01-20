@@ -593,6 +593,29 @@ body {
   pointer-events: none;
 }
 
+/* Watermark - visible in screenshots/clips */
+.stage-watermark {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  z-index: 5;
+  letter-spacing: 0.02em;
+  transition: opacity var(--transition-base);
+}
+
+.stage-watermark:hover {
+  opacity: 0.6;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Tooltip
    ═══════════════════════════════════════════════════════════════════════════ */

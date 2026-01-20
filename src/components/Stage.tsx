@@ -586,6 +586,11 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
 
       {/* Pulse animation element */}
       <div className="pulse" id="pulse" />
+
+      {/* Watermark - visible in screenshots/clips */}
+      <div className="stage-watermark">
+        InfiniteSpecies.com
+      </div>
     </div>
   )
 }
