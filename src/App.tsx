@@ -381,6 +381,7 @@ export default function App() {
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
           onSettings={() => setSettingsOpen(true)}
+          onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
           onShowToast={toast.showToast}
         />

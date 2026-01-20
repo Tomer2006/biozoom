@@ -14,7 +14,6 @@ const controls = [
   { key: 'S', description: 'Web search current/hovered' },
   { key: 'R', description: 'Reset to root' },
   { key: 'F', description: 'Fit current node in view' },
-  { key: 'H', description: 'Hide/show controls panel' },
   { key: '?', description: 'Toggle this help panel' },
 ]
 

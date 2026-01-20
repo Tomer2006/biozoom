@@ -43,10 +43,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     name: '',
     meta: '',
   })
-  const [legendVisible, setLegendVisible] = useState(() => {
-    const saved = localStorage.getItem('legendVisible')
-    return saved !== null ? saved === 'true' : true
-  })
 
   // Big preview is managed by the preview module via DOM manipulation
   // We just need to provide the DOM elements
@@ -233,33 +229,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     return () => window.removeEventListener('mouseup', handleMouseUp)
   }, [])
 
-  // Keyboard shortcut to toggle legend visibility (desktop only)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger if user is typing in an input field
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return
-      }
-      
-      // Disable on mobile/touch devices
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-      if (isTouchDevice) {
-        return
-      }
-      
-      if (e.key.toLowerCase() === 'h') {
-        setLegendVisible(prev => !prev)
-      }
-    }
-    
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
-
-  // Save legend visibility to localStorage
-  useEffect(() => {
-    localStorage.setItem('legendVisible', String(legendVisible))
-  }, [legendVisible])
 
   // Use native wheel event listener to enable preventDefault (React's onWheel is passive)
   // Use vanilla JS function for performance-critical wheel handling
@@ -563,25 +532,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
           <div className="big-preview-path" id="bigPreviewPath"></div>
         </div>
       </div>
-
-      {/* Legend */}
-      {legendVisible && (
-        <div className="legend">
-          <div className="legend-title">Controls</div>
-          <ul>
-            <li><kbd>Left Click</kbd> Zoom into a group</li>
-            <li><kbd>Right Click</kbd> Zoom out to parent</li>
-            <li><kbd>Wheel</kbd> Smooth zoom</li>
-            <li><kbd>Middle Drag</kbd> Pan the view</li>
-            <li><kbd>Enter</kbd> Search; pick a result</li>
-            <li><kbd>F</kbd> Fit hovered/current</li>
-            <li><kbd>R</kbd> Reset to root</li>
-            <li><kbd>S</kbd> Web search</li>
-            <li><kbd>H</kbd> Hide/show controls</li>
-            <li><kbd>?</kbd> Toggle help</li>
-          </ul>
-        </div>
-      )}
 
       {/* Pulse animation element */}
       <div className="pulse" id="pulse" />
