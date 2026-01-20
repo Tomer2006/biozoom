@@ -68,13 +68,7 @@ function calculateRelevanceScoreFast(node, query, queryLower) {
     }
   }
 
-  // Prefer nodes with fewer children (more specific)
-  const childCount = node.children?.length || 0;
-  if (childCount === 0) {
-    score += 30; // Leaf nodes get bonus
-  } else if (childCount < 10) {
-    score += 20; // Nodes with few children get bonus
-  }
+  // No bonus based on child count - groups and leaf nodes are scored equally
 
   // Prefer nodes at moderate depth (not too shallow, not too deep)
   const level = node.level || 0;
