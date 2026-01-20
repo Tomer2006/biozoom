@@ -473,14 +473,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     onUpdateBreadcrumbs(n)
   }
 
-  const handleTooltipSearch = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    const target = state.hoverNode || state.current
-    if (target) {
-      openProviderSearch(target)
-    }
-  }
-
   return (
     <div className={`stage ${hidden ? 'hidden' : ''}`} ref={stageRef}>
       <canvas
@@ -506,11 +498,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         <div className="tooltip-content">
           <div className="tooltip-name">{tooltip.name}</div>
           {tooltip.meta && <div className="tooltip-meta">{tooltip.meta}</div>}
-        </div>
-        <div className="tooltip-actions">
-          <button className="tooltip-btn" onClick={handleTooltipSearch} title="Search">
-            🔎
-          </button>
         </div>
       </div>
 
