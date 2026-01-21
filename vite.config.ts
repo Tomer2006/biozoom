@@ -14,6 +14,14 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true
+    sourcemap: false,
+    minify: 'esbuild', // Use esbuild (Vite default) for fast minification
+    rollupOptions: {
+      output: {
+        banner: `/*! Copyright (c) 2026 InfiniteSpecies. All Rights Reserved. Proprietary Software. Unauthorized copying, modification, distribution, or use is strictly prohibited. */`,
+        // Compact output for better obfuscation
+        compact: true
+      }
+    }
   }
 })
