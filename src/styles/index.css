@@ -1,3 +1,14 @@
+/* InfiniteSpecies - stylesheet entrypoint */
+
+@import "./variables.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./ui.css";
+@import "./overlays.css";
+@import "./landing.css";
+@import "./animations.css";
+@import "./utilities.css";
+@import "./responsive.css";
 /* ═══════════════════════════════════════════════════════════════════════════
    InfiniteSpecies - Modern Design System
    A cosmic journey through the tree of life
