@@ -77,7 +77,6 @@ The visualization is compatible with:
 
 
  
-**Custom JSON:** You can load your own hierarchy via the "Load JSON" feature in the app.
 
 
 
