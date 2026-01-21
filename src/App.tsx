@@ -8,6 +8,7 @@ import LoadingOverlay from './components/LoadingOverlay'
 import HelpModal from './components/HelpModal'
 import AboutModal from './components/AboutModal'
 import SettingsModal from './components/SettingsModal'
+import ScreenshotPanel from './components/ScreenshotPanel'
 import ToastContainer from './components/Toast'
 import { useToast } from './hooks/useToast'
 
@@ -52,6 +53,7 @@ export default function App() {
   const [helpOpen, setHelpOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [screenshotOpen, setScreenshotOpen] = useState(false)
 
   const toast = useToast()
 
@@ -337,6 +339,10 @@ export default function App() {
     }
   }
 
+  const handleScreenshot = () => {
+    setScreenshotOpen(true)
+  }
+
 
   return (
     <div className="app">
@@ -355,6 +361,7 @@ export default function App() {
         <Topbar
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
+          onScreenshot={handleScreenshot}
           onSettings={() => setSettingsOpen(true)}
           onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
@@ -394,6 +401,12 @@ export default function App() {
       </AnimatePresence>
 
       <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+
+      <ScreenshotPanel
+        isOpen={screenshotOpen}
+        onClose={() => setScreenshotOpen(false)}
+        onShowToast={toast.showToast}
+      />
 
       <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />
     </div>

@@ -11,8 +11,8 @@ export const perf = {
   // Rendering and label/layout tunables
   rendering: {
     renderDistance: 1,          // tighter culling for better FPS
-    minPxRadius: 10,              // prune tiny nodes & their subtrees early
-    labelMinPxRadius: 22,         // minimum node radius (px) to consider it for labeling
+    minPxRadius: 7,              // prune tiny nodes & their subtrees early
+    labelMinPxRadius: 20,         // minimum node radius (px) to consider it for labeling
     
     // Depth-based render distance settings
     depthRenderEnabled: false,     // Enable depth-based render distance culling
@@ -65,7 +65,6 @@ export const perf = {
     labelStrokeWidthMax: 5,         // Maximum stroke width (applies to all fonts)
     labelLargeFontThreshold: 14    // Font size threshold (px) - no longer used for stroke width, kept for compatibility
   },
-
   // Canvas/device related caps
   canvas: {
     maxDevicePixelRatio: 1,

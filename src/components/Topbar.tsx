@@ -18,6 +18,7 @@ interface TaxonomyNode {
 interface TopbarProps {
   onBackToMenu: () => void
   onCopyLink: () => void
+  onScreenshot: () => void
   onSettings: () => void
   onHelp: () => void
   onUpdateBreadcrumbs: (node: TaxonomyNode) => void
@@ -78,6 +79,7 @@ function highlightMatchJSX(text: string, query: string): (string | JSX.Element)[
 export default function Topbar({
   onBackToMenu,
   onCopyLink,
+  onScreenshot,
   onSettings,
   onHelp,
   onUpdateBreadcrumbs,
@@ -215,6 +217,12 @@ export default function Topbar({
       </div>
 
       <div className="topbar-right">
+        <button className="btn btn-icon" onClick={onScreenshot} title="Download full PNG">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 7h-1l-2-2H8L6 7H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+            <circle cx="12" cy="13" r="3" />
+          </svg>
+        </button>
         <button className="btn btn-icon" onClick={onCopyLink} title="Copy deep link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="18" cy="5" r="3" />

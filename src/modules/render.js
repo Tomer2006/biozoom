@@ -7,7 +7,7 @@
  * millions of taxonomy nodes.
  */
 
-import { getContext, W, H, worldToScreen } from './canvas.js';
+import { getContext, W, H } from './canvas.js';
 import { state } from './state.js';
 import { getNodeColor } from './constants.js';
 import { perf } from './settings.js';
@@ -86,14 +86,34 @@ function getGridPattern(ctx) {
   return gridPattern;
 }
 
-export function draw() {
-  const ctx = getContext();
+export function draw(options = {}) {
+  return drawWithOptions(options);
+}
+
+export function drawWithOptions(options = {}) {
+  const {
+    ctx: ctxOverride,
+    width,
+    height,
+    camera,
+    renderingOverrides = {},
+    disableCulling = false,
+    renderAllLabels = false,
+    useTransformScaling = false  // Use canvas transform scaling for text (screenshot mode)
+  } = options;
+
+  const ctx = ctxOverride || getContext();
   if (!ctx || !state.layout) {
     return;
   }
 
+  const viewW = typeof width === 'number' ? width : W;
+  const viewH = typeof height === 'number' ? height : H;
+
   // Destructure performance settings once at the top
-  const { k: camK, x: camX, y: camY } = state.camera;
+  const { k: camK, x: camX, y: camY } = camera || state.camera;
+
+  const rendering = { ...perf.rendering, ...renderingOverrides };
 
   const {
     lodDetailThreshold,
@@ -133,7 +153,7 @@ export function draw() {
     depthRenderEnabled,
     depthRenderBase,
     depthRenderFalloff
-  } = perf.rendering;
+  } = rendering;
 
   // Calculate current node's level for depth-based rendering
   const currentLevel = state.current ? (state.current.level || 0) : 0;
@@ -142,7 +162,7 @@ export function draw() {
   performMemoryCleanup();
 
   // Clear once per frame
-  ctx.clearRect(0, 0, W, H);
+  ctx.clearRect(0, 0, viewW, viewH);
 
   // Batch rendering operations to minimize state changes
   let currentFillStyle = null;
@@ -183,11 +203,11 @@ export function draw() {
   if (showGrid) {
     ctx.save();
     const pat = getGridPattern(ctx);
-    const offX = Math.floor((W / 2 - camX * camK) % gridTileSize);
-    const offY = Math.floor((H / 2 - camY * camK) % gridTileSize);
+    const offX = Math.floor((viewW / 2 - camX * camK) % gridTileSize);
+    const offY = Math.floor((viewH / 2 - camY * camK) % gridTileSize);
     ctx.translate(offX, offY);
     ctx.fillStyle = pat;
-    ctx.fillRect(-offX, -offY, W + gridTileSize, H + gridTileSize);
+    ctx.fillRect(-offX, -offY, viewW + gridTileSize, viewH + gridTileSize);
     ctx.restore();
   }
 
@@ -198,8 +218,8 @@ export function draw() {
 
   // Pre-compute viewport bounds for efficient culling
   const padWorld = verticalPadPx / camK;
-  const halfW = W / (2 * camK);
-  const halfH = H / (2 * camK);
+  const halfW = viewW / (2 * camK);
+  const halfH = viewH / (2 * camK);
   const minX = camX - halfW - padWorld;
   const maxX = camX + halfW + padWorld;
   const minY = camY - halfH - padWorld;
@@ -230,7 +250,7 @@ export function draw() {
     if (drawn >= maxNodes) return;
     
     // Optimized viewport culling
-    if (!isInViewport(d._vx, d._vy, d._vr)) return;
+    if (!disableCulling && !isInViewport(d._vx, d._vy, d._vr)) return;
     const sr = d._vr * camK;
     // If this node is too small on screen, its children are even smaller (packed layout) → prune subtree
     if (sr < minPxRadius) return;
@@ -249,105 +269,112 @@ export function draw() {
       }
     }
 
-    const [sx, sy] = worldToScreen(d._vx, d._vy);
+    const [sx, sy] = [
+      viewW / 2 + (d._vx - camX) * camK,
+      viewH / 2 + (d._vy - camY) * camK
+    ];
 
-    // Level-of-detail rendering based on screen size
-    if (sr < lodSkipThreshold) {
-      // Skip rendering entirely for very small nodes
-      drawn++;
-      const ch = d.children || [];
-      for (let i = 0; i < ch.length; i++) {
-        if (drawn >= maxNodes) break;
-        visit(ch[i]);
-      }
-      return;
-    }
-
-    // Determine LOD level
-    let lodLevel = 'detail';
-    if (sr < lodDetailThreshold) {
-      if (sr < lodMediumThreshold) {
-        lodLevel = sr < lodSimpleThreshold ? 'simple' : 'medium';
-      } else {
-        lodLevel = 'medium';
-      }
-    }
-
-    // Render based on LOD level with optimized state management
+    // Render circle with full detail
     ctx.beginPath();
     ctx.arc(sx, sy, sr, 0, Math.PI * 2);
-
-    switch (lodLevel) {
-      case 'simple':
-        // Simple rendering: just filled circle, no stroke
-        setFillStyle(getNodeColor(d.data));
-        setGlobalAlpha(1);
-        ctx.fill();
-        break;
-
-      case 'medium':
-        // Medium detail: filled circle with simplified stroke
-        setFillStyle(getNodeColor(d.data));
-        setGlobalAlpha(1);
-        ctx.fill();
-        // Simplified stroke for medium nodes
-        setLineWidth(1);
-        setStrokeStyle(d.children && d.children.length ? strokeColorWithChildren : strokeColorLeaf);
-        ctx.stroke();
-        break;
-
-      case 'detail':
-      default:
-        // Full detail rendering (original logic)
-        setFillStyle(getNodeColor(d.data));
-        setGlobalAlpha(1);
-        ctx.fill();
-        const lineWidth = Math.max(strokeLineWidthMin, Math.min(strokeLineWidthMax, strokeLineWidthBase * Math.sqrt(Math.max(sr / gridTileSize, strokeLineWidthMinRatio))));
-        setLineWidth(lineWidth);
-        setStrokeStyle(d.children && d.children.length ? strokeColorWithChildrenDetail : strokeColorLeafDetail);
-        ctx.stroke();
-        break;
-    }
+    setFillStyle(getNodeColor(d.data));
+    setGlobalAlpha(1);
+    ctx.fill();
+    const lineWidth = Math.max(strokeLineWidthMin, Math.min(strokeLineWidthMax, strokeLineWidthBase * Math.sqrt(Math.max(sr / gridTileSize, strokeLineWidthMinRatio))));
+    setLineWidth(lineWidth);
+    setStrokeStyle(d.children && d.children.length ? strokeColorWithChildrenDetail : strokeColorLeafDetail);
+    ctx.stroke();
 
     drawn++;
     if (drawn >= maxNodes) return;
 
     if (sr > labelMinPxRadius) {
-      const fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
-      if (fontSize >= labelMinFontPx) {
-        const text = d.data.name;
-        const key = fontSize + '|' + text;
-        let metrics = measureCache.get(key);
-
-        // Track cache access for LRU behavior
-        if (metrics) {
-          // Move to end of access order (most recently used)
-          const index = cacheAccessOrder.indexOf(key);
-          if (index > -1) {
-            cacheAccessOrder.splice(index, 1);
-          }
-          cacheAccessOrder.push(key);
-        } else {
-          // Cache miss - measure and store
-          ctx.font = `${labelFontWeight} ${fontSize}px ${labelFontFamily}`;
-          metrics = { width: ctx.measureText(text).width };
-
-          // Cache management
-          if (measureCache.size >= MAX_CACHE_SIZE) {
-            // Remove least recently used items
-            while (measureCache.size >= CACHE_CLEANUP_THRESHOLD && cacheAccessOrder.length > 0) {
-              const lruKey = cacheAccessOrder.shift();
-              measureCache.delete(lruKey);
-            }
-          }
-
-          measureCache.set(key, metrics);
-          cacheAccessOrder.push(key);
-        }
-        const textWidth = metrics.width;
-        const textHeight = fontSize;
-        const pad = 2;
+      const text = d.data.name;
+      let fontSize, textWidth, textHeight, pad, textScale, baseFontSize;
+      let shouldRenderLabel = false;
+      
+      if (useTransformScaling) {
+        // Screenshot mode: Use fixed base font size and scale with canvas transform
+        baseFontSize = 14; // Fixed base font size in pixels
+        textScale = sr / (baseFontSize * labelFontSizeDivisor); // Scale 1:1 with circle size
+        fontSize = baseFontSize * textScale;
         
+        if (fontSize >= labelMinFontPx) {
+          shouldRenderLabel = true;
+          const key = baseFontSize + '|' + text;
+          let metrics = measureCache.get(key);
+
+          // Track cache access for LRU behavior
+          if (metrics) {
+            // Move to end of access order (most recently used)
+            const index = cacheAccessOrder.indexOf(key);
+            if (index > -1) {
+              cacheAccessOrder.splice(index, 1);
+            }
+            cacheAccessOrder.push(key);
+          } else {
+            // Cache miss - measure and store at base font size
+            ctx.font = `${labelFontWeight} ${baseFontSize}px ${labelFontFamily}`;
+            metrics = { width: ctx.measureText(text).width };
+
+            // Cache management
+            if (measureCache.size >= MAX_CACHE_SIZE) {
+              // Remove least recently used items
+              while (measureCache.size >= CACHE_CLEANUP_THRESHOLD && cacheAccessOrder.length > 0) {
+                const lruKey = cacheAccessOrder.shift();
+                measureCache.delete(lruKey);
+              }
+            }
+
+            measureCache.set(key, metrics);
+            cacheAccessOrder.push(key);
+          }
+          // Scale the measured width and height by the transform scale
+          textWidth = metrics.width * textScale;
+          textHeight = fontSize;
+          pad = 2 * textScale;
+        }
+      } else {
+        // Regular rendering: Use font size directly (round to integer for crisp rendering)
+        fontSize = Math.round(Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor)));
+        
+        if (fontSize >= labelMinFontPx) {
+          shouldRenderLabel = true;
+          const key = fontSize + '|' + text;
+          let metrics = measureCache.get(key);
+
+          // Track cache access for LRU behavior
+          if (metrics) {
+            // Move to end of access order (most recently used)
+            const index = cacheAccessOrder.indexOf(key);
+            if (index > -1) {
+              cacheAccessOrder.splice(index, 1);
+            }
+            cacheAccessOrder.push(key);
+          } else {
+            // Cache miss - measure and store
+            ctx.font = `${labelFontWeight} ${fontSize}px ${labelFontFamily}`;
+            metrics = { width: ctx.measureText(text).width };
+
+            // Cache management
+            if (measureCache.size >= MAX_CACHE_SIZE) {
+              // Remove least recently used items
+              while (measureCache.size >= CACHE_CLEANUP_THRESHOLD && cacheAccessOrder.length > 0) {
+                const lruKey = cacheAccessOrder.shift();
+                measureCache.delete(lruKey);
+              }
+            }
+
+            measureCache.set(key, metrics);
+            cacheAccessOrder.push(key);
+          }
+          textWidth = metrics.width;
+          textHeight = fontSize;
+          pad = 2;
+        }
+      }
+      
+      if (shouldRenderLabel) {
         // Calculate available space at top of circle
         // Find the highest child (closest to top edge)
         const ch = d.children || [];
@@ -381,7 +408,11 @@ export function draw() {
             x2: sx + textWidth / 2 + pad,
             y2: textY + textHeight / 2 + pad
           };
-          labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect });
+          if (useTransformScaling) {
+            labelCandidates.push({ sx, sy, sr, textY, textScale, baseFontSize, fontSize, text, rect });
+          } else {
+            labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect });
+          }
         }
       }
     }
@@ -408,10 +439,55 @@ export function draw() {
 
     // Dynamic label limit based on zoom level - fewer labels when zoomed out
     const zoomFactor = Math.max(0.1, Math.min(1, camK));
-    const dynamicMaxLabels = Math.floor(maxLabels * zoomFactor);
+    const dynamicMaxLabels = Number.isFinite(maxLabels)
+      ? Math.floor(maxLabels * zoomFactor)
+      : Infinity;
     const capped = labelCandidates.slice(0, Math.min(dynamicMaxLabels, labelCandidates.length));
 
     if (capped.length > 0) {
+      if (renderAllLabels) {
+        for (const cand of capped) {
+          ctx.save();
+          if (useTransformScaling && cand.textScale) {
+            // Screenshot mode: Use canvas transform for scaling
+            ctx.translate(cand.sx, cand.textY);
+            ctx.scale(cand.textScale, cand.textScale);
+            ctx.font = `${labelFontWeight} ${cand.baseFontSize}px ${labelFontFamily}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            const scaledFontSize = cand.baseFontSize * cand.textScale;
+            ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, scaledFontSize / labelFontSizeDivisor)) / cand.textScale;
+            ctx.strokeStyle = scaledFontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+            ctx.lineJoin = 'round';
+            ctx.miterLimit = 2;
+            ctx.strokeText(cand.text, 0, 0);
+            ctx.fillStyle = labelFillColor;
+            ctx.globalAlpha = labelAlpha;
+            ctx.fillText(cand.text, 0, 0);
+          } else {
+            // Regular rendering: Use font size directly
+            // Round coordinates to integer pixels for crisp rendering
+            const textX = Math.round(cand.sx);
+            const textY = Math.round(cand.textY);
+            // Ensure crisp text rendering
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+            ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+            ctx.lineJoin = 'round';
+            ctx.miterLimit = 2;
+            ctx.strokeText(cand.text, textX, textY);
+            ctx.fillStyle = labelFillColor;
+            ctx.globalAlpha = labelAlpha;
+            ctx.fillText(cand.text, textX, textY);
+          }
+          ctx.restore();
+        }
+        return;
+      }
       const placed = [];
       const grid = new Map();
       const cell = labelGridCellPx;
@@ -456,20 +532,42 @@ export function draw() {
 
         // Render label at top of circle
         ctx.save();
-        ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // Use same stroke width calculation for all font sizes
-        ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-        ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-        ctx.lineJoin = 'round';
-        ctx.miterLimit = 2;
-        ctx.strokeText(cand.text, cand.sx, cand.textY);
-
-        ctx.fillStyle = labelFillColor;
-        ctx.globalAlpha = labelAlpha;
-        ctx.fillText(cand.text, cand.sx, cand.textY);
+        if (useTransformScaling && cand.textScale) {
+          // Screenshot mode: Use canvas transform for scaling
+          ctx.translate(cand.sx, cand.textY);
+          ctx.scale(cand.textScale, cand.textScale);
+          ctx.font = `${labelFontWeight} ${cand.baseFontSize}px ${labelFontFamily}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const scaledFontSize = cand.baseFontSize * cand.textScale;
+          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, scaledFontSize / labelFontSizeDivisor)) / cand.textScale;
+          ctx.strokeStyle = scaledFontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+          ctx.lineJoin = 'round';
+          ctx.miterLimit = 2;
+          ctx.strokeText(cand.text, 0, 0);
+          ctx.fillStyle = labelFillColor;
+          ctx.globalAlpha = labelAlpha;
+          ctx.fillText(cand.text, 0, 0);
+        } else {
+          // Regular rendering: Use font size directly
+          // Round coordinates to integer pixels for crisp rendering
+          const textX = Math.round(cand.sx);
+          const textY = Math.round(cand.textY);
+          // Ensure crisp text rendering
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+          ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+          ctx.lineJoin = 'round';
+          ctx.miterLimit = 2;
+          ctx.strokeText(cand.text, textX, textY);
+          ctx.fillStyle = labelFillColor;
+          ctx.globalAlpha = labelAlpha;
+          ctx.fillText(cand.text, textX, textY);
+        }
         ctx.restore();
 
         // Update spatial index
