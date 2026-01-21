@@ -127,7 +127,11 @@ The visualization is compatible with:
 
 ## 📄 License
 
- See `package.json` for more information.
+Proprietary "All Rights Reserved"
+
+Copyright (c) 2026 InfiniteSpecies
+
+This software is proprietary and confidential. Unauthorized copying, modification, distribution, or use is strictly prohibited. See [LICENSE](LICENSE) for full terms.
 
 ---
 
