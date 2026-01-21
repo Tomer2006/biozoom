@@ -47,49 +47,6 @@
 
 See the full control list in the app by pressing `?` or `F1`.
 
-## 🛠️ Installation & Setup
-
-### Prerequisites
-
-* Node.js 18+
-* npm
-
-### Local Development
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/infinitespecies.git
-cd infinitespecies
-
-```
-
-
-2. **Install dependencies**
-```bash
-npm install
-
-```
-
-
-3. **Start the development server**
-```bash
-npm run dev
-
-```
-
-
-Open `http://localhost:3000` to view it in the browser.
-
-
-
-### Production Build
-
-```bash
-npm run build
-npm run preview
-
-```
-
 ## 🏗️ Architecture
 
 This project uses a specialized architecture to handle the visualization of millions of nodes:
