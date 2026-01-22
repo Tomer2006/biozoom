@@ -12,7 +12,7 @@ export const perf = {
   rendering: {
     renderDistance: 1,          // tighter culling for better FPS
     minPxRadius: 7,              // prune tiny nodes & their subtrees early
-    labelMinPxRadius: 20,         // minimum node radius (px) to consider it for labeling
+    labelMinPxRadius: 18,         // minimum node radius (px) to consider it for labeling
     
     // Depth-based render distance settings
     depthRenderEnabled: false,     // Enable depth-based render distance culling

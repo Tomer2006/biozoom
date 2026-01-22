@@ -88,8 +88,8 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
                   type="number"
                   className="settings-input"
                   value={pixelsPerWorldUnit}
-                  onChange={(e) => setPixelsPerWorldUnit(Math.max(100, Math.min(5000, parseInt(e.target.value) || 1000)))}
-                  min={100}
+                  onChange={(e) => setPixelsPerWorldUnit(Math.max(1, Math.min(5000, parseInt(e.target.value) || 1000)))}
+                  min={1}
                   max={5000}
                   step={100}
                   disabled={isCapturing}

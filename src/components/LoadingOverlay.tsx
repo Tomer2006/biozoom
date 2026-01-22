@@ -42,7 +42,7 @@ export default function LoadingOverlay({
         <div className="loading-timer">{timer}</div>
 
         <div className="loading-hint">
-          Tip: Press <kbd>?</kbd> for help, <kbd>F</kbd> to fit, <kbd>S</kbd> for web search
+          Tip: Press <kbd>?</kbd> for help
         </div>
       </div>
     </div>
