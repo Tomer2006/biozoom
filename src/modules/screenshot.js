@@ -55,6 +55,145 @@ async function ensureFontsReady() {
 }
 
 /**
+ * Create a screenshot split into multiple chunks and zip them
+ */
+async function createSplitScreenshot(fullWidth, fullHeight, maxDimension, worldBounds, scale, onProgress) {
+  // Calculate number of chunks needed
+  const chunksX = Math.ceil(fullWidth / maxDimension);
+  const chunksY = Math.ceil(fullHeight / maxDimension);
+  const totalChunks = chunksX * chunksY;
+  let completedChunks = 0;
+
+  const zip = new JSZip();
+  const timestamp = Date.now();
+
+  // Render each chunk
+  for (let cy = 0; cy < chunksY; cy++) {
+    for (let cx = 0; cx < chunksX; cx++) {
+      const chunkX = cx * maxDimension;
+      const chunkY = cy * maxDimension;
+      const chunkWidth = Math.min(maxDimension, fullWidth - chunkX);
+      const chunkHeight = Math.min(maxDimension, fullHeight - chunkY);
+
+      // Create canvas for this chunk
+      const chunkCanvas = document.createElement('canvas');
+      chunkCanvas.width = chunkWidth;
+      chunkCanvas.height = chunkHeight;
+      const chunkCtx = chunkCanvas.getContext('2d', { alpha: false });
+      if (!chunkCtx) {
+        throw new Error('Unable to create chunk canvas context');
+      }
+
+      // Fill with white background
+      chunkCtx.fillStyle = '#ffffff';
+      chunkCtx.fillRect(0, 0, chunkWidth, chunkHeight);
+
+      // Calculate world bounds for this chunk
+      const chunkWorldX = worldBounds.minX + (chunkX / scale);
+      const chunkWorldY = worldBounds.minY + (chunkY / scale);
+      const chunkWorldW = chunkWidth / scale;
+      const chunkWorldH = chunkHeight / scale;
+
+      const chunkWorldBounds = {
+        minX: chunkWorldX,
+        minY: chunkWorldY,
+        maxX: chunkWorldX + chunkWorldW,
+        maxY: chunkWorldY + chunkWorldH,
+        width: chunkWorldW,
+        height: chunkWorldH
+      };
+
+      // Render this chunk using tiles
+      const tilesX = Math.ceil(chunkWidth / TILE_SIZE);
+      const tilesY = Math.ceil(chunkHeight / TILE_SIZE);
+      let chunkTilesCompleted = 0;
+      const chunkTotalTiles = tilesX * tilesY;
+
+      for (let ty = 0; ty < tilesY; ty++) {
+        for (let tx = 0; tx < tilesX; tx++) {
+          const tileX = tx * TILE_SIZE;
+          const tileY = ty * TILE_SIZE;
+          const tileWidth = Math.min(TILE_SIZE, chunkWidth - tileX);
+          const tileHeight = Math.min(TILE_SIZE, chunkHeight - tileY);
+
+          const tileCanvas = await renderTile(
+            chunkX + tileX,
+            chunkY + tileY,
+            tileWidth,
+            tileHeight,
+            worldBounds,
+            scale,
+            () => {
+              chunkTilesCompleted++;
+              // Update progress after each tile
+              if (onProgress) {
+                const chunkProgress = chunkTilesCompleted / chunkTotalTiles;
+                const overallProgress = (completedChunks + chunkProgress) / totalChunks;
+                onProgress(
+                  Math.floor(overallProgress * totalChunks),
+                  totalChunks,
+                  Math.round(overallProgress * 100)
+                );
+              }
+            }
+          );
+
+          // Copy tile to chunk canvas
+          chunkCtx.drawImage(tileCanvas, tileX, tileY);
+
+          // Clean up
+          tileCanvas.width = 0;
+          tileCanvas.height = 0;
+        }
+      }
+
+      // Mark chunk as completed
+      completedChunks++;
+      if (onProgress) {
+        onProgress(completedChunks, totalChunks, Math.round((completedChunks / totalChunks) * 100));
+      }
+
+      // Convert chunk to blob and add to zip
+      const chunkBlob = await new Promise((resolve, reject) => {
+        chunkCanvas.toBlob((result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(new Error('Failed to create chunk blob'));
+          }
+        }, 'image/png');
+      });
+
+      const chunkFileName = `infinitespecies-${timestamp}-part-${cy + 1}-${cx + 1}.png`;
+      zip.file(chunkFileName, chunkBlob);
+
+      // Clean up chunk canvas
+      chunkCanvas.width = 0;
+      chunkCanvas.height = 0;
+
+      // Small delay between chunks
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+  }
+
+  // Generate zip file
+  const zipBlob = await zip.generateAsync({ type: 'blob' });
+  const zipFileName = `infinitespecies-${timestamp}.zip`;
+
+  // Download zip file
+  const url = URL.createObjectURL(zipBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = zipFileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+
+  return { fileName: zipFileName, width: fullWidth, height: fullHeight, chunks: totalChunks };
+}
+
+/**
  * Render a single tile of the screenshot
  */
 async function renderTile(tileX, tileY, tileWidth, tileHeight, worldBounds, scale, onProgress) {
@@ -154,11 +293,16 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
 
   await ensureFontsReady();
 
-  // Check if we need to zip (browser canvas limit is 16,384px per dimension)
+  // Check if we need to split into chunks (browser canvas limit is 16,384px per dimension)
   const MAX_CANVAS_DIMENSION = 16384;
-  const needsZip = fullWidth > MAX_CANVAS_DIMENSION || fullHeight > MAX_CANVAS_DIMENSION;
+  const needsSplitting = fullWidth > MAX_CANVAS_DIMENSION || fullHeight > MAX_CANVAS_DIMENSION;
 
-  // Normal single-image path (no splitting)
+  if (needsSplitting) {
+    // Split into chunks and create zip file
+    return await createSplitScreenshot(fullWidth, fullHeight, MAX_CANVAS_DIMENSION, worldBounds, scale, onProgress);
+  }
+
+  // Normal single-image path
   const width = fullWidth;
   const height = fullHeight;
 
@@ -280,57 +424,26 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
   }
 
   try {
-    const timestamp = Date.now();
-    const fileName = `infinitespecies-${timestamp}.png`;
-
-    if (needsZip) {
-      // Zip the PNG file
-      const zip = new JSZip();
-      zip.file(fileName, blob);
-      const zipBlob = await zip.generateAsync({ type: 'blob' });
-      const zipFileName = `infinitespecies-${timestamp}.zip`;
-      
-      const url = URL.createObjectURL(zipBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = zipFileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 100);
-      
-      // Clean up main canvas
-      mainCanvas.width = 0;
-      mainCanvas.height = 0;
-      
-      return { fileName: zipFileName, width, height };
-    } else {
-      // Regular PNG download
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      // Delay before revoking URL to ensure download starts
-      setTimeout(() => URL.revokeObjectURL(url), 100);
-      
-      // Clean up main canvas
-      mainCanvas.width = 0;
-      mainCanvas.height = 0;
-      
-      return { fileName, width, height };
-    }
+    const fileName = `infinitespecies-${Date.now()}.png`;
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    // Delay before revoking URL to ensure download starts
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   } catch (downloadError) {
     console.error('Error downloading file:', downloadError);
     // Clean up URL even if download fails
-    if (blob) {
-      URL.revokeObjectURL(URL.createObjectURL(blob));
-    }
-    // Clean up main canvas
-    mainCanvas.width = 0;
-    mainCanvas.height = 0;
+    URL.revokeObjectURL(URL.createObjectURL(blob));
     throw new Error(`Failed to download screenshot: ${downloadError.message}`);
   }
+
+  // Clean up main canvas
+  mainCanvas.width = 0;
+  mainCanvas.height = 0;
+
+  return { fileName: `infinitespecies-${Date.now()}.png`, width, height };
 }
