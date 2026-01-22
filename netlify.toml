@@ -1,6 +1,8 @@
 [build]
   # Build command for Vite
-  command = "npm run build"
+  # Reinstall dependencies to ensure Linux-specific optional dependencies are installed
+  # This fixes the Rollup binary issue when package-lock.json was created on Windows
+  command = "rm -rf node_modules && npm install && npm run build"
   # Publish directory (Vite outputs to dist/)
   publish = "dist"
   # Functions directory (if you have serverless functions)
