@@ -161,10 +161,10 @@ async function createSplitScreenshot(fullWidth, fullHeight, maxDimension, worldB
           } else {
             reject(new Error('Failed to create chunk blob'));
           }
-        }, 'image/png');
+        }, 'image/webp', 0.95);
       });
 
-      const chunkFileName = `infinitespecies-${timestamp}-part-${cy + 1}-${cx + 1}.png`;
+      const chunkFileName = `infinitespecies-${timestamp}-part-${cy + 1}-${cx + 1}.webp`;
       zip.file(chunkFileName, chunkBlob);
 
       // Clean up chunk canvas
@@ -254,7 +254,7 @@ async function renderTile(tileX, tileY, tileWidth, tileHeight, worldBounds, scal
   return tileCanvas;
 }
 
-export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_PER_WORLD_UNIT, onProgress) {
+export async function captureFullRenderWebp(pixelsPerWorldUnit = DEFAULT_PIXELS_PER_WORLD_UNIT, onProgress) {
   if (!state.layout) {
     throw new Error('No layout available for screenshot');
   }
@@ -401,7 +401,7 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
           } else {
             reject(new Error('toBlob returned null'));
           }
-        }, 'image/png');
+        }, 'image/webp', 0.95);
       });
     } catch (blobError) {
       attempts++;
@@ -410,7 +410,7 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
         // Clean up before throwing
         mainCanvas.width = 0;
         mainCanvas.height = 0;
-        throw new Error(`Failed to generate PNG blob after ${maxAttempts} attempts: ${blobError.message}. The image may be too large (${width}×${height}px, ${totalTiles} tiles). Try reducing the resolution.`);
+        throw new Error(`Failed to generate WebP blob after ${maxAttempts} attempts: ${blobError.message}. The image may be too large (${width}×${height}px, ${totalTiles} tiles). Try reducing the resolution.`);
       }
       // Wait before retrying
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -420,11 +420,11 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
   if (!blob) {
     mainCanvas.width = 0;
     mainCanvas.height = 0;
-    throw new Error('Failed to generate PNG blob');
+    throw new Error('Failed to generate WebP blob');
   }
 
   try {
-    const fileName = `infinitespecies-${Date.now()}.png`;
+    const fileName = `infinitespecies-${Date.now()}.webp`;
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -445,5 +445,5 @@ export async function captureFullRenderPng(pixelsPerWorldUnit = DEFAULT_PIXELS_P
   mainCanvas.width = 0;
   mainCanvas.height = 0;
 
-  return { fileName: `infinitespecies-${Date.now()}.png`, width, height };
+  return { fileName: `infinitespecies-${Date.now()}.webp`, width, height };
 }

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { captureFullRenderPng } from '../modules/screenshot'
+import { captureFullRenderWebp } from '../modules/screenshot'
 
 interface ScreenshotPanelProps {
   isOpen: boolean
@@ -19,16 +19,16 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
 
     try {
       // Temporarily override PIXELS_PER_WORLD_UNIT in screenshot module
-      // We'll need to pass this as a parameter to captureFullRenderPng
-      const { width, height } = await captureFullRenderPng(
+      // We'll need to pass this as a parameter to captureFullRenderWebp
+      const { width, height } = await captureFullRenderWebp(
         pixelsPerWorldUnit,
-        (completed, total, percent) => {
+        (completed: number, total: number, percent: number) => {
           setProgress({ completed, total, percent })
         }
       )
       
       setIsCapturing(false)
-      onShowToast(`Saved PNG (${width}×${height})`, 'success')
+      onShowToast(`Saved WebP (${width}×${height})`, 'success')
       onClose()
     } catch (err) {
       console.error('Screenshot failed:', err)
