@@ -335,8 +335,8 @@ export function drawWithOptions(options = {}) {
           pad = 2 * textScale;
         }
       } else {
-        // Regular rendering: Use font size directly (round to integer for crisp rendering)
-        fontSize = Math.round(Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor)));
+        // Regular rendering: Use font size directly (allow fractional sizes for smooth zoom)
+        fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
         
         if (fontSize >= labelMinFontPx) {
           shouldRenderLabel = true;
@@ -466,10 +466,10 @@ export function drawWithOptions(options = {}) {
             ctx.fillText(cand.text, 0, 0);
           } else {
             // Regular rendering: Use font size directly
-            // Round coordinates to integer pixels for crisp rendering
-            const textX = Math.round(cand.sx);
-            const textY = Math.round(cand.textY);
-            // Ensure crisp text rendering
+            // Use sub-pixel positioning for smooth text during zoom
+            const textX = cand.sx;
+            const textY = cand.textY;
+            // Ensure smooth text rendering
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
             ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
@@ -550,10 +550,10 @@ export function drawWithOptions(options = {}) {
           ctx.fillText(cand.text, 0, 0);
         } else {
           // Regular rendering: Use font size directly
-          // Round coordinates to integer pixels for crisp rendering
-          const textX = Math.round(cand.sx);
-          const textY = Math.round(cand.textY);
-          // Ensure crisp text rendering
+          // Use sub-pixel positioning for smooth text during zoom
+          const textX = cand.sx;
+          const textY = cand.textY;
+          // Ensure smooth text rendering
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
           ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
