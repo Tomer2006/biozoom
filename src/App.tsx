@@ -339,11 +339,6 @@ export default function App() {
     }
   }
 
-  const handleScreenshot = () => {
-    setScreenshotOpen(true)
-  }
-
-
   return (
     <div className="app">
       <AnimatePresence>
@@ -361,7 +356,6 @@ export default function App() {
         <Topbar
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
-          onScreenshot={handleScreenshot}
           onSettings={() => setSettingsOpen(true)}
           onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
