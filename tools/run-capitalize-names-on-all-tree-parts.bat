@@ -1,4 +1,5 @@
 @echo off
+REM Runs capitalize-first-letter-of-each-word-in-names.js on all tree_part_001..005 in public/data.
 REM Change to the project root directory (parent of tools folder)
 cd /d "%~dp0.."
 

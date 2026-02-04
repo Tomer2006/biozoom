@@ -1,3 +1,7 @@
+/**
+ * Stage — Canvas container and input bridge. Hosts the taxonomy canvas, wires mouse/touch/wheel
+ * to pan/zoom/pick, and coordinates tooltip, preview, and breadcrumb updates with the app.
+ */
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { state } from '../modules/state'
 import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange } from '../modules/canvas'

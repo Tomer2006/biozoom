@@ -1,3 +1,7 @@
+/**
+ * Minifies JSON by removing whitespace and newlines. Reduces file size for tree data.
+ * Usage: node tools/minify-json-remove-whitespace.js <input_file> <output_file>
+ */
 const fs = require('fs');
 const path = require('path');
 

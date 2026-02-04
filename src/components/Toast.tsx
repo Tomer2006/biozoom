@@ -1,3 +1,6 @@
+/**
+ * Toast — Toast notification component and container; shows dismissible messages (success/info/warning/error).
+ */
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, forwardRef } from 'react'
 

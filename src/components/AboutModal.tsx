@@ -1,3 +1,6 @@
+/**
+ * AboutModal — Modal dialog showing app credits, description, and link to InfiniteSpecies.com.
+ */
 import { motion } from 'framer-motion'
 
 interface AboutModalProps {

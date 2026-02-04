@@ -1,3 +1,7 @@
+/**
+ * Topbar — Top bar with back-to-menu, copy link, settings, help, search input, and action buttons
+ * (clear, reset, fit, surprise); triggers search and navigation via search-handler.
+ */
 import { useState, useRef, useEffect } from 'react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'

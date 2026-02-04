@@ -1,3 +1,6 @@
+/**
+ * HelpModal — Modal listing keyboard and mouse controls (zoom, pan, search, fit, etc.).
+ */
 import { motion } from 'framer-motion'
 
 interface HelpModalProps {

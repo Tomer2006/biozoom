@@ -1,3 +1,7 @@
+/**
+ * ScreenshotPanel — Side panel for capturing the current view as a high-res WebP; configurable
+ * resolution and progress feedback.
+ */
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { captureFullRenderWebp } from '../modules/screenshot'

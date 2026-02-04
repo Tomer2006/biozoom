@@ -1,3 +1,8 @@
+/**
+ * App.tsx — Root React component for InfiniteSpecies.
+ * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, modals (help/about/settings),
+ * screenshot panel, and toasts. Wires data loading, deep links, navigation, and rendering.
+ */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import LandingPage from './components/LandingPage'

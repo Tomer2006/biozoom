@@ -1,3 +1,7 @@
+/**
+ * main.tsx — Application entry point. Mounts React app, loads saved settings from localStorage
+ * (font/color/search provider), applies fonts to CSS and canvas, then renders <App />.
+ */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'

@@ -1,3 +1,8 @@
+/**
+ * Screenshot and export module.
+ * Renders the current taxonomy view to a high-resolution WebP image (tiled for large canvases),
+ * with optional progress callback. Used by the screenshot panel for download/export.
+ */
 import { state } from './state.js';
 import { drawWithOptions } from './render.js';
 import JSZip from 'jszip';

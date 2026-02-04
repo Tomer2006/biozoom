@@ -1,4 +1,4 @@
-/* InfiniteSpecies - stylesheet entrypoint */
+/* InfiniteSpecies - stylesheet entrypoint: imports variables, base, layout, ui, overlays, landing, animations, utilities, responsive. */
 
 @import "./variables.css";
 @import "./base.css";

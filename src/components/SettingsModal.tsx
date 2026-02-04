@@ -1,3 +1,6 @@
+/**
+ * SettingsModal — Modal for font preset, color preset, and search provider; persists to localStorage.
+ */
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { perf } from '../modules/settings'

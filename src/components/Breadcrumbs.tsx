@@ -1,3 +1,7 @@
+/**
+ * Breadcrumbs — Renders the current taxonomy path as clickable breadcrumb segments; clicking
+ * a segment navigates to that node.
+ */
 import { motion } from 'framer-motion'
 
 interface Crumb {

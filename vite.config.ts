@@ -1,3 +1,6 @@
+/**
+ * Vite config: React plugin, dev server (port 3000, HMR), build (dist, esbuild minify, banner).
+ */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

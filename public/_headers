@@ -1,4 +1,4 @@
-# Netlify headers configuration
+# Netlify headers: set Content-Type for JS/MJS so modules load correctly.
 # Ensure JavaScript modules are served with correct Content-Type
 
 # JavaScript files

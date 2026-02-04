@@ -1,4 +1,4 @@
-/* Responsive tweaks */
+/* Responsive tweaks: breakpoints for search results, help grid, topbar, modals, etc. */
 
 @media (max-width: 768px) {
     .search-results {

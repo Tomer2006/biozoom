@@ -1,3 +1,6 @@
+/**
+ * useToast — Hook that manages a list of toasts, with showToast/removeToast and helpers (success, error, etc.).
+ */
 import { useState, useCallback } from 'react'
 import { Toast } from '../components/Toast'
 

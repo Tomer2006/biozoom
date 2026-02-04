@@ -1,3 +1,6 @@
+/**
+ * LoadingOverlay — Full-screen loading card showing title, stage label, progress bar, and optional timer.
+ */
 interface LoadingOverlayProps {
   title: string
   stage: string

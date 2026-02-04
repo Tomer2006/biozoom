@@ -1,3 +1,6 @@
+/**
+ * LandingPage — Initial welcome screen with title, “Explore” button, and links to Help, About, and Settings.
+ */
 import { motion } from 'framer-motion'
 
 interface LandingPageProps {
