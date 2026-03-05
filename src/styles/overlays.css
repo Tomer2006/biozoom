@@ -145,8 +145,33 @@
 }
 
 .big-preview-footer .btn-small {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-base);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  height: 1.75rem;
+  min-height: 1.75rem;
+}
+
+.big-preview-footer .btn-small:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass);
+  border-color: var(--border-bright);
+  transform: none;
+}
+
+.big-preview-footer .btn-small:active {
+  transform: none;
 }
 
 .big-preview-path {
