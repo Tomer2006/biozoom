@@ -78,7 +78,8 @@
   background: var(--bg-glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-base);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
   opacity: 0;
   transition: opacity var(--transition-fast), top var(--transition-fast);
@@ -118,8 +119,8 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-sm) var(--space-md);
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid var(--border-dim);
+  background: transparent;
+  border-bottom: 1px solid var(--border-base);
 }
 
 .big-preview-caption {
@@ -136,8 +137,8 @@
   justify-content: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  background: rgba(0, 0, 0, 0.3);
-  border-top: 1px solid var(--border-dim);
+  background: transparent;
+  border-top: 1px solid var(--border-base);
   pointer-events: auto;
   width: 100%;
   box-sizing: border-box;

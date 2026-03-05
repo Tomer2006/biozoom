@@ -406,10 +406,10 @@
   font-weight: 500;
   color: var(--text-secondary);
   background: var(--bg-glass);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border-base);
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
@@ -420,7 +420,7 @@
 
 .crumb:hover {
   color: var(--text-primary);
-  background: rgba(31, 37, 72, 0.72);
+  background: var(--bg-glass);
   border-color: var(--border-bright);
 }
 
