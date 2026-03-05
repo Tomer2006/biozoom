@@ -10,7 +10,7 @@ import { showBigFor, hideBigPreview as hidePreviewModule } from '../modules/prev
 import { updateCurrentNodeOnly, fitNodeInView } from '../modules/navigation'
 import { handleWheelEvent, handleMouseMovePan, handleMouseMovePick, handleMouseLeaveEvent, handleMouseDown as handleMouseDownJS, validateHoverOnCameraChange } from '../modules/mouse-handler'
 import { pickNodeAt } from '../modules/picking'
-import { handleCameraPan } from '../modules/camera'
+import { handleCameraPan, clampCameraZoom } from '../modules/camera'
 
 // Type for taxonomy nodes from the state module
 interface TaxonomyNode {
@@ -376,7 +376,7 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
           const center = getCenter(e.touches[0], e.touches[1])
           const [wx, wy] = screenToWorld(center.x, center.y)
           
-          state.camera.k = newZoom
+          state.camera.k = clampCameraZoom(newZoom)
           state.camera.x = wx - (center.x - canvas.width / 2) / state.camera.k
           state.camera.y = wy - (center.y - canvas.height / 2) / state.camera.k
           
@@ -540,4 +540,3 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     </div>
   )
 }
-

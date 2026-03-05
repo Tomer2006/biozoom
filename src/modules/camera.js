@@ -6,7 +6,7 @@
  */
 
 import { state } from './state.js';
-import { requestRender, screenToWorld } from './canvas.js';
+import { requestRender, screenToWorld, W, H } from './canvas.js';
 import { perf } from './settings.js';
 
 // Native cubic-in-out easing function (replaces d3-ease)
@@ -20,10 +20,58 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
+function getLargestCircleFitZoom() {
+  if (!(state.maxNodeRadius > 0) || !(W > 0) || !(H > 0)) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
+  return targetRadiusPx / state.maxNodeRadius;
+}
+
+function getSmallestCircleZoomLimit() {
+  if (!(state.minNodeRadius > 0) || !(W > 0) || !(H > 0)) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const targetRadiusPx = Math.min(W, H) * perf.navigation.maxSmallestCircleViewportFraction;
+  return targetRadiusPx / state.minNodeRadius;
+}
+
+export function getMinCameraZoom() {
+  const fitZoom = getLargestCircleFitZoom();
+  if (!Number.isFinite(fitZoom) || fitZoom <= 0) {
+    return 0;
+  }
+
+  return fitZoom / perf.navigation.maxLargestCircleZoomOutMultiplier;
+}
+
+export function getMaxCameraZoom() {
+  const maxZoom = getSmallestCircleZoomLimit();
+  if (!Number.isFinite(maxZoom) || maxZoom <= 0) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  return maxZoom;
+}
+
+export function clampCameraZoom(k) {
+  if (!Number.isFinite(k) || k <= 0) {
+    return 1;
+  }
+
+  const minZoom = getMinCameraZoom();
+  const maxZoom = getMaxCameraZoom();
+  let clamped = Number.isFinite(minZoom) ? Math.max(k, minZoom) : k;
+  clamped = Number.isFinite(maxZoom) ? Math.min(clamped, maxZoom) : clamped;
+  return clamped;
+}
+
 export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs) {
   state.targetCam.x = nx;
   state.targetCam.y = ny;
-  state.targetCam.k = nk;
+  state.targetCam.k = clampCameraZoom(nk);
 
   const sx = state.camera.x,
     sy = state.camera.y,
@@ -36,7 +84,7 @@ export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs)
     const e = easeCubicInOut(t);
     state.camera.x = lerp(sx, state.targetCam.x, e);
     state.camera.y = lerp(sy, state.targetCam.y, e);
-    state.camera.k = lerp(sk, state.targetCam.k, e);
+    state.camera.k = clampCameraZoom(lerp(sk, state.targetCam.k, e));
 
     requestRender();
 
@@ -61,7 +109,7 @@ export function handleWheelZoom(e, canvas) {
   const my = e.clientY - rect.top;
   const [wx, wy] = screenToWorld(mx, my);
 
-  state.camera.k *= scale;
+  state.camera.k = clampCameraZoom(state.camera.k * scale);
   state.camera.x = wx - (mx - rect.width / 2) / state.camera.k;
   state.camera.y = wy - (my - rect.height / 2) / state.camera.k;
 
@@ -79,4 +127,3 @@ export function handleCameraPan(dx, dy) {
   state.camera.y -= dy / state.camera.k;
   requestRender();
 }
-

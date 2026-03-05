@@ -12,6 +12,8 @@ export const state = {
   layout: null,
   rootLayout: null, // Cached global layout for Eager mode
   globalId: 1,
+  maxNodeRadius: 0,
+  minNodeRadius: 0,
 
   // camera
   camera: { x: 0, y: 0, k: 1 },
@@ -35,11 +37,22 @@ export const state = {
 
 export function rebuildNodeMap() {
   state.nodeLayoutMap.clear();
+  state.maxNodeRadius = 0;
+  state.minNodeRadius = Number.POSITIVE_INFINITY;
   if (!state.layout?.root) return;
   const desc = state.layout.root.descendants();
-  desc.forEach(d => state.nodeLayoutMap.set(d.data._id, d));
+  desc.forEach(d => {
+    state.nodeLayoutMap.set(d.data._id, d);
+    if (typeof d._vr === 'number' && d._vr > state.maxNodeRadius) {
+      state.maxNodeRadius = d._vr;
+    }
+    if (typeof d._vr === 'number' && d._vr > 0 && d._vr < state.minNodeRadius) {
+      state.minNodeRadius = d._vr;
+    }
+  });
+  if (!Number.isFinite(state.minNodeRadius)) {
+    state.minNodeRadius = 0;
+  }
   // Precompute pick order: deepest nodes first for accurate picking
   state.pickOrder = desc.slice().sort((a, b) => b.depth - a.depth);
 }
-
-

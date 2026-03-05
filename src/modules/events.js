@@ -38,6 +38,7 @@ import { logInfo, logDebug, logTrace } from './logger.js';
 import { openProviderSearch } from './providers.js';
 import { fitNodeInView, goToNode, updateCurrentNodeOnly } from './navigation.js';
 import { handleSearch } from './search.js';
+import { clampCameraZoom } from './camera.js';
 import { isCurrentlyLoading } from './loading.js';
 import { getNodePath } from './deeplink.js';
 import { hideBigPreview } from './preview.js';
@@ -165,7 +166,7 @@ export function initEvents() {
         my = ev.clientY - rect.top;
       const [wx, wy] = screenToWorld(mx, my);
 
-      state.camera.k *= scale;
+      state.camera.k = clampCameraZoom(state.camera.k * scale);
       state.camera.x = wx - (mx - rect.width / 2) / state.camera.k;
       state.camera.y = wy - (my - rect.height / 2) / state.camera.k;
 
@@ -381,5 +382,4 @@ export function initEvents() {
 
 
 }
-
 

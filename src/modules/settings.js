@@ -135,7 +135,9 @@ export const perf = {
 
   // Navigation settings
   navigation: {
-    fitTargetRadiusMultiplier: 0.4  // Multiplier for fitNodeInView target radius (0.5 = 50% of viewport)
+    fitTargetRadiusMultiplier: 0.4,  // Multiplier for fitNodeInView target radius (0.5 = 50% of viewport)
+    maxLargestCircleZoomOutMultiplier: 5, // Largest baked circle can shrink to 1/5 of its fitted radius
+    maxSmallestCircleViewportFraction: 0.25 // Smallest baked circle radius can grow to 25% of the shorter viewport edge
   },
 
   // Search settings

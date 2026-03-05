@@ -10,7 +10,7 @@
 
 import { state } from './state.js';
 import { updateDeepLinkFromNode } from './deeplink.js';
-import { animateToCam } from './camera.js';
+import { animateToCam, clampCameraZoom } from './camera.js';
 import { requestRender, W, H } from './canvas.js';
 import { logInfo, logDebug, logWarn, logError } from './logger.js';
 import { perf } from './settings.js';
@@ -67,7 +67,7 @@ export function fitNodeInView(node) {
     return;
   }
   const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-  const k = targetRadiusPx / d._vr;
+  const k = clampCameraZoom(targetRadiusPx / d._vr);
   console.log(`[fitNodeInView] node="${node.name}" _id=${node._id} _vr=${d._vr} W=${W} H=${H} mult=${perf.navigation.fitTargetRadiusMultiplier} targetR=${targetRadiusPx} k=${k} currentK=${state.camera.k}`);
   // Set camera position instantly instead of animating
   state.camera.x = d._vx;
@@ -121,21 +121,21 @@ export async function updateNavigation(node, animate = true) {
       if (d) {
         // Calculate k to fit the node's circle using the same multiplier as fitNodeInView
         const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-        const targetK = targetRadiusPx / d._vr;
+        const targetK = clampCameraZoom(targetRadiusPx / d._vr);
         console.log(`[updateNavigation] node="${state.current.name}" _id=${state.current._id} _vr=${d._vr} W=${W} H=${H} mult=${perf.navigation.fitTargetRadiusMultiplier} targetR=${targetRadiusPx} k=${targetK} currentK=${state.camera.k}`);
         // Render the new subtree immediately before starting animation
         requestRender();
         animateToCam(d._vx, d._vy, targetK);
       } else {
         // Fallback for root or error
-        const targetK = Math.min(W / state.layout.diameter, H / state.layout.diameter);
+        const targetK = clampCameraZoom(Math.min(W / state.layout.diameter, H / state.layout.diameter));
         // Render the new subtree immediately before starting animation
         requestRender();
         animateToCam(0, 0, targetK);
       }
     } else {
       // Local layout: center at 0,0
-      const targetK = Math.min(W / state.layout.diameter, H / state.layout.diameter);
+      const targetK = clampCameraZoom(Math.min(W / state.layout.diameter, H / state.layout.diameter));
       // Render the new subtree immediately before starting animation
       requestRender();
       animateToCam(0, 0, targetK);
@@ -147,16 +147,16 @@ export async function updateNavigation(node, animate = true) {
         state.camera.x = d._vx;
         state.camera.y = d._vy;
         const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-        state.camera.k = targetRadiusPx / d._vr;
+        state.camera.k = clampCameraZoom(targetRadiusPx / d._vr);
       } else {
         state.camera.x = 0;
         state.camera.y = 0;
-        state.camera.k = Math.min(W, H) / state.layout.diameter;
+        state.camera.k = clampCameraZoom(Math.min(W, H) / state.layout.diameter);
       }
     } else {
       state.camera.x = 0;
       state.camera.y = 0;
-      state.camera.k = Math.min(W, H) / state.layout.diameter;
+      state.camera.k = clampCameraZoom(Math.min(W, H) / state.layout.diameter);
     }
     // Request render immediately after setting camera position in non-animated navigation
     requestRender();
@@ -211,7 +211,7 @@ export function zoomToNode(node) {
   
   // Calculate zoom level to fit the node
   const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-  const targetK = targetRadiusPx / d._vr;
+  const targetK = clampCameraZoom(targetRadiusPx / d._vr);
   
   // Animate camera to the node's position
   animateToCam(d._vx, d._vy, targetK);
