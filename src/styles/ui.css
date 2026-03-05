@@ -374,6 +374,7 @@
   background: transparent;
   backdrop-filter: none;
   border: none;
+  box-shadow: none;
   flex-shrink: 0;
   overflow-y: visible;
 }
@@ -404,8 +405,10 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--surface-dim);
-  border: 1px solid var(--border-dim);
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-base);
+  box-shadow: var(--shadow-sm);
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -417,8 +420,8 @@
 
 .crumb:hover {
   color: var(--text-primary);
-  background: var(--surface-base);
-  border-color: var(--border-base);
+  background: rgba(31, 37, 72, 0.72);
+  border-color: var(--border-bright);
 }
 
 .crumb-separator {
