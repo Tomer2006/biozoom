@@ -370,7 +370,8 @@ export function isSupportedLanguage(value: string | null | undefined): value is 
 }
 
 export function isRtlLanguage(language: AppLanguage): boolean {
-  return language === 'he'
+  void language
+  return false
 }
 
 export function getStoredLanguage(): AppLanguage | null {
@@ -388,7 +389,8 @@ export function getCurrentLanguage(): AppLanguage {
 }
 
 export function getLanguageDirection(language: AppLanguage): 'ltr' | 'rtl' {
-  return isRtlLanguage(language) ? 'rtl' : 'ltr'
+  void language
+  return 'ltr'
 }
 
 export function applyDocumentLanguage(language: AppLanguage) {

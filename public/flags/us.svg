@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7410 3900" role="img" aria-labelledby="title">
+  <title>United States flag</title>
+  <rect width="7410" height="3900" fill="#b22234"/>
+  <g fill="#fff">
+    <rect y="300" width="7410" height="300"/>
+    <rect y="900" width="7410" height="300"/>
+    <rect y="1500" width="7410" height="300"/>
+    <rect y="2100" width="7410" height="300"/>
+    <rect y="2700" width="7410" height="300"/>
+    <rect y="3300" width="7410" height="300"/>
+  </g>
+  <rect width="2964" height="2100" fill="#3c3b6e"/>
+  <g fill="#fff">
+    <g id="s18">
+      <g id="s9">
+        <g id="s5">
+          <g id="s4">
+            <path id="s" d="m247,90 70.534,217.082-184.698-134.164h228.328l-184.698,134.164z"/>
+            <use href="#s" x="494"/>
+            <use href="#s" x="988"/>
+            <use href="#s" x="1482"/>
+          </g>
+          <use href="#s" x="1976"/>
+        </g>
+        <use href="#s5" y="420"/>
+      </g>
+      <use href="#s9" y="840"/>
+    </g>
+    <use href="#s18" x="247" y="210"/>
+    <use href="#s9" x="494" y="0"/>
+    <use href="#s18" x="988" y="210"/>
+    <use href="#s9" x="1482" y="0"/>
+    <use href="#s18" x="1976" y="210"/>
+    <use href="#s9" x="2470" y="0"/>
+  </g>
+</svg>

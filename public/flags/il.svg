@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" role="img" aria-labelledby="title">
+  <title>Israel flag</title>
+  <rect width="1100" height="800" fill="#fff"/>
+  <rect y="110" width="1100" height="90" fill="#0038b8"/>
+  <rect y="600" width="1100" height="90" fill="#0038b8"/>
+  <path d="M550 250 421 474h258z" fill="none" stroke="#0038b8" stroke-width="55" stroke-linejoin="round"/>
+  <path d="M550 550 679 326H421z" fill="none" stroke="#0038b8" stroke-width="55" stroke-linejoin="round"/>
+</svg>
