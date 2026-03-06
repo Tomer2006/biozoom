@@ -1,8 +1,5 @@
-/**
- * Breadcrumbs — Renders the current taxonomy path as clickable breadcrumb segments; clicking
- * a segment navigates to that node.
- */
 import { motion } from 'framer-motion'
+import { translate, type AppLanguage } from '../modules/i18n'
 
 interface Crumb {
   id: number
@@ -11,16 +8,18 @@ interface Crumb {
 }
 
 interface BreadcrumbsProps {
+  language: AppLanguage
   crumbs: Crumb[]
   onCrumbClick: (node: any) => void
   onRandomClick: (node: any) => void
 }
 
-export default function Breadcrumbs({ crumbs, onCrumbClick, onRandomClick }: BreadcrumbsProps) {
+export default function Breadcrumbs({ language, crumbs, onCrumbClick, onRandomClick }: BreadcrumbsProps) {
   const lastCrumb = crumbs[crumbs.length - 1]
+  const separator = language === 'he' ? '‹' : '›'
 
   return (
-    <nav className="breadcrumbs" aria-label="Taxonomy path">
+    <nav className="breadcrumbs" aria-label={translate('breadcrumbs.ariaLabel', undefined, language)}>
       {crumbs.map((crumb, index) => (
         <motion.div
           key={crumb.id}
@@ -29,11 +28,11 @@ export default function Breadcrumbs({ crumbs, onCrumbClick, onRandomClick }: Bre
           transition={{ delay: index * 0.03, duration: 0.2 }}
           style={{ display: 'contents' }}
         >
-          {index > 0 && <span className="crumb-separator">›</span>}
+          {index > 0 && <span className="crumb-separator">{separator}</span>}
           <button
             className="crumb"
             onClick={() => onCrumbClick(crumb.node)}
-            title={`Navigate to ${crumb.name}`}
+            title={translate('breadcrumbs.navigateTo', { name: crumb.name }, language)}
           >
             {crumb.name}
           </button>
@@ -48,12 +47,12 @@ export default function Breadcrumbs({ crumbs, onCrumbClick, onRandomClick }: Bre
           transition={{ delay: crumbs.length * 0.03, duration: 0.2 }}
           style={{ display: 'contents' }}
         >
-          <span className="crumb-separator">›</span>
+          <span className="crumb-separator">{separator}</span>
           <button
             className="crumb crumb-random"
             onClick={() => onRandomClick(lastCrumb.node)}
-            title={`Jump to a random organism under ${lastCrumb.name}`}
-            aria-label={`Jump to a random organism under ${lastCrumb.name}`}
+            title={translate('breadcrumbs.randomJump', { name: lastCrumb.name }, language)}
+            aria-label={translate('breadcrumbs.randomJump', { name: lastCrumb.name }, language)}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <rect x="3.5" y="3.5" width="17" height="17" rx="3.5" />

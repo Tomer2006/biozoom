@@ -453,3 +453,26 @@
   justify-content: center;
   height: 1.75rem;
 }
+
+[dir="rtl"] .topbar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .topbar-left {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .topbar-right {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .searchbar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .searchbar-input,
+[dir="rtl"] .search-result-item,
+[dir="rtl"] .search-result-name,
+[dir="rtl"] .search-result-path {
+  text-align: right;
+}

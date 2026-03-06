@@ -1,16 +1,16 @@
-/**
- * LandingPage — Initial welcome screen with title, “Explore” button, and links to Help, About, and Settings.
- */
 import { motion } from 'framer-motion'
+import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
+  language: AppLanguage
   onStart: () => void
+  onLanguage: () => void
   onHelp: () => void
   onAbout: () => void
   onSettings: () => void
 }
 
-export default function LandingPage({ onStart, onHelp, onAbout, onSettings }: LandingPageProps) {
+export default function LandingPage({ language, onStart, onLanguage, onHelp, onAbout, onSettings }: LandingPageProps) {
   return (
     <motion.div
       className="landing-page"
@@ -18,7 +18,6 @@ export default function LandingPage({ onStart, onHelp, onAbout, onSettings }: La
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Top-left header */}
       <motion.div
         className="landing-header"
         initial={{ opacity: 0, x: -30 }}
@@ -27,12 +26,14 @@ export default function LandingPage({ onStart, onHelp, onAbout, onSettings }: La
       >
         <h1 className="landing-title">InfiniteSpecies</h1>
         <p className="landing-tagline">
-          millions of organisms<br />
-          one <span className="highlight">zoomable map</span>.
+          {translate('landing.taglineLine1', undefined, language)}
+          <br />
+          {translate('landing.taglineLine2Prefix', undefined, language)}{' '}
+          <span className="highlight">{translate('landing.taglineHighlight', undefined, language)}</span>
+          {translate('landing.taglineLine2Suffix', undefined, language)}
         </p>
       </motion.div>
 
-      {/* Center content */}
       <motion.div
         className="landing-center"
         initial={{ opacity: 0, y: 30 }}
@@ -45,41 +46,28 @@ export default function LandingPage({ onStart, onHelp, onAbout, onSettings }: La
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="landing-start-text">Start Exploration</span>
-          <span className="landing-start-hint">Usually takes 10 seconds to load</span>
+          <span className="landing-start-text">{translate('landing.start', undefined, language)}</span>
+          <span className="landing-start-hint">{translate('landing.startHint', undefined, language)}</span>
         </motion.button>
       </motion.div>
 
-      {/* Bottom buttons */}
       <motion.div
         className="landing-footer-buttons"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <motion.button
-          className="landing-footer-btn"
-          onClick={onSettings}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Settings
+        <motion.button className="landing-footer-btn landing-footer-icon-btn" onClick={onLanguage} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} title={translate('common.language', undefined, language)}>
+          <span aria-hidden="true">🌐</span>
         </motion.button>
-        <motion.button
-          className="landing-footer-btn"
-          onClick={onAbout}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          About
+        <motion.button className="landing-footer-btn" onClick={onSettings} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          {translate('common.settings', undefined, language)}
         </motion.button>
-        <motion.button
-          className="landing-footer-btn"
-          onClick={onHelp}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Help
+        <motion.button className="landing-footer-btn" onClick={onAbout} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          {translate('common.about', undefined, language)}
+        </motion.button>
+        <motion.button className="landing-footer-btn" onClick={onHelp} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          {translate('common.help', undefined, language)}
         </motion.button>
       </motion.div>
     </motion.div>

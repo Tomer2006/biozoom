@@ -1,18 +1,21 @@
-/**
- * Stage — Canvas container and input bridge. Hosts the taxonomy canvas, wires mouse/touch/wheel
- * to pan/zoom/pick, and coordinates tooltip, preview, and breadcrumb updates with the app.
- */
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { state } from '../modules/state'
 import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange } from '../modules/canvas'
 import { openProviderSearch } from '../modules/providers'
 import { showBigFor, hideBigPreview as hidePreviewModule } from '../modules/preview'
 import { updateCurrentNodeOnly, fitNodeInView } from '../modules/navigation'
-import { handleWheelEvent, handleMouseMovePan, handleMouseMovePick, handleMouseLeaveEvent, handleMouseDown as handleMouseDownJS, validateHoverOnCameraChange } from '../modules/mouse-handler'
+import {
+  handleWheelEvent,
+  handleMouseMovePan,
+  handleMouseMovePick,
+  handleMouseLeaveEvent,
+  handleMouseDown as handleMouseDownJS,
+  validateHoverOnCameraChange,
+} from '../modules/mouse-handler'
 import { pickNodeAt } from '../modules/picking'
 import { handleCameraPan, clampCameraZoom } from '../modules/camera'
+import { formatNumber, translate, type AppLanguage } from '../modules/i18n'
 
-// Type for taxonomy nodes from the state module
 interface TaxonomyNode {
   _id: number
   name: string
@@ -26,6 +29,7 @@ interface TaxonomyNode {
 }
 
 interface StageProps {
+  language: AppLanguage
   isLoading: boolean
   onUpdateBreadcrumbs: (node: TaxonomyNode) => void
   hidden?: boolean
@@ -39,7 +43,7 @@ interface TooltipState {
   meta: string
 }
 
-export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }: StageProps) {
+export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden = false }: StageProps) {
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
     x: 0,
@@ -47,9 +51,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     name: '',
     meta: '',
   })
-
-  // Big preview is managed by the preview module via DOM manipulation
-  // We just need to provide the DOM elements
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
@@ -59,9 +60,7 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
   const lastMouseRef = useRef({ x: 0, y: 0 })
   const prevHoverIdRef = useRef<number | null>(null)
   const breadcrumbTimerRef = useRef<number | null>(null)
-  const pendingBreadcrumbNodeIdRef = useRef<number | null>(null)
-  
-  // Touch handling refs
+
   const touchStateRef = useRef({
     isPanning: false,
     isZooming: false,
@@ -73,14 +72,12 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     longPressTimer: null as number | null,
   })
 
-  // Set up canvas reference in DOM module and initialize
   useEffect(() => {
     if (canvasRef.current) {
-      // @ts-ignore - setting canvas reference for the modules
+      // @ts-ignore
       window.__reactCanvas = canvasRef.current
     }
-    
-    // Cleanup: clear breadcrumb timer on unmount
+
     return () => {
       if (breadcrumbTimerRef.current !== null) {
         clearTimeout(breadcrumbTimerRef.current)
@@ -88,11 +85,9 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
       }
     }
   }, [onUpdateBreadcrumbs])
-  
-  // Initialize canvas when it becomes visible
+
   useEffect(() => {
     if (!hidden && canvasRef.current) {
-      // Small delay to ensure DOM is ready
       const timer = setTimeout(() => {
         resizeCanvas()
         tick()
@@ -101,9 +96,26 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     }
   }, [hidden])
 
+  const buildTooltipMeta = useCallback((node: any) => {
+    const parts: string[] = []
+    const isLeafNode = !node.children || node.children.length === 0
+
+    if (isLeafNode && node._leaves === 1) {
+      parts.push(translate('stage.oneSpecies', undefined, language))
+    } else if (node._leaves && node._leaves > 1) {
+      parts.push(translate('stage.speciesCount', { count: formatNumber(node._leaves, language) }, language))
+    }
+
+    if (node.level !== undefined) {
+      parts.push(translate('stage.level', { level: node.level }, language))
+    }
+
+    return parts.join(' • ')
+  }, [language])
+
   const updateTooltipAndPreview = useCallback((node: any, x: number, y: number) => {
     if (!node) {
-      setTooltip(prev => ({ ...prev, visible: false }))
+      setTooltip((prev) => ({ ...prev, visible: false }))
       hidePreviewModule()
       return
     }
@@ -112,38 +124,19 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     const changedNode = nodeId !== prevHoverIdRef.current
     prevHoverIdRef.current = nodeId
 
-    // Update tooltip position and content
-    const name = node.name || 'Unknown'
-    let meta = ''
-    
-    // Only show species count for leaf nodes (actual species)
-    // Leaf nodes have no children, so _leaves === 1 for a single species
-    const isLeafNode = !node.children || node.children.length === 0
-    if (isLeafNode && node._leaves === 1) {
-      meta = '1 species'
-    } else if (node._leaves && node._leaves > 1) {
-      // For groups, show the count (may include subspecies, but represents species-level diversity)
-      meta = `${node._leaves.toLocaleString()} species`
-    }
-    if (node.level !== undefined) {
-      meta += meta ? ` • Level ${node.level}` : `Level ${node.level}`
-    }
-
     setTooltip({
       visible: true,
       x,
       y,
-      name,
-      meta,
+      name: node.name || translate('stage.unknown', undefined, language),
+      meta: buildTooltipMeta(node),
     })
 
-    // Update big preview only on node change - fetch from Wikipedia
     if (changedNode) {
       showBigFor(node)
     }
-  }, [])
+  }, [buildTooltipMeta])
 
-  // O(1) hover validation when camera changes - use vanilla JS function
   useEffect(() => {
     const validateHover = () => {
       const { x, y } = lastMouseRef.current
@@ -151,13 +144,13 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         if (node) {
           updateTooltipAndPreview(node, px, py)
         } else {
-          setTooltip(prev => ({ ...prev, visible: false }))
+          setTooltip((prev) => ({ ...prev, visible: false }))
           hidePreviewModule()
           prevHoverIdRef.current = null
         }
       })
     }
-    
+
     onCameraChange(validateHover)
     return () => onCameraChange(null)
   }, [updateTooltipAndPreview])
@@ -171,28 +164,25 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     const y = e.clientY - rect.top
     lastMouseRef.current = { x, y }
 
-    // Handle panning - use vanilla JS function
     if (isPanningRef.current && lastPanRef.current) {
       const newPan = handleMouseMovePan(x, y, isPanningRef.current, lastPanRef.current) as { x: number; y: number } | null
       if (newPan) {
         lastPanRef.current = newPan
-        setTooltip(prev => ({ ...prev, visible: false }))
+        setTooltip((prev) => ({ ...prev, visible: false }))
         hidePreviewModule()
         return
       }
     }
 
-    // Throttle picking for non-panning moves
     if (!pickingScheduledRef.current) {
       pickingScheduledRef.current = true
       requestAnimationFrame(() => {
         pickingScheduledRef.current = false
-        const n = handleMouseMovePick(lastMouseRef.current.x, lastMouseRef.current.y)
-        if (n) {
-          updateTooltipAndPreview(n, lastMouseRef.current.x, lastMouseRef.current.y)
+        const node = handleMouseMovePick(lastMouseRef.current.x, lastMouseRef.current.y)
+        if (node) {
+          updateTooltipAndPreview(node, lastMouseRef.current.x, lastMouseRef.current.y)
         } else {
-          // No node found - hide tooltip and preview
-          setTooltip(prev => ({ ...prev, visible: false }))
+          setTooltip((prev) => ({ ...prev, visible: false }))
           hidePreviewModule()
           prevHoverIdRef.current = null
         }
@@ -201,21 +191,17 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
   }
 
   const handleMouseLeave = () => {
-    // Use vanilla JS function
     handleMouseLeaveEvent()
-    setTooltip(prev => ({ ...prev, visible: false }))
-    
-    // Clear any pending breadcrumb update when mouse leaves
+    setTooltip((prev) => ({ ...prev, visible: false }))
+
     if (breadcrumbTimerRef.current !== null) {
       clearTimeout(breadcrumbTimerRef.current)
       breadcrumbTimerRef.current = null
     }
-    pendingBreadcrumbNodeIdRef.current = null
   }
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (e.button === 1) {
-      // Middle mouse button - use vanilla JS function
       const rect = canvasRef.current?.getBoundingClientRect()
       if (rect) {
         const x = e.clientX - rect.left
@@ -235,13 +221,11 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
       isPanningRef.current = false
       lastPanRef.current = null
     }
+
     window.addEventListener('mouseup', handleMouseUp)
     return () => window.removeEventListener('mouseup', handleMouseUp)
   }, [])
 
-
-  // Use native wheel event listener to enable preventDefault (React's onWheel is passive)
-  // Use vanilla JS function for performance-critical wheel handling
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -254,7 +238,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     return () => canvas.removeEventListener('wheel', handleWheelEventWrapper)
   }, [])
 
-  // Touch event handlers for mobile support
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -278,33 +261,28 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     const getCenter = (t1: Touch, t2: Touch) => {
       const rect = canvas.getBoundingClientRect()
       return {
-        x: ((t1.clientX + t2.clientX) / 2) - rect.left,
-        y: ((t1.clientY + t2.clientY) / 2) - rect.top,
+        x: (t1.clientX + t2.clientX) / 2 - rect.left,
+        y: (t1.clientY + t2.clientY) / 2 - rect.top,
       }
     }
 
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
-        // Single touch - prepare for pan or tap
         const touch = e.touches[0]
         const pos = getTouchPos(touch)
         touchState.lastTouch = pos
         touchState.isPanning = false
-        
-        // Clear any existing long press timer
+
         if (touchState.longPressTimer) {
           clearTimeout(touchState.longPressTimer)
           touchState.longPressTimer = null
         }
-        
-        // Set up long press timer (500ms)
+
         touchState.longPressTimer = window.setTimeout(() => {
-          // Long press - trigger context menu (go to parent)
           const current = state.current as TaxonomyNode | null
           if (current && current.parent && !isLoading) {
             updateCurrentNodeOnly(current.parent as any)
             onUpdateBreadcrumbs(current.parent)
-            // Visual feedback
             canvas.style.opacity = '0.8'
             setTimeout(() => {
               canvas.style.opacity = '1'
@@ -312,23 +290,19 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
           }
           touchState.longPressTimer = null
         }, 500)
-        
-        // Update hover on touch start
-        const n = pickNodeAt(pos.x, pos.y)
-        state.hoverNode = n
-        if (n) {
-          updateTooltipAndPreview(n, pos.x, pos.y)
+
+        const node = pickNodeAt(pos.x, pos.y)
+        state.hoverNode = node
+        if (node) {
+          updateTooltipAndPreview(node, pos.x, pos.y)
         }
       } else if (e.touches.length === 2) {
-        // Two touches - prepare for pinch zoom
         touchState.isZooming = true
         touchState.isPanning = false
-        const distance = getDistance(e.touches[0], e.touches[1])
-        touchState.initialDistance = distance
+        touchState.initialDistance = getDistance(e.touches[0], e.touches[1])
         touchState.initialZoom = state.camera.k
         touchState.initialCenter = getCenter(e.touches[0], e.touches[1])
-        
-        // Cancel long press timer
+
         if (touchState.longPressTimer) {
           clearTimeout(touchState.longPressTimer)
           touchState.longPressTimer = null
@@ -339,27 +313,24 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length === 1 && touchState.lastTouch) {
-        // Single touch move - panning
         const touch = e.touches[0]
         const pos = getTouchPos(touch)
-        
-        // Cancel long press if moved
+
         if (touchState.longPressTimer) {
           clearTimeout(touchState.longPressTimer)
           touchState.longPressTimer = null
         }
-        
+
         if (!touchState.isPanning) {
-          // Check if moved enough to start panning (5px threshold)
           const dx = pos.x - touchState.lastTouch.x
           const dy = pos.y - touchState.lastTouch.y
           if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
             touchState.isPanning = true
-            setTooltip(prev => ({ ...prev, visible: false }))
+            setTooltip((prev) => ({ ...prev, visible: false }))
             hidePreviewModule()
           }
         }
-        
+
         if (touchState.isPanning) {
           const dx = pos.x - touchState.lastTouch.x
           const dy = pos.y - touchState.lastTouch.y
@@ -367,19 +338,18 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
           touchState.lastTouch = pos
         }
       } else if (e.touches.length === 2 && touchState.isZooming) {
-        // Two touches - pinch zoom
         const distance = getDistance(e.touches[0], e.touches[1])
         const scale = distance / touchState.initialDistance
         const newZoom = touchState.initialZoom * scale
-        
+
         if (touchState.initialCenter) {
           const center = getCenter(e.touches[0], e.touches[1])
           const [wx, wy] = screenToWorld(center.x, center.y)
-          
+
           state.camera.k = clampCameraZoom(newZoom)
           state.camera.x = wx - (center.x - canvas.width / 2) / state.camera.k
           state.camera.y = wy - (center.y - canvas.height / 2) / state.camera.k
-          
+
           requestRender()
         }
       }
@@ -387,45 +357,36 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     }
 
     const handleTouchEnd = (e: TouchEvent) => {
-      // Cancel long press timer
       if (touchState.longPressTimer) {
         clearTimeout(touchState.longPressTimer)
         touchState.longPressTimer = null
       }
-      
+
       if (e.touches.length === 0) {
-        // All touches ended
         if (!touchState.isPanning && !touchState.isZooming && touchState.lastTouch) {
-          // Single tap - disabled on mobile to prevent accidental navigation
-          // Only double tap is enabled for fitting nodes
           const now = Date.now()
           const timeSinceLastTap = now - touchState.lastTapTime
-          
+
           if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
-            // Double tap - fit current node
-            const target = state.hoverNode || state.current || state.DATA_ROOT
-            if (target) {
-              // @ts-ignore - JS module import
-              fitNodeInView(target)
+            const targetNode = state.hoverNode || state.current || state.DATA_ROOT
+            if (targetNode) {
+              fitNodeInView(targetNode)
             }
           }
-          // Single tap navigation removed - prevents accidental clicks while panning/zooming
-          
+
           touchState.lastTapTime = now
         }
-        
+
         touchState.isPanning = false
         touchState.isZooming = false
         touchState.lastTouch = null
         touchState.initialDistance = 0
         touchState.initialCenter = null
       } else if (e.touches.length === 1) {
-        // One touch remaining - switch to single touch mode
         touchState.isZooming = false
-        const touch = e.touches[0]
-        touchState.lastTouch = getTouchPos(touch)
+        touchState.lastTouch = getTouchPos(e.touches[0])
       }
-      
+
       e.preventDefault()
     }
 
@@ -433,7 +394,7 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false })
     canvas.addEventListener('touchend', handleTouchEnd, { passive: false })
     canvas.addEventListener('touchcancel', handleTouchEnd, { passive: false })
-    
+
     return () => {
       canvas.removeEventListener('touchstart', handleTouchStart)
       canvas.removeEventListener('touchmove', handleTouchMove)
@@ -443,7 +404,7 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         clearTimeout(touchState.longPressTimer)
       }
     }
-  }, [isLoading, onUpdateBreadcrumbs])
+  }, [isLoading, onUpdateBreadcrumbs, updateTooltipAndPreview])
 
   const handleContextMenu = async (e: React.MouseEvent) => {
     e.preventDefault()
@@ -451,30 +412,24 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
 
     const current = state.current as TaxonomyNode | null
     if (current && current.parent) {
-      // Update breadcrumbs to parent (go up one level), don't zoom
-      // Example: if breadcrumbs are "1 dog > 2 fish > 3 cat", 
-      // right click updates to "1 dog > 2 fish" (removes last item)
       updateCurrentNodeOnly(current.parent as any)
       onUpdateBreadcrumbs(current.parent)
     }
   }
 
   const handleClick = async (e: React.MouseEvent) => {
-    if (e.button !== 0) return
-    if (isLoading) return
+    if (e.button !== 0 || isLoading) return
 
     const rect = canvasRef.current?.getBoundingClientRect()
     if (!rect) return
 
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
+    const node = pickNodeAt(x, y)
+    if (!node) return
 
-    const n = pickNodeAt(x, y)
-    if (!n) return
-
-    // Update tree view to show only this subtree, don't move camera
-    updateCurrentNodeOnly(n as any)
-    onUpdateBreadcrumbs(n)
+    updateCurrentNodeOnly(node as any)
+    onUpdateBreadcrumbs(node)
   }
 
   return (
@@ -490,7 +445,6 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         onClick={handleClick}
       />
 
-      {/* Tooltip */}
       <div
         className="tooltip"
         style={{
@@ -505,38 +459,35 @@ export default function Stage({ isLoading, onUpdateBreadcrumbs, hidden = false }
         </div>
       </div>
 
-      {/* Big Preview - managed by preview.js module */}
       <div className="big-preview" id="bigPreview" aria-hidden="true">
         <div className="big-preview-header">
           <div className="big-preview-caption" id="bigPreviewCap"></div>
         </div>
         <img id="bigPreviewImg" alt="" decoding="async" />
         <div className="big-preview-empty" id="bigPreviewEmpty" aria-hidden="true">
-          No image
+          {translate('stage.noImage', undefined, language)}
         </div>
         <div className="big-preview-footer">
-          <button 
-            className="btn btn-small" 
+          <button
+            className="btn btn-small"
             onClick={(e) => {
               e.stopPropagation()
-              const target = state.hoverNode || state.current
-              if (target) openProviderSearch(target)
+              const targetNode = state.hoverNode || state.current
+              if (targetNode) {
+                openProviderSearch(targetNode)
+              }
             }}
-            title="Search on the web (S)"
+            title={translate('stage.webSearchTitle', undefined, language)}
           >
-            Web Search (S)
+            {translate('stage.webSearch', undefined, language)}
           </button>
           <div className="big-preview-path" id="bigPreviewPath"></div>
         </div>
       </div>
 
-      {/* Pulse animation element */}
       <div className="pulse" id="pulse" />
 
-      {/* Watermark - visible in screenshots/clips */}
-      <div className="stage-watermark">
-        InfiniteSpecies.com
-      </div>
+      <div className="stage-watermark">InfiniteSpecies.com</div>
     </div>
   )
 }

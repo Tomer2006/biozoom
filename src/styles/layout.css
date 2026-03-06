@@ -94,3 +94,8 @@
 .stage-watermark:hover {
   opacity: 0.6;
 }
+
+[dir="rtl"] .stage-watermark {
+  left: 1rem;
+  right: auto;
+}

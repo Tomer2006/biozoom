@@ -21,6 +21,16 @@
       left: var(--space-md);
       max-width: none;
     }
+
+    .language-modal-options {
+      grid-template-columns: 1fr;
+    }
+
+    .onboarding-actions {
+      width: 100%;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
   }
   
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -157,6 +167,11 @@
       max-height: 35vh;
       pointer-events: auto;
     }
+
+    [dir="rtl"] .big-preview {
+      left: var(--space-md);
+      right: auto;
+    }
     
     .big-preview img {
       width: 100%;
@@ -279,6 +294,11 @@
         width: 150px;
         max-width: 35vw;
         max-height: 30vh;
+      }
+
+      [dir="rtl"] .big-preview {
+        left: var(--space-sm);
+        right: auto;
       }
       
       .big-preview img {
