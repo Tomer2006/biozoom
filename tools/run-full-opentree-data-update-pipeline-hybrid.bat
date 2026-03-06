@@ -12,9 +12,10 @@ REM This script will (optimized order for efficiency):
 REM   1. Convert OpenTreeofLife taxonomy.tsv to nested tree (tree_opentree.json)
 REM   2. Remove duplicate leaf nodes (reduces nodes early - efficient!)
 REM   3. Remove sibling_higher nodes (reduces nodes early - efficient!)
-REM   4. Lowercase all names in main tree (before expensive layout)
-REM   5. Bake D3 circle-packing layout with Hybrid sorting (expensive operation)
-REM   6. Capitalize names in split files (final formatting step)
+REM   4. Remove nodes containing "unidentified" or "unclassified"
+REM   5. Lowercase all names in main tree (before expensive layout)
+REM   6. Bake D3 circle-packing layout with Hybrid sorting (expensive operation)
+REM   7. Capitalize names in split files (final formatting step)
 REM
 REM Hybrid sorting combines:
 REM   - Primary: By value (descending) - larger groups get priority
@@ -83,10 +84,9 @@ if errorlevel 1 (
 echo.
 
 echo ============================================
-echo Step 4: Lowercasing all names in main tree...
+echo Step 4: Removing unidentified and unclassified nodes...
 echo ============================================
-echo (Processing before layout for efficiency)
-node tools/lowercase-all-names.js data/tree_opentree.json data/tree_opentree.json
+node tools/remove-unidentified-nodes-from-tree.js data/tree_opentree.json data/tree_opentree.json
 if errorlevel 1 (
     echo FAILED at Step 4
     pause
@@ -95,11 +95,10 @@ if errorlevel 1 (
 echo.
 
 echo ============================================
-echo Step 5: Baking D3 layout (Hybrid sort)...
+echo Step 5: Lowercasing all names in main tree...
 echo ============================================
-echo (This may take several minutes for large datasets)
-echo (Using Hybrid sorting: value first, then depth for ties)
-node tools/compute-d3-circle-packing-layout-from-opentree-tree-hybrid.js
+echo (Processing before layout for efficiency)
+node tools/lowercase-all-names.js data/tree_opentree.json data/tree_opentree.json
 if errorlevel 1 (
     echo FAILED at Step 5
     pause
@@ -108,40 +107,53 @@ if errorlevel 1 (
 echo.
 
 echo ============================================
-echo Step 6: Capitalizing names in split files...
+echo Step 6: Baking D3 layout (Hybrid sort)...
+echo ============================================
+echo (This may take several minutes for large datasets)
+echo (Using Hybrid sorting: value first, then depth for ties)
+node tools/compute-d3-circle-packing-layout-from-opentree-tree-hybrid.js
+if errorlevel 1 (
+    echo FAILED at Step 6
+    pause
+    exit /b 1
+)
+echo.
+
+echo ============================================
+echo Step 7: Capitalizing names in split files...
 echo ============================================
 echo [1/5] Processing tree_part_001.json...
 node tools/capitalize-first-letter-of-each-word-in-names.js public/data/tree_part_001.json public/data/tree_part_001.json
 if errorlevel 1 (
-    echo FAILED at Step 6
+    echo FAILED at Step 7
     pause
     exit /b 1
 )
 echo [2/5] Processing tree_part_002.json...
 node tools/capitalize-first-letter-of-each-word-in-names.js public/data/tree_part_002.json public/data/tree_part_002.json
 if errorlevel 1 (
-    echo FAILED at Step 6
+    echo FAILED at Step 7
     pause
     exit /b 1
 )
 echo [3/5] Processing tree_part_003.json...
 node tools/capitalize-first-letter-of-each-word-in-names.js public/data/tree_part_003.json public/data/tree_part_003.json
 if errorlevel 1 (
-    echo FAILED at Step 6
+    echo FAILED at Step 7
     pause
     exit /b 1
 )
 echo [4/5] Processing tree_part_004.json...
 node tools/capitalize-first-letter-of-each-word-in-names.js public/data/tree_part_004.json public/data/tree_part_004.json
 if errorlevel 1 (
-    echo FAILED at Step 6
+    echo FAILED at Step 7
     pause
     exit /b 1
 )
 echo [5/5] Processing tree_part_005.json...
 node tools/capitalize-first-letter-of-each-word-in-names.js public/data/tree_part_005.json public/data/tree_part_005.json
 if errorlevel 1 (
-    echo FAILED at Step 6
+    echo FAILED at Step 7
     pause
     exit /b 1
 )
