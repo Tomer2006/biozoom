@@ -282,25 +282,27 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .loading-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   padding: clamp(1.5rem, 4vw, 3rem);
   overflow: auto;
-  background: linear-gradient(180deg, rgba(8, 9, 15, 0.95) 0%, rgba(8, 9, 15, 0.9) 100%);
-  backdrop-filter: blur(8px);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(91, 141, 239, 0.2), transparent 30%),
+    radial-gradient(circle at 80% 78%, rgba(110, 231, 183, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(8, 9, 15, 0.98) 0%, rgba(8, 9, 15, 0.94) 100%);
+  backdrop-filter: blur(12px);
   z-index: 50;
 }
 
-.loading-card {
-  width: min(760px, 92vw);
+.loading-content {
+  width: min(760px, 100%);
+  min-height: min(540px, 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: clamp(2rem, 4vw, 3.5rem);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-base);
-  border-radius: calc(var(--radius-xl) + 6px);
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .loading-brand {
