@@ -825,8 +825,16 @@
 }
 
 .language-modal-header {
+  position: relative;
   justify-content: center;
   text-align: center;
+}
+
+.language-modal-header .modal-close {
+  position: absolute;
+  top: 50%;
+  right: var(--space-lg);
+  transform: translateY(-50%);
 }
 
 .language-modal-body {

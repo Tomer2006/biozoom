@@ -106,10 +106,6 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       parts.push(translate('stage.speciesCount', { count: formatNumber(node._leaves, language) }, language))
     }
 
-    if (node.level !== undefined) {
-      parts.push(translate('stage.level', { level: node.level }, language))
-    }
-
     return parts.join(' • ')
   }, [language])
 

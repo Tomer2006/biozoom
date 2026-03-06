@@ -182,7 +182,7 @@ export function initEvents() {
     const tag = (active && active.tagName) || '';
     const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (active && active.isContentEditable === true);
     if (isTyping) return;
-    if (e.code === 'KeyS') {
+    if (e.code === 'KeyW') {
       const target = state.hoverNode || state.current || state.DATA_ROOT;
       if (target) openProviderSearch(target);
       e.preventDefault();
@@ -382,4 +382,3 @@ export function initEvents() {
 
 
 }
-
