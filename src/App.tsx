@@ -23,7 +23,7 @@ import { resizeCanvas, registerDrawCallback, tick } from './modules/canvas'
 import { draw } from './modules/render'
 import { loadEager } from './modules/data'
 import { decodePath, findNodeByPath, getNodePath, updateDeepLinkFromNode } from './modules/deeplink'
-import { updateNavigation, fitNodeInView, goToNode } from './modules/navigation'
+import { updateNavigation, fitNodeInView, goToNode, zoomToNode } from './modules/navigation'
 import { openProviderSearch } from './modules/providers'
 
 export interface AppState {
@@ -331,6 +331,35 @@ export default function App() {
     updateBreadcrumbs(node)
   }
 
+  const handleBreadcrumbRandom = (rootNode: any) => {
+    if (!rootNode?.children?.length) {
+      toast.info('No deeper branch available here')
+      return
+    }
+
+    let node = rootNode
+    let targetIndex = Math.floor(Math.random() * (node._leaves || 1))
+
+    while (node.children && node.children.length > 0) {
+      let nextNode = node.children[0]
+
+      for (const child of node.children) {
+        const weight = child._leaves || 1
+        if (targetIndex < weight) {
+          nextNode = child
+          break
+        }
+        targetIndex -= weight
+      }
+
+      node = nextNode
+    }
+
+    if (node && node !== rootNode) {
+      zoomToNode(node)
+    }
+  }
+
   const handleCopyLink = async () => {
     const url = new URL(location.href)
     const path = state.current ? getNodePath(state.current).join('/') : ''
@@ -372,6 +401,7 @@ export default function App() {
         <Breadcrumbs
           crumbs={appState.breadcrumbs}
           onCrumbClick={handleBreadcrumbClick}
+          onRandomClick={handleBreadcrumbRandom}
         />
       )}
 
@@ -411,4 +441,3 @@ export default function App() {
     </div>
   )
 }
-
