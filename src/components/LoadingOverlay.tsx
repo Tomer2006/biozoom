@@ -18,7 +18,7 @@ export default function LoadingOverlay({
 }: LoadingOverlayProps) {
   return (
     <div className="loading-overlay">
-      <div className="loading-card">
+      <div className="loading-content">
         <div className="loading-brand">
           <div className="loading-brand-text">
             <div className="loading-brand-title">InfiniteSpecies</div>
@@ -51,4 +51,3 @@ export default function LoadingOverlay({
     </div>
   )
 }
-
