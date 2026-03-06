@@ -292,13 +292,18 @@
 }
 
 .search-results::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--scrollbar-track);
   border-radius: var(--radius-lg);
 }
 
 .search-results::-webkit-scrollbar-thumb {
-  background: var(--surface-bright);
+  background: var(--scrollbar-thumb);
   border-radius: var(--radius-full);
+  border: 2px solid var(--scrollbar-track);
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 .search-result-item {
@@ -388,16 +393,17 @@
 }
 
 .breadcrumbs::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--scrollbar-track);
 }
 
 .breadcrumbs::-webkit-scrollbar-thumb {
-  background: var(--surface-bright);
+  background: var(--scrollbar-thumb);
   border-radius: var(--radius-full);
+  border: 1px solid var(--scrollbar-track);
 }
 
 .breadcrumbs::-webkit-scrollbar-thumb:hover {
-  background: var(--surface-hover);
+  background: var(--scrollbar-thumb-hover);
 }
 
 .crumb {
