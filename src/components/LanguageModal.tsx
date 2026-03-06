@@ -40,16 +40,24 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
               <p className="language-modal-subtitle">{translate('languageModal.subtitle')}</p>
 
               <div className="language-modal-options">
-                <button className="language-option" onClick={() => onSelect('en')}>
-                  <span className="language-option-flag" aria-hidden="true">🇺🇸</span>
+                <button
+                  className="language-option language-option-flag-only"
+                  onClick={() => onSelect('en')}
+                  aria-label={translate('languageModal.englishTitle')}
+                  title={translate('languageModal.englishTitle')}
+                >
+                  <img className="language-option-flag-image" src="/flags/us.svg" alt="" aria-hidden="true" />
                   <span className="language-option-title">{translate('languageModal.englishTitle')}</span>
-                  <span className="language-option-description">{translate('languageModal.englishDescription')}</span>
                 </button>
 
-                <button className="language-option" onClick={() => onSelect('he')}>
-                  <span className="language-option-flag" aria-hidden="true">🇮🇱</span>
+                <button
+                  className="language-option language-option-flag-only"
+                  onClick={() => onSelect('he')}
+                  aria-label={translate('languageModal.hebrewTitle')}
+                  title={translate('languageModal.hebrewTitle')}
+                >
+                  <img className="language-option-flag-image" src="/flags/il.svg" alt="" aria-hidden="true" />
                   <span className="language-option-title">{translate('languageModal.hebrewTitle')}</span>
-                  <span className="language-option-description">{translate('languageModal.hebrewDescription')}</span>
                 </button>
               </div>
             </div>
