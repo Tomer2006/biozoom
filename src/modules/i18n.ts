@@ -96,7 +96,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       hoverDescription: 'Show image preview',
       enterKey: 'Enter',
       enterDescription: 'Search and navigate',
-      searchKey: 'S',
+      searchKey: 'W',
       searchDescription: 'Web search current/hovered',
       resetKey: 'R',
       resetDescription: 'Reset to root',
@@ -133,7 +133,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       fontLabel: 'Font Family',
       colorSection: 'Color Palette',
       colorLabel: 'Color Scheme',
-      searchSection: 'Web Search (S key)',
+      searchSection: 'Web Search (W key)',
       searchLabel: 'Search Provider',
     },
     screenshot: {
@@ -154,8 +154,8 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       level: (params) => `Level ${params?.level ?? 0}`,
       noImage: 'No image',
       unknown: 'Unknown',
-      webSearch: 'Web Search (S)',
-      webSearchTitle: 'Search on the web (S)',
+      webSearch: 'Web Search (W)',
+      webSearchTitle: 'Search on the web (W)',
     },
     app: {
       copyLinkPrompt: 'Copy link:',
@@ -258,7 +258,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       hoverDescription: 'הצגת תצוגת תמונה',
       enterKey: 'Enter',
       enterDescription: 'חיפוש וניווט',
-      searchKey: 'S',
+      searchKey: 'W',
       searchDescription: 'חיפוש ברשת עבור הנוכחי או המרוחף',
       resetKey: 'R',
       resetDescription: 'חזרה לשורש',
@@ -315,8 +315,8 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       level: (params) => `רמה ${params?.level ?? 0}`,
       noImage: 'אין תמונה',
       unknown: 'לא ידוע',
-      webSearch: 'חיפוש ברשת (S)',
-      webSearchTitle: 'חיפוש ברשת (S)',
+      webSearch: 'חיפוש ברשת (W)',
+      webSearchTitle: 'חיפוש ברשת (W)',
     },
     app: {
       copyLinkPrompt: 'העתקת קישור:',
@@ -447,3 +447,4 @@ export function getColorPresetLabel(preset: string, language: AppLanguage = curr
     .replace(/^./, (char) => char.toUpperCase())
     .trim()
 }
+

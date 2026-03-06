@@ -130,7 +130,7 @@ export default function App() {
       if (e.code === 'Slash' || e.key === '?' || e.code === 'F1') {
         e.preventDefault()
         setHelpOpen((prev: boolean) => !prev)
-      } else if (e.code === 'KeyS') {
+      } else if (e.code === 'KeyW') {
         e.preventDefault()
         const targetNode = state.hoverNode || state.current || state.DATA_ROOT
         if (targetNode) {
