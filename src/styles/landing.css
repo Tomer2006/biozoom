@@ -143,6 +143,12 @@
   transform: translateY(-2px);
 }
 
+.landing-footer-icon-btn {
+  min-width: 3.25rem;
+  padding: 0.875rem 1rem;
+  font-size: 1.1rem;
+}
+
 /* Legacy classes for backward compatibility */
 .landing-content {
   position: relative;

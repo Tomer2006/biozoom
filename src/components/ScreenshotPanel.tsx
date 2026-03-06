@@ -1,18 +1,16 @@
-/**
- * ScreenshotPanel — Side panel for capturing the current view as a high-res WebP; configurable
- * resolution and progress feedback.
- */
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { captureFullRenderWebp } from '../modules/screenshot'
+import { translate, type AppLanguage } from '../modules/i18n'
 
 interface ScreenshotPanelProps {
+  language: AppLanguage
   isOpen: boolean
   onClose: () => void
   onShowToast: (message: string, type?: 'success' | 'info' | 'warning' | 'error', duration?: number) => string
 }
 
-export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: ScreenshotPanelProps) {
+export default function ScreenshotPanel({ language, isOpen, onClose, onShowToast }: ScreenshotPanelProps) {
   const [pixelsPerWorldUnit, setPixelsPerWorldUnit] = useState(1000)
   const [isCapturing, setIsCapturing] = useState(false)
   const [progress, setProgress] = useState({ completed: 0, total: 0, percent: 0 })
@@ -22,22 +20,17 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
     setProgress({ completed: 0, total: 0, percent: 0 })
 
     try {
-      // Temporarily override PIXELS_PER_WORLD_UNIT in screenshot module
-      // We'll need to pass this as a parameter to captureFullRenderWebp
-      const { width, height } = await captureFullRenderWebp(
-        pixelsPerWorldUnit,
-        (completed: number, total: number, percent: number) => {
-          setProgress({ completed, total, percent })
-        }
-      )
-      
+      const { width, height } = await captureFullRenderWebp(pixelsPerWorldUnit, (completed: number, total: number, percent: number) => {
+        setProgress({ completed, total, percent })
+      })
+
       setIsCapturing(false)
-      onShowToast(`Saved WebP (${width}×${height})`, 'success')
+      onShowToast(translate('screenshot.saved', { width, height }, language), 'success')
       onClose()
     } catch (err) {
       console.error('Screenshot failed:', err)
       setIsCapturing(false)
-      onShowToast('Screenshot failed', 'error')
+      onShowToast(translate('screenshot.failed', undefined, language), 'error')
     }
   }
 
@@ -54,7 +47,6 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
           onClick={!isCapturing ? onClose : undefined}
           style={{ cursor: isCapturing ? 'default' : 'pointer' }}
         >
-          {/* Modal */}
           <motion.div
             className="modal"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -65,13 +57,9 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2 className="modal-title">Screenshot Settings</h2>
+              <h2 className="modal-title">{translate('screenshot.title', undefined, language)}</h2>
               {!isCapturing && (
-                <button
-                  className="modal-close"
-                  onClick={onClose}
-                  aria-label="Close"
-                >
+                <button className="modal-close" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -83,55 +71,45 @@ export default function ScreenshotPanel({ isOpen, onClose, onShowToast }: Screen
             <div className="modal-content">
               <div className="settings-group">
                 <label className="settings-label">
-                  <span>Resolution (pixels per world unit)</span>
-                  <span className="settings-hint">
-                    Higher = more detail but larger file size
-                  </span>
+                  <span>{translate('screenshot.resolutionLabel', undefined, language)}</span>
+                  <span className="settings-hint">{translate('screenshot.resolutionHint', undefined, language)}</span>
                 </label>
                 <input
                   type="number"
                   className="settings-input"
                   value={pixelsPerWorldUnit}
-                  onChange={(e) => setPixelsPerWorldUnit(Math.max(1, Math.min(5000, parseInt(e.target.value) || 1000)))}
+                  onChange={(e) => setPixelsPerWorldUnit(Math.max(1, Math.min(5000, parseInt(e.target.value, 10) || 1000)))}
                   min={1}
                   max={5000}
                   step={100}
                   disabled={isCapturing}
                 />
-                <div className="settings-note">
-                  Current: {pixelsPerWorldUnit} px/unit (recommended: 300-2000)
-                </div>
+                <div className="settings-note">{translate('screenshot.currentResolution', { value: pixelsPerWorldUnit }, language)}</div>
               </div>
 
               {isCapturing && (
                 <div className="screenshot-progress">
                   <div className="progress-bar-container">
-                    <div
-                      className="progress-bar-fill"
-                      style={{ width: `${progress.percent}%` }}
-                    />
+                    <div className="progress-bar-fill" style={{ width: `${progress.percent}%` }} />
                   </div>
                   <div className="progress-text">
-                    Rendering screenshot... {progress.percent}% ({progress.completed}/{progress.total} tiles)
+                    {translate(
+                      'screenshot.renderingProgress',
+                      { percent: progress.percent, completed: progress.completed, total: progress.total },
+                      language,
+                    )}
                   </div>
                 </div>
               )}
             </div>
 
             <div className="modal-footer">
-              <button
-                className="btn btn-primary"
-                onClick={handleStartScreenshot}
-                disabled={isCapturing}
-              >
-                {isCapturing ? 'Capturing...' : 'Start Screenshot'}
+              <button className="btn btn-primary" onClick={handleStartScreenshot} disabled={isCapturing}>
+                {isCapturing ? translate('screenshot.capturing', undefined, language) : translate('screenshot.start', undefined, language)}
               </button>
               {!isCapturing && (
-                <button
-                  className="btn btn-ghost"
-                  onClick={onClose}
-                >
-                  Cancel
+                <button className="btn btn-ghost" onClick={onClose}>
+                  {translate('common.cancel', undefined, language)}
                 </button>
               )}
             </div>

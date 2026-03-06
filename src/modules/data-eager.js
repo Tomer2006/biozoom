@@ -11,6 +11,7 @@ import { logInfo, logWarn, logError, logDebug } from './logger.js';
 import { setProgress } from './loading.js';
 import { updateNavigation } from './navigation.js';
 import { decodePath, findNodeByPath } from './deeplink.js';
+import { formatNumber, translate } from './i18n.ts';
 
 const maxRetries = perf.loading.maxRetries;
 const retryBaseDelayMs = perf.loading.retryBaseDelayMs;
@@ -68,7 +69,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   logInfo(`Loading pre-baked layout from ${baseUrl} (${totalFiles} files, ${totalNodes.toLocaleString()} nodes)`);
 
   // Stage 1: Loading Files
-  setProgress(0, `Loading ${totalFiles} baked files...`, 1, 1);
+  setProgress(0, translate('data.loadingBakedFiles', { total: formatNumber(totalFiles) }), 1, 1);
 
   const concurrency = Math.max(computeFetchConcurrency(), 8);
   let completed = 0;
@@ -97,7 +98,12 @@ async function loadFromBakedFiles(baseUrl, manifest) {
       completed++;
 
       if (completed === totalFiles || completed % Math.max(1, Math.floor(totalFiles / 10)) === 0) {
-        setProgress(completed / totalFiles, `Loaded ${completed}/${totalFiles} baked files...`, 1, 1);
+        setProgress(
+          completed / totalFiles,
+          translate('data.loadedBakedFiles', { completed: formatNumber(completed), total: formatNumber(totalFiles) }),
+          1,
+          1,
+        );
       }
 
       return true;
@@ -151,7 +157,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   }
 
   // Stage 2: Rehydrating tree
-  setProgress(0, 'Rehydrating tree structure...', 1, 1);
+  setProgress(0, translate('data.rehydratingTree'), 1, 1);
 
   // Sort by index and merge all arrays
   validResults.sort((a, b) => a.index - b.index);
@@ -222,7 +228,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
     }
   }
 
-  setProgress(1, `Loaded ${flatNodes.length.toLocaleString()} nodes with pre-baked layout`, 1, 1);
+  setProgress(1, translate('data.loadedNodesWithLayout', { count: formatNumber(flatNodes.length) }), 1, 1);
   logInfo(`Baked layout loaded: ${flatNodes.length} nodes in ${(performance.now() - startTime).toFixed(0)}ms`);
 }
 
@@ -363,7 +369,12 @@ function rehydrateTree(flatNodes) {
     nodeById[fn.id] = node;
 
     if (i > 0 && i % progressEvery === 0) {
-      setProgress(0.3 * (i / nodeCount), `Creating nodes... ${i.toLocaleString()}/${nodeCount.toLocaleString()}`, 1, 1);
+      setProgress(
+        0.3 * (i / nodeCount),
+        translate('data.creatingNodes', { current: formatNumber(i), total: formatNumber(nodeCount) }),
+        1,
+        1,
+      );
     }
   }
 
@@ -386,7 +397,12 @@ function rehydrateTree(flatNodes) {
     }
 
     if (i > 0 && i % progressEvery === 0) {
-      setProgress(0.3 + 0.4 * (i / nodeCount), `Linking nodes... ${i.toLocaleString()}/${nodeCount.toLocaleString()}`, 1, 1);
+      setProgress(
+        0.3 + 0.4 * (i / nodeCount),
+        translate('data.linkingNodes', { current: formatNumber(i), total: formatNumber(nodeCount) }),
+        1,
+        1,
+      );
     }
   }
 
@@ -397,7 +413,7 @@ function rehydrateTree(flatNodes) {
   // Third pass: compute _leaves counts (bottom-up)
   computeLeavesCounts(root);
 
-  setProgress(0.9, 'Finalizing tree structure...', 1, 1);
+  setProgress(0.9, translate('data.finalizingTree'), 1, 1);
 
   // Update globalId to continue from max
   state.globalId = maxId + 1;

@@ -1,26 +1,25 @@
-/**
- * HelpModal — Modal listing keyboard and mouse controls (zoom, pan, search, fit, etc.).
- */
 import { motion } from 'framer-motion'
+import { translate, type AppLanguage } from '../modules/i18n'
 
 interface HelpModalProps {
+  language: AppLanguage
   onClose: () => void
 }
 
-const controls = [
-  { key: 'Left Click', description: 'Zoom into a group' },
-  { key: 'Right Click ', description: 'Zoom out to parent' },
-  { key: 'Mouse Wheel ', description: 'Smooth zoom in/out' },
-  { key: 'Middle Drag ', description: 'Pan the view' },
-  { key: 'Hover', description: 'Show image preview' },
-  { key: 'Enter', description: 'Search and navigate' },
-  { key: 'S', description: 'Web search current/hovered' },
-  { key: 'R', description: 'Reset to root' },
-  { key: 'F', description: 'Fit current node in view' },
-  { key: '?', description: 'Toggle this help panel' },
-]
+export default function HelpModal({ language, onClose }: HelpModalProps) {
+  const controls = [
+    { key: translate('help.leftClickKey', undefined, language), description: translate('help.leftClickDescription', undefined, language) },
+    { key: translate('help.rightClickKey', undefined, language), description: translate('help.rightClickDescription', undefined, language) },
+    { key: translate('help.mouseWheelKey', undefined, language), description: translate('help.mouseWheelDescription', undefined, language) },
+    { key: translate('help.middleDragKey', undefined, language), description: translate('help.middleDragDescription', undefined, language) },
+    { key: translate('help.hoverKey', undefined, language), description: translate('help.hoverDescription', undefined, language) },
+    { key: translate('help.enterKey', undefined, language), description: translate('help.enterDescription', undefined, language) },
+    { key: translate('help.searchKey', undefined, language), description: translate('help.searchDescription', undefined, language) },
+    { key: translate('help.resetKey', undefined, language), description: translate('help.resetDescription', undefined, language) },
+    { key: translate('help.fitKey', undefined, language), description: translate('help.fitDescription', undefined, language) },
+    { key: translate('help.toggleKey', undefined, language), description: translate('help.toggleDescription', undefined, language) },
+  ]
 
-export default function HelpModal({ onClose }: HelpModalProps) {
   return (
     <motion.div
       className="modal-backdrop"
@@ -39,8 +38,8 @@ export default function HelpModal({ onClose }: HelpModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-header">
-          <h2>Keyboard Shortcuts & Controls</h2>
-          <button className="modal-close" onClick={onClose} aria-label="Close">
+          <h2>{translate('help.title', undefined, language)}</h2>
+          <button className="modal-close" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
@@ -61,4 +60,3 @@ export default function HelpModal({ onClose }: HelpModalProps) {
     </motion.div>
   )
 }
-

@@ -1,15 +1,10 @@
-/**
- * Loading state management module (React-compatible)
- *
- * Provides loading indicator functionality that integrates with React state.
- */
+import { translate } from './i18n.ts';
 
 let loadingState = false;
 
-export function showLoading(title = 'Loading…') {
+export function showLoading(title = translate('loading.defaultTitle')) {
   loadingState = true;
-  
-  // Call React's loading handler if available
+
   if (typeof window.__reactShowLoading === 'function') {
     window.__reactShowLoading(title);
   }
@@ -17,8 +12,7 @@ export function showLoading(title = 'Loading…') {
 
 export function hideLoading() {
   loadingState = false;
-  
-  // Call React's hide loading handler if available
+
   if (typeof window.__reactHideLoading === 'function') {
     window.__reactHideLoading();
   }
@@ -28,23 +22,14 @@ export function isCurrentlyLoading() {
   return loadingState;
 }
 
-/**
- * Set loading progress
- * @param {number} progress - Progress value 0-1
- * @param {string} label - Progress label text
- * @param {number} currentStage - Current stage number (1-based)
- * @param {number} totalStages - Total number of stages
- */
 export function setProgress(progress, label, currentStage = 1, totalStages = 1) {
   const percentage = Math.round(progress * 100);
-  const stageText = `Stage ${currentStage} of 1`;
-  
-  // Call React's progress update handler if available
+
   if (typeof window.__reactUpdateProgress === 'function') {
-    window.__reactUpdateProgress(percentage, label, stageText);
+    window.__reactUpdateProgress(percentage, label, currentStage, totalStages);
   }
 }
 
-export function updateProgress(progress, label, stage) {
-  setProgress(progress / 100, label, parseInt(stage?.split(' ')[1]) || 1, parseInt(stage?.split(' ')[3]) || 1);
+export function updateProgress(progress, label, currentStage = 1, totalStages = 1) {
+  setProgress(progress / 100, label, currentStage, totalStages);
 }

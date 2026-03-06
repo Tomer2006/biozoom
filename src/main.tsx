@@ -7,6 +7,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './styles/index.css'
 import { perf } from './modules/settings.js'
+import { initializeLanguage } from './modules/i18n'
+
+initializeLanguage()
 
 // Load saved settings from localStorage
 const savedFontPreset = localStorage.getItem('infinitespecies_fontPreset')
@@ -52,4 +55,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>,
 )
-

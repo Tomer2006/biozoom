@@ -1,7 +1,7 @@
 /**
- * App.tsx — Root React component for InfiniteSpecies.
- * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, modals (help/about/settings),
- * screenshot panel, and toasts. Wires data loading, deep links, navigation, and rendering.
+ * App.tsx - Root React component for InfiniteSpecies.
+ * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, first-run language modal,
+ * settings/help/about dialogs, screenshot panel, and toast notifications.
  */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
@@ -10,6 +10,8 @@ import Topbar from './components/Topbar'
 import Breadcrumbs from './components/Breadcrumbs'
 import Stage from './components/Stage'
 import LoadingOverlay from './components/LoadingOverlay'
+import LanguageModal from './components/LanguageModal'
+import OnboardingModal from './components/OnboardingModal'
 import HelpModal from './components/HelpModal'
 import AboutModal from './components/AboutModal'
 import SettingsModal from './components/SettingsModal'
@@ -17,7 +19,6 @@ import ScreenshotPanel from './components/ScreenshotPanel'
 import ToastContainer from './components/Toast'
 import { useToast } from './hooks/useToast'
 
-// Import the existing visualization modules
 import { state } from './modules/state'
 import { resizeCanvas, registerDrawCallback, tick } from './modules/canvas'
 import { draw } from './modules/render'
@@ -25,6 +26,12 @@ import { loadEager } from './modules/data'
 import { decodePath, findNodeByPath, getNodePath, updateDeepLinkFromNode } from './modules/deeplink'
 import { updateNavigation, fitNodeInView, goToNode, zoomToNode } from './modules/navigation'
 import { openProviderSearch } from './modules/providers'
+import {
+  getCurrentLanguage,
+  setCurrentLanguage,
+  translate,
+  type AppLanguage,
+} from './modules/i18n'
 
 export interface AppState {
   isLanding: boolean
@@ -40,12 +47,17 @@ export interface AppState {
   hoverNode: any
 }
 
+const ONBOARDING_STORAGE_KEY = 'infinitespecies_onboardingSeen'
+
 export default function App() {
+  const [language, setLanguage] = useState<AppLanguage>(() => getCurrentLanguage())
+  const [languageModalOpen, setLanguageModalOpen] = useState(false)
+  const [onboardingOpen, setOnboardingOpen] = useState(() => localStorage.getItem(ONBOARDING_STORAGE_KEY) !== 'true')
   const [appState, setAppState] = useState<AppState>({
     isLanding: true,
     isLoading: false,
-    loadingTitle: 'Loading…',
-    loadingStage: 'Stage 1 of 1',
+    loadingTitle: translate('loading.defaultTitle', undefined, getCurrentLanguage()),
+    loadingStage: translate('loading.stage', { current: 1, total: 1 }, getCurrentLanguage()),
     loadingProgress: 0,
     loadingPct: '0%',
     loadingTimer: '00:00',
@@ -65,13 +77,11 @@ export default function App() {
   const loadingStartTime = useRef<number>(0)
   const timerInterval = useRef<number | null>(null)
 
-  // Initialize canvas and render
   useEffect(() => {
     resizeCanvas()
     registerDrawCallback(draw)
   }, [])
 
-  // Handle deep links
   useEffect(() => {
     const handleHashChange = async () => {
       const hash = decodePath(location.hash.slice(1))
@@ -87,20 +97,24 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
-  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (languageModalOpen) return
+
       const target = e.target as HTMLElement
       const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) || target.isContentEditable
 
-      // Handle Escape key - close modals or clear search
       if (e.key === 'Escape' || e.code === 'Escape') {
-        // Allow Escape to work normally in text inputs
-        if (isTyping && target.tagName === 'TEXTAREA') {
-          return // Let textarea handle Escape normally
+        if (onboardingOpen) {
+          e.preventDefault()
+          dismissOnboarding()
+          return
         }
-        
-        // Close modals in order of priority
+
+        if (isTyping && target.tagName === 'TEXTAREA') {
+          return
+        }
+
         if (helpOpen) {
           e.preventDefault()
           setHelpOpen(false)
@@ -118,9 +132,9 @@ export default function App() {
         setHelpOpen((prev: boolean) => !prev)
       } else if (e.code === 'KeyS') {
         e.preventDefault()
-        const target = state.hoverNode || state.current || state.DATA_ROOT
-        if (target) {
-          openProviderSearch(target)
+        const targetNode = state.hoverNode || state.current || state.DATA_ROOT
+        if (targetNode) {
+          openProviderSearch(targetNode)
         }
       } else if (e.code === 'KeyR') {
         e.preventDefault()
@@ -133,20 +147,18 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [helpOpen, aboutOpen])
+  }, [aboutOpen, helpOpen, languageModalOpen, onboardingOpen])
 
   const updateBreadcrumbs = useCallback((node: any) => {
     if (!node) {
-      // Clear breadcrumbs and URL when node is null
       setAppState((prev: AppState) => ({ ...prev, breadcrumbs: [], currentNode: null }))
       if (window.location.hash) {
         history.replaceState(null, '', window.location.pathname + window.location.search)
       }
-      // Update CSS variable for breadcrumbs height
       document.documentElement.style.setProperty('--breadcrumbs-height', '0px')
       return
     }
-    
+
     const crumbs: Array<{ id: number; name: string; node: any }> = []
     let current = node
     while (current) {
@@ -157,56 +169,60 @@ export default function App() {
       })
       current = current.parent
     }
+
     setAppState((prev: AppState) => ({ ...prev, breadcrumbs: crumbs, currentNode: node }))
-    
-    // Update URL hash when breadcrumbs change (only from mouse hover, not from clicks)
     updateDeepLinkFromNode(node)
   }, [])
-  
-  // Update CSS variable for breadcrumbs height when breadcrumbs change
+
   useEffect(() => {
     const updateBreadcrumbsHeight = () => {
-      const breadcrumbsEl = document.querySelector('.breadcrumbs') as HTMLElement
+      const breadcrumbsEl = document.querySelector('.breadcrumbs') as HTMLElement | null
       if (breadcrumbsEl) {
-        const height = breadcrumbsEl.offsetHeight
-        document.documentElement.style.setProperty('--breadcrumbs-height', `${height}px`)
+        document.documentElement.style.setProperty('--breadcrumbs-height', `${breadcrumbsEl.offsetHeight}px`)
       } else {
         document.documentElement.style.setProperty('--breadcrumbs-height', '0px')
       }
     }
-    
-    // Update immediately and after a short delay to account for rendering
+
     updateBreadcrumbsHeight()
     const timer = setTimeout(updateBreadcrumbsHeight, 100)
-    
-    // Also update on window resize
+
     window.addEventListener('resize', updateBreadcrumbsHeight)
-    
     return () => {
       clearTimeout(timer)
       window.removeEventListener('resize', updateBreadcrumbsHeight)
     }
   }, [appState.breadcrumbs])
 
-  const showLoading = useCallback((title: string) => {
+  useEffect(() => {
+    if (!appState.isLoading) {
+      setAppState((prev: AppState) => ({
+        ...prev,
+        loadingTitle: translate('loading.defaultTitle', undefined, language),
+        loadingStage: translate('loading.stage', { current: 1, total: 1 }, language),
+      }))
+    }
+  }, [appState.isLoading, language])
+
+  const showLoading = useCallback((title?: string) => {
     loadingStartTime.current = performance.now()
     setAppState((prev: AppState) => ({
       ...prev,
       isLoading: true,
-      loadingTitle: title,
+      loadingTitle: title ?? translate('loading.defaultTitle', undefined, language),
+      loadingStage: translate('loading.stage', { current: 1, total: 1 }, language),
       loadingProgress: 0,
       loadingPct: '0%',
       loadingTimer: '00:00',
     }))
 
-    // Start timer
     timerInterval.current = window.setInterval(() => {
       const elapsed = Math.floor((performance.now() - loadingStartTime.current) / 1000)
       const mins = Math.floor(elapsed / 60).toString().padStart(2, '0')
       const secs = (elapsed % 60).toString().padStart(2, '0')
       setAppState((prev: AppState) => ({ ...prev, loadingTimer: `${mins}:${secs}` }))
     }, 1000)
-  }, [])
+  }, [language])
 
   const hideLoading = useCallback(() => {
     if (timerInterval.current) {
@@ -216,17 +232,16 @@ export default function App() {
     setAppState((prev: AppState) => ({ ...prev, isLoading: false }))
   }, [])
 
-  const updateProgress = useCallback((progress: number, label?: string, stage?: string) => {
+  const updateProgress = useCallback((progress: number, label?: string, currentStage = 1, totalStages = 1) => {
     setAppState((prev: AppState) => ({
       ...prev,
       loadingProgress: progress,
       loadingPct: `${Math.round(progress)}%`,
+      loadingStage: translate('loading.stage', { current: currentStage, total: totalStages }, language),
       ...(label && { loadingTitle: label }),
-      ...(stage && { loadingStage: stage }),
     }))
-  }, [])
+  }, [language])
 
-  // Override the loading module's functions
   useEffect(() => {
     // @ts-ignore
     window.__reactShowLoading = showLoading
@@ -234,38 +249,32 @@ export default function App() {
     window.__reactHideLoading = hideLoading
     // @ts-ignore
     window.__reactUpdateProgress = updateProgress
-  }, [showLoading, hideLoading, updateProgress])
+  }, [hideLoading, showLoading, updateProgress])
 
   const handleStartExploration = async () => {
     setAppState((prev: AppState) => ({ ...prev, isLanding: false, showTopbar: true }))
-    
-    // Save the initial hash before loading (for deep linking)
-    const initialHash = decodePath(location.hash.slice(1))
-    
-    // Wait for canvas to be ready
-    await new Promise(resolve => setTimeout(resolve, 100))
-    resizeCanvas()
-    
-    try {
-      showLoading('Loading taxonomy data…')
 
-      // Try to load default data - try both absolute and relative paths
-      // Vite serves public/ folder from root, so both should work
+    const initialHash = decodePath(location.hash.slice(1))
+
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    resizeCanvas()
+
+    try {
+      showLoading(translate('loading.loadingTaxonomy', undefined, language))
+
       const candidates = ['/data/manifest.json', 'data/manifest.json']
-      
+
       for (const url of candidates) {
         try {
           console.log(`Attempting to load data from: ${url}`)
           await loadEager(url)
           hideLoading()
-          
+
           state.layoutChanged = true
-          
-          // Check if there's a deep link in the URL and navigate to it
+
           if (initialHash && state.DATA_ROOT) {
             const targetNode = await findNodeByPath(initialHash)
             if (targetNode && targetNode !== state.DATA_ROOT) {
-              // Navigate to the deep linked node
               await goToNode(targetNode, true)
               updateBreadcrumbs(targetNode)
             } else {
@@ -276,7 +285,7 @@ export default function App() {
             fitNodeInView(state.DATA_ROOT)
             updateBreadcrumbs(state.DATA_ROOT)
           }
-          
+
           tick()
           return
         } catch (err) {
@@ -284,7 +293,6 @@ export default function App() {
         }
       }
 
-      // All failed
       hideLoading()
       console.error('Failed to load data from all candidates')
     } catch (err) {
@@ -301,12 +309,10 @@ export default function App() {
       breadcrumbs: [],
     }))
 
-    // Reset state
     if (state.DATA_ROOT) {
       await goToNode(state.DATA_ROOT, false)
     }
 
-    // Clear URL hash
     if (window.location.hash) {
       history.replaceState(null, '', window.location.pathname + window.location.search)
     }
@@ -320,9 +326,9 @@ export default function App() {
   }
 
   const handleFit = () => {
-    const target = state.hoverNode || state.current || state.DATA_ROOT
-    if (target) {
-      fitNodeInView(target)
+    const targetNode = state.hoverNode || state.current || state.DATA_ROOT
+    if (targetNode) {
+      fitNodeInView(targetNode)
     }
   }
 
@@ -333,7 +339,7 @@ export default function App() {
 
   const handleBreadcrumbRandom = (rootNode: any) => {
     if (!rootNode?.children?.length) {
-      toast.info('No deeper branch available here')
+      toast.info(translate('breadcrumbs.noDeeperBranch', undefined, language))
       return
     }
 
@@ -364,21 +370,46 @@ export default function App() {
     const url = new URL(location.href)
     const path = state.current ? getNodePath(state.current).join('/') : ''
     url.hash = path ? `#${encodeURIComponent(path)}` : ''
-    
+
     try {
       await navigator.clipboard.writeText(url.toString())
-      toast.success('Link copied to clipboard')
+      toast.success(translate('app.linkCopied', undefined, language))
     } catch {
-      window.prompt('Copy link:', url.toString())
+      window.prompt(translate('app.copyLinkPrompt', undefined, language), url.toString())
     }
+  }
+
+  const handleLanguageSelect = (nextLanguage: AppLanguage) => {
+    setCurrentLanguage(nextLanguage)
+    setLanguage(nextLanguage)
+    setLanguageModalOpen(false)
+  }
+
+  const dismissOnboarding = () => {
+    localStorage.setItem(ONBOARDING_STORAGE_KEY, 'true')
+    setOnboardingOpen(false)
   }
 
   return (
     <div className="app">
+      <OnboardingModal
+        isOpen={onboardingOpen}
+        language={language}
+        onClose={dismissOnboarding}
+      />
+
+      <LanguageModal
+        isOpen={languageModalOpen}
+        onSelect={handleLanguageSelect}
+        onClose={() => setLanguageModalOpen(false)}
+      />
+
       <AnimatePresence>
         {appState.isLanding && (
           <LandingPage
+            language={language}
             onStart={handleStartExploration}
+            onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}
             onAbout={() => setAboutOpen(true)}
             onSettings={() => setSettingsOpen(true)}
@@ -388,8 +419,10 @@ export default function App() {
 
       {appState.showTopbar && (
         <Topbar
+          language={language}
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
+          onLanguage={() => setLanguageModalOpen(true)}
           onSettings={() => setSettingsOpen(true)}
           onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
@@ -399,6 +432,7 @@ export default function App() {
 
       {appState.showTopbar && appState.breadcrumbs.length > 0 && (
         <Breadcrumbs
+          language={language}
           crumbs={appState.breadcrumbs}
           onCrumbClick={handleBreadcrumbClick}
           onRandomClick={handleBreadcrumbRandom}
@@ -406,6 +440,7 @@ export default function App() {
       )}
 
       <Stage
+        language={language}
         isLoading={appState.isLoading}
         onUpdateBreadcrumbs={updateBreadcrumbs}
         hidden={appState.isLanding}
@@ -413,6 +448,7 @@ export default function App() {
 
       {appState.isLoading && (
         <LoadingOverlay
+          language={language}
           title={appState.loadingTitle}
           stage={appState.loadingStage}
           progress={appState.loadingProgress}
@@ -422,16 +458,22 @@ export default function App() {
       )}
 
       <AnimatePresence>
-        {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
+        {helpOpen && <HelpModal language={language} onClose={() => setHelpOpen(false)} />}
       </AnimatePresence>
 
       <AnimatePresence>
-        {aboutOpen && <AboutModal onClose={() => setAboutOpen(false)} />}
+        {aboutOpen && <AboutModal language={language} onClose={() => setAboutOpen(false)} />}
       </AnimatePresence>
 
-      <SettingsModal isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsModal
+        isOpen={settingsOpen}
+        language={language}
+        onLanguageChange={handleLanguageSelect}
+        onClose={() => setSettingsOpen(false)}
+      />
 
       <ScreenshotPanel
+        language={language}
         isOpen={screenshotOpen}
         onClose={() => setScreenshotOpen(false)}
         onShowToast={toast.showToast}
