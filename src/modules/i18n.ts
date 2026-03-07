@@ -151,7 +151,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       level: (params) => `Level ${params?.level ?? 0}`,
       noImage: 'No image',
       unknown: 'Unknown',
-      webSearch: 'Search Hovered (W)',
+      webSearch: 'Search (W)',
       webSearchTitle: 'Search hovered node on the web (W)',
     },
     app: {
