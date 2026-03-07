@@ -28,6 +28,7 @@ import { updateNavigation, fitNodeInView, goToNode, zoomToNode } from './modules
 import { openProviderSearch } from './modules/providers'
 import {
   getCurrentLanguage,
+  getStoredLanguage,
   setCurrentLanguage,
   translate,
   type AppLanguage,
@@ -50,9 +51,11 @@ export interface AppState {
 const ONBOARDING_STORAGE_KEY = 'infinitespecies_onboardingSeen'
 
 export default function App() {
+  const hasStoredLanguage = getStoredLanguage() !== null
+  const hasSeenOnboarding = () => localStorage.getItem(ONBOARDING_STORAGE_KEY) === 'true'
   const [language, setLanguage] = useState<AppLanguage>(() => getCurrentLanguage())
-  const [languageModalOpen, setLanguageModalOpen] = useState(false)
-  const [onboardingOpen, setOnboardingOpen] = useState(() => localStorage.getItem(ONBOARDING_STORAGE_KEY) !== 'true')
+  const [languageModalOpen, setLanguageModalOpen] = useState(() => !hasStoredLanguage)
+  const [onboardingOpen, setOnboardingOpen] = useState(() => hasStoredLanguage && !hasSeenOnboarding())
   const [appState, setAppState] = useState<AppState>({
     isLanding: true,
     isLoading: false,
@@ -383,6 +386,16 @@ export default function App() {
     setCurrentLanguage(nextLanguage)
     setLanguage(nextLanguage)
     setLanguageModalOpen(false)
+    if (!hasSeenOnboarding()) {
+      setOnboardingOpen(true)
+    }
+  }
+
+  const handleLanguageModalClose = () => {
+    setLanguageModalOpen(false)
+    if (!hasSeenOnboarding()) {
+      setOnboardingOpen(true)
+    }
   }
 
   const dismissOnboarding = () => {
@@ -401,7 +414,7 @@ export default function App() {
       <LanguageModal
         isOpen={languageModalOpen}
         onSelect={handleLanguageSelect}
-        onClose={() => setLanguageModalOpen(false)}
+        onClose={handleLanguageModalClose}
       />
 
       <AnimatePresence>
