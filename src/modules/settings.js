@@ -20,20 +20,12 @@ export const perf = {
     depthRenderFalloff: 0.7,      // Multiplier for render distance at each depth level (0.7 = 70% of previous)
     labelMinFontPx: 12,           // minimum font size (px) for labels; smaller are skipped
     verticalPadPx: 100,           // extra vertical padding (px) when culling to keep near-edge nodes visible
-    // Performance knobs
-    strokeMinPxRadius: 24,
     // Nodes smaller than this on-screen are ignored for picking (in pixels)
     pickMinPxRadius: 4,
     maxLabels: 180,
     labelGridCellPx: 30,
     maxNodesPerFrame: 9000,
     showGrid: false,
-
-    // Level-of-detail thresholds (in pixels)
-    lodDetailThreshold: 8,     // Above this size, render with full detail
-    lodMediumThreshold: 4,     // Above this size, render with medium detail
-    lodSimpleThreshold: 2,     // Above this size, render simplified version
-    lodSkipThreshold: 1,       // Below this size, skip rendering entirely
 
     // Grid pattern settings
     gridTileSize: 40,          // Grid tile size in pixels

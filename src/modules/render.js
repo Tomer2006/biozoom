@@ -16,8 +16,39 @@ import { perf } from './settings.js';
 const measureCache = new Map();
 const MAX_CACHE_SIZE = perf.memory.maxTextCacheSize;
 const CACHE_CLEANUP_THRESHOLD = perf.memory.cacheCleanupThreshold;
-let cacheAccessOrder = []; // Track access order for LRU-like behavior
 const labelCandidates = [];
+
+function touchMeasureCacheEntry(key, metrics) {
+  // Refresh insertion order so the oldest entry remains the least recently used.
+  measureCache.delete(key);
+  measureCache.set(key, metrics);
+}
+
+function evictMeasureCacheEntries(targetSize) {
+  while (measureCache.size > targetSize) {
+    const oldestKey = measureCache.keys().next().value;
+    if (oldestKey === undefined) break;
+    measureCache.delete(oldestKey);
+  }
+}
+
+function getCachedTextMetrics(ctx, key, text, font) {
+  const cached = measureCache.get(key);
+  if (cached) {
+    touchMeasureCacheEntry(key, cached);
+    return cached;
+  }
+
+  ctx.font = font;
+  const metrics = { width: ctx.measureText(text).width };
+
+  if (measureCache.size >= MAX_CACHE_SIZE) {
+    evictMeasureCacheEntries(CACHE_CLEANUP_THRESHOLD - 1);
+  }
+
+  measureCache.set(key, metrics);
+  return metrics;
+}
 
 // Memory management: progressive cleanup
 let lastMemoryCheck = 0;
@@ -37,10 +68,7 @@ function performMemoryCleanup() {
     if (measureCache.size > CACHE_CLEANUP_THRESHOLD) {
       const cleanupSize = Math.min(perf.memory.progressiveCleanupBatch,
         measureCache.size - CACHE_CLEANUP_THRESHOLD);
-      for (let i = 0; i < cleanupSize && cacheAccessOrder.length > 0; i++) {
-        const lruKey = cacheAccessOrder.shift();
-        measureCache.delete(lruKey);
-      }
+      evictMeasureCacheEntries(measureCache.size - cleanupSize);
     }
   }
 }
@@ -116,10 +144,6 @@ export function drawWithOptions(options = {}) {
   const rendering = { ...perf.rendering, ...renderingOverrides };
 
   const {
-    lodDetailThreshold,
-    lodMediumThreshold,
-    lodSimpleThreshold,
-    lodSkipThreshold,
     minPxRadius,
     labelMinPxRadius,
     maxNodesPerFrame,
@@ -127,7 +151,6 @@ export function drawWithOptions(options = {}) {
     gridTileSize,
     strokeColorWithChildren,
     strokeColorLeaf,
-    strokeMinPxRadius,
     strokeLineWidthMin,
     strokeLineWidthMax,
     strokeLineWidthBase,
@@ -302,33 +325,12 @@ export function drawWithOptions(options = {}) {
         if (fontSize >= labelMinFontPx) {
           shouldRenderLabel = true;
           const key = baseFontSize + '|' + text;
-          let metrics = measureCache.get(key);
-
-          // Track cache access for LRU behavior
-          if (metrics) {
-            // Move to end of access order (most recently used)
-            const index = cacheAccessOrder.indexOf(key);
-            if (index > -1) {
-              cacheAccessOrder.splice(index, 1);
-            }
-            cacheAccessOrder.push(key);
-          } else {
-            // Cache miss - measure and store at base font size
-            ctx.font = `${labelFontWeight} ${baseFontSize}px ${labelFontFamily}`;
-            metrics = { width: ctx.measureText(text).width };
-
-            // Cache management
-            if (measureCache.size >= MAX_CACHE_SIZE) {
-              // Remove least recently used items
-              while (measureCache.size >= CACHE_CLEANUP_THRESHOLD && cacheAccessOrder.length > 0) {
-                const lruKey = cacheAccessOrder.shift();
-                measureCache.delete(lruKey);
-              }
-            }
-
-            measureCache.set(key, metrics);
-            cacheAccessOrder.push(key);
-          }
+          const metrics = getCachedTextMetrics(
+            ctx,
+            key,
+            text,
+            `${labelFontWeight} ${baseFontSize}px ${labelFontFamily}`
+          );
           // Scale the measured width and height by the transform scale
           textWidth = metrics.width * textScale;
           textHeight = fontSize;
@@ -341,33 +343,12 @@ export function drawWithOptions(options = {}) {
         if (fontSize >= labelMinFontPx) {
           shouldRenderLabel = true;
           const key = fontSize + '|' + text;
-          let metrics = measureCache.get(key);
-
-          // Track cache access for LRU behavior
-          if (metrics) {
-            // Move to end of access order (most recently used)
-            const index = cacheAccessOrder.indexOf(key);
-            if (index > -1) {
-              cacheAccessOrder.splice(index, 1);
-            }
-            cacheAccessOrder.push(key);
-          } else {
-            // Cache miss - measure and store
-            ctx.font = `${labelFontWeight} ${fontSize}px ${labelFontFamily}`;
-            metrics = { width: ctx.measureText(text).width };
-
-            // Cache management
-            if (measureCache.size >= MAX_CACHE_SIZE) {
-              // Remove least recently used items
-              while (measureCache.size >= CACHE_CLEANUP_THRESHOLD && cacheAccessOrder.length > 0) {
-                const lruKey = cacheAccessOrder.shift();
-                measureCache.delete(lruKey);
-              }
-            }
-
-            measureCache.set(key, metrics);
-            cacheAccessOrder.push(key);
-          }
+          const metrics = getCachedTextMetrics(
+            ctx,
+            key,
+            text,
+            `${labelFontWeight} ${fontSize}px ${labelFontFamily}`
+          );
           textWidth = metrics.width;
           textHeight = fontSize;
           pad = 2;

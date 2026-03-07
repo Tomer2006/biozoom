@@ -241,10 +241,6 @@ async function renderTile(tileX, tileY, tileWidth, tileHeight, worldBounds, scal
       labelMinFontPx: 0,
       maxNodesPerFrame: Infinity,
       maxLabels: Infinity, // No limit on number of labels, but collision detection will prevent overlap
-      lodDetailThreshold: 0,
-      lodMediumThreshold: 0,
-      lodSimpleThreshold: 0,
-      lodSkipThreshold: 0,
       depthRenderEnabled: false,
     },
   });
