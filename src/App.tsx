@@ -135,9 +135,11 @@ export default function App() {
         setHelpOpen((prev: boolean) => !prev)
       } else if (e.code === 'KeyW') {
         e.preventDefault()
-        const targetNode = state.hoverNode || state.current || state.DATA_ROOT
-        if (targetNode) {
-          openProviderSearch(targetNode)
+        const hoveredNode = state.hoverNode
+        if (hoveredNode) {
+          openProviderSearch(hoveredNode)
+        } else {
+          toast.info(translate('app.hoverToWebSearch', undefined, language))
         }
       } else if (e.code === 'KeyR') {
         e.preventDefault()
@@ -150,7 +152,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [aboutOpen, helpOpen, languageModalOpen, onboardingOpen])
+  }, [aboutOpen, helpOpen, language, languageModalOpen, onboardingOpen, toast])
 
   const updateBreadcrumbs = useCallback((node: any) => {
     if (!node) {
@@ -431,13 +433,13 @@ export default function App() {
       </AnimatePresence>
 
       {appState.showTopbar && (
-        <Topbar
-          language={language}
-          onBackToMenu={handleBackToMenu}
-          onCopyLink={handleCopyLink}
-          onLanguage={() => setLanguageModalOpen(true)}
-          onSettings={() => setSettingsOpen(true)}
-          onHelp={() => setHelpOpen(true)}
+      <Topbar
+        language={language}
+        onBackToMenu={handleBackToMenu}
+        onCopyLink={handleCopyLink}
+        onLanguage={() => setLanguageModalOpen(true)}
+        onSettings={() => setSettingsOpen(true)}
+        onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
           onShowToast={toast.showToast}
         />

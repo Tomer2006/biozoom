@@ -81,8 +81,10 @@ export default function Topbar({
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [showResults, setShowResults] = useState(false)
+  const [selectedSearchIndex, setSelectedSearchIndex] = useState(-1)
   const searchRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const resultRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -99,7 +101,13 @@ export default function Topbar({
     setSearchQuery('')
     setSearchResults([])
     setShowResults(false)
+    setSelectedSearchIndex(-1)
   }
+
+  useEffect(() => {
+    if (!showResults || selectedSearchIndex < 0) return
+    resultRefs.current[selectedSearchIndex]?.scrollIntoView({ block: 'nearest' })
+  }, [selectedSearchIndex, showResults])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -123,6 +131,7 @@ export default function Topbar({
     if (!result.hasResults) {
       setSearchResults([])
       setShowResults(false)
+      setSelectedSearchIndex(-1)
       onShowToast(translate('topbar.noResults', undefined, language), 'warning')
       return
     }
@@ -131,10 +140,12 @@ export default function Topbar({
       handleSingleSearchResult(result.matches[0], onUpdateBreadcrumbs)
       setShowResults(false)
       setSearchQuery('')
+      setSelectedSearchIndex(-1)
     } else {
       const results: SearchResult[] = processSearchResults(result.matches, searchQuery)
       setSearchResults(results)
       setShowResults(true)
+      setSelectedSearchIndex(0)
     }
   }
 
@@ -142,6 +153,7 @@ export default function Topbar({
     handleSearchResultClick(result.node)
     setShowResults(false)
     setSearchQuery('')
+    setSelectedSearchIndex(-1)
   }
 
   return (
@@ -160,10 +172,31 @@ export default function Topbar({
             type="search"
             dir="auto"
             placeholder={translate('topbar.searchPlaceholder', undefined, language)}
+            role="combobox"
+            aria-expanded={showResults}
+            aria-controls="topbar-search-results"
+            aria-activedescendant={selectedSearchIndex >= 0 ? `topbar-search-result-${searchResults[selectedSearchIndex]?._id}-${selectedSearchIndex}` : undefined}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value)
+              setShowResults(false)
+              setSelectedSearchIndex(-1)
+            }}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === 'ArrowDown') {
+                if (!showResults || searchResults.length === 0) return
+                e.preventDefault()
+                setSelectedSearchIndex((currentIndex) => (currentIndex + 1) % searchResults.length)
+              } else if (e.key === 'ArrowUp') {
+                if (!showResults || searchResults.length === 0) return
+                e.preventDefault()
+                setSelectedSearchIndex((currentIndex) => (currentIndex <= 0 ? searchResults.length - 1 : currentIndex - 1))
+              } else if (e.key === 'Enter') {
+                if (showResults && selectedSearchIndex >= 0 && searchResults[selectedSearchIndex]) {
+                  e.preventDefault()
+                  handleResultClick(searchResults[selectedSearchIndex])
+                  return
+                }
                 handleSearch()
               } else if (e.key === 'Escape') {
                 handleClear()
@@ -179,9 +212,20 @@ export default function Topbar({
           </button>
 
           {showResults && searchResults.length > 0 && (
-            <div className="search-results">
-              {searchResults.map((result) => (
-                <div key={result._id} className="search-result-item" onClick={() => handleResultClick(result)}>
+            <div id="topbar-search-results" className="search-results" role="listbox">
+              {searchResults.map((result, index) => (
+                <div
+                  key={`${result._id}-${index}`}
+                  id={`topbar-search-result-${result._id}-${index}`}
+                  ref={(element) => {
+                    resultRefs.current[index] = element
+                  }}
+                  className={`search-result-item${index === selectedSearchIndex ? ' active' : ''}`}
+                  role="option"
+                  aria-selected={index === selectedSearchIndex}
+                  onMouseEnter={() => setSelectedSearchIndex(index)}
+                  onClick={() => handleResultClick(result)}
+                >
                   <div className="search-result-name">{highlightMatchJSX(result.name, searchQuery)}</div>
                   {result.path && <div className="search-result-path">{highlightMatchJSX(result.path, searchQuery)}</div>}
                 </div>

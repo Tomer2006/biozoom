@@ -468,9 +468,9 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
             className="btn btn-small"
             onClick={(e) => {
               e.stopPropagation()
-              const targetNode = state.hoverNode || state.current
-              if (targetNode) {
-                openProviderSearch(targetNode)
+              const hoveredNode = state.hoverNode
+              if (hoveredNode) {
+                openProviderSearch(hoveredNode)
               }
             }}
             title={translate('stage.webSearchTitle', undefined, language)}
