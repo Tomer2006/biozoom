@@ -850,13 +850,6 @@
   gap: var(--space-lg);
 }
 
-.language-modal-subtitle {
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  text-align: center;
-}
-
 .language-modal-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1254,7 +1247,6 @@
 }
 
 [dir="rtl"] .language-modal-header,
-[dir="rtl"] .language-modal-subtitle,
 [dir="rtl"] .language-option {
   text-align: center;
 }

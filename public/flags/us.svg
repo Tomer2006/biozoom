@@ -1,36 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7410 3900" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 100" role="img" aria-labelledby="title">
   <title>United States flag</title>
-  <rect width="7410" height="3900" fill="#b22234"/>
+  <rect width="190" height="100" fill="#b22234"/>
   <g fill="#fff">
-    <rect y="300" width="7410" height="300"/>
-    <rect y="900" width="7410" height="300"/>
-    <rect y="1500" width="7410" height="300"/>
-    <rect y="2100" width="7410" height="300"/>
-    <rect y="2700" width="7410" height="300"/>
-    <rect y="3300" width="7410" height="300"/>
+    <rect y="7.692" width="190" height="7.692"/>
+    <rect y="23.077" width="190" height="7.692"/>
+    <rect y="38.462" width="190" height="7.692"/>
+    <rect y="53.846" width="190" height="7.692"/>
+    <rect y="69.231" width="190" height="7.692"/>
+    <rect y="84.615" width="190" height="7.692"/>
   </g>
-  <rect width="2964" height="2100" fill="#3c3b6e"/>
+  <rect width="76" height="53.846" fill="#3c3b6e"/>
   <g fill="#fff">
-    <g id="s18">
-      <g id="s9">
-        <g id="s5">
-          <g id="s4">
-            <path id="s" d="m247,90 70.534,217.082-184.698-134.164h228.328l-184.698,134.164z"/>
-            <use href="#s" x="494"/>
-            <use href="#s" x="988"/>
-            <use href="#s" x="1482"/>
-          </g>
-          <use href="#s" x="1976"/>
-        </g>
-        <use href="#s5" y="420"/>
-      </g>
-      <use href="#s9" y="840"/>
-    </g>
-    <use href="#s18" x="247" y="210"/>
-    <use href="#s9" x="494" y="0"/>
-    <use href="#s18" x="988" y="210"/>
-    <use href="#s9" x="1482" y="0"/>
-    <use href="#s18" x="1976" y="210"/>
-    <use href="#s9" x="2470" y="0"/>
+    <circle cx="6.333" cy="5.983" r="1.55"/>
+    <circle cx="18.999" cy="5.983" r="1.55"/>
+    <circle cx="31.665" cy="5.983" r="1.55"/>
+    <circle cx="44.331" cy="5.983" r="1.55"/>
+    <circle cx="56.997" cy="5.983" r="1.55"/>
+    <circle cx="69.663" cy="5.983" r="1.55"/>
+    <circle cx="12.666" cy="11.966" r="1.55"/>
+    <circle cx="25.332" cy="11.966" r="1.55"/>
+    <circle cx="37.998" cy="11.966" r="1.55"/>
+    <circle cx="50.664" cy="11.966" r="1.55"/>
+    <circle cx="63.33" cy="11.966" r="1.55"/>
+    <circle cx="6.333" cy="17.949" r="1.55"/>
+    <circle cx="18.999" cy="17.949" r="1.55"/>
+    <circle cx="31.665" cy="17.949" r="1.55"/>
+    <circle cx="44.331" cy="17.949" r="1.55"/>
+    <circle cx="56.997" cy="17.949" r="1.55"/>
+    <circle cx="69.663" cy="17.949" r="1.55"/>
+    <circle cx="12.666" cy="23.932" r="1.55"/>
+    <circle cx="25.332" cy="23.932" r="1.55"/>
+    <circle cx="37.998" cy="23.932" r="1.55"/>
+    <circle cx="50.664" cy="23.932" r="1.55"/>
+    <circle cx="63.33" cy="23.932" r="1.55"/>
+    <circle cx="6.333" cy="29.915" r="1.55"/>
+    <circle cx="18.999" cy="29.915" r="1.55"/>
+    <circle cx="31.665" cy="29.915" r="1.55"/>
+    <circle cx="44.331" cy="29.915" r="1.55"/>
+    <circle cx="56.997" cy="29.915" r="1.55"/>
+    <circle cx="69.663" cy="29.915" r="1.55"/>
+    <circle cx="12.666" cy="35.898" r="1.55"/>
+    <circle cx="25.332" cy="35.898" r="1.55"/>
+    <circle cx="37.998" cy="35.898" r="1.55"/>
+    <circle cx="50.664" cy="35.898" r="1.55"/>
+    <circle cx="63.33" cy="35.898" r="1.55"/>
+    <circle cx="6.333" cy="41.881" r="1.55"/>
+    <circle cx="18.999" cy="41.881" r="1.55"/>
+    <circle cx="31.665" cy="41.881" r="1.55"/>
+    <circle cx="44.331" cy="41.881" r="1.55"/>
+    <circle cx="56.997" cy="41.881" r="1.55"/>
+    <circle cx="69.663" cy="41.881" r="1.55"/>
+    <circle cx="12.666" cy="47.864" r="1.55"/>
+    <circle cx="25.332" cy="47.864" r="1.55"/>
+    <circle cx="37.998" cy="47.864" r="1.55"/>
+    <circle cx="50.664" cy="47.864" r="1.55"/>
+    <circle cx="63.33" cy="47.864" r="1.55"/>
+    <circle cx="6.333" cy="53.847" r="1.55"/>
+    <circle cx="18.999" cy="53.847" r="1.55"/>
+    <circle cx="31.665" cy="53.847" r="1.55"/>
+    <circle cx="44.331" cy="53.847" r="1.55"/>
+    <circle cx="56.997" cy="53.847" r="1.55"/>
+    <circle cx="69.663" cy="53.847" r="1.55"/>
   </g>
 </svg>

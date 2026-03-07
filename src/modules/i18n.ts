@@ -24,8 +24,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     },
     languageModal: {
       title: 'Choose your language / בחרו שפה',
-      subtitle:
-        'Pick the interface language. You can change it later in Settings. / בחרו את שפת הממשק. אפשר לשנות אותה אחר כך בהגדרות.',
       englishTitle: 'English',
       englishDescription: 'Use the app in English.',
       hebrewTitle: 'עברית',
@@ -186,8 +184,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     },
     languageModal: {
       title: 'Choose your language / בחרו שפה',
-      subtitle:
-        'Pick the interface language. You can change it later in Settings. / בחרו את שפת הממשק. אפשר לשנות אותה אחר כך בהגדרות.',
       englishTitle: 'English',
       englishDescription: 'Use the app in English.',
       hebrewTitle: 'עברית',
