@@ -42,6 +42,22 @@ export function rebuildNodeMap() {
   if (!state.layout?.root) return;
   const desc = state.layout.root.descendants();
   desc.forEach(d => {
+    let labelTopSpaceWorld = d._vr * 2;
+    const children = d.children || [];
+    if (children.length > 0) {
+      const parentTop = d._vy - d._vr;
+      let highestChildTop = d._vy + d._vr;
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        const childTop = child._vy - child._vr;
+        if (childTop < highestChildTop) {
+          highestChildTop = childTop;
+        }
+      }
+      labelTopSpaceWorld = Math.max(0, highestChildTop - parentTop);
+    }
+
+    d._labelTopSpaceWorld = labelTopSpaceWorld;
     state.nodeLayoutMap.set(d.data._id, d);
     if (typeof d._vr === 'number' && d._vr > state.maxNodeRadius) {
       state.maxNodeRadius = d._vr;

@@ -356,27 +356,8 @@ export function drawWithOptions(options = {}) {
       }
       
       if (shouldRenderLabel) {
-        // Calculate available space at top of circle
-        // Find the highest child (closest to top edge)
-        const ch = d.children || [];
-        let availableSpace = sr * 2; // default: full diameter if no children
-        
-        if (ch.length > 0) {
-          // Find the child whose top edge is closest to parent's top
-          const parentTop = d._vy - d._vr;
-          let highestChildTop = d._vy + d._vr; // start at bottom
-          
-          for (const child of ch) {
-            const childTop = child._vy - child._vr;
-            if (childTop < highestChildTop) {
-              highestChildTop = childTop;
-            }
-          }
-          
-          // Available space is from parent top to highest child top (in screen pixels)
-          availableSpace = (highestChildTop - parentTop) * camK;
-        }
-        
+        const availableSpace = (d._labelTopSpaceWorld ?? (d._vr * 2)) * camK;
+
         // Only show label if there's enough space for text (need text height + padding)
         const requiredSpace = textHeight + 4;
         if (availableSpace >= requiredSpace) {
