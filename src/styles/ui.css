@@ -84,6 +84,17 @@
   box-shadow: 0 0 0 2px var(--accent-primary);
 }
 
+.topbar-web-search-btn {
+  gap: 0.4rem;
+  padding-inline: 0.75rem;
+}
+
+.topbar-web-search-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Buttons
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -317,6 +328,11 @@
 
 .search-result-item:hover {
   background: rgba(31, 37, 72, 0.55);
+}
+
+.search-result-item.active {
+  background: rgba(91, 141, 239, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(91, 141, 239, 0.45);
 }
 
 .search-result-name {

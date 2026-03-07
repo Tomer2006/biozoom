@@ -60,7 +60,7 @@ export const perf = {
     labelFontSizeMax: 18,           // Maximum label font size in pixels
     labelFontSizeDivisor: 3,        // Divisor for calculating font size from screen radius (fontSize = sr / divisor)
     labelFontWeight: 600,           // Font weight (600 = semi-bold)
-    labelFontFamily: 'ui-sans-serif', // Font family
+    labelFontFamily: "'Roboto', ui-sans-serif, system-ui, sans-serif", // Font family
     labelStrokeWidthMin: 2,         // Minimum stroke width (applies to all fonts)
     labelStrokeWidthMax: 5,         // Maximum stroke width (applies to all fonts)
     labelLargeFontThreshold: 14    // Font size threshold (px) - no longer used for stroke width, kept for compatibility
@@ -281,57 +281,6 @@ export const perf = {
     
     // Helper to get the current palette (used by the app)
     get palette() {
-      return this.presets[this.currentPreset];
-    }
-  },
-
-  // Font configuration
-  fonts: {
-    // Change this to switch between presets: 'inter', 'roboto', 'sourceSans', 'poppins', 'nunito', 'workSans', 'dmSans', 'lato', 'helvetica'
-    currentPreset: 'roboto',
-    
-    // Font presets (Google Fonts + System Fonts)
-    presets: {
-      roboto: {
-        name: 'Roboto',
-        import: 'Roboto:wght@300;400;500;700'
-      },
-      helvetica: {
-        name: 'Helvetica',
-        import: null  // System font, no import needed
-      },
-      inter: {
-        name: 'Inter',
-        import: 'Inter:wght@300;400;500;600;700;800'
-      },
-      sourceSans: {
-        name: 'Source Sans 3',
-        import: 'Source+Sans+3:wght@300;400;500;600;700'
-      },
-      poppins: {
-        name: 'Poppins',
-        import: 'Poppins:wght@300;400;500;600;700'
-      },
-      nunito: {
-        name: 'Nunito Sans',
-        import: 'Nunito+Sans:wght@300;400;500;600;700'
-      },
-      workSans: {
-        name: 'Work Sans',
-        import: 'Work+Sans:wght@300;400;500;600;700'
-      },
-      dmSans: {
-        name: 'DM Sans',
-        import: 'DM+Sans:wght@300;400;500;600;700'
-      },
-      lato: {
-        name: 'Lato',
-        import: 'Lato:wght@300;400;700'
-      }
-    },
-    
-    // Helper to get the current font
-    get current() {
       return this.presets[this.currentPreset];
     }
   },

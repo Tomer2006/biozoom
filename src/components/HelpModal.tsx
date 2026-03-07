@@ -47,6 +47,7 @@ export default function HelpModal({ language, onClose }: HelpModalProps) {
         </div>
 
         <div className="modal-body">
+          <p className="help-note">{translate('help.webSearchHint', undefined, language)}</p>
           <div className="help-grid">
             {controls.map((control) => (
               <div key={control.key} className="help-item">

@@ -624,6 +624,13 @@
   gap: var(--space-md);
 }
 
+.help-note {
+  margin-bottom: var(--space-md);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
 .help-item {
   display: flex;
   gap: var(--space-sm);
