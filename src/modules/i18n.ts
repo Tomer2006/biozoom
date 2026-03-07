@@ -24,8 +24,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     },
     languageModal: {
       title: 'Choose your language / בחרו שפה',
-      subtitle:
-        'Pick the interface language. You can change it later in Settings. / בחרו את שפת הממשק. אפשר לשנות אותה אחר כך בהגדרות.',
       englishTitle: 'English',
       englishDescription: 'Use the app in English.',
       hebrewTitle: 'עברית',
@@ -120,7 +118,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       feature4: 'Hover over organisms to see image previews and quick visual context.',
       feature5: 'Open related reference pages when you want to learn more about a species or group.',
       feature6: 'Copy and share the current view so other people can open the same place in the tree.',
-      feature7: 'Adjust visual settings like colors, fonts, and preferred web search provider.',
+      feature7: 'Adjust visual settings like colors and your preferred web search provider.',
       feature8: 'Use built-in help and keyboard shortcuts for faster exploration.',
       projectLinks: 'Project links',
       github: 'View on GitHub',
@@ -129,8 +127,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       title: 'Settings',
       languageSection: 'Language',
       languageLabel: 'Interface Language',
-      fontSection: 'Font',
-      fontLabel: 'Font Family',
       colorSection: 'Color Palette',
       colorLabel: 'Color Scheme',
       searchSection: 'Web Search (W key)',
@@ -186,8 +182,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     },
     languageModal: {
       title: 'Choose your language / בחרו שפה',
-      subtitle:
-        'Pick the interface language. You can change it later in Settings. / בחרו את שפת הממשק. אפשר לשנות אותה אחר כך בהגדרות.',
       englishTitle: 'English',
       englishDescription: 'Use the app in English.',
       hebrewTitle: 'עברית',
@@ -281,7 +275,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       feature4: 'ריחוף מעל אורגניזמים כדי לראות תצוגות תמונה והקשר חזותי מהיר.',
       feature5: 'פתיחת דפי עיון קשורים כשאתם רוצים ללמוד עוד על מין או קבוצה.',
       feature6: 'העתקה ושיתוף של התצוגה הנוכחית כך שאנשים אחרים יפתחו בדיוק את אותו מקום בעץ.',
-      feature7: 'התאמת ההגדרות החזותיות כמו צבעים, פונטים וספק חיפוש מועדף ברשת.',
+      feature7: 'התאמת ההגדרות החזותיות כמו צבעים וספק חיפוש מועדף ברשת.',
       feature8: 'שימוש בעזרה המובנית ובקיצורי המקלדת לחקירה מהירה יותר.',
       projectLinks: 'קישורי הפרויקט',
       github: 'צפייה ב-GitHub',
@@ -290,8 +284,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       title: 'הגדרות',
       languageSection: 'שפה',
       languageLabel: 'שפת הממשק',
-      fontSection: 'פונט',
-      fontLabel: 'משפחת פונטים',
       colorSection: 'פלטת צבעים',
       colorLabel: 'ערכת צבעים',
       searchSection: 'חיפוש ברשת (מקש S)',

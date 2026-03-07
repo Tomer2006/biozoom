@@ -16,14 +16,6 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ isOpen, language, onLanguageChange, onClose }: SettingsModalProps) {
-  const getSavedFontPreset = () => {
-    const saved = localStorage.getItem('infinitespecies_fontPreset')
-    if (saved && perf.fonts.presets[saved as keyof typeof perf.fonts.presets]) {
-      return saved
-    }
-    return perf.fonts.currentPreset
-  }
-
   const getSavedColorPreset = () => {
     const saved = localStorage.getItem('infinitespecies_colorPreset')
     if (saved && perf.colors.presets[saved as keyof typeof perf.colors.presets]) {
@@ -33,38 +25,13 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
   }
 
   const [currentColorPreset, setCurrentColorPreset] = useState(getSavedColorPreset)
-  const [currentFontPreset, setCurrentFontPreset] = useState(getSavedFontPreset)
 
   const colorPresets = Object.keys(perf.colors.presets)
-  const fontPresets = Object.keys(perf.fonts.presets)
 
   const handleColorChange = (preset: string) => {
     setCurrentColorPreset(preset)
     perf.colors.currentPreset = preset
     localStorage.setItem('infinitespecies_colorPreset', preset)
-  }
-
-  const handleFontChange = (preset: string) => {
-    setCurrentFontPreset(preset)
-    perf.fonts.currentPreset = preset
-    localStorage.setItem('infinitespecies_fontPreset', preset)
-
-    const fontConfig = perf.fonts.presets[preset as keyof typeof perf.fonts.presets]
-    if (fontConfig) {
-      if (fontConfig.import) {
-        const existingLink = document.querySelector(`link[href*="${fontConfig.import}"]`)
-        if (!existingLink) {
-          const link = document.createElement('link')
-          link.rel = 'stylesheet'
-          link.href = `https://fonts.googleapis.com/css2?family=${fontConfig.import}&display=swap`
-          document.head.appendChild(link)
-        }
-      }
-
-      document.documentElement.style.setProperty('--font-sans', `'${fontConfig.name}', ui-sans-serif, system-ui, -apple-system, sans-serif`)
-      document.documentElement.style.setProperty('--font-mono', `'${fontConfig.name}', ui-sans-serif, system-ui, -apple-system, sans-serif`)
-      perf.rendering.labelFontFamily = `'${fontConfig.name}', ui-sans-serif, system-ui, sans-serif`
-    }
   }
 
   useEffect(() => {
@@ -118,20 +85,6 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
                   >
                     <option value="en">{getLanguageLabel('en')}</option>
                     <option value="he">{getLanguageLabel('he')}</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="settings-section">
-                <h3 className="settings-section-title">{translate('settings.fontSection', undefined, language)}</h3>
-                <div className="settings-select-group">
-                  <label htmlFor="font-select">{translate('settings.fontLabel', undefined, language)}</label>
-                  <select id="font-select" className="settings-select" value={currentFontPreset} onChange={(e) => handleFontChange(e.target.value)}>
-                    {fontPresets.map((preset) => (
-                      <option key={preset} value={preset}>
-                        {perf.fonts.presets[preset as keyof typeof perf.fonts.presets].name}
-                      </option>
-                    ))}
                   </select>
                 </div>
               </div>

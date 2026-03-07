@@ -37,8 +37,6 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
             </div>
 
             <div className="modal-body language-modal-body">
-              <p className="language-modal-subtitle">{translate('languageModal.subtitle')}</p>
-
               <div className="language-modal-options">
                 <button
                   className="language-option language-option-flag-only"
