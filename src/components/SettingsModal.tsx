@@ -16,12 +16,15 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ isOpen, language, onLanguageChange, onClose }: SettingsModalProps) {
+  const fontSettings = perf.fonts && perf.fonts.presets && perf.fonts.currentPreset ? perf.fonts : null
+
   const getSavedFontPreset = () => {
+    if (!fontSettings) return null
     const saved = localStorage.getItem('infinitespecies_fontPreset')
-    if (saved && perf.fonts.presets[saved as keyof typeof perf.fonts.presets]) {
+    if (saved && fontSettings.presets[saved as keyof typeof fontSettings.presets]) {
       return saved
     }
-    return perf.fonts.currentPreset
+    return fontSettings.currentPreset
   }
 
   const getSavedColorPreset = () => {
@@ -36,7 +39,7 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
   const [currentFontPreset, setCurrentFontPreset] = useState(getSavedFontPreset)
 
   const colorPresets = Object.keys(perf.colors.presets)
-  const fontPresets = Object.keys(perf.fonts.presets)
+  const fontPresets = fontSettings ? Object.keys(fontSettings.presets) : []
 
   const handleColorChange = (preset: string) => {
     setCurrentColorPreset(preset)
@@ -45,11 +48,12 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
   }
 
   const handleFontChange = (preset: string) => {
+    if (!fontSettings) return
     setCurrentFontPreset(preset)
-    perf.fonts.currentPreset = preset
+    fontSettings.currentPreset = preset
     localStorage.setItem('infinitespecies_fontPreset', preset)
 
-    const fontConfig = perf.fonts.presets[preset as keyof typeof perf.fonts.presets]
+    const fontConfig = fontSettings.presets[preset as keyof typeof fontSettings.presets]
     if (fontConfig) {
       if (fontConfig.import) {
         const existingLink = document.querySelector(`link[href*="${fontConfig.import}"]`)
@@ -122,19 +126,21 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
                 </div>
               </div>
 
-              <div className="settings-section">
-                <h3 className="settings-section-title">{translate('settings.fontSection', undefined, language)}</h3>
-                <div className="settings-select-group">
-                  <label htmlFor="font-select">{translate('settings.fontLabel', undefined, language)}</label>
-                  <select id="font-select" className="settings-select" value={currentFontPreset} onChange={(e) => handleFontChange(e.target.value)}>
-                    {fontPresets.map((preset) => (
-                      <option key={preset} value={preset}>
-                        {perf.fonts.presets[preset as keyof typeof perf.fonts.presets].name}
-                      </option>
-                    ))}
-                  </select>
+              {fontSettings && currentFontPreset && (
+                <div className="settings-section">
+                  <h3 className="settings-section-title">{translate('settings.fontSection', undefined, language)}</h3>
+                  <div className="settings-select-group">
+                    <label htmlFor="font-select">{translate('settings.fontLabel', undefined, language)}</label>
+                    <select id="font-select" className="settings-select" value={currentFontPreset} onChange={(e) => handleFontChange(e.target.value)}>
+                      {fontPresets.map((preset) => (
+                        <option key={preset} value={preset}>
+                          {fontSettings.presets[preset as keyof typeof fontSettings.presets].name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="settings-section">
                 <h3 className="settings-section-title">{translate('settings.colorSection', undefined, language)}</h3>
