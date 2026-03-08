@@ -7,10 +7,78 @@
 
 import { state } from './state.js';
 import { requestRender, screenToWorld } from './canvas.js';
-import { pickNodeAt, isNodeStillHoverable } from './picking.js';
+import { pickNodeAt, isNodeInCurrentSubtree } from './picking.js';
 import { handleCameraPan, handleWheelZoom } from './camera.js';
 import { showBigFor, hideBigPreview } from './preview.js';
+import { perf } from './settings.js';
 import { updateTooltip } from './tooltip.js';
+
+function containsWorldPoint(node, wx, wy) {
+  if (!node || typeof node._vx !== 'number' || typeof node._vy !== 'number' || typeof node._vr !== 'number') {
+    return false;
+  }
+
+  const dx = wx - node._vx;
+  const dy = wy - node._vy;
+  return dx * dx + dy * dy <= node._vr * node._vr;
+}
+
+function isNodeHoverableAtPoint(node, wx, wy) {
+  if (!node || !isNodeInCurrentSubtree(node)) return false;
+  if (!containsWorldPoint(node, wx, wy)) return false;
+
+  const screenR = node._vr * state.camera.k;
+  const { pickMinPxRadius, minPxRadius } = perf.rendering;
+
+  return screenR >= (pickMinPxRadius || 0) && screenR >= minPxRadius;
+}
+
+function resolveHoverNodeOnCameraChange(px, py) {
+  const [wx, wy] = screenToWorld(px, py);
+
+  let candidate = state.hoverNode || state.current || state.DATA_ROOT || null;
+
+  while (candidate && (!isNodeInCurrentSubtree(candidate) || !containsWorldPoint(candidate, wx, wy))) {
+    candidate = candidate.parent || null;
+  }
+
+  if (!candidate) {
+    const root = state.current || state.DATA_ROOT || null;
+    if (!root || !containsWorldPoint(root, wx, wy)) {
+      return null;
+    }
+    candidate = root;
+  }
+
+  while (candidate && !isNodeHoverableAtPoint(candidate, wx, wy)) {
+    candidate = candidate.parent || null;
+  }
+
+  if (!candidate) {
+    return null;
+  }
+
+  let resolved = candidate;
+
+  while (resolved?.children?.length) {
+    let next = null;
+
+    for (const child of resolved.children) {
+      if (!isNodeHoverableAtPoint(child, wx, wy)) continue;
+      if (!next || child._vr < next._vr) {
+        next = child;
+      }
+    }
+
+    if (!next) {
+      break;
+    }
+
+    resolved = next;
+  }
+
+  return resolved;
+}
 
 /**
  * Handle mouse move event - panning logic
@@ -82,30 +150,16 @@ export function handleWheelEvent(e, canvas) {
  */
 export function validateHoverOnCameraChange(x, y, onTooltipUpdate) {
   if (x === 0 && y === 0) return; // No mouse position yet
-  
-  const currentHover = state.hoverNode;
-  
-  // If no current hover, try to pick one (user might have zoomed into a node)
-  if (!currentHover) {
-    const n = pickNodeAt(x, y);
-    if (n) {
-      state.hoverNode = n;
-      if (onTooltipUpdate) {
-        onTooltipUpdate(n, x, y);
-      }
-    }
-    return;
-  }
-  
-  // Check if current hover is still valid (O(1) check)
-  if (!isNodeStillHoverable(currentHover, x, y)) {
-    // Node is no longer hoverable - find the new node under cursor
-    const n = pickNodeAt(x, y);
-    state.hoverNode = n;
-    if (n && onTooltipUpdate) {
-      onTooltipUpdate(n, x, y);
-    } else if (onTooltipUpdate) {
-      onTooltipUpdate(null, x, y);
-    }
+
+  const nextHover = resolveHoverNodeOnCameraChange(x, y);
+  const prevHoverId = state.hoverNode?._id ?? null;
+  const nextHoverId = nextHover?._id ?? null;
+
+  state.hoverNode = nextHover;
+
+  if (prevHoverId !== nextHoverId && onTooltipUpdate) {
+    onTooltipUpdate(nextHover, x, y);
+  } else if (!nextHover && onTooltipUpdate) {
+    onTooltipUpdate(null, x, y);
   }
 }
