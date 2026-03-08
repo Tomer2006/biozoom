@@ -28,7 +28,14 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header language-modal-header">
-              <h2>{translate('languageModal.title')}</h2>
+              <div className="language-modal-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18" />
+                  <path d="M12 3a15 15 0 0 1 0 18" />
+                  <path d="M12 3a15 15 0 0 0 0 18" />
+                </svg>
+              </div>
               <button className="modal-close" onClick={onClose} aria-label={translate('common.close')}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />

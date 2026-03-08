@@ -834,7 +834,12 @@
 .language-modal-header {
   position: relative;
   justify-content: center;
-  text-align: center;
+}
+
+.language-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .language-modal-header .modal-close {
@@ -844,10 +849,18 @@
   transform: translateY(-50%);
 }
 
-.language-modal-body {
+.language-modal-icon {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--accent-primary);
+}
+
+.language-modal-icon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .language-modal-options {
@@ -1246,7 +1259,6 @@
   text-align: right;
 }
 
-[dir="rtl"] .language-modal-header,
 [dir="rtl"] .language-option {
   text-align: center;
 }
