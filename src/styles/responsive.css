@@ -240,7 +240,14 @@
       padding: 0.75rem 1.5rem;
       font-size: 15px;
     }
-    
+
+    .landing-art-image {
+      width: min(115vw, 760px);
+      margin-right: -32vw;
+      opacity: 0.5;
+      transform: translateY(8vh);
+    }
+     
     /* Help grid - stack on mobile */
     .help-grid {
       grid-template-columns: 1fr;

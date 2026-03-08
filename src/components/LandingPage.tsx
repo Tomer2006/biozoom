@@ -18,6 +18,10 @@ export default function LandingPage({ language, onStart, onLanguage, onHelp, onA
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
+      <div className="landing-art" aria-hidden="true">
+        <img className="landing-art-image" src="/landing-tree-bg.png" alt="" />
+      </div>
+
       <motion.div
         className="landing-header"
         initial={{ opacity: 0, x: -30 }}
