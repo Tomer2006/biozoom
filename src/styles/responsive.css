@@ -242,8 +242,8 @@
     }
 
     .landing-art-image {
-      width: min(115vw, 760px);
-      margin-right: -32vw;
+      max-width: 92vw;
+      max-height: 44vh;
       opacity: 0.5;
       transform: translateY(8vh);
     }
