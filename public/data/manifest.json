@@ -3,18 +3,19 @@
   "description": "Pre-baked D3 circle-packing layout for OpenTreeofLife taxonomy tree",
   "layout_size": 4000,
   "layout_padding": 0,
+  "single_leaf_radius_scale": 0.5,
   "total_nodes": 4479382,
   "total_files": 5,
   "files": [
     {
       "filename": "tree_part_001.json",
       "nodes_count": 895877,
-      "size_bytes": 96415041
+      "size_bytes": 96415002
     },
     {
       "filename": "tree_part_002.json",
       "nodes_count": 895877,
-      "size_bytes": 95551276
+      "size_bytes": 95551267
     },
     {
       "filename": "tree_part_003.json",
@@ -24,7 +25,7 @@
     {
       "filename": "tree_part_004.json",
       "nodes_count": 895877,
-      "size_bytes": 98475268
+      "size_bytes": 98475265
     },
     {
       "filename": "tree_part_005.json",
@@ -32,5 +33,5 @@
       "size_bytes": 97115448
     }
   ],
-  "created_at": "2026-03-06T10:15:54.875Z"
+  "created_at": "2026-03-09T11:09:10.035Z"
 }

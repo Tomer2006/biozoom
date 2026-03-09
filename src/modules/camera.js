@@ -29,15 +29,6 @@ function getLargestCircleFitZoom() {
   return targetRadiusPx / state.maxNodeRadius;
 }
 
-function getSmallestCircleZoomLimit() {
-  if (!(state.minNodeRadius > 0) || !(W > 0) || !(H > 0)) {
-    return Number.POSITIVE_INFINITY;
-  }
-
-  const targetRadiusPx = Math.min(W, H) * perf.navigation.maxSmallestCircleViewportFraction;
-  return targetRadiusPx / state.minNodeRadius;
-}
-
 export function getMinCameraZoom() {
   const fitZoom = getLargestCircleFitZoom();
   if (!Number.isFinite(fitZoom) || fitZoom <= 0) {
@@ -48,7 +39,7 @@ export function getMinCameraZoom() {
 }
 
 export function getMaxCameraZoom() {
-  const maxZoom = getSmallestCircleZoomLimit();
+  const maxZoom = perf.navigation.maxCameraZoom;
   if (!Number.isFinite(maxZoom) || maxZoom <= 0) {
     return Number.POSITIVE_INFINITY;
   }

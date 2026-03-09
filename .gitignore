@@ -5,6 +5,7 @@ gh-cli/
 .cursor/
 .vscode/
 full data/
+data/
 dist/
 .idea/
 *.swp

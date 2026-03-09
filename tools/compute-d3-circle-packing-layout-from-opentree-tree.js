@@ -30,6 +30,75 @@ const OUTPUT_DIR = resolve(__dirname, '../public/data');
 const LAYOUT_SIZE = 4000;
 const LAYOUT_PADDING = 0;
 const NUM_PARTS = 5;
+const SINGLE_LEAF_RADIUS_SCALE = 0.5;
+
+function scaleSubtree(root, originX, originY, scale) {
+  const stack = [root];
+
+  while (stack.length > 0) {
+    const node = stack.pop();
+    node.x = originX + (node.x - originX) * scale;
+    node.y = originY + (node.y - originY) * scale;
+    node.r *= scale;
+
+    const children = node.children || [];
+    for (let i = children.length - 1; i >= 0; i--) {
+      stack.push(children[i]);
+    }
+  }
+}
+
+function computeLeafCounts(root) {
+  const stack = [root];
+  const postOrder = [];
+
+  while (stack.length > 0) {
+    const node = stack.pop();
+    postOrder.push(node);
+
+    const children = node.children || [];
+    for (let i = children.length - 1; i >= 0; i--) {
+      stack.push(children[i]);
+    }
+  }
+
+  for (let i = postOrder.length - 1; i >= 0; i--) {
+    const node = postOrder[i];
+    const children = node.children || [];
+
+    if (children.length === 0) {
+      node._leafCount = 1;
+      continue;
+    }
+
+    let leafCount = 0;
+    for (let j = 0; j < children.length; j++) {
+      leafCount += children[j]._leafCount || 0;
+    }
+    node._leafCount = leafCount;
+  }
+}
+
+function shrinkSingleLeafSubtrees(root, scale = SINGLE_LEAF_RADIUS_SCALE) {
+  let adjustedSubtrees = 0;
+  const stack = [root];
+
+  while (stack.length > 0) {
+    const node = stack.pop();
+    const children = node.children || [];
+
+    if (node._leafCount === 1 && children.length === 1) {
+      scaleSubtree(children[0], node.x, node.y, scale);
+      adjustedSubtrees++;
+    }
+
+    for (let i = children.length - 1; i >= 0; i--) {
+      stack.push(children[i]);
+    }
+  }
+
+  return adjustedSubtrees;
+}
 
 async function main() {
   console.time('bake-layout-opentree');
@@ -70,10 +139,14 @@ async function main() {
     })
     .sort((a, b) => b.value - a.value);
 
+  computeLeafCounts(root);
   pack(root);
+
+  const adjustedSubtrees = shrinkSingleLeafSubtrees(root, SINGLE_LEAF_RADIUS_SCALE);
 
   const duration = performance.now() - startTime;
   console.log(`Layout computed in ${(duration / 1000).toFixed(2)}s`);
+  console.log(`Scaled ${adjustedSubtrees.toLocaleString()} single-leaf subtrees by ${Math.round(SINGLE_LEAF_RADIUS_SCALE * 100)}%`);
 
   // Flatten tree
   console.log('Flattening tree...');
@@ -139,6 +212,7 @@ async function main() {
     description: 'Pre-baked D3 circle-packing layout for OpenTreeofLife taxonomy tree',
     layout_size: LAYOUT_SIZE,
     layout_padding: LAYOUT_PADDING,
+    single_leaf_radius_scale: SINGLE_LEAF_RADIUS_SCALE,
     total_nodes: nodes.length,
     total_files: files.length,
     files,

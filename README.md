@@ -52,7 +52,7 @@ See the full control list in the app by pressing `?` or `F1`.
 This project uses a specialized architecture to handle the visualization of millions of nodes:
 
  
-**Data Pipeline (`/tools`)**: Raw taxonomy dumps (from OpenTree or NCBI) are processed, "baked" into a D3 packing layout offline, and split into sharded JSON chunks.
+**Data Pipeline (`/tools`)**: Raw OpenTree taxonomy dumps are processed, "baked" into a D3 packing layout offline, and split into sharded JSON chunks.
 
 
   
@@ -73,13 +73,6 @@ The visualization is compatible with:
 
 
  
-**NCBI Taxonomy:** Tools provided to convert NCBI dumps.
-
-
- 
-
-
-
 
 ## 📄 License
 

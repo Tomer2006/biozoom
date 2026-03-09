@@ -485,8 +485,7 @@ async function main() {
   
   console.timeEnd('opentree-to-tree');
   console.log('\nNext steps:');
-  console.log('1. Run: node tools/compute-d3-circle-packing-layout-from-ncbi-tree.js');
-  console.log('   (Update it to read tree_opentree.json or create a new script)');
+  console.log('1. Run: node tools/compute-d3-circle-packing-layout-from-opentree-tree.js');
 }
 
 main().catch(err => {
