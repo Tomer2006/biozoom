@@ -169,11 +169,25 @@ export const perf = {
   // Color palette configuration
   colors: {
     // Change this to switch between presets: 'tableau10', 'blueGradient'
-    currentPreset: 'blueGradient',
+    currentPreset: 'tableau10',
     
     // Color palette presets
     presets: {
-      // Preset 1: 38 colors from light blue to dark blue (DEFAULT)
+      // Preset 1: Original Tableau 10 colors (DEFAULT)
+      tableau10: [
+        'rgb(31, 118, 180)', // Blue
+        'rgb(255, 126, 14)', // Orange
+        'rgb(214, 39, 39)', // Red
+        'rgb(44, 160, 44)', // Green
+        'rgb(23, 189, 207)', // Teal
+        'rgb(189, 189, 34)', // Yellow
+        'rgb(147, 103, 189)', // Purple
+        'rgb(227, 119, 195)', // Pink
+        'rgb(140, 86, 75)', // Brown
+        'rgb(127, 127, 127)'  // Gray
+        ],
+
+      // Preset 2: 38 colors from light blue to dark blue
       blueGradient: [
         'rgb(184, 211, 238)', // 1 - Start color
         'rgb(178, 204, 232)', // 2
@@ -213,23 +227,7 @@ export const perf = {
         'rgb(0, 0, 47)',      // 36
         'rgb(0, 0, 46)',      // 37
         'rgb(0, 0, 45)'       // 38 - Darkest blue (near black)
-      ],
-
-      // Preset 2: Original Tableau 10 colors
-      tableau10: [
-        'rgb(31, 118, 180)', // Blue
-        'rgb(255, 126, 14)', // Orange
-        'rgb(214, 39, 39)', // Red
-        'rgb(44, 160, 44)', // Green
-        'rgb(23, 189, 207)', // Teal
-        'rgb(189, 189, 34)', // Yellow
-        'rgb(147, 103, 189)', // Purple
-        'rgb(227, 119, 195)', // Pink
-        'rgb(140, 86, 75)', // Brown
-        'rgb(127, 127, 127)'  // Gray
-        ],
-
-      
+      ]
     },
     
     // Helper to get the current palette (used by the app)
