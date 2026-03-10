@@ -338,7 +338,6 @@ const languageLabels: Record<AppLanguage, string> = {
 const colorPresetLabels: Record<string, Record<AppLanguage, string>> = {
   blueGradient: { en: 'Blue Gradient', he: 'מעבר כחול' },
   tableau10: { en: 'Tableau 10', he: 'Tableau 10' },
-  blueZigzag: { en: 'Blue Zigzag', he: 'כחול מזוגזג' },
 }
 
 let currentLanguage: AppLanguage = 'en'

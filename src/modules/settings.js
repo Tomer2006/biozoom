@@ -229,46 +229,7 @@ export const perf = {
         'rgb(127, 127, 127)'  // Gray
         ],
 
-      // Preset 3: 37 colors alternating dark-light, getting darker each flip
-      blueZigzag: [
-        'rgb(50, 80, 140)',   // 1 - Dark
-        'rgb(150, 200, 255)', // 2 - Light
-        'rgb(45, 72, 128)',   // 3 - Darker
-        'rgb(143, 191, 247)', // 4 - Less light
-        'rgb(40, 65, 117)',   // 5 - Darker
-        'rgb(136, 182, 238)', // 6 - Less light
-        'rgb(36, 58, 106)',   // 7 - Darker
-        'rgb(129, 173, 230)', // 8 - Less light
-        'rgb(32, 52, 96)',    // 9 - Darker
-        'rgb(122, 164, 221)', // 10 - Less light
-        'rgb(28, 46, 87)',    // 11 - Darker
-        'rgb(115, 155, 213)', // 12 - Less light
-        'rgb(25, 41, 78)',    // 13 - Darker
-        'rgb(108, 146, 204)', // 14 - Less light
-        'rgb(22, 36, 70)',    // 15 - Darker
-        'rgb(101, 137, 196)', // 16 - Less light
-        'rgb(19, 32, 63)',    // 17 - Darker
-        'rgb(94, 128, 187)',  // 18 - Less light
-        'rgb(17, 28, 56)',    // 19 - Darker
-        'rgb(87, 119, 179)',  // 20 - Less light
-        'rgb(15, 25, 50)',    // 21 - Darker
-        'rgb(80, 110, 170)',  // 22 - Less light
-        'rgb(13, 22, 45)',    // 23 - Darker
-        'rgb(73, 101, 162)',  // 24 - Less light
-        'rgb(11, 19, 40)',    // 25 - Darker
-        'rgb(66, 92, 153)',   // 26 - Less light
-        'rgb(9, 16, 36)',     // 27 - Darker
-        'rgb(59, 83, 145)',   // 28 - Less light
-        'rgb(8, 14, 32)',     // 29 - Darker
-        'rgb(52, 74, 136)',   // 30 - Less light
-        'rgb(6, 12, 28)',     // 31 - Darker
-        'rgb(45, 65, 128)',   // 32 - Less light
-        'rgb(5, 10, 25)',     // 33 - Darker
-        'rgb(38, 56, 119)',   // 34 - Less light
-        'rgb(4, 8, 22)',      // 35 - Darker
-        'rgb(31, 47, 111)',   // 36 - Less light
-        'rgb(2, 5, 18)'       // 37 - Darkest
-      ]
+      
     },
     
     // Helper to get the current palette (used by the app)
