@@ -11,11 +11,13 @@ import {
 interface SettingsModalProps {
   isOpen: boolean
   language: AppLanguage
+  colorPreset: string
+  onColorPresetChange: (preset: string) => void
   onLanguageChange: (language: AppLanguage) => void
   onClose: () => void
 }
 
-export default function SettingsModal({ isOpen, language, onLanguageChange, onClose }: SettingsModalProps) {
+export default function SettingsModal({ isOpen, language, colorPreset, onColorPresetChange, onLanguageChange, onClose }: SettingsModalProps) {
   const fontSettings = perf.fonts && perf.fonts.presets && perf.fonts.currentPreset ? perf.fonts : null
 
   const getSavedFontPreset = () => {
@@ -45,6 +47,7 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
     setCurrentColorPreset(preset)
     perf.colors.currentPreset = preset
     localStorage.setItem('infinitespecies_colorPreset', preset)
+    onColorPresetChange(preset)
   }
 
   const handleFontChange = (preset: string) => {
@@ -70,6 +73,10 @@ export default function SettingsModal({ isOpen, language, onLanguageChange, onCl
       perf.rendering.labelFontFamily = `'${fontConfig.name}', ui-sans-serif, system-ui, sans-serif`
     }
   }
+
+  useEffect(() => {
+    setCurrentColorPreset(colorPreset)
+  }, [colorPreset])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

@@ -32,6 +32,7 @@ import {
   translate,
   type AppLanguage,
 } from './modules/i18n'
+import { perf } from './modules/settings'
 
 export interface AppState {
   isLanding: boolean
@@ -51,6 +52,7 @@ const ONBOARDING_STORAGE_KEY = 'infinitespecies_onboardingSeen'
 
 export default function App() {
   const [language, setLanguage] = useState<AppLanguage>(() => getCurrentLanguage())
+  const [colorPreset, setColorPreset] = useState(() => perf.colors.currentPreset)
   const [languageModalOpen, setLanguageModalOpen] = useState(false)
   const [onboardingOpen, setOnboardingOpen] = useState(() => localStorage.getItem(ONBOARDING_STORAGE_KEY) !== 'true')
   const [appState, setAppState] = useState<AppState>({
@@ -408,6 +410,7 @@ export default function App() {
         {appState.isLanding && (
           <LandingPage
             language={language}
+            colorPreset={colorPreset}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}
@@ -468,6 +471,8 @@ export default function App() {
       <SettingsModal
         isOpen={settingsOpen}
         language={language}
+        colorPreset={colorPreset}
+        onColorPresetChange={setColorPreset}
         onLanguageChange={handleLanguageSelect}
         onClose={() => setSettingsOpen(false)}
       />

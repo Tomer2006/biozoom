@@ -3,6 +3,7 @@ import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
   language: AppLanguage
+  colorPreset: string
   onStart: () => void
   onLanguage: () => void
   onHelp: () => void
@@ -10,7 +11,14 @@ interface LandingPageProps {
   onSettings: () => void
 }
 
-export default function LandingPage({ language, onStart, onLanguage, onHelp, onAbout, onSettings }: LandingPageProps) {
+const landingTreeImages: Record<string, string> = {
+  tableau10: '/landing-tree-bg.png',
+  blueGradient: '/landing-tree-bg1.png',
+}
+
+export default function LandingPage({ language, colorPreset, onStart, onLanguage, onHelp, onAbout, onSettings }: LandingPageProps) {
+  const landingTreeImage = landingTreeImages[colorPreset] || landingTreeImages.tableau10
+
   return (
     <motion.div
       className="landing-page"
@@ -19,7 +27,7 @@ export default function LandingPage({ language, onStart, onLanguage, onHelp, onA
       transition={{ duration: 0.4 }}
     >
       <div className="landing-art" aria-hidden="true">
-        <img className="landing-art-image" src="/landing-tree-bg.png" alt="" />
+        <img className="landing-art-image" src={landingTreeImage} alt="" />
       </div>
 
       <motion.div
