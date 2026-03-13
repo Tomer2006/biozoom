@@ -32,7 +32,7 @@ import {
   type AppLanguage,
 } from './modules/i18n'
 import { perf } from './modules/settings'
-import { hasClerkPublishableKey } from './modules/clerk'
+import { getClerkConfigError, hasClerkPublishableKey } from './modules/clerk'
 
 export interface AppState {
   isLanding: boolean
@@ -408,6 +408,7 @@ export default function App() {
             language={language}
             colorPreset={colorPreset}
             authEnabled={hasClerkPublishableKey()}
+            authError={getClerkConfigError()}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}

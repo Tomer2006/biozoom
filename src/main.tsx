@@ -9,7 +9,7 @@ import App from './App'
 import './styles/index.css'
 import { perf } from './modules/settings.js'
 import { initializeLanguage } from './modules/i18n'
-import { clerkPublishableKey, hasClerkPublishableKey } from './modules/clerk'
+import { getClerkPublishableKey, hasClerkPublishableKey } from './modules/clerk'
 
 initializeLanguage()
 
@@ -44,7 +44,7 @@ perf.rendering.labelFontFamily = `'Roboto', ui-sans-serif, system-ui, sans-serif
 
 const appTree = hasClerkPublishableKey()
   ? (
-      <ClerkProvider publishableKey={clerkPublishableKey}>
+      <ClerkProvider publishableKey={getClerkPublishableKey()}>
         <App />
       </ClerkProvider>
     )

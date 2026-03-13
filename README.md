@@ -62,7 +62,13 @@ Required env vars:
 VITE_CLERK_PUBLISHABLE_KEY=pk_...
 ```
 
-Without a Clerk publishable key, the app still runs, but auth UI stays disabled.
+Optional for localhost/dev:
+
+```bash
+VITE_CLERK_DEV_PUBLISHABLE_KEY=pk_test_...
+```
+
+Use the live key only on `infinitespecies.com` and its subdomains. For `localhost`, use a Clerk test/development publishable key.
 
 ## License
 

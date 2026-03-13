@@ -6,6 +6,7 @@ interface LandingPageProps {
   language: AppLanguage
   colorPreset: string
   authEnabled: boolean
+  authError: string | null
   onStart: () => void
   onLanguage: () => void
   onHelp: () => void
@@ -28,6 +29,7 @@ export default function LandingPage({
   language,
   colorPreset,
   authEnabled,
+  authError,
   onStart,
   onLanguage,
   onHelp,
@@ -112,7 +114,7 @@ export default function LandingPage({
               </Show>
             </>
           ) : (
-            <p className="landing-auth-note">{translate('auth.notConfigured', undefined, language)}</p>
+            <p className="landing-auth-note">{authError ?? translate('auth.notConfigured', undefined, language)}</p>
           )}
         </div>
       </motion.div>
