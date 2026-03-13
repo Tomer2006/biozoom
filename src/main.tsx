@@ -52,6 +52,7 @@ const clerkLocalization = {
 }
 
 const clerkAppearance = {
+  theme: 'simple',
   variables: {
     colorPrimary: '#5bc4be',
     colorText: '#f4f7fb',
@@ -62,49 +63,6 @@ const clerkAppearance = {
     colorDanger: '#ff6b6b',
     borderRadius: '12px',
     fontFamily: robotoFontStack,
-  },
-  elements: {
-    card: {
-      backgroundColor: 'rgba(10, 16, 27, 0.96)',
-      border: '1px solid rgba(95, 120, 151, 0.45)',
-      boxShadow: '0 24px 80px rgba(0, 0, 0, 0.5)',
-    },
-    modalBackdrop: {
-      backgroundColor: 'rgba(4, 8, 14, 0.78)',
-      backdropFilter: 'blur(10px)',
-    },
-    headerTitle: {
-      color: '#f4f7fb',
-    },
-    headerSubtitle: {
-      color: '#9db0c7',
-    },
-    socialButtonsBlockButton: {
-      backgroundColor: '#131a2a',
-      border: '1px solid rgba(95, 120, 151, 0.55)',
-      color: '#f4f7fb',
-    },
-    socialButtonsBlockButtonText: {
-      color: '#f4f7fb',
-    },
-    formFieldInput: {
-      backgroundColor: '#131a2a',
-      borderColor: 'rgba(95, 120, 151, 0.55)',
-      color: '#f4f7fb',
-    },
-    formButtonPrimary: {
-      backgroundColor: '#5bc4be',
-      color: '#0a1628',
-    },
-    footerActionLink: {
-      color: '#5bc4be',
-    },
-    dividerLine: {
-      backgroundColor: 'rgba(95, 120, 151, 0.35)',
-    },
-    dividerText: {
-      color: '#9db0c7',
-    },
   },
 }
 

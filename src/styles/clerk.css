@@ -1,0 +1,145 @@
+/* Clerk auth modal overrides to match the InfiniteSpecies landing palette. */
+
+.cl-rootBox {
+  color: #f4f7fb;
+  font-family: var(--font-sans);
+}
+
+.cl-modalBackdrop {
+  background:
+    radial-gradient(ellipse 800px 600px at 20% 10%, rgba(91, 141, 239, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 500px at 80% 90%, rgba(110, 231, 183, 0.08) 0%, transparent 60%),
+    rgba(4, 8, 14, 0.78) !important;
+  backdrop-filter: blur(14px);
+}
+
+.cl-cardBox,
+.cl-card {
+  background: linear-gradient(180deg, rgba(7, 10, 18, 0.98) 0%, rgba(10, 16, 27, 0.96) 100%) !important;
+  border: 1px solid rgba(95, 120, 151, 0.45) !important;
+  border-radius: 28px !important;
+  box-shadow:
+    0 0 0 1px rgba(230, 156, 80, 0.14),
+    0 24px 80px rgba(0, 0, 0, 0.52),
+    0 0 60px rgba(91, 196, 190, 0.08) !important;
+}
+
+.cl-headerTitle,
+.cl-headerTitle * {
+  color: #f4f7fb !important;
+}
+
+.cl-headerSubtitle,
+.cl-headerSubtitle * {
+  color: #a9bdd5 !important;
+}
+
+.cl-formFieldLabel,
+.cl-formFieldLabel * {
+  color: #d7e4f3 !important;
+}
+
+.cl-formFieldInput,
+.cl-input,
+.cl-otpCodeFieldInput {
+  color: #f4f7fb !important;
+  background: rgba(19, 26, 42, 0.95) !important;
+  border: 1px solid rgba(95, 120, 151, 0.52) !important;
+  border-radius: 16px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.cl-formFieldInput::placeholder,
+.cl-input::placeholder {
+  color: #7f94ae !important;
+}
+
+.cl-formFieldInput:focus,
+.cl-input:focus,
+.cl-otpCodeFieldInput:focus {
+  border-color: rgba(91, 196, 190, 0.9) !important;
+  box-shadow:
+    0 0 0 1px rgba(91, 196, 190, 0.35),
+    0 0 0 4px rgba(91, 196, 190, 0.14) !important;
+}
+
+.cl-formFieldInputShowPasswordButton,
+.cl-formFieldAction {
+  color: #a9bdd5 !important;
+}
+
+.cl-formButtonPrimary {
+  color: #0a1628 !important;
+  background: linear-gradient(135deg, #5bc4be 0%, #4db8a8 50%, #3fa896 100%) !important;
+  border: 2px solid #e69c50 !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 0 0 1px rgba(230, 156, 80, 0.25),
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(91, 196, 190, 0.12) !important;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+.cl-formButtonPrimary:hover,
+.cl-formButtonPrimary:focus-visible {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 2px rgba(230, 156, 80, 0.28),
+    0 12px 32px rgba(0, 0, 0, 0.42),
+    0 0 52px rgba(91, 196, 190, 0.18) !important;
+}
+
+.cl-socialButtonsBlockButton {
+  color: #f4f7fb !important;
+  background: rgba(13, 18, 32, 0.92) !important;
+  border: 1px solid rgba(95, 120, 151, 0.55) !important;
+  border-radius: 14px !important;
+}
+
+.cl-socialButtonsBlockButtonText,
+.cl-dividerText,
+.cl-footer,
+.cl-footer *,
+.cl-formResendCodeLink,
+.cl-formResendCodeLink *,
+.cl-identityPreviewText,
+.cl-alertText,
+.cl-navbarButton,
+.cl-navbarButton * {
+  color: #9db0c7 !important;
+}
+
+.cl-footerActionText,
+.cl-footerActionText * {
+  color: #8ea2bd !important;
+}
+
+.cl-footerActionLink,
+.cl-footerActionLink *,
+.cl-formFieldAction,
+.cl-formFieldAction *,
+.cl-identityPreviewEditButton,
+.cl-identityPreviewEditButton * {
+  color: #5bc4be !important;
+}
+
+.cl-dividerLine {
+  background: rgba(95, 120, 151, 0.3) !important;
+}
+
+.cl-formFieldErrorText,
+.cl-alertText[data-variant="danger"] {
+  color: #ff9b9b !important;
+}
+
+.cl-modalCloseButton {
+  color: #b6c9df !important;
+  background: rgba(19, 26, 42, 0.55) !important;
+  border-radius: 999px !important;
+}
+
+.cl-modalCloseButton:hover {
+  background: rgba(19, 26, 42, 0.9) !important;
+  color: #f4f7fb !important;
+}
