@@ -143,3 +143,97 @@
   background: rgba(19, 26, 42, 0.9) !important;
   color: #f4f7fb !important;
 }
+
+.topbar-user-button .cl-userButtonTrigger {
+  min-height: 38px;
+  padding: 0.375rem 0.75rem 0.375rem 0.45rem !important;
+  color: #dce8f6 !important;
+  background: rgba(9, 14, 24, 0.88) !important;
+  border: 1px solid rgba(78, 104, 138, 0.68) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 0 0 1px rgba(230, 156, 80, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.22) !important;
+  backdrop-filter: blur(10px);
+}
+
+.topbar-user-button .cl-userButtonTrigger:hover,
+.topbar-user-button .cl-userButtonTrigger:focus-visible {
+  background: rgba(13, 21, 35, 0.94) !important;
+  border-color: rgba(132, 160, 196, 0.85) !important;
+}
+
+.topbar-user-button .cl-userButtonBox,
+.topbar-user-button .cl-userButtonTextContainer {
+  color: #dce8f6 !important;
+}
+
+.topbar-user-button .cl-userButtonOuterIdentifier,
+.topbar-user-button .cl-userButtonText {
+  color: #dce8f6 !important;
+  font-weight: 600 !important;
+}
+
+.topbar-user-button .cl-userButtonAvatarBox {
+  width: 28px !important;
+  height: 28px !important;
+  box-shadow: 0 0 0 1px rgba(230, 156, 80, 0.24) !important;
+}
+
+.cl-userButtonPopoverCard,
+.cl-menuList,
+.cl-userPreview,
+.cl-userButtonPopoverMain {
+  background: linear-gradient(180deg, rgba(7, 10, 18, 0.98) 0%, rgba(10, 16, 27, 0.97) 100%) !important;
+  border-color: rgba(95, 120, 151, 0.45) !important;
+  color: #f4f7fb !important;
+}
+
+.cl-userButtonPopoverCard {
+  border-radius: 20px !important;
+  box-shadow:
+    0 0 0 1px rgba(230, 156, 80, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.52),
+    0 0 60px rgba(91, 196, 190, 0.08) !important;
+}
+
+.cl-userPreviewMainIdentifier,
+.cl-userPreviewMainIdentifier *,
+.cl-menuItemButtonText,
+.cl-menuItemButtonText *,
+.cl-menuButton,
+.cl-menuButton * {
+  color: #f4f7fb !important;
+}
+
+.cl-userPreviewSecondaryIdentifier,
+.cl-userPreviewSecondaryIdentifier *,
+.cl-menuItemSubTitle,
+.cl-menuItemSubTitle *,
+.cl-userButtonPopoverFooter,
+.cl-userButtonPopoverFooter * {
+  color: #9db0c7 !important;
+}
+
+.cl-menuItemButton,
+.cl-menuButton {
+  border-radius: 14px !important;
+}
+
+.cl-menuItemButton:hover,
+.cl-menuItemButton:focus-visible,
+.cl-menuButton:hover,
+.cl-menuButton:focus-visible {
+  background: rgba(19, 26, 42, 0.92) !important;
+}
+
+.cl-menuItemButtonIcon,
+.cl-menuItemButtonIcon svg,
+.cl-menuButtonIcon,
+.cl-menuButtonIcon svg {
+  color: #5bc4be !important;
+}
+
+.cl-menuSeparator {
+  background: rgba(95, 120, 151, 0.3) !important;
+}
