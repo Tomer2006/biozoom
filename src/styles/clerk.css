@@ -194,6 +194,50 @@
   box-shadow: 0 0 0 1px rgba(230, 156, 80, 0.24) !important;
 }
 
+.cl-userProfile-root,
+.cl-userProfile-root *,
+.cl-pageScrollBox,
+.cl-pageScrollBox *,
+.cl-profileSection,
+.cl-profileSection *,
+.cl-navbar,
+.cl-navbar * {
+  color: #f4f7fb !important;
+}
+
+.cl-userProfile-root,
+.cl-pageScrollBox,
+.cl-profileSection,
+.cl-navbar {
+  background: linear-gradient(180deg, rgba(7, 10, 18, 0.98) 0%, rgba(10, 16, 27, 0.97) 100%) !important;
+  border-color: rgba(95, 120, 151, 0.45) !important;
+}
+
+.cl-navbarButton,
+.cl-navbarButton *,
+.cl-profileSectionTitle,
+.cl-profileSectionTitle *,
+.cl-profileSectionTitleText,
+.cl-profileSectionTitleText *,
+.cl-accordionTriggerButton,
+.cl-accordionTriggerButton * {
+  color: #f4f7fb !important;
+}
+
+.cl-profileSectionPrimaryButton,
+.cl-profileSectionPrimaryButton *,
+.cl-formButtonReset,
+.cl-formButtonReset * {
+  color: #f4f7fb !important;
+}
+
+.cl-profileSectionPrimaryButton,
+.cl-formButtonReset {
+  background: rgba(13, 18, 32, 0.92) !important;
+  border: 1px solid rgba(95, 120, 151, 0.55) !important;
+  border-radius: 14px !important;
+}
+
 .cl-userButtonPopoverCard,
 .cl-menuList,
 .cl-userPreview,
