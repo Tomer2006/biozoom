@@ -24,6 +24,13 @@
     0 0 60px rgba(91, 196, 190, 0.08) !important;
 }
 
+.cl-card,
+.cl-card *,
+.cl-userButtonPopoverCard,
+.cl-userButtonPopoverCard * {
+  color: #f4f7fb;
+}
+
 .cl-headerTitle,
 .cl-headerTitle * {
   color: #f4f7fb !important;
@@ -43,6 +50,7 @@
 .cl-input,
 .cl-otpCodeFieldInput {
   color: #f4f7fb !important;
+  -webkit-text-fill-color: #f4f7fb !important;
   background: rgba(19, 26, 42, 0.95) !important;
   border: 1px solid rgba(95, 120, 151, 0.52) !important;
   border-radius: 16px !important;
@@ -51,7 +59,8 @@
 
 .cl-formFieldInput::placeholder,
 .cl-input::placeholder {
-  color: #7f94ae !important;
+  color: #92a7c0 !important;
+  opacity: 1 !important;
 }
 
 .cl-formFieldInput:focus,
@@ -104,6 +113,11 @@
 .cl-formResendCodeLink,
 .cl-formResendCodeLink *,
 .cl-identityPreviewText,
+.cl-formFieldHintText,
+.cl-formFieldHintText *,
+.cl-formFieldSuccessText,
+.cl-formFieldSuccessText *,
+.cl-internal-b3fm6y,
 .cl-alertText,
 .cl-navbarButton,
 .cl-navbarButton * {
@@ -211,7 +225,9 @@
 .cl-menuItemSubTitle,
 .cl-menuItemSubTitle *,
 .cl-userButtonPopoverFooter,
-.cl-userButtonPopoverFooter * {
+.cl-userButtonPopoverFooter *,
+.cl-userButtonPopoverActionButtonHint,
+.cl-userButtonPopoverActionButtonHint * {
   color: #9db0c7 !important;
 }
 
