@@ -42,9 +42,18 @@ document.documentElement.style.setProperty('--font-sans', robotoFontStack)
 document.documentElement.style.setProperty('--font-mono', robotoFontStack)
 perf.rendering.labelFontFamily = `'Roboto', ui-sans-serif, system-ui, sans-serif`
 
+const clerkLocalization = {
+  signIn: {
+    start: {
+      title: 'Sign in to infinitespecies',
+      titleCombined: 'Sign in to infinitespecies',
+    },
+  },
+}
+
 const appTree = hasClerkPublishableKey()
   ? (
-      <ClerkProvider publishableKey={getClerkPublishableKey()}>
+      <ClerkProvider publishableKey={getClerkPublishableKey()} localization={clerkLocalization}>
         <App />
       </ClerkProvider>
     )
