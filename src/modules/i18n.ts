@@ -19,7 +19,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       skip: 'Skip',
       settings: 'Settings',
       about: 'About',
-      help: 'Help',
+      help: 'Controls',
       language: 'Language',
     },
     languageModal: {
