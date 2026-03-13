@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Show, SignInButton, SignOutButton, useUser } from '@clerk/react'
+import { Show, SignInButton, SignOutButton } from '@clerk/react'
 import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
@@ -19,10 +19,7 @@ const landingTreeImages: Record<string, string> = {
 }
 
 function LandingSignedInStatus({ language }: { language: AppLanguage }) {
-  const { user } = useUser()
-  const displayName = user?.fullName || user?.primaryEmailAddress?.emailAddress || translate('auth.account', undefined, language)
-
-  return <span>{translate('auth.signedInAs', { name: displayName }, language)}</span>
+  return <span>{translate('auth.signedIn', undefined, language)}</span>
 }
 
 export default function LandingPage({

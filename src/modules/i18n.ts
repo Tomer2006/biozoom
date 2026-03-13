@@ -59,6 +59,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     },
     auth: {
       account: 'Account',
+      signedIn: 'Signed in',
       signIn: 'Sign in',
       signInShort: 'Sign in',
       manageAccount: 'Manage account',

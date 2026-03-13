@@ -83,7 +83,7 @@ function TopbarAuth({ language }: { language: AppLanguage }) {
 
       <Show when="signed-in">
         <div className="topbar-user-button" title={translate('auth.manageAccount', undefined, language)}>
-          <UserButton showName />
+          <UserButton />
         </div>
       </Show>
     </>
