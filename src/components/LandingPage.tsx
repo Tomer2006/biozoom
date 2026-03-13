@@ -85,7 +85,6 @@ export default function LandingPage({
             <>
               <Show when="signed-in">
                 <div className="landing-auth-status">
-                  <span className="landing-auth-avatar">C</span>
                   <LandingSignedInStatus language={language} />
                 </div>
                 <SignOutButton>
