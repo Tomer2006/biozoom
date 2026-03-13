@@ -6,12 +6,15 @@
 
 .app {
   min-height: 100vh;
+  min-height: 100dvh;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .app::before {
@@ -34,7 +37,9 @@
   right: 0;
   bottom: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: transparent;
   z-index: 1;

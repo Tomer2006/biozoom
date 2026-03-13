@@ -4,10 +4,12 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { ClerkProvider } from '@clerk/react'
 import App from './App'
 import './styles/index.css'
 import { perf } from './modules/settings.js'
 import { initializeLanguage } from './modules/i18n'
+import { clerkPublishableKey, hasClerkPublishableKey } from './modules/clerk'
 
 initializeLanguage()
 
@@ -40,8 +42,18 @@ document.documentElement.style.setProperty('--font-sans', robotoFontStack)
 document.documentElement.style.setProperty('--font-mono', robotoFontStack)
 perf.rendering.labelFontFamily = `'Roboto', ui-sans-serif, system-ui, sans-serif`
 
+const appTree = hasClerkPublishableKey()
+  ? (
+      <ClerkProvider publishableKey={clerkPublishableKey}>
+        <App />
+      </ClerkProvider>
+    )
+  : (
+      <App />
+    )
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    {appTree}
   </React.StrictMode>,
 )

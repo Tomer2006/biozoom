@@ -20,10 +20,12 @@
 }
 
 .topbar-left,
+.topbar-center,
 .topbar-right {
   flex: 1;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .topbar-left {
@@ -95,6 +97,52 @@
   flex-shrink: 0;
 }
 
+.topbar-auth-btn {
+  gap: 0.625rem;
+  min-width: 0;
+  max-width: min(16rem, 30vw);
+  padding-inline: 0.625rem 0.875rem;
+}
+
+.topbar-auth-avatar,
+.topbar-auth-avatar-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.topbar-auth-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0a1628;
+  background: linear-gradient(135deg, #f7d26a 0%, #f2b24b 100%);
+}
+
+.topbar-auth-avatar-image {
+  object-fit: cover;
+}
+
+.topbar-auth-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar-user-button {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  max-width: min(16rem, 30vw);
+}
+
+.topbar-user-button button {
+  max-width: 100%;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Buttons
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -126,6 +174,12 @@
 
 .btn:active {
   transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn:focus-visible {
@@ -441,6 +495,9 @@
   flex-shrink: 0;
   height: 1.75rem; /* Fixed height for each crumb to ensure consistent row height */
   box-sizing: border-box;
+  max-width: min(100%, 22rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .crumb:hover {

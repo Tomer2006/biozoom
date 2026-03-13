@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
+import { Show, SignInButton, SignOutButton, useUser } from '@clerk/react'
 import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
   language: AppLanguage
   colorPreset: string
+  authEnabled: boolean
   onStart: () => void
   onLanguage: () => void
   onHelp: () => void
-  onAbout: () => void
   onSettings: () => void
 }
 
@@ -16,7 +17,22 @@ const landingTreeImages: Record<string, string> = {
   blueGradient: '/landing-tree-bg1.png',
 }
 
-export default function LandingPage({ language, colorPreset, onStart, onLanguage, onHelp, onAbout, onSettings }: LandingPageProps) {
+function LandingSignedInStatus({ language }: { language: AppLanguage }) {
+  const { user } = useUser()
+  const displayName = user?.fullName || user?.primaryEmailAddress?.emailAddress || translate('auth.account', undefined, language)
+
+  return <span>{translate('auth.signedInAs', { name: displayName }, language)}</span>
+}
+
+export default function LandingPage({
+  language,
+  colorPreset,
+  authEnabled,
+  onStart,
+  onLanguage,
+  onHelp,
+  onSettings,
+}: LandingPageProps) {
   const landingTreeImage = landingTreeImages[colorPreset] || landingTreeImages.tableau10
 
   return (
@@ -61,6 +77,44 @@ export default function LandingPage({ language, colorPreset, onStart, onLanguage
           <span className="landing-start-text">{translate('landing.start', undefined, language)}</span>
           <span className="landing-start-hint">{translate('landing.startHint', undefined, language)}</span>
         </motion.button>
+
+        <div className="landing-auth-panel">
+          {authEnabled ? (
+            <>
+              <Show when="signed-in">
+                <div className="landing-auth-status">
+                  <span className="landing-auth-avatar">C</span>
+                  <LandingSignedInStatus language={language} />
+                </div>
+                <SignOutButton>
+                  <motion.button
+                    className="landing-google-btn"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="landing-google-icon" aria-hidden="true">C</span>
+                    <span>{translate('auth.signOut', undefined, language)}</span>
+                  </motion.button>
+                </SignOutButton>
+              </Show>
+
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <motion.button
+                    className="landing-google-btn"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="landing-google-icon" aria-hidden="true">C</span>
+                    <span>{translate('auth.signIn', undefined, language)}</span>
+                  </motion.button>
+                </SignInButton>
+              </Show>
+            </>
+          ) : (
+            <p className="landing-auth-note">{translate('auth.notConfigured', undefined, language)}</p>
+          )}
+        </div>
       </motion.div>
 
       <motion.div
@@ -74,9 +128,6 @@ export default function LandingPage({ language, colorPreset, onStart, onLanguage
         </motion.button>
         <motion.button className="landing-footer-btn" onClick={onSettings} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           {translate('common.settings', undefined, language)}
-        </motion.button>
-        <motion.button className="landing-footer-btn" onClick={onAbout} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-          {translate('common.about', undefined, language)}
         </motion.button>
         <motion.button className="landing-footer-btn" onClick={onHelp} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           {translate('common.help', undefined, language)}

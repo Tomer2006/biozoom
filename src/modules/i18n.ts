@@ -57,6 +57,15 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       start: 'Start Exploration',
       startHint: 'Usually takes 10 seconds to load',
     },
+    auth: {
+      account: 'Account',
+      signIn: 'Sign in',
+      signInShort: 'Sign in',
+      manageAccount: 'Manage account',
+      signOut: 'Sign out',
+      signedInAs: (params) => `Signed in as ${params?.name ?? 'Account'}`,
+      notConfigured: 'Clerk auth is not configured yet. Add VITE_CLERK_PUBLISHABLE_KEY first.',
+    },
     topbar: {
       returnToMenu: 'Return to main menu',
       searchPlaceholder: 'Search organism or group (use scientific names)',

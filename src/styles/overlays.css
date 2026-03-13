@@ -85,6 +85,7 @@
   transition: opacity var(--transition-fast), top var(--transition-fast);
   max-width: 240px;
   width: 240px;
+  max-height: min(70vh, calc(100dvh - 6rem));
 }
 
 .big-preview.visible {
@@ -286,7 +287,11 @@
   inset: 0;
   display: grid;
   place-items: center;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding:
+    max(clamp(1.5rem, 4vw, 3rem), var(--safe-top))
+    max(clamp(1.5rem, 4vw, 3rem), var(--safe-right))
+    max(clamp(1.5rem, 4vw, 3rem), var(--safe-bottom))
+    max(clamp(1.5rem, 4vw, 3rem), var(--safe-left));
   overflow: auto;
   background:
     radial-gradient(circle at 18% 20%, rgba(91, 141, 239, 0.2), transparent 30%),
@@ -299,6 +304,7 @@
 .loading-content {
   width: min(760px, 100%);
   min-height: min(540px, 100%);
+  min-height: min(540px, calc(100dvh - 6rem));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -433,6 +439,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding:
+    max(var(--space-md), var(--safe-top))
+    max(var(--space-md), var(--safe-right))
+    max(var(--space-md), var(--safe-bottom))
+    max(var(--space-md), var(--safe-left));
+  overflow-y: auto;
   background: rgba(8, 9, 15, 0.8);
   backdrop-filter: blur(8px);
   z-index: 300;
@@ -441,6 +453,7 @@
 .modal {
   width: min(700px, 95vw);
   max-height: 90vh;
+  max-height: min(90vh, calc(100dvh - var(--space-md) - var(--space-md)));
   display: flex;
   flex-direction: column;
   background: var(--bg-elevated);
@@ -451,6 +464,7 @@
   position: relative;
   z-index: 301;
   pointer-events: auto;
+  margin: auto;
 }
 
 .modal-header {
@@ -501,12 +515,14 @@
   flex: 1;
   padding: var(--space-lg);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .modal-content {
   flex: 1;
   padding: var(--space-lg);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .modal-footer {

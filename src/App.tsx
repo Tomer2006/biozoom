@@ -1,7 +1,7 @@
 /**
  * App.tsx - Root React component for InfiniteSpecies.
  * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, first-run language modal,
- * settings/help/about dialogs, screenshot panel, and toast notifications.
+ * settings/help dialogs, screenshot panel, and toast notifications.
  */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
@@ -13,7 +13,6 @@ import LoadingOverlay from './components/LoadingOverlay'
 import LanguageModal from './components/LanguageModal'
 import OnboardingModal from './components/OnboardingModal'
 import HelpModal from './components/HelpModal'
-import AboutModal from './components/AboutModal'
 import SettingsModal from './components/SettingsModal'
 import ScreenshotPanel from './components/ScreenshotPanel'
 import ToastContainer from './components/Toast'
@@ -33,6 +32,7 @@ import {
   type AppLanguage,
 } from './modules/i18n'
 import { perf } from './modules/settings'
+import { hasClerkPublishableKey } from './modules/clerk'
 
 export interface AppState {
   isLanding: boolean
@@ -70,7 +70,6 @@ export default function App() {
   })
 
   const [helpOpen, setHelpOpen] = useState(false)
-  const [aboutOpen, setAboutOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [screenshotOpen, setScreenshotOpen] = useState(false)
 
@@ -120,9 +119,6 @@ export default function App() {
         if (helpOpen) {
           e.preventDefault()
           setHelpOpen(false)
-        } else if (aboutOpen) {
-          e.preventDefault()
-          setAboutOpen(false)
         }
         return
       }
@@ -149,7 +145,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [aboutOpen, helpOpen, languageModalOpen, onboardingOpen])
+  }, [helpOpen, languageModalOpen, onboardingOpen])
 
   const updateBreadcrumbs = useCallback((node: any) => {
     if (!node) {
@@ -411,10 +407,10 @@ export default function App() {
           <LandingPage
             language={language}
             colorPreset={colorPreset}
+            authEnabled={hasClerkPublishableKey()}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}
-            onAbout={() => setAboutOpen(true)}
             onSettings={() => setSettingsOpen(true)}
           />
         )}
@@ -423,6 +419,7 @@ export default function App() {
       {appState.showTopbar && (
         <Topbar
           language={language}
+          authEnabled={hasClerkPublishableKey()}
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
           onLanguage={() => setLanguageModalOpen(true)}
@@ -463,11 +460,6 @@ export default function App() {
       <AnimatePresence>
         {helpOpen && <HelpModal language={language} onClose={() => setHelpOpen(false)} />}
       </AnimatePresence>
-
-      <AnimatePresence>
-        {aboutOpen && <AboutModal language={language} onClose={() => setAboutOpen(false)} />}
-      </AnimatePresence>
-
       <SettingsModal
         isOpen={settingsOpen}
         language={language}

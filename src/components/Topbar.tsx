@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import { Show, SignInButton, UserButton } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -17,6 +18,7 @@ interface TaxonomyNode {
 
 interface TopbarProps {
   language: AppLanguage
+  authEnabled: boolean
   onBackToMenu: () => void
   onCopyLink: () => void
   onLanguage: () => void
@@ -68,8 +70,30 @@ function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] 
   return [before, <mark key="match">{match}</mark>, after]
 }
 
+function TopbarAuth({ language }: { language: AppLanguage }) {
+  return (
+    <>
+      <Show when="signed-out">
+        <SignInButton mode="modal">
+          <button className="btn topbar-auth-btn" title={translate('auth.signIn', undefined, language)}>
+            <span className="topbar-auth-avatar" aria-hidden="true">C</span>
+            <span className="topbar-auth-label">{translate('auth.signInShort', undefined, language)}</span>
+          </button>
+        </SignInButton>
+      </Show>
+
+      <Show when="signed-in">
+        <div className="topbar-user-button" title={translate('auth.manageAccount', undefined, language)}>
+          <UserButton showName />
+        </div>
+      </Show>
+    </>
+  )
+}
+
 export default function Topbar({
   language,
+  authEnabled,
   onBackToMenu,
   onCopyLink,
   onLanguage,
@@ -296,6 +320,9 @@ export default function Topbar({
       </div>
 
       <div className="topbar-right">
+        {authEnabled && (
+          <TopbarAuth language={language} />
+        )}
         <button className="btn btn-icon" onClick={onLanguage} title={translate('common.language', undefined, language)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="9" />
