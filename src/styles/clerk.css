@@ -28,7 +28,7 @@
 .cl-card *,
 .cl-userButtonPopoverCard,
 .cl-userButtonPopoverCard * {
-  color: #f4f7fb;
+  color: #f4f7fb !important;
 }
 
 .cl-headerTitle,
@@ -38,12 +38,12 @@
 
 .cl-headerSubtitle,
 .cl-headerSubtitle * {
-  color: #a9bdd5 !important;
+  color: #dce8f6 !important;
 }
 
 .cl-formFieldLabel,
 .cl-formFieldLabel * {
-  color: #d7e4f3 !important;
+  color: #f4f7fb !important;
 }
 
 .cl-formFieldInput,
@@ -59,7 +59,7 @@
 
 .cl-formFieldInput::placeholder,
 .cl-input::placeholder {
-  color: #92a7c0 !important;
+  color: #c0d0e0 !important;
   opacity: 1 !important;
 }
 
@@ -121,12 +121,12 @@
 .cl-alertText,
 .cl-navbarButton,
 .cl-navbarButton * {
-  color: #9db0c7 !important;
+  color: #dce8f6 !important;
 }
 
 .cl-footerActionText,
 .cl-footerActionText * {
-  color: #8ea2bd !important;
+  color: #dce8f6 !important;
 }
 
 .cl-footerActionLink,
@@ -228,7 +228,7 @@
 .cl-userButtonPopoverFooter *,
 .cl-userButtonPopoverActionButtonHint,
 .cl-userButtonPopoverActionButtonHint * {
-  color: #9db0c7 !important;
+  color: #dce8f6 !important;
 }
 
 .cl-menuItemButton,
