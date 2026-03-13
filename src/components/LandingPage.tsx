@@ -93,7 +93,6 @@ export default function LandingPage({
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <span className="landing-google-icon" aria-hidden="true">C</span>
                     <span>{translate('auth.signOut', undefined, language)}</span>
                   </motion.button>
                 </SignOutButton>

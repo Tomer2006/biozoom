@@ -76,7 +76,6 @@ function TopbarAuth({ language }: { language: AppLanguage }) {
       <Show when="signed-out">
         <SignInButton mode="modal">
           <button className="btn topbar-auth-btn" title={translate('auth.signIn', undefined, language)}>
-            <span className="topbar-auth-avatar" aria-hidden="true">C</span>
             <span className="topbar-auth-label">{translate('auth.signInShort', undefined, language)}</span>
           </button>
         </SignInButton>

@@ -212,19 +212,6 @@
   transform: none;
 }
 
-.landing-google-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #0a1628;
-  background: linear-gradient(135deg, #f7d26a 0%, #f2b24b 100%);
-  border-radius: 999px;
-}
-
 .landing-auth-note {
   max-width: 28rem;
   margin: 0;
