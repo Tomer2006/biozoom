@@ -14,6 +14,7 @@ import LanguageModal from './components/LanguageModal'
 import OnboardingModal from './components/OnboardingModal'
 import HelpModal from './components/HelpModal'
 import SettingsModal from './components/SettingsModal'
+import SettingsLabModal from './components/SettingsLabModal'
 import ScreenshotPanel from './components/ScreenshotPanel'
 import ToastContainer from './components/Toast'
 import { useToast } from './hooks/useToast'
@@ -70,6 +71,7 @@ export default function App() {
 
   const [helpOpen, setHelpOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [settingsLabOpen, setSettingsLabOpen] = useState(false)
   const [screenshotOpen, setScreenshotOpen] = useState(false)
 
   const toast = useToast()
@@ -424,6 +426,7 @@ export default function App() {
           onCopyLink={handleCopyLink}
           onLanguage={() => setLanguageModalOpen(true)}
           onSettings={() => setSettingsOpen(true)}
+          onSettingsLab={() => setSettingsLabOpen(true)}
           onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
           onShowToast={toast.showToast}
@@ -467,6 +470,14 @@ export default function App() {
         onColorPresetChange={setColorPreset}
         onLanguageChange={handleLanguageSelect}
         onClose={() => setSettingsOpen(false)}
+      />
+      <SettingsLabModal
+        isOpen={settingsLabOpen}
+        language={language}
+        onClose={() => setSettingsLabOpen(false)}
+        onPerfChange={() => {
+          setColorPreset(perf.colors.currentPreset)
+        }}
       />
 
       <ScreenshotPanel

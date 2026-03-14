@@ -1,8 +1,9 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignIn, SignOutButton } from '@clerk/react'
+import { Show, SignIn, SignOutButton, useClerk } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
+import { isPerfLabSecretCode } from '../modules/runtimeSettings'
 
 interface TaxonomyNode {
   _id: number
@@ -23,6 +24,7 @@ interface TopbarProps {
   onCopyLink: () => void
   onLanguage: () => void
   onSettings: () => void
+  onSettingsLab: () => void
   onHelp: () => void
   onUpdateBreadcrumbs: (node: TaxonomyNode) => void
   onShowToast: (message: string, type?: 'success' | 'info' | 'warning' | 'error', duration?: number) => string
@@ -134,6 +136,7 @@ function TopbarAuth({
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const clerk = useClerk()
 
   useEffect(() => {
     if (!menuOpen) return
@@ -210,6 +213,19 @@ function TopbarAuth({
               </Show>
 
               <Show when="signed-in">
+                <button
+                  className="topbar-account-item"
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    setMenuOpen(false)
+                    clerk.openUserProfile()
+                  }}
+                >
+                  <AccountIcon />
+                  <span>{translate('auth.account', undefined, language)}</span>
+                </button>
+
                 <SignOutButton>
                   <button
                     className="topbar-account-item"
@@ -242,6 +258,7 @@ export default function Topbar({
   onCopyLink,
   onLanguage,
   onSettings,
+  onSettingsLab,
   onHelp,
   onUpdateBreadcrumbs,
   onShowToast,
@@ -307,6 +324,12 @@ export default function Topbar({
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return
+
+    if (isPerfLabSecretCode(searchQuery)) {
+      handleClear()
+      onSettingsLab()
+      return
+    }
 
     const result = await performSearch(searchQuery, onShowToast)
 

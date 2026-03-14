@@ -10,6 +10,7 @@ import './styles/index.css'
 import { perf } from './modules/settings.js'
 import { initializeLanguage } from './modules/i18n'
 import { getClerkPublishableKey } from './modules/clerk'
+import { applyPersistedPerfOverrides } from './modules/runtimeSettings'
 
 initializeLanguage()
 
@@ -26,6 +27,8 @@ if (savedColorPreset && perf.colors.presets[savedColorPreset as keyof typeof per
 if (savedSearchProvider && perf.search.providers[savedSearchProvider as keyof typeof perf.search.providers]) {
   perf.search.currentProvider = savedSearchProvider
 }
+
+applyPersistedPerfOverrides()
 
 const robotoImport = 'Roboto:wght@300;400;500;700'
 const robotoFontStack = `'Roboto', ui-sans-serif, system-ui, -apple-system, sans-serif`
