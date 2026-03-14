@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignInButton, UserButton } from '@clerk/react'
+import { Show, UserButton } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -114,23 +114,19 @@ function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] 
 
 function TopbarAuth({
   language,
+  authEnabled,
   onLanguage,
   onSettings,
 }: {
   language: AppLanguage
+  authEnabled: boolean
   onLanguage: () => void
   onSettings: () => void
 }) {
+  if (!authEnabled) return null
+
   return (
     <>
-      <Show when="signed-out">
-        <SignInButton mode="modal">
-          <button className="btn topbar-auth-btn" title={translate('auth.signIn', undefined, language)}>
-            <span className="topbar-auth-label">{translate('auth.signInShort', undefined, language)}</span>
-          </button>
-        </SignInButton>
-      </Show>
-
       <Show when="signed-in">
         <div className="topbar-user-button" title={translate('auth.manageAccount', undefined, language)}>
           <UserButton>
@@ -384,13 +380,12 @@ export default function Topbar({
       </div>
 
       <div className="topbar-right">
-        {authEnabled && (
-          <TopbarAuth
-            language={language}
-            onLanguage={onLanguage}
-            onSettings={onSettings}
-          />
-        )}
+        <TopbarAuth
+          language={language}
+          authEnabled={authEnabled}
+          onLanguage={onLanguage}
+          onSettings={onSettings}
+        />
         {authEnabled ? (
           <Show when="signed-out">
             <button className="btn btn-icon" onClick={onLanguage} title={translate('common.language', undefined, language)}>

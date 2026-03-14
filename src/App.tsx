@@ -32,7 +32,6 @@ import {
   type AppLanguage,
 } from './modules/i18n'
 import { perf } from './modules/settings'
-import { getClerkConfigError, hasClerkPublishableKey } from './modules/clerk'
 
 export interface AppState {
   isLanding: boolean
@@ -74,6 +73,7 @@ export default function App() {
   const [screenshotOpen, setScreenshotOpen] = useState(false)
 
   const toast = useToast()
+  const authEnabled = true
 
   const loadingStartTime = useRef<number>(0)
   const timerInterval = useRef<number | null>(null)
@@ -407,8 +407,7 @@ export default function App() {
           <LandingPage
             language={language}
             colorPreset={colorPreset}
-            authEnabled={hasClerkPublishableKey()}
-            authError={getClerkConfigError()}
+            authEnabled={authEnabled}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}
@@ -420,7 +419,7 @@ export default function App() {
       {appState.showTopbar && (
         <Topbar
           language={language}
-          authEnabled={hasClerkPublishableKey()}
+          authEnabled={authEnabled}
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
           onLanguage={() => setLanguageModalOpen(true)}

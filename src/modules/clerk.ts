@@ -20,7 +20,7 @@ export function getClerkPublishableKey() {
     return productionPublishableKey
   }
 
-  return developmentPublishableKey
+  return developmentPublishableKey || productionPublishableKey
 }
 
 export function hasClerkPublishableKey() {
@@ -32,10 +32,6 @@ export function getClerkConfigError() {
 
   if (isProductionDomain(hostname) && productionPublishableKey.length === 0) {
     return 'Clerk auth is not configured yet. Add VITE_CLERK_PUBLISHABLE_KEY first.'
-  }
-
-  if (!isProductionDomain(hostname) && productionPublishableKey.length > 0 && developmentPublishableKey.length === 0) {
-    return 'This is a non-production origin. Add VITE_CLERK_DEV_PUBLISHABLE_KEY for localhost/dev, or test on infinitespecies.com.'
   }
 
   if (hasClerkPublishableKey()) {

@@ -97,32 +97,6 @@
   flex-shrink: 0;
 }
 
-.topbar-auth-btn {
-  gap: 0.625rem;
-  min-width: 0;
-  max-width: min(16rem, 30vw);
-  padding-inline: 0.625rem 0.875rem;
-  color: #dce8f6;
-  background: rgba(9, 14, 24, 0.88);
-  border-color: rgba(78, 104, 138, 0.68);
-  box-shadow:
-    0 0 0 1px rgba(230, 156, 80, 0.08),
-    0 8px 24px rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(10px);
-}
-
-.topbar-auth-btn:hover {
-  color: #f4f7fb;
-  background: rgba(13, 21, 35, 0.94);
-  border-color: rgba(132, 160, 196, 0.85);
-}
-
-.topbar-auth-label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .topbar-user-button {
   display: flex;
   align-items: center;

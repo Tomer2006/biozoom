@@ -9,7 +9,7 @@ import App from './App'
 import './styles/index.css'
 import { perf } from './modules/settings.js'
 import { initializeLanguage } from './modules/i18n'
-import { getClerkPublishableKey, hasClerkPublishableKey } from './modules/clerk'
+import { getClerkPublishableKey } from './modules/clerk'
 
 initializeLanguage()
 
@@ -66,19 +66,16 @@ const clerkAppearance = {
   },
 }
 
-const appTree = hasClerkPublishableKey()
-  ? (
-      <ClerkProvider
-        publishableKey={getClerkPublishableKey()}
-        localization={clerkLocalization}
-        appearance={clerkAppearance}
-      >
-        <App />
-      </ClerkProvider>
-    )
-  : (
+const appTree = (
+  <ClerkProvider
+    publishableKey={getClerkPublishableKey() || undefined}
+    localization={clerkLocalization}
+    appearance={clerkAppearance}
+    __internal_bypassMissingPublishableKey
+  >
       <App />
-    )
+  </ClerkProvider>
+)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
