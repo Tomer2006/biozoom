@@ -97,6 +97,15 @@
   flex-shrink: 0;
 }
 
+.topbar-auth-btn {
+  color: #dce8f6;
+}
+
+.topbar-auth-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
 .topbar-user-button {
   display: flex;
   align-items: center;

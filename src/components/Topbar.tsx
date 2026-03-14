@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, UserButton } from '@clerk/react'
+import { Show, SignInButton, UserButton } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -77,6 +77,15 @@ function SettingsIcon() {
   )
 }
 
+function AccountIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21a8 8 0 0 0-16 0" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
 function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] {
   if (!query) return [text]
   const queryLower = query.toLowerCase()
@@ -127,6 +136,14 @@ function TopbarAuth({
 
   return (
     <>
+      <Show when="signed-out">
+        <SignInButton mode="modal">
+          <button className="btn btn-icon topbar-auth-btn" title={translate('auth.signIn', undefined, language)} aria-label={translate('auth.signIn', undefined, language)}>
+            <AccountIcon />
+          </button>
+        </SignInButton>
+      </Show>
+
       <Show when="signed-in">
         <div className="topbar-user-button" title={translate('auth.manageAccount', undefined, language)}>
           <UserButton>
