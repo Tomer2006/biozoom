@@ -313,6 +313,10 @@
     0 0 60px rgba(91, 196, 190, 0.08) !important;
 }
 
+.cl-userButtonPopoverCard .cl-userPreview {
+  display: none !important;
+}
+
 .cl-userPreviewMainIdentifier,
 .cl-userPreviewMainIdentifier *,
 .cl-menuItemButtonText,
