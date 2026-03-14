@@ -161,24 +161,30 @@
 }
 
 .topbar-user-button .cl-userButtonTrigger {
-  min-height: 38px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-height: 36px;
   padding: 0 !important;
   color: #dce8f6 !important;
   background: transparent !important;
   border: 1px solid transparent !important;
-  border-radius: 999px !important;
+  border-radius: var(--radius-md) !important;
   box-shadow: none !important;
   backdrop-filter: none;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .topbar-user-button .cl-userButtonTrigger:hover,
 .topbar-user-button .cl-userButtonTrigger:focus-visible {
-  background: transparent !important;
-  border-color: transparent !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .topbar-user-button .cl-userButtonTrigger:focus-visible {
-  box-shadow: 0 0 0 2px rgba(91, 196, 190, 0.65) !important;
+  box-shadow: 0 0 0 2px var(--accent-primary) !important;
 }
 
 .topbar-user-button .cl-userButtonBox,
@@ -193,9 +199,9 @@
 }
 
 .topbar-user-button .cl-userButtonAvatarBox {
-  width: 28px !important;
-  height: 28px !important;
-  box-shadow: 0 0 0 1px rgba(230, 156, 80, 0.24) !important;
+  width: 24px !important;
+  height: 24px !important;
+  box-shadow: none !important;
 }
 
 .cl-userProfile-root,
