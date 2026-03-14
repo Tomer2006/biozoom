@@ -106,19 +106,61 @@
   height: 18px;
 }
 
-.topbar-user-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  max-width: 36px;
+.topbar-account-menu {
+  position: relative;
 }
 
-.topbar-user-button button {
+.topbar-account-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 11rem;
+  padding: 0.4rem;
+  background: rgba(7, 10, 18, 0.98);
+  border: 1px solid rgba(95, 120, 151, 0.45);
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(230, 156, 80, 0.08),
+    0 18px 48px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+  z-index: 120;
+}
+
+.topbar-account-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
   width: 100%;
-  max-width: 100%;
+  min-height: 2.5rem;
+  padding: 0.625rem 0.75rem;
+  color: #f4f7fb;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.topbar-account-item:hover,
+.topbar-account-item:focus-visible {
+  background: rgba(19, 26, 42, 0.92);
+  border-color: rgba(95, 120, 151, 0.35);
+  outline: none;
+}
+
+.topbar-account-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #5bc4be;
+}
+
+.topbar-account-item span {
+  white-space: nowrap;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -515,6 +557,11 @@
 
 [dir="rtl"] .topbar-right {
   justify-content: flex-start;
+}
+
+[dir="rtl"] .topbar-account-dropdown {
+  right: auto;
+  left: 0;
 }
 
 [dir="rtl"] .searchbar {

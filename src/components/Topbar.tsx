@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignInButton, UserButton } from '@clerk/react'
+import { Show, SignInButton, SignOutButton } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -132,39 +132,114 @@ function TopbarAuth({
   onLanguage: () => void
   onSettings: () => void
 }) {
-  if (!authEnabled) return null
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' || event.code === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [menuOpen])
 
   return (
-    <>
-      <Show when="signed-out">
-        <SignInButton mode="modal">
-          <button className="btn btn-icon topbar-auth-btn" title={translate('auth.signIn', undefined, language)} aria-label={translate('auth.signIn', undefined, language)}>
-            <AccountIcon />
-          </button>
-        </SignInButton>
-      </Show>
+    <div className="topbar-account-menu" ref={menuRef}>
+      <button
+        className="btn btn-icon topbar-auth-btn"
+        type="button"
+        title={translate('auth.account', undefined, language)}
+        aria-label={translate('auth.account', undefined, language)}
+        aria-haspopup="menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((current) => !current)}
+      >
+        <AccountIcon />
+      </button>
 
-      <Show when="signed-in">
-        <div className="topbar-user-button" title={translate('auth.manageAccount', undefined, language)}>
-          <UserButton>
-            <UserButton.MenuItems>
-              <UserButton.Action label="manageAccount" />
-              <UserButton.Action
-                label={translate('common.language', undefined, language)}
-                labelIcon={<LanguageIcon />}
-                onClick={onLanguage}
-              />
-              <UserButton.Action
-                label={translate('topbar.settingsButton', undefined, language)}
-                labelIcon={<SettingsIcon />}
-                onClick={onSettings}
-              />
-              <UserButton.Action label="signOut" />
-            </UserButton.MenuItems>
-          </UserButton>
+      {menuOpen && (
+        <div className="topbar-account-dropdown" role="menu">
+          <button
+            className="topbar-account-item"
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setMenuOpen(false)
+              onLanguage()
+            }}
+          >
+            <LanguageIcon />
+            <span>{translate('common.language', undefined, language)}</span>
+          </button>
+
+          <button
+            className="topbar-account-item"
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setMenuOpen(false)
+              onSettings()
+            }}
+          >
+            <SettingsIcon />
+            <span>{translate('topbar.settingsButton', undefined, language)}</span>
+          </button>
+
+          {authEnabled ? (
+            <>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    className="topbar-account-item"
+                    type="button"
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <AccountIcon />
+                    <span>{translate('auth.signIn', undefined, language)}</span>
+                  </button>
+                </SignInButton>
+              </Show>
+
+              <Show when="signed-in">
+                <SignOutButton>
+                  <button
+                    className="topbar-account-item"
+                    type="button"
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <AccountIcon />
+                    <span>{translate('auth.signOut', undefined, language)}</span>
+                  </button>
+                </SignOutButton>
+              </Show>
+            </>
+          ) : (
+            <button className="topbar-account-item" type="button" role="menuitem">
+              <AccountIcon />
+              <span>{translate('auth.signIn', undefined, language)}</span>
+            </button>
+          )}
         </div>
-      </Show>
-    </>
+      )}
+    </div>
   )
 }
 
@@ -403,25 +478,6 @@ export default function Topbar({
           onLanguage={onLanguage}
           onSettings={onSettings}
         />
-        {authEnabled ? (
-          <Show when="signed-out">
-            <button className="btn btn-icon" onClick={onLanguage} title={translate('common.language', undefined, language)}>
-              <LanguageIcon />
-            </button>
-            <button className="btn btn-icon" onClick={onSettings} title={translate('topbar.settingsButton', undefined, language)}>
-              <SettingsIcon />
-            </button>
-          </Show>
-        ) : (
-          <>
-            <button className="btn btn-icon" onClick={onLanguage} title={translate('common.language', undefined, language)}>
-              <LanguageIcon />
-            </button>
-            <button className="btn btn-icon" onClick={onSettings} title={translate('topbar.settingsButton', undefined, language)}>
-              <SettingsIcon />
-            </button>
-          </>
-        )}
         <button className="btn btn-icon" onClick={onCopyLink} title={translate('topbar.copyLink', undefined, language)}>
           <ShareIcon />
         </button>
