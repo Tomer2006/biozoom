@@ -218,6 +218,28 @@
   display: none !important;
 }
 
+/* Remove user photos across Clerk surfaces so account UI stays icon/text-based. */
+.cl-rootBox [class*="AvatarBox"],
+.cl-rootBox [class*="avatarBox"],
+.cl-rootBox [class*="AvatarImage"],
+.cl-rootBox [class*="avatarImage"],
+.cl-rootBox [class*="ProfileImage"],
+.cl-rootBox [class*="profileImage"],
+.cl-rootBox [class*="UserAvatar"],
+.cl-rootBox [class*="userAvatar"] {
+  display: none !important;
+}
+
+.cl-rootBox [class*="profileImage"] [class*="badge"],
+.cl-rootBox [class*="ProfileImage"] [class*="badge"] {
+  display: none !important;
+}
+
+.cl-userPreview,
+.cl-userProfile-root [class*="profileSection"] {
+  gap: 0.75rem !important;
+}
+
 .cl-userProfile-root,
 .cl-userProfile-root *,
 .cl-pageScrollBox,
