@@ -81,16 +81,16 @@ export default function LandingPage({
               <Show when="signed-in">
                 <div className="landing-auth-status">
                   <LandingSignedInStatus language={language} />
-                </div>
-                <SignOutButton>
-                  <motion.button
-                    className="landing-google-btn"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
+                  <SignOutButton>
+                    <motion.button
+                      className="landing-auth-signout-btn"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
                     <span>{translate('auth.signOut', undefined, language)}</span>
-                  </motion.button>
-                </SignOutButton>
+                    </motion.button>
+                  </SignOutButton>
+                </div>
               </Show>
 
               <Show when="signed-out">
