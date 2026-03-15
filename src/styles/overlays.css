@@ -839,48 +839,67 @@
   border-radius: var(--radius-md);
 }
 
-.settings-lab-modal {
-  width: min(980px, 96vw);
-  max-width: 980px;
-  height: min(92vh, calc(100dvh - var(--space-md) - var(--space-md)));
-  max-height: min(92vh, calc(100dvh - var(--space-md) - var(--space-md)));
+.settings-lab-panel {
+  position: fixed;
+  top: calc(4.5rem + var(--breadcrumbs-height, 0px));
+  right: var(--space-md);
+  bottom: var(--space-md);
+  width: min(42rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: rgba(7, 10, 18, 0.96);
+  border: 1px solid rgba(95, 120, 151, 0.35);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+  z-index: 260;
+  overflow: hidden;
 }
 
-.settings-lab-modal,
-.settings-lab-modal * {
+.settings-lab-panel,
+.settings-lab-panel * {
   scrollbar-width: thin !important;
   -ms-overflow-style: auto !important;
 }
 
-.settings-lab-modal::-webkit-scrollbar,
-.settings-lab-modal *::-webkit-scrollbar {
+.settings-lab-panel::-webkit-scrollbar,
+.settings-lab-panel *::-webkit-scrollbar {
   display: block !important;
   width: 10px !important;
   height: 10px !important;
   background: transparent !important;
 }
 
-.settings-lab-modal::-webkit-scrollbar-thumb,
-.settings-lab-modal *::-webkit-scrollbar-thumb {
+.settings-lab-panel::-webkit-scrollbar-thumb,
+.settings-lab-panel *::-webkit-scrollbar-thumb {
   background: rgba(95, 120, 151, 0.45);
   border-radius: 999px;
 }
 
-.settings-lab-modal .modal-body {
+.settings-lab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.settings-lab-body {
   overflow-y: auto !important;
   overscroll-behavior: contain;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: var(--space-lg);
 }
 
 .settings-lab-subtitle {
   margin-top: 0.25rem;
   font-size: 0.8125rem;
   color: var(--text-secondary);
-}
-
-.settings-lab-body {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
 }
 
 .settings-lab-field {

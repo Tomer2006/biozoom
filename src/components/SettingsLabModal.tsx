@@ -11,7 +11,6 @@ import {
 
 interface SettingsLabModalProps {
   isOpen: boolean
-  onClose: () => void
   onPerfChange: () => void
 }
 
@@ -233,7 +232,6 @@ function SettingsLabField({ path, label, value, onChange }: SettingsLabFieldProp
 
 export default function SettingsLabModal({
   isOpen,
-  onClose,
   onPerfChange,
 }: SettingsLabModalProps) {
   const [snapshot, setSnapshot] = useState<EditablePerfRecord>(() => getPerfSettingsSnapshot())
@@ -243,21 +241,6 @@ export default function SettingsLabModal({
       setSnapshot(getPerfSettingsSnapshot())
     }
   }, [isOpen])
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose()
-      }
-    }
-
-    if (!isOpen) {
-      return
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, onClose])
 
   const commitSnapshot = (nextSnapshot: EditablePerfRecord) => {
     setSnapshot(nextSnapshot)
@@ -271,60 +254,51 @@ export default function SettingsLabModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className="modal-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
+        <motion.aside
+          className="settings-lab-panel"
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 24 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div
-            className="modal settings-modal settings-lab-modal"
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 20 }}
-            transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="modal-header">
-              <div>
-                <h2>Settings Lab</h2>
-                <p className="settings-lab-subtitle">
-                  Scrollable runtime list for every editable `perf` value in `settings.js`.
-                </p>
-              </div>
-              <div className="modal-header-actions">
-                <button
-                  className="btn btn-ghost"
-                  type="button"
-                  onClick={() => {
-                    resetPersistedPerfOverrides()
-                    const resetSnapshot = getPerfSettingsSnapshot()
-                    setSnapshot(resetSnapshot)
-                    onPerfChange()
-                  }}
-                >
-                  Reset Defaults
-                </button>
-              </div>
+          <div className="settings-lab-header">
+            <div>
+              <h2>Settings Lab</h2>
+              <p className="settings-lab-subtitle">
+                Scrollable runtime list for every editable `perf` value in `settings.js`.
+              </p>
             </div>
+            <div className="modal-header-actions">
+              <button
+                className="btn btn-ghost"
+                type="button"
+                onClick={() => {
+                  resetPersistedPerfOverrides()
+                  const resetSnapshot = getPerfSettingsSnapshot()
+                  setSnapshot(resetSnapshot)
+                  onPerfChange()
+                }}
+              >
+                Reset Defaults
+              </button>
+            </div>
+          </div>
 
-            <div className="modal-body settings-lab-body">
-              {flatEntries.map(({ path, value }) => (
-                <SettingsLabField
-                  key={path.join('.')}
-                  path={path}
-                  label={formatLabel(path[path.length - 1] ?? 'Setting')}
-                  value={value}
-                  onChange={(path, nextValue) => {
-                    const nextSnapshot = updateSnapshotAtPath(snapshot, path, nextValue)
-                    commitSnapshot(nextSnapshot)
-                  }}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+          <div className="settings-lab-body">
+            {flatEntries.map(({ path, value }) => (
+              <SettingsLabField
+                key={path.join('.')}
+                path={path}
+                label={formatLabel(path[path.length - 1] ?? 'Setting')}
+                value={value}
+                onChange={(path, nextValue) => {
+                  const nextSnapshot = updateSnapshotAtPath(snapshot, path, nextValue)
+                  commitSnapshot(nextSnapshot)
+                }}
+              />
+            ))}
+          </div>
+        </motion.aside>
       )}
     </AnimatePresence>
   )

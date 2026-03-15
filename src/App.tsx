@@ -308,6 +308,7 @@ export default function App() {
       showTopbar: false,
       breadcrumbs: [],
     }))
+    setSettingsLabOpen(false)
 
     if (state.DATA_ROOT) {
       await goToNode(state.DATA_ROOT, false)
@@ -426,7 +427,7 @@ export default function App() {
           onCopyLink={handleCopyLink}
           onLanguage={() => setLanguageModalOpen(true)}
           onSettings={() => setSettingsOpen(true)}
-          onSettingsLab={() => setSettingsLabOpen(true)}
+          onSettingsLab={() => setSettingsLabOpen((prev) => !prev)}
           onHelp={() => setHelpOpen(true)}
           onUpdateBreadcrumbs={updateBreadcrumbs}
           onShowToast={toast.showToast}
@@ -473,7 +474,6 @@ export default function App() {
       />
       <SettingsLabModal
         isOpen={settingsLabOpen}
-        onClose={() => setSettingsLabOpen(false)}
         onPerfChange={() => {
           setColorPreset(perf.colors.currentPreset)
         }}
