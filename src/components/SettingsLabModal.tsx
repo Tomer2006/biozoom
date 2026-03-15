@@ -8,11 +8,9 @@ import {
   type EditablePerfRecord,
   type EditablePerfValue,
 } from '../modules/runtimeSettings'
-import { translate, type AppLanguage } from '../modules/i18n'
 
 interface SettingsLabModalProps {
   isOpen: boolean
-  language: AppLanguage
   onClose: () => void
   onPerfChange: () => void
 }
@@ -21,8 +19,12 @@ interface SettingsLabFieldProps {
   path: string[]
   label: string
   value: EditablePerfValue
-  depth: number
   onChange: (path: string[], value: EditablePerfValue) => void
+}
+
+interface FlatSettingEntry {
+  path: string[]
+  value: EditablePerfValue
 }
 
 function isPlainObject(value: EditablePerfValue): value is EditablePerfRecord {
@@ -64,6 +66,14 @@ function updateSnapshotAtPath(
     ...source,
     [head]: updateSnapshotAtPath(currentChild, rest, nextValue),
   }
+}
+
+function flattenSettings(value: EditablePerfValue, path: string[] = []): FlatSettingEntry[] {
+  if (isPlainObject(value)) {
+    return Object.entries(value).flatMap(([key, childValue]) => flattenSettings(childValue, path.concat(key)))
+  }
+
+  return [{ path, value }]
 }
 
 function JsonArrayField({
@@ -156,32 +166,7 @@ function NumericField({
   )
 }
 
-function SettingsLabField({ path, label, value, depth, onChange }: SettingsLabFieldProps) {
-  if (isPlainObject(value)) {
-    const entries = Object.entries(value)
-
-    return (
-      <details className="settings-lab-group" open={depth <= 1}>
-        <summary>
-          <span>{label}</span>
-          <code>{path.join('.')}</code>
-        </summary>
-        <div className="settings-lab-group-body">
-          {entries.map(([key, childValue]) => (
-            <SettingsLabField
-              key={path.concat(key).join('.')}
-              path={path.concat(key)}
-              label={formatLabel(key)}
-              value={childValue}
-              depth={depth + 1}
-              onChange={onChange}
-            />
-          ))}
-        </div>
-      </details>
-    )
-  }
-
+function SettingsLabField({ path, label, value, onChange }: SettingsLabFieldProps) {
   if (Array.isArray(value)) {
     return (
       <div className="settings-lab-field">
@@ -248,7 +233,6 @@ function SettingsLabField({ path, label, value, depth, onChange }: SettingsLabFi
 
 export default function SettingsLabModal({
   isOpen,
-  language,
   onClose,
   onPerfChange,
 }: SettingsLabModalProps) {
@@ -282,7 +266,7 @@ export default function SettingsLabModal({
     onPerfChange()
   }
 
-  const topLevelEntries = Object.entries(snapshot)
+  const flatEntries = flattenSettings(snapshot).sort((a, b) => a.path.join('.').localeCompare(b.path.join('.')))
 
   return (
     <AnimatePresence>
@@ -306,7 +290,7 @@ export default function SettingsLabModal({
               <div>
                 <h2>Settings Lab</h2>
                 <p className="settings-lab-subtitle">
-                  Live runtime editor for `perf` values in `settings.js`.
+                  Scrollable runtime list for every editable `perf` value in `settings.js`.
                 </p>
               </div>
               <div className="modal-header-actions">
@@ -322,26 +306,16 @@ export default function SettingsLabModal({
                 >
                   Reset Defaults
                 </button>
-                <button
-                  className="modal-close"
-                  onClick={onClose}
-                  aria-label={translate('common.close', undefined, language)}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                </button>
               </div>
             </div>
 
             <div className="modal-body settings-lab-body">
-              {topLevelEntries.map(([key, value]) => (
+              {flatEntries.map(({ path, value }) => (
                 <SettingsLabField
-                  key={key}
-                  path={[key]}
-                  label={formatLabel(key)}
+                  key={path.join('.')}
+                  path={path}
+                  label={formatLabel(path[path.length - 1] ?? 'Setting')}
                   value={value}
-                  depth={0}
                   onChange={(path, nextValue) => {
                     const nextSnapshot = updateSnapshotAtPath(snapshot, path, nextValue)
                     commitSnapshot(nextSnapshot)

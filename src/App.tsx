@@ -473,7 +473,6 @@ export default function App() {
       />
       <SettingsLabModal
         isOpen={settingsLabOpen}
-        language={language}
         onClose={() => setSettingsLabOpen(false)}
         onPerfChange={() => {
           setColorPreset(perf.colors.currentPreset)

@@ -842,11 +842,33 @@
 .settings-lab-modal {
   width: min(980px, 96vw);
   max-width: 980px;
+  height: min(92vh, calc(100dvh - var(--space-md) - var(--space-md)));
   max-height: min(92vh, calc(100dvh - var(--space-md) - var(--space-md)));
+}
+
+.settings-lab-modal,
+.settings-lab-modal * {
+  scrollbar-width: thin !important;
+  -ms-overflow-style: auto !important;
+}
+
+.settings-lab-modal::-webkit-scrollbar,
+.settings-lab-modal *::-webkit-scrollbar {
+  display: block !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: transparent !important;
+}
+
+.settings-lab-modal::-webkit-scrollbar-thumb,
+.settings-lab-modal *::-webkit-scrollbar-thumb {
+  background: rgba(95, 120, 151, 0.45);
+  border-radius: 999px;
 }
 
 .settings-lab-modal .modal-body {
   overflow-y: auto !important;
+  overscroll-behavior: contain;
 }
 
 .settings-lab-subtitle {
@@ -856,62 +878,18 @@
 }
 
 .settings-lab-body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.settings-lab-group {
-  background: rgba(14, 18, 28, 0.72);
-  border: 1px solid var(--border-dim);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.settings-lab-group > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding: 0.9rem 1rem;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-
-.settings-lab-group > summary::-webkit-details-marker {
-  display: none;
-}
-
-.settings-lab-group > summary span {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.settings-lab-group > summary code {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.settings-lab-group-body {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
-  padding: 0 1rem 1rem;
-}
-
-.settings-lab-group .settings-lab-group {
-  background: rgba(19, 25, 38, 0.76);
 }
 
 .settings-lab-field {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  padding: 0.875rem;
-  background: rgba(10, 14, 24, 0.65);
-  border: 1px solid rgba(95, 120, 151, 0.18);
+  padding: 1rem;
+  background: rgba(10, 14, 24, 0.82);
+  border: 1px solid rgba(95, 120, 151, 0.24);
   border-radius: var(--radius-md);
 }
 
@@ -920,6 +898,10 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-md);
+}
+
+.settings-lab-field .settings-hint {
+  word-break: break-word;
 }
 
 .settings-lab-type {
