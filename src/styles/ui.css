@@ -163,27 +163,6 @@
   white-space: nowrap;
 }
 
-.topbar-account-signin {
-  margin-top: 0.125rem;
-  padding-top: 0.4rem;
-  border-top: 1px solid rgba(95, 120, 151, 0.25);
-}
-
-.topbar-account-signin .cl-rootBox,
-.topbar-account-signin .cl-cardBox,
-.topbar-account-signin .cl-card {
-  width: min(24rem, calc(100vw - 2rem)) !important;
-  max-width: 100% !important;
-}
-
-.topbar-account-signin .cl-cardBox,
-.topbar-account-signin .cl-card {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
 /* ═══════════════════════════════════════════════════════════════════════════
    Buttons
    ═══════════════════════════════════════════════════════════════════════════ */

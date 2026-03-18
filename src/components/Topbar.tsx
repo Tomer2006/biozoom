@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignIn, SignOutButton, useClerk } from '@clerk/react'
+import { Show, SignInButton, SignOutButton, useClerk } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -207,9 +207,17 @@ function TopbarAuth({
           {authEnabled ? (
             <>
               <Show when="signed-out">
-                <div className="topbar-account-signin">
-                  <SignIn routing="virtual" />
-                </div>
+                <SignInButton mode="modal">
+                  <button
+                    className="topbar-account-item"
+                    type="button"
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <AccountIcon />
+                    <span>{translate('auth.signIn', undefined, language)}</span>
+                  </button>
+                </SignInButton>
               </Show>
 
               <Show when="signed-in">
