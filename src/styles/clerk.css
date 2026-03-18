@@ -49,8 +49,7 @@
 }
 
 .cl-formFieldInput,
-.cl-input,
-.cl-otpCodeFieldInput {
+.cl-input {
   color: #f4f7fb !important;
   -webkit-text-fill-color: #f4f7fb !important;
   background: rgba(19, 26, 42, 0.95) !important;
@@ -61,22 +60,17 @@
 
 .cl-formFieldInput:hover,
 .cl-input:hover,
-.cl-otpCodeFieldInput:hover,
 .cl-formFieldInput:active,
-.cl-input:active,
-.cl-otpCodeFieldInput:active {
+.cl-input:active {
   background: rgba(19, 26, 42, 0.95) !important;
 }
 
 .cl-formFieldInput:-webkit-autofill,
 .cl-input:-webkit-autofill,
-.cl-otpCodeFieldInput:-webkit-autofill,
 .cl-formFieldInput:-webkit-autofill:hover,
 .cl-input:-webkit-autofill:hover,
-.cl-otpCodeFieldInput:-webkit-autofill:hover,
 .cl-formFieldInput:-webkit-autofill:focus,
-.cl-input:-webkit-autofill:focus,
-.cl-otpCodeFieldInput:-webkit-autofill:focus {
+.cl-input:-webkit-autofill:focus {
   -webkit-text-fill-color: #f4f7fb !important;
   caret-color: #f4f7fb !important;
   -webkit-box-shadow: 0 0 0 1000px rgba(19, 26, 42, 0.95) inset !important;
@@ -93,12 +87,31 @@
 }
 
 .cl-formFieldInput:focus,
-.cl-input:focus,
-.cl-otpCodeFieldInput:focus {
+.cl-input:focus {
   border-color: rgba(91, 196, 190, 0.9) !important;
   box-shadow:
     0 0 0 1px rgba(91, 196, 190, 0.35),
     0 0 0 4px rgba(91, 196, 190, 0.14) !important;
+}
+
+/*
+ * Clerk's OTP UI uses an internal managed input layered underneath the slot UI.
+ * If we style that internal input like a normal field, repeated digits can render
+ * twice or appear in the wrong position.
+ */
+.cl-otpCodeFieldInput,
+.cl-otpCodeFieldInput:hover,
+.cl-otpCodeFieldInput:active,
+.cl-otpCodeFieldInput:focus,
+.cl-otpCodeFieldInput:-webkit-autofill,
+.cl-otpCodeFieldInput:-webkit-autofill:hover,
+.cl-otpCodeFieldInput:-webkit-autofill:focus {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  caret-color: #f4f7fb !important;
 }
 
 .cl-formFieldInputShowPasswordButton,
