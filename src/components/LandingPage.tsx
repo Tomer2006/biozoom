@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Show, SignInButton, SignOutButton } from '@clerk/react'
+import { Show, SignOutButton } from '@clerk/react'
 import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
@@ -75,46 +75,24 @@ export default function LandingPage({
           <span className="landing-start-hint">{translate('landing.startHint', undefined, language)}</span>
         </motion.button>
 
-        <div className="landing-auth-panel">
-          {authEnabled ? (
-            <>
-              <Show when="signed-in">
-                <div className="landing-auth-status">
-                  <LandingSignedInStatus language={language} />
-                  <SignOutButton>
-                    <motion.button
-                      className="landing-auth-signout-btn"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                    <span>{translate('auth.signOut', undefined, language)}</span>
-                    </motion.button>
-                  </SignOutButton>
-                </div>
-              </Show>
-
-              <Show when="signed-out">
-                <SignInButton mode="modal">
+        {authEnabled && (
+          <Show when="signed-in">
+            <div className="landing-auth-panel">
+              <div className="landing-auth-status">
+                <LandingSignedInStatus language={language} />
+                <SignOutButton>
                   <motion.button
-                    className="landing-google-btn"
+                    className="landing-auth-signout-btn"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <span>{translate('auth.signIn', undefined, language)}</span>
+                    <span>{translate('auth.signOut', undefined, language)}</span>
                   </motion.button>
-                </SignInButton>
-              </Show>
-            </>
-          ) : (
-            <motion.button
-              className="landing-google-btn"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span>{translate('auth.signIn', undefined, language)}</span>
-            </motion.button>
-          )}
-        </div>
+                </SignOutButton>
+              </div>
+            </div>
+          </Show>
+        )}
       </motion.div>
 
       <motion.div

@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignInButton, SignOutButton, useClerk } from '@clerk/react'
+import { Show, SignOutButton, useClerk } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -204,54 +204,33 @@ function TopbarAuth({
             <span>{translate('topbar.settingsButton', undefined, language)}</span>
           </button>
 
-          {authEnabled ? (
-            <>
-              <Show when="signed-out">
-                <SignInButton mode="modal">
-                  <button
-                    className="topbar-account-item"
-                    type="button"
-                    role="menuitem"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <AccountIcon />
-                    <span>{translate('auth.signIn', undefined, language)}</span>
-                  </button>
-                </SignInButton>
-              </Show>
+          {authEnabled && (
+            <Show when="signed-in">
+              <button
+                className="topbar-account-item"
+                type="button"
+                role="menuitem"
+                onClick={() => {
+                  setMenuOpen(false)
+                  clerk.openUserProfile()
+                }}
+              >
+                <AccountIcon />
+                <span>{translate('auth.account', undefined, language)}</span>
+              </button>
 
-              <Show when="signed-in">
+              <SignOutButton>
                 <button
                   className="topbar-account-item"
                   type="button"
                   role="menuitem"
-                  onClick={() => {
-                    setMenuOpen(false)
-                    clerk.openUserProfile()
-                  }}
+                  onClick={() => setMenuOpen(false)}
                 >
                   <AccountIcon />
-                  <span>{translate('auth.account', undefined, language)}</span>
+                  <span>{translate('auth.signOut', undefined, language)}</span>
                 </button>
-
-                <SignOutButton>
-                  <button
-                    className="topbar-account-item"
-                    type="button"
-                    role="menuitem"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <AccountIcon />
-                    <span>{translate('auth.signOut', undefined, language)}</span>
-                  </button>
-                </SignOutButton>
-              </Show>
-            </>
-          ) : (
-            <button className="topbar-account-item" type="button" role="menuitem">
-              <AccountIcon />
-              <span>{translate('auth.signIn', undefined, language)}</span>
-            </button>
+              </SignOutButton>
+            </Show>
           )}
         </div>
       )}
