@@ -2,8 +2,6 @@
 
 **InfiniteSpecies** is a high-performance, interactive visualization of the biological Tree of Life. It uses a hybrid React + HTML5 Canvas engine to render millions of organisms in a zoomable circle-packing layout, allowing users to navigate from high-level domains down to individual species.
 
-Timeline 1 - FPS (1) - CROP - Videobolt net
-
 Live on [https://infinitespecies.com](https://infinitespecies.com)
 
 ## Key Features
