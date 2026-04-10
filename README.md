@@ -2,9 +2,9 @@
 
 **InfiniteSpecies** is a high-performance, interactive visualization of the biological Tree of Life. It uses a hybrid React + HTML5 Canvas engine to render millions of organisms in a zoomable circle-packing layout, allowing users to navigate from high-level domains down to individual species.
 
-![Timeline 1 - FPS (1) - CROP - Videobolt net](https://github.com/user-attachments/assets/b832fd34-a71e-4fb2-bf48-864efe5e9bf2)
+Timeline 1 - FPS (1) - CROP - Videobolt net
 
-Live on https://infinitespecies.com
+Live on [https://infinitespecies.com](https://infinitespecies.com)
 
 ## Key Features
 
@@ -22,14 +22,16 @@ Live on https://infinitespecies.com
 
 ## Controls
 
-| Action | Desktop | Mobile/Touch |
-| --- | --- | --- |
-| **Zoom In** | Scroll Up / Left Click (on group) | Pinch Out |
-| **Zoom Out** | Scroll Down / Right Click | Pinch In / Long Press |
-| **Pan View** | Middle Click Drag / Drag | Drag |
-| **Fit Node** | `F` Key | Double Tap |
-| **Search** | `S` Key | Button in UI |
-| **Reset** | `R` Key | Menu > Reset |
+
+| Action       | Desktop                           | Mobile/Touch          |
+| ------------ | --------------------------------- | --------------------- |
+| **Zoom In**  | Scroll Up / Left Click (on group) | Pinch Out             |
+| **Zoom Out** | Scroll Down / Right Click         | Pinch In / Long Press |
+| **Pan View** | Middle Click Drag / Drag          | Drag                  |
+| **Fit Node** | `F` Key                           | Double Tap            |
+| **Search**   | `S` Key                           | Button in UI          |
+| **Reset**    | `R` Key                           | Menu > Reset          |
+
 
 See the full control list in the app by pressing `?` or `F1`.
 
@@ -47,29 +49,6 @@ The visualization is compatible with:
 
 **Open Tree of Life:** The default dataset.
 
-## Clerk Auth
-
-This app uses Clerk for authentication.
-
-1. Create or open a Clerk application.
-2. Copy your Clerk publishable key into a local `.env.local` file.
-3. Restart `vite` after adding the env var.
-4. If you want Google login, enable the Google social connection in the Clerk dashboard.
-
-Required env vars:
-
-```bash
-VITE_CLERK_PUBLISHABLE_KEY=pk_...
-```
-
-Optional for localhost/dev:
-
-```bash
-VITE_CLERK_DEV_PUBLISHABLE_KEY=pk_test_...
-```
-
-Use the live key only on `infinitespecies.com` and its subdomains. For `localhost`, use a Clerk test/development publishable key.
-
 ## License
 
 Proprietary "All Rights Reserved"
@@ -80,6 +59,4 @@ This software is proprietary and confidential. Unauthorized copying, modificatio
 
 ---
 
-<div align="center">
-<p>Built with love using React, D3, and Biology</p>
-</div>
+Built with love using React, D3, and Biology
