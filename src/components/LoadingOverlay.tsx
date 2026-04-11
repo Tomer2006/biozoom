@@ -32,10 +32,6 @@ export default function LoadingOverlay({ language, title, stage, progress, pct, 
         </div>
 
         <div className="loading-timer">{timer}</div>
-
-        <div className="loading-hint">
-          {translate('loading.hint', undefined, language)} <kbd>?</kbd> {translate('loading.hintSuffix', undefined, language)}
-        </div>
       </div>
     </div>
   )
