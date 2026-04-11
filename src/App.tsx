@@ -252,16 +252,19 @@ export default function App() {
   }, [hideLoading, showLoading, updateProgress])
 
   const handleStartExploration = async () => {
+    showLoading(translate('loading.loadingTaxonomy', undefined, language))
     setAppState((prev: AppState) => ({ ...prev, isLanding: false, showTopbar: true }))
 
     const initialHash = decodePath(location.hash.slice(1))
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(resolve)
+      })
+    })
     resizeCanvas()
 
     try {
-      showLoading(translate('loading.loadingTaxonomy', undefined, language))
-
       const candidates = ['/data/manifest.json', 'data/manifest.json']
 
       for (const url of candidates) {
