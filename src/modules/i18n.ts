@@ -55,7 +55,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       taglineHighlight: 'zoomable map',
       taglineLine2Suffix: '.',
       start: 'Start Exploration',
-      startHint: 'Usually takes 10 seconds to load',
     },
     auth: {
       account: 'Account',
@@ -452,4 +451,3 @@ export function getColorPresetLabel(preset: string, language: AppLanguage = curr
     .replace(/^./, (char) => char.toUpperCase())
     .trim()
 }
-

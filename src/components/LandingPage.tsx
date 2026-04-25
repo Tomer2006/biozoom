@@ -72,7 +72,6 @@ export default function LandingPage({
           whileTap={{ scale: 0.98 }}
         >
           <span className="landing-start-text">{translate('landing.start', undefined, language)}</span>
-          <span className="landing-start-hint">{translate('landing.startHint', undefined, language)}</span>
         </motion.button>
 
         {authEnabled && (
