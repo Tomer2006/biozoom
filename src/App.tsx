@@ -269,7 +269,7 @@ export default function App() {
 
     try {
       try {
-        await loadBackend('/api')
+        await loadBackend()
         hideLoading()
 
         state.layoutChanged = true
