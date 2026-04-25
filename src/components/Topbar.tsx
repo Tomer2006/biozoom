@@ -287,8 +287,8 @@ export default function Topbar({
     })
   }, [activeResultIndex, showResults])
 
-  const selectSearchResult = (result: SearchResult) => {
-    handleSearchResultClick(result.node)
+  const selectSearchResult = async (result: SearchResult) => {
+    await handleSearchResultClick(result.node)
     setShowResults(false)
     setSearchQuery('')
     setSearchResults([])
@@ -329,7 +329,7 @@ export default function Topbar({
     }
 
     if (result.singleResult) {
-      handleSingleSearchResult(result.matches[0], onUpdateBreadcrumbs)
+      await handleSingleSearchResult(result.matches[0], onUpdateBreadcrumbs)
       setShowResults(false)
       setSearchQuery('')
       setSearchResults([])
@@ -343,7 +343,7 @@ export default function Topbar({
   }
 
   const handleResultClick = (result: SearchResult) => {
-    selectSearchResult(result)
+    void selectSearchResult(result)
   }
 
   const handleSearchInputChange = (value: string) => {
@@ -394,7 +394,7 @@ export default function Topbar({
     if (e.key === 'Enter') {
       if (showResults && activeResultIndex >= 0 && activeResultIndex < searchResults.length) {
         e.preventDefault()
-        selectSearchResult(searchResults[activeResultIndex])
+        void selectSearchResult(searchResults[activeResultIndex])
         return
       }
 

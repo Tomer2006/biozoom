@@ -9,6 +9,8 @@ import { findAllByQuery, pulseAtNode } from './search.js';
 import { updateNavigation, zoomToNode } from './navigation.js';
 import { processSearchResults } from './search.js';
 import { perf } from './settings.js';
+import { ensureBackendViewport, loadBackendNodeById, searchBackendNodes } from './data-backend.js';
+import { state } from './state.js';
 
 /**
  * Perform search
@@ -22,7 +24,9 @@ export async function performSearch(query, onToast) {
   }
 
   const trimmedQuery = query.trim();
-  let matches = findAllByQuery(trimmedQuery, perf.search.maxResults);
+  let matches = state.loadMode === 'backend'
+    ? await searchBackendNodes(trimmedQuery, perf.search.maxResults)
+    : findAllByQuery(trimmedQuery, perf.search.maxResults);
   
   return {
     matches,
@@ -36,11 +40,14 @@ export async function performSearch(query, onToast) {
  * @param {Object} node - The node to navigate to
  * @param {Function} onUpdateBreadcrumbs - Callback to update breadcrumbs
  */
-export function handleSingleSearchResult(node, onUpdateBreadcrumbs) {
-  updateNavigation(node, false);
-  pulseAtNode(node);
+export async function handleSingleSearchResult(node, onUpdateBreadcrumbs) {
+  const readyNode = state.loadMode === 'backend'
+    ? await loadBackendNodeById(node._id)
+    : node;
+  updateNavigation(readyNode, false);
+  pulseAtNode(readyNode);
   if (onUpdateBreadcrumbs) {
-    onUpdateBreadcrumbs(node);
+    onUpdateBreadcrumbs(readyNode);
   }
 }
 
@@ -48,7 +55,13 @@ export function handleSingleSearchResult(node, onUpdateBreadcrumbs) {
  * Handle search result click - zoom to node without changing navigation
  * @param {Object} node - The node to zoom to
  */
-export function handleSearchResultClick(node) {
-  zoomToNode(node);
-  pulseAtNode(node);
+export async function handleSearchResultClick(node) {
+  const readyNode = state.loadMode === 'backend'
+    ? await loadBackendNodeById(node._id)
+    : node;
+  zoomToNode(readyNode);
+  pulseAtNode(readyNode);
+  if (state.loadMode === 'backend') {
+    ensureBackendViewport({ force: true });
+  }
 }

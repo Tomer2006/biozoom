@@ -368,11 +368,16 @@ function renderResults(nodes, q) {
 export function processSearchResults(matches, query) {
   return matches.map(n => {
     let path = '';
-    try {
-      const parts = getNodePath(n);
+    if (n._searchPath) {
+      const parts = String(n._searchPath).split(' / ');
       path = parts.slice(0, -1).join(' / ');
-    } catch (_e) {
-      // best-effort; ignore path errors
+    } else {
+      try {
+        const parts = getNodePath(n);
+        path = parts.slice(0, -1).join(' / ');
+      } catch (_e) {
+        // best-effort; ignore path errors
+      }
     }
     return {
       _id: n._id,
@@ -411,4 +416,3 @@ export async function handleSearch(progressLabelEl) {
     renderResults(matches, q);
   }
 }
-

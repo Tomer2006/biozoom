@@ -14,6 +14,7 @@ import {
 } from '../modules/mouse-handler'
 import { pickNodeAt } from '../modules/picking'
 import { handleCameraPan, clampCameraZoom } from '../modules/camera'
+import { ensureBackendViewport } from '../modules/data-backend'
 import { formatNumber, translate, type AppLanguage } from '../modules/i18n'
 
 interface TaxonomyNode {
@@ -147,8 +148,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       })
     }
 
-    onCameraChange(validateHover)
-    return () => onCameraChange(null)
+    return onCameraChange(validateHover)
   }, [updateTooltipAndPreview])
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -277,8 +277,10 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         touchState.longPressTimer = window.setTimeout(() => {
           const current = state.current as TaxonomyNode | null
           if (current && current.parent && !isLoading) {
-            updateCurrentNodeOnly(current.parent as any)
-            onUpdateBreadcrumbs(current.parent)
+            ensureBackendViewport({ force: true }).then(() => {
+              updateCurrentNodeOnly(current.parent as any)
+              onUpdateBreadcrumbs(current.parent as any)
+            })
             canvas.style.opacity = '0.8'
             setTimeout(() => {
               canvas.style.opacity = '1'
@@ -408,6 +410,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
 
     const current = state.current as TaxonomyNode | null
     if (current && current.parent) {
+      await ensureBackendViewport({ force: true })
       updateCurrentNodeOnly(current.parent as any)
       onUpdateBreadcrumbs(current.parent)
     }
@@ -426,6 +429,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
 
     updateCurrentNodeOnly(node as any)
     onUpdateBreadcrumbs(node)
+    await ensureBackendViewport({ force: true })
   }
 
   return (

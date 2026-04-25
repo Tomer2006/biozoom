@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "backend": "node --max-old-space-size=4096 server/taxonomy-server.js",
+    "start": "node --max-old-space-size=4096 server/taxonomy-server.js",
     "build": "vite build",
     "preview": "vite preview"
   },

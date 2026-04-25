@@ -23,6 +23,7 @@ import { state } from './modules/state'
 import { resizeCanvas, registerDrawCallback, tick } from './modules/canvas'
 import { draw } from './modules/render'
 import { loadEager } from './modules/data'
+import { ensureBackendViewport, findBackendNodeByPath, loadBackend } from './modules/data-backend'
 import { decodePath, findNodeByPath, getNodePath, updateDeepLinkFromNode } from './modules/deeplink'
 import { updateNavigation, fitNodeInView, goToNode, zoomToNode } from './modules/navigation'
 import { openProviderSearch } from './modules/providers'
@@ -89,7 +90,9 @@ export default function App() {
     const handleHashChange = async () => {
       const hash = decodePath(location.hash.slice(1))
       if (!hash || !state.DATA_ROOT) return
-      const node = await findNodeByPath(hash)
+      const node = state.loadMode === 'backend'
+        ? await findBackendNodeByPath(hash)
+        : await findNodeByPath(hash)
       if (node) {
         updateNavigation(node, true)
         updateBreadcrumbs(node)
@@ -265,6 +268,33 @@ export default function App() {
     resizeCanvas()
 
     try {
+      try {
+        await loadBackend('/api')
+        hideLoading()
+
+        state.layoutChanged = true
+
+        if (initialHash && state.DATA_ROOT) {
+          const targetNode = await findBackendNodeByPath(initialHash)
+          if (targetNode && targetNode !== state.DATA_ROOT) {
+            await goToNode(targetNode, true)
+            updateBreadcrumbs(targetNode)
+          } else {
+            fitNodeInView(state.DATA_ROOT)
+            updateBreadcrumbs(state.DATA_ROOT)
+          }
+        } else if (state.DATA_ROOT) {
+          fitNodeInView(state.DATA_ROOT)
+          updateBreadcrumbs(state.DATA_ROOT)
+        }
+
+        await ensureBackendViewport({ force: true })
+        tick()
+        return
+      } catch (backendErr) {
+        console.warn('Backend data API unavailable, falling back to eager static data:', backendErr)
+      }
+
       const candidates = ['/data/manifest.json', 'data/manifest.json']
 
       for (const url of candidates) {
@@ -337,6 +367,7 @@ export default function App() {
   }
 
   const handleBreadcrumbClick = async (node: any) => {
+    await ensureBackendViewport({ force: true })
     await goToNode(node, true)
     updateBreadcrumbs(node)
   }
@@ -366,7 +397,7 @@ export default function App() {
     }
 
     if (node && node !== rootNode) {
-      zoomToNode(node)
+      ensureBackendViewport({ force: true }).then(() => zoomToNode(node))
     }
   }
 

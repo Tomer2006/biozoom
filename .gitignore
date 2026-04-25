@@ -14,10 +14,12 @@ dist/
 
 # Logs
 *.log
+logs/
 
 # Temporary files
 *.tmp
 temp/
+downloaded-circle-images/
 .env
 .env.*
 !.env.example
