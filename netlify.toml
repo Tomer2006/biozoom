@@ -6,6 +6,9 @@
   # Functions directory (if you have serverless functions)
   functions = "netlify/functions"
 
+[build.environment]
+  VITE_DATA_API_URL = "https://infinitespecies-production.up.railway.app/api"
+
 # Redirect rules for SPA (Single Page Application)
 [[redirects]]
   from = "/*"
