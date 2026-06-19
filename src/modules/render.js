@@ -126,8 +126,7 @@ export function drawWithOptions(options = {}) {
     camera,
     renderingOverrides = {},
     disableCulling = false,
-    renderAllLabels = false,
-    useTransformScaling = false  // Use canvas transform scaling for text (screenshot mode)
+    renderAllLabels = false
   } = options;
 
   const ctx = ctxOverride || getContext();
@@ -313,46 +312,22 @@ export function drawWithOptions(options = {}) {
 
     if (sr > labelMinPxRadius) {
       const text = d.data.name;
-      let fontSize, textWidth, textHeight, pad, textScale, baseFontSize;
+      const fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
+      let textWidth, textHeight, pad;
       let shouldRenderLabel = false;
-      
-      if (useTransformScaling) {
-        // Screenshot mode: Use fixed base font size and scale with canvas transform
-        baseFontSize = 14; // Fixed base font size in pixels
-        textScale = sr / (baseFontSize * labelFontSizeDivisor); // Scale 1:1 with circle size
-        fontSize = baseFontSize * textScale;
-        
-        if (fontSize >= labelMinFontPx) {
-          shouldRenderLabel = true;
-          const key = baseFontSize + '|' + text;
-          const metrics = getCachedTextMetrics(
-            ctx,
-            key,
-            text,
-            `${labelFontWeight} ${baseFontSize}px ${labelFontFamily}`
-          );
-          // Scale the measured width and height by the transform scale
-          textWidth = metrics.width * textScale;
-          textHeight = fontSize;
-          pad = 2 * textScale;
-        }
-      } else {
-        // Regular rendering: Use font size directly (allow fractional sizes for smooth zoom)
-        fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
-        
-        if (fontSize >= labelMinFontPx) {
-          shouldRenderLabel = true;
-          const key = fontSize + '|' + text;
-          const metrics = getCachedTextMetrics(
-            ctx,
-            key,
-            text,
-            `${labelFontWeight} ${fontSize}px ${labelFontFamily}`
-          );
-          textWidth = metrics.width;
-          textHeight = fontSize;
-          pad = 2;
-        }
+
+      if (fontSize >= labelMinFontPx) {
+        shouldRenderLabel = true;
+        const key = fontSize + '|' + text;
+        const metrics = getCachedTextMetrics(
+          ctx,
+          key,
+          text,
+          `${labelFontWeight} ${fontSize}px ${labelFontFamily}`
+        );
+        textWidth = metrics.width;
+        textHeight = fontSize;
+        pad = 2;
       }
       
       if (shouldRenderLabel) {
@@ -370,11 +345,7 @@ export function drawWithOptions(options = {}) {
             x2: sx + textWidth / 2 + pad,
             y2: textY + textHeight / 2 + pad
           };
-          if (useTransformScaling) {
-            labelCandidates.push({ sx, sy, sr, textY, textScale, baseFontSize, fontSize, text, rect });
-          } else {
-            labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect });
-          }
+          labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect });
         }
       }
     }
@@ -410,42 +381,21 @@ export function drawWithOptions(options = {}) {
       if (renderAllLabels) {
         for (const cand of capped) {
           ctx.save();
-          if (useTransformScaling && cand.textScale) {
-            // Screenshot mode: Use canvas transform for scaling
-            ctx.translate(cand.sx, cand.textY);
-            ctx.scale(cand.textScale, cand.textScale);
-            ctx.font = `${labelFontWeight} ${cand.baseFontSize}px ${labelFontFamily}`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            const scaledFontSize = cand.baseFontSize * cand.textScale;
-            ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, scaledFontSize / labelFontSizeDivisor)) / cand.textScale;
-            ctx.strokeStyle = scaledFontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-            ctx.lineJoin = 'round';
-            ctx.miterLimit = 2;
-            ctx.strokeText(cand.text, 0, 0);
-            ctx.fillStyle = labelFillColor;
-            ctx.globalAlpha = labelAlpha;
-            ctx.fillText(cand.text, 0, 0);
-          } else {
-            // Regular rendering: Use font size directly
-            // Use sub-pixel positioning for smooth text during zoom
-            const textX = cand.sx;
-            const textY = cand.textY;
-            // Ensure smooth text rendering
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-            ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-            ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-            ctx.lineJoin = 'round';
-            ctx.miterLimit = 2;
-            ctx.strokeText(cand.text, textX, textY);
-            ctx.fillStyle = labelFillColor;
-            ctx.globalAlpha = labelAlpha;
-            ctx.fillText(cand.text, textX, textY);
-          }
+          const textX = cand.sx;
+          const textY = cand.textY;
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+          ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+          ctx.lineJoin = 'round';
+          ctx.miterLimit = 2;
+          ctx.strokeText(cand.text, textX, textY);
+          ctx.fillStyle = labelFillColor;
+          ctx.globalAlpha = labelAlpha;
+          ctx.fillText(cand.text, textX, textY);
           ctx.restore();
         }
         return;
@@ -494,42 +444,21 @@ export function drawWithOptions(options = {}) {
 
         // Render label at top of circle
         ctx.save();
-        if (useTransformScaling && cand.textScale) {
-          // Screenshot mode: Use canvas transform for scaling
-          ctx.translate(cand.sx, cand.textY);
-          ctx.scale(cand.textScale, cand.textScale);
-          ctx.font = `${labelFontWeight} ${cand.baseFontSize}px ${labelFontFamily}`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          const scaledFontSize = cand.baseFontSize * cand.textScale;
-          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, scaledFontSize / labelFontSizeDivisor)) / cand.textScale;
-          ctx.strokeStyle = scaledFontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-          ctx.lineJoin = 'round';
-          ctx.miterLimit = 2;
-          ctx.strokeText(cand.text, 0, 0);
-          ctx.fillStyle = labelFillColor;
-          ctx.globalAlpha = labelAlpha;
-          ctx.fillText(cand.text, 0, 0);
-        } else {
-          // Regular rendering: Use font size directly
-          // Use sub-pixel positioning for smooth text during zoom
-          const textX = cand.sx;
-          const textY = cand.textY;
-          // Ensure smooth text rendering
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-          ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-          ctx.lineJoin = 'round';
-          ctx.miterLimit = 2;
-          ctx.strokeText(cand.text, textX, textY);
-          ctx.fillStyle = labelFillColor;
-          ctx.globalAlpha = labelAlpha;
-          ctx.fillText(cand.text, textX, textY);
-        }
+        const textX = cand.sx;
+        const textY = cand.textY;
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+        ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+        ctx.lineJoin = 'round';
+        ctx.miterLimit = 2;
+        ctx.strokeText(cand.text, textX, textY);
+        ctx.fillStyle = labelFillColor;
+        ctx.globalAlpha = labelAlpha;
+        ctx.fillText(cand.text, textX, textY);
         ctx.restore();
 
         // Update spatial index

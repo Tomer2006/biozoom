@@ -133,18 +133,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       searchSection: 'Web Search (W key)',
       searchLabel: 'Search Provider',
     },
-    screenshot: {
-      title: 'Screenshot Settings',
-      resolutionLabel: 'Resolution (pixels per world unit)',
-      resolutionHint: 'Higher = more detail but larger file size',
-      currentResolution: (params) => `Current: ${params?.value ?? 0} px/unit (recommended: 300-2000)`,
-      renderingProgress: (params) =>
-        `Rendering screenshot... ${params?.percent ?? 0}% (${params?.completed ?? 0}/${params?.total ?? 0} tiles)`,
-      start: 'Start Screenshot',
-      capturing: 'Capturing...',
-      saved: (params) => `Saved WebP (${params?.width ?? 0}×${params?.height ?? 0})`,
-      failed: 'Screenshot failed',
-    },
     stage: {
       oneSpecies: '1 species',
       speciesCount: (params) => `${params?.count ?? 0} species`,
@@ -291,18 +279,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       colorLabel: 'ערכת צבעים',
       searchSection: 'חיפוש ברשת (מקש S)',
       searchLabel: 'ספק חיפוש',
-    },
-    screenshot: {
-      title: 'הגדרות צילום מסך',
-      resolutionLabel: 'רזולוציה (פיקסלים ליחידת עולם)',
-      resolutionHint: 'גבוה יותר = יותר פרטים אבל קובץ גדול יותר',
-      currentResolution: (params) => `נוכחי: ${params?.value ?? 0} פיקסלים ליחידה (מומלץ: 300-2000)`,
-      renderingProgress: (params) =>
-        `מצייר צילום מסך... ${params?.percent ?? 0}% (${params?.completed ?? 0}/${params?.total ?? 0} אריחים)`,
-      start: 'התחלת צילום מסך',
-      capturing: 'מצלם...',
-      saved: (params) => `קובץ WebP נשמר (${params?.width ?? 0}×${params?.height ?? 0})`,
-      failed: 'צילום המסך נכשל',
     },
     stage: {
       oneSpecies: 'מין אחד',

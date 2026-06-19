@@ -1,7 +1,7 @@
 /**
  * App.tsx - Root React component for InfiniteSpecies.
  * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, first-run language modal,
- * settings/help dialogs, screenshot panel, and toast notifications.
+ * settings/help dialogs and toast notifications.
  */
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
@@ -15,7 +15,6 @@ import OnboardingModal from './components/OnboardingModal'
 import HelpModal from './components/HelpModal'
 import SettingsModal from './components/SettingsModal'
 import SettingsLabModal from './components/SettingsLabModal'
-import ScreenshotPanel from './components/ScreenshotPanel'
 import ToastContainer from './components/Toast'
 import { useToast } from './hooks/useToast'
 
@@ -73,7 +72,6 @@ export default function App() {
   const [helpOpen, setHelpOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [settingsLabOpen, setSettingsLabOpen] = useState(false)
-  const [screenshotOpen, setScreenshotOpen] = useState(false)
 
   const toast = useToast()
 
@@ -526,13 +524,6 @@ export default function App() {
         onPerfChange={() => {
           setColorPreset(perf.colors.currentPreset)
         }}
-      />
-
-      <ScreenshotPanel
-        language={language}
-        isOpen={screenshotOpen}
-        onClose={() => setScreenshotOpen(false)}
-        onShowToast={toast.showToast}
       />
 
       <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />
