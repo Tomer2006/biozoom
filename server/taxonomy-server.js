@@ -100,7 +100,6 @@ function loadIndex() {
   const largeSpatialIds = [];
   const smallSpatialGrid = new Map();
   const radiusBuckets = new Map();
-  const maxRadiusByLevel = [];
   const searchIndex = new TaxonomySearchIndex({ maxCacheEntries: 500 });
   let rootId = null;
   let maxId = 0;
@@ -124,7 +123,6 @@ function loadIndex() {
       nodeById[node.id] = node;
       ids.push(node.id);
       searchIndex.add(node.id, node.name);
-      maxRadiusByLevel[node.level] = Math.max(maxRadiusByLevel[node.level] || 0, node.r);
       if (node.id > maxId) maxId = node.id;
 
       if (node.parent_id == null) {
@@ -189,7 +187,6 @@ function loadIndex() {
     smallSpatialGrid,
     radiusBuckets,
     radiusBucketKeysDesc,
-    maxRadiusByLevel,
     searchIndex,
     rootId,
     totalNodes: ids.length,
@@ -226,7 +223,7 @@ function buildNodeResponse(id, depth) {
     .map(nodeId => serializeNode(nodeId))
     .filter(Boolean);
 
-  const response = {
+  return {
     root_id: index.rootId,
     requested_id: id,
     depth,
@@ -234,8 +231,6 @@ function buildNodeResponse(id, depth) {
     expanded_ids: Array.from(expanded),
     nodes,
   };
-  if (id === index.rootId) response.level_max_radii = index.maxRadiusByLevel;
-  return response;
 }
 
 function buildViewportResponse(url) {

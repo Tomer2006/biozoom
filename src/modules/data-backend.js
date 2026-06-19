@@ -169,14 +169,6 @@ export async function searchBackendNodes(query, limit, signal) {
 }
 
 function stitchResponse(response) {
-  if (Array.isArray(response.level_max_radii)) {
-    state.maxNodeRadiusByLevel = new Map(
-      response.level_max_radii
-        .map((radius, level) => [level, Number(radius)])
-        .filter(([, radius]) => Number.isFinite(radius) && radius > 0),
-    );
-  }
-
   const serverNodes = response.nodes || [];
   for (const serverNode of serverNodes) {
     getOrCreateNode(serverNode);

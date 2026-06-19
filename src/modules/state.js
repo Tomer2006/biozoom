@@ -14,8 +14,6 @@ export const state = {
   globalId: 1,
   maxNodeRadius: 0,
   minNodeRadius: 0,
-  maxNodeRadiusByLevel: new Map(),
-  loadedMaxNodeRadiusByLevel: new Map(),
 
   // camera
   camera: { x: 0, y: 0, k: 1 },
@@ -42,7 +40,6 @@ export function rebuildNodeMap() {
   state.nodeLayoutMap.clear();
   state.maxNodeRadius = 0;
   state.minNodeRadius = Number.POSITIVE_INFINITY;
-  state.loadedMaxNodeRadiusByLevel.clear();
   if (!state.layout?.root) return;
   const desc = state.layout.root.descendants();
   desc.forEach(d => {
@@ -65,11 +62,6 @@ export function rebuildNodeMap() {
     state.nodeLayoutMap.set(d.data._id, d);
     if (typeof d._vr === 'number' && d._vr > state.maxNodeRadius) {
       state.maxNodeRadius = d._vr;
-    }
-    const level = Number(d.data?.level ?? d.depth);
-    if (Number.isFinite(level) && typeof d._vr === 'number' && d._vr > 0) {
-      const largestAtLevel = state.loadedMaxNodeRadiusByLevel.get(level) || 0;
-      if (d._vr > largestAtLevel) state.loadedMaxNodeRadiusByLevel.set(level, d._vr);
     }
     if (typeof d._vr === 'number' && d._vr > 0 && d._vr < state.minNodeRadius) {
       state.minNodeRadius = d._vr;

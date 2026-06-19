@@ -20,12 +20,9 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-function getLevelZoomOutLimit() {
-  const activeLevel = Number(state.current?.level ?? state.DATA_ROOT?.level ?? 0);
-  const levelRadius = Number.isFinite(activeLevel)
-    ? state.maxNodeRadiusByLevel.get(activeLevel) || state.loadedMaxNodeRadiusByLevel.get(activeLevel)
-    : 0;
-  const zoomLimitRadius = levelRadius || state.maxNodeRadius;
+function getBreadcrumbZoomOutLimit() {
+  const breadcrumbRadius = Number(state.current?._vr ?? state.DATA_ROOT?._vr);
+  const zoomLimitRadius = breadcrumbRadius > 0 ? breadcrumbRadius : state.maxNodeRadius;
 
   if (!(zoomLimitRadius > 0) || !(W > 0) || !(H > 0)) {
     return Number.POSITIVE_INFINITY;
@@ -36,7 +33,7 @@ function getLevelZoomOutLimit() {
 }
 
 export function getMinCameraZoom() {
-  const zoomOutLimit = getLevelZoomOutLimit();
+  const zoomOutLimit = getBreadcrumbZoomOutLimit();
   if (!Number.isFinite(zoomOutLimit) || zoomOutLimit <= 0) {
     return 0;
   }

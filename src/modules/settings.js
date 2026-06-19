@@ -128,7 +128,7 @@ export const perf = {
   // Navigation settings
   navigation: {
     fitTargetRadiusMultiplier: 0.4,  // Multiplier for fitNodeInView target radius (0.5 = 50% of viewport)
-    zoomOutLargestCircleViewportRatio: 0.5, // At max zoom-out, the level's largest circle spans 50% of the shorter viewport side
+    zoomOutLargestCircleViewportRatio: 0.5, // At max zoom-out, the bottom breadcrumb's circle spans 50% of the shorter viewport side
     maxCameraZoom: 4000 // Fixed maximum zoom-in level for the camera
   },
 

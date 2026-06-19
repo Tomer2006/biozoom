@@ -183,8 +183,8 @@ export function updateCurrentNodeOnly(node) {
   state.current = node;
   state.layoutChanged = true;
 
-  // The active taxonomy level changes the zoom-out boundary. Apply the new
-  // boundary immediately while keeping the selected node fixed on screen.
+  // The bottom breadcrumb changes the zoom-out boundary. Apply the new
+  // boundary immediately while keeping that circle fixed on screen.
   const nextZoom = clampCameraZoom(previousZoom);
   if (nextZoom !== previousZoom) {
     const anchorX = Number(node._vx);

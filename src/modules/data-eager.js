@@ -25,7 +25,6 @@ export async function loadEager(url) {
   if (!url) throw new Error('No URL provided');
 
   state.loadMode = 'eager';
-  state.maxNodeRadiusByLevel.clear();
   logInfo(`Loading data eagerly from ${url}`);
 
   const baseUrl = url.replace(/[^/]*$/, '');
