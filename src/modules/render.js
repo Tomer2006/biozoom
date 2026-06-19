@@ -9,7 +9,6 @@
 
 import { getContext, W, H } from './canvas.js';
 import { state } from './state.js';
-import { getNodeColor } from './constants.js';
 import { perf } from './settings.js';
 
 // Optimized text measurement cache with size limits and hit tracking
@@ -58,11 +57,6 @@ function performMemoryCleanup() {
   const now = performance.now();
   if (now - lastMemoryCheck > MEMORY_CHECK_INTERVAL) {
     lastMemoryCheck = now;
-
-    // Suggest garbage collection if available
-    if (window.gc && typeof window.gc === 'function') {
-      window.gc();
-    }
 
     // Cleanup text cache if needed
     if (measureCache.size > CACHE_CLEANUP_THRESHOLD) {
@@ -140,7 +134,9 @@ function drawWithOptions(options = {}) {
   // Destructure performance settings once at the top
   const { k: camK, x: camX, y: camY } = camera || state.camera;
 
-  const rendering = { ...perf.rendering, ...renderingOverrides };
+  // Avoid a per-frame object spread on the common path (no overrides).
+  const hasRenderingOverrides = renderingOverrides && Object.keys(renderingOverrides).length > 0;
+  const rendering = hasRenderingOverrides ? { ...perf.rendering, ...renderingOverrides } : perf.rendering;
 
   const {
     minPxRadius,
@@ -180,11 +176,22 @@ function drawWithOptions(options = {}) {
   // Calculate current node's level for depth-based rendering
   const currentLevel = state.current ? (state.current.level || 0) : 0;
 
+  // Node colors: read the palette once per frame (cheap and preset-safe).
+  const palette = perf.colors.palette;
+  const paletteLen = palette.length;
+
+  // Collect the nodes actually drawn this frame so picking can scan only the
+  // visible set instead of the whole tree. Only for the main on-screen render.
+  const collectPickList = !ctxOverride;
+  const visibleNodes = collectPickList ? [] : null;
+
   // Periodic memory cleanup
   performMemoryCleanup();
 
   // Clear once per frame
   ctx.clearRect(0, 0, viewW, viewH);
+  // Ensure a known alpha at the start of every frame (labels may leave it changed).
+  ctx.globalAlpha = 1;
 
   // Batch rendering operations to minimize state changes
   let currentFillStyle = null;
@@ -279,7 +286,7 @@ function drawWithOptions(options = {}) {
     
     // Depth-based render distance culling
     if (depthRenderEnabled) {
-      const nodeLevel = d.data.level || 0;
+      const nodeLevel = d.level || 0;
       const depthFromCurrent = nodeLevel - currentLevel;
       if (depthFromCurrent > 0) {
         // Calculate max render distance for this depth
@@ -291,15 +298,13 @@ function drawWithOptions(options = {}) {
       }
     }
 
-    const [sx, sy] = [
-      viewW / 2 + (d._vx - camX) * camK,
-      viewH / 2 + (d._vy - camY) * camK
-    ];
+    const sx = viewW / 2 + (d._vx - camX) * camK;
+    const sy = viewH / 2 + (d._vy - camY) * camK;
 
     // Render circle with full detail
     ctx.beginPath();
     ctx.arc(sx, sy, sr, 0, Math.PI * 2);
-    setFillStyle(getNodeColor(d.data));
+    setFillStyle(palette[(d.level || 0) % paletteLen]);
     setGlobalAlpha(1);
     ctx.fill();
     const lineWidth = Math.max(strokeLineWidthMin, Math.min(strokeLineWidthMax, strokeLineWidthBase * Math.sqrt(Math.max(sr / gridTileSize, strokeLineWidthMinRatio))));
@@ -308,10 +313,11 @@ function drawWithOptions(options = {}) {
     ctx.stroke();
 
     drawn++;
+    if (visibleNodes) visibleNodes.push(d);
     if (drawn >= maxNodes) return;
 
     if (sr > labelMinPxRadius) {
-      const text = d.data.name;
+      const text = d.name;
       const fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
       let textWidth, textHeight, pad;
       let shouldRenderLabel = false;
@@ -365,6 +371,9 @@ function drawWithOptions(options = {}) {
 
   visit(startNode);
 
+  // Publish the drawn set for picking (deepest/last-drawn is topmost).
+  if (collectPickList) state.visibleNodes = visibleNodes;
+
   // Optimized label placement with early rejection and reduced computation
   if (labelCandidates.length) {
     // Sort by size (largest first) and apply stricter limits based on zoom level
@@ -378,33 +387,33 @@ function drawWithOptions(options = {}) {
     const capped = labelCandidates.slice(0, Math.min(dynamicMaxLabels, labelCandidates.length));
 
     if (capped.length > 0) {
+      // Invariant text-rendering state — set once for every label this frame.
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.lineJoin = 'round';
+      ctx.miterLimit = 2;
+      ctx.fillStyle = labelFillColor;
+      ctx.globalAlpha = labelAlpha;
+
+      const drawLabel = (cand) => {
+        ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+        ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+        ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+        ctx.strokeText(cand.text, cand.sx, cand.textY);
+        ctx.fillText(cand.text, cand.sx, cand.textY);
+      };
+
       if (renderAllLabels) {
-        for (const cand of capped) {
-          ctx.save();
-          const textX = cand.sx;
-          const textY = cand.textY;
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-          ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-          ctx.lineJoin = 'round';
-          ctx.miterLimit = 2;
-          ctx.strokeText(cand.text, textX, textY);
-          ctx.fillStyle = labelFillColor;
-          ctx.globalAlpha = labelAlpha;
-          ctx.fillText(cand.text, textX, textY);
-          ctx.restore();
-        }
+        for (const cand of capped) drawLabel(cand);
         return;
       }
-      const placed = [];
+
       const grid = new Map();
       const cell = labelGridCellPx;
 
-      // Pre-compute cell keys to avoid repeated calculations
+      // Pre-compute integer cell keys to avoid per-label string allocation.
       const cellsForRect = r => {
         const cells = [];
         const x1 = Math.floor(r.x1 / cell);
@@ -413,7 +422,7 @@ function drawWithOptions(options = {}) {
         const y2 = Math.floor(r.y2 / cell);
         for (let gx = x1; gx <= x2; gx++) {
           for (let gy = y1; gy <= y2; gy++) {
-            cells.push(`${gx},${gy}`);
+            cells.push(gx * 1000003 + gy);
           }
         }
         return cells;
@@ -421,16 +430,14 @@ function drawWithOptions(options = {}) {
 
       const overlaps = (a, b) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
 
-      // Early rejection: check against larger placed labels first
+      // Early rejection: check against already-placed labels via the spatial grid.
       for (const cand of capped) {
         const nearbyKeys = cellsForRect(cand.rect);
         let hit = false;
 
-        // Check collision with existing labels
         for (const k of nearbyKeys) {
           const arr = grid.get(k);
           if (!arr) continue;
-
           for (const r of arr) {
             if (overlaps(cand.rect, r)) {
               hit = true;
@@ -442,30 +449,16 @@ function drawWithOptions(options = {}) {
 
         if (hit) continue;
 
-        // Render label at top of circle
-        ctx.save();
-        const textX = cand.sx;
-        const textY = cand.textY;
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-        ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-        ctx.lineJoin = 'round';
-        ctx.miterLimit = 2;
-        ctx.strokeText(cand.text, textX, textY);
-        ctx.fillStyle = labelFillColor;
-        ctx.globalAlpha = labelAlpha;
-        ctx.fillText(cand.text, textX, textY);
-        ctx.restore();
+        drawLabel(cand);
 
         // Update spatial index
-        placed.push(cand.rect);
         for (const k of nearbyKeys) {
-          if (!grid.has(k)) grid.set(k, []);
-          grid.get(k).push(cand.rect);
+          let arr = grid.get(k);
+          if (!arr) {
+            arr = [];
+            grid.set(k, arr);
+          }
+          arr.push(cand.rect);
         }
       }
     }

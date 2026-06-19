@@ -99,11 +99,11 @@ export function findAllByQuery(q, limit = perf.search.maxResults) {
   // Phase 1: Fast search - collect candidates without expensive path lookups
   while (stack.length && scoredResults.length < maxCandidates) {
     const d = stack.pop();
-    if (!d?.data) continue;
-    
-    const score = matchesQueryFast(d.data, q, queryLower);
+    if (!d) continue;
+
+    const score = matchesQueryFast(d, q, queryLower);
     if (score > 0) {
-      scoredResults.push({ node: d.data, score });
+      scoredResults.push({ node: d, score });
     }
     
     const ch = d.children || [];

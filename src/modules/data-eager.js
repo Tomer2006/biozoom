@@ -193,18 +193,17 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   state.DATA_ROOT = root;
   state.useBakedLayout = true;
 
-  // Create D3-compatible layout structure for the renderer
-  // The renderer expects state.layout.root to have .descendants() method
-  const hierarchyRoot = createHierarchyWrapper(root);
+  // The renderer and picking operate directly on the data nodes (which already
+  // carry _vx/_vy/_vr and children arrays), so no wrapper tree is needed.
   const layout = {
-    root: hierarchyRoot,
+    root,
     diameter: manifest.layout_size || 4000
   };
 
   state.layout = layout;
   state.rootLayout = layout;
 
-  // Build node map for navigation (uses the hierarchy wrapper)
+  // Build node map for navigation
   rebuildNodeMap();
 
   // Handle deep links and navigation
@@ -233,105 +232,6 @@ async function loadFromBakedFiles(baseUrl, manifest) {
 
   setProgress(1, translate('data.loadedNodesWithLayout', { count: formatNumber(flatNodes.length) }), 1, 1);
   logInfo(`Baked layout loaded: ${flatNodes.length} nodes in ${(performance.now() - startTime).toFixed(0)}ms`);
-}
-
-/**
- * Create a D3-compatible hierarchy wrapper around our tree nodes.
- * This allows the existing renderer code to work unchanged.
- *
- * @param {Object} root - Root data node
- * @returns {Object} - Pseudo-D3 hierarchy node with descendants() method
- */
-function createHierarchyWrapper(root) {
-  // Cache for descendants
-  let cachedDescendants = null;
-
-  function wrapNode(dataNode, parent = null) {
-    const wrapped = {
-      data: dataNode,
-      depth: dataNode.level,
-      parent: parent,
-      children: null,
-      // Copy layout coordinates directly
-      _vx: dataNode._vx,
-      _vy: dataNode._vy,
-      _vr: dataNode._vr,
-      // D3 hierarchy compatibility
-      value: dataNode._leaves || 1,
-      height: 0 // Will be set later if needed
-    };
-
-    // Wrap children
-    if (dataNode.children && dataNode.children.length > 0) {
-      wrapped.children = dataNode.children.map(child => wrapNode(child, wrapped));
-    }
-
-    return wrapped;
-  }
-
-  const hierarchyRoot = wrapNode(root);
-
-  // Add descendants() method
-  hierarchyRoot.descendants = function () {
-    if (cachedDescendants) return cachedDescendants;
-
-    const result = [];
-    const stack = [this];
-
-    while (stack.length) {
-      const node = stack.pop();
-      result.push(node);
-      if (node.children) {
-        for (let i = node.children.length - 1; i >= 0; i--) {
-          stack.push(node.children[i]);
-        }
-      }
-    }
-
-    cachedDescendants = result;
-    return result;
-  };
-
-  // Add each() method for D3 compatibility
-  hierarchyRoot.each = function (callback) {
-    const desc = this.descendants();
-    for (let i = 0; i < desc.length; i++) {
-      callback(desc[i]);
-    }
-    return this;
-  };
-
-  // Propagate descendants() method to all nodes
-  const allNodes = hierarchyRoot.descendants();
-  for (const node of allNodes) {
-    if (node !== hierarchyRoot) {
-      node.descendants = function () {
-        const result = [];
-        const stack = [this];
-        while (stack.length) {
-          const n = stack.pop();
-          result.push(n);
-          if (n.children) {
-            for (let i = n.children.length - 1; i >= 0; i--) {
-              stack.push(n.children[i]);
-            }
-          }
-        }
-        return result;
-      };
-      node.each = function (callback) {
-        const desc = this.descendants();
-        for (let i = 0; i < desc.length; i++) {
-          callback(desc[i]);
-        }
-        return this;
-      };
-    }
-  }
-
-  logDebug(`Created hierarchy wrapper with ${allNodes.length} nodes`);
-
-  return hierarchyRoot;
 }
 
 /**

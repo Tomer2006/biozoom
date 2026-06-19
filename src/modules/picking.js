@@ -43,28 +43,35 @@ export function isNodeInCurrentSubtree(nodeData) {
 }
 
 export function pickNodeAt(px, py) {
-  const nodes = state.pickOrder && state.pickOrder.length ? state.pickOrder : (state.layout && state.layout.root ? state.layout.root.descendants().slice().sort((a, b) => b.depth - a.depth) : []);
   const wx = state.camera.x + (px - W / 2) / state.camera.k;
   const wy = state.camera.y + (py - H / 2) / state.camera.k;
-  
+
+  // Fast path: scan only the nodes drawn last frame, topmost (last-drawn) first.
+  // This is O(visible) instead of O(total nodes) per pick.
+  const visible = state.visibleNodes;
+  if (visible && visible.length) {
+    for (let i = visible.length - 1; i >= 0; i--) {
+      const d = visible[i];
+      if (!isNodeInCurrentSubtree(d)) continue;
+      const dx = wx - d._vx;
+      const dy = wy - d._vy;
+      if (dx * dx + dy * dy <= d._vr * d._vr) return d;
+    }
+    return null;
+  }
+
+  // Fallback (e.g. before the first render): scan the precomputed pick order.
   const { pickMinPxRadius, minPxRadius } = perf.rendering;
-  
+  const nodes = state.pickOrder || [];
   for (const d of nodes) {
-    // Fast viewport check
     if (!nodeInView(d)) continue;
-    
-    // Skip nodes too small on screen
     const screenR = d._vr * state.camera.k;
     if (screenR < (pickMinPxRadius || 0)) continue;
     if (screenR < minPxRadius) continue;
-    
-    // Only pick nodes within the current subtree
-    if (!isNodeInCurrentSubtree(d.data)) continue;
-    
-    // Point-in-circle check
-    const dx = wx - d._vx,
-      dy = wy - d._vy;
-    if (dx * dx + dy * dy <= d._vr * d._vr) return d.data;
+    if (!isNodeInCurrentSubtree(d)) continue;
+    const dx = wx - d._vx;
+    const dy = wy - d._vy;
+    if (dx * dx + dy * dy <= d._vr * d._vr) return d;
   }
   return null;
 }

@@ -3,7 +3,7 @@
  * Composes landing, topbar, breadcrumbs, canvas stage, loading overlay, first-run language modal,
  * settings/help dialogs and toast notifications.
  */
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import LandingPage from './components/LandingPage'
 import Topbar from './components/Topbar'
@@ -14,8 +14,11 @@ import LanguageModal from './components/LanguageModal'
 import OnboardingModal from './components/OnboardingModal'
 import HelpModal from './components/HelpModal'
 import SettingsModal from './components/SettingsModal'
-import SettingsLabModal from './components/SettingsLabModal'
 import ToastContainer from './components/Toast'
+
+// Lazy-loaded: the perf "lab" panel is a power-user tool, so its code is split
+// into a separate chunk fetched only when it's first opened.
+const SettingsLabModal = lazy(() => import('./components/SettingsLabModal'))
 import { useToast } from './hooks/useToast'
 
 import { state } from './modules/state'
@@ -517,12 +520,16 @@ export default function App() {
         onLanguageChange={handleLanguageSelect}
         onClose={() => setSettingsOpen(false)}
       />
-      <SettingsLabModal
-        isOpen={settingsLabOpen}
-        onPerfChange={() => {
-          setColorPreset(perf.colors.currentPreset)
-        }}
-      />
+      {settingsLabOpen && (
+        <Suspense fallback={null}>
+          <SettingsLabModal
+            isOpen={settingsLabOpen}
+            onPerfChange={() => {
+              setColorPreset(perf.colors.currentPreset)
+            }}
+          />
+        </Suspense>
+      )}
 
       <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />
     </div>

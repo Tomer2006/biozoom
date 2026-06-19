@@ -27,7 +27,8 @@ export const state = {
   // layout map
   nodeLayoutMap: new Map(),
   // cached orders for performance
-  pickOrder: [],  // hierarchy nodes sorted by depth for picking (deepest first)
+  pickOrder: [],  // nodes sorted by level for picking (deepest first)
+  visibleNodes: [], // nodes drawn in the last frame (populated by the renderer for fast picking)
 
   // layout change tracking
   layoutChanged: false,
@@ -36,12 +37,29 @@ export const state = {
   loadMode: 'eager', // 'eager' only now
 };
 
+// Collect all nodes in a (data) tree, depth-first. Replaces the per-node
+// .descendants() methods that the old hierarchy wrapper attached to every node.
+function descendants(root) {
+  const result = [];
+  if (!root) return result;
+  const stack = [root];
+  while (stack.length) {
+    const n = stack.pop();
+    result.push(n);
+    const ch = n.children;
+    if (ch) {
+      for (let i = ch.length - 1; i >= 0; i--) stack.push(ch[i]);
+    }
+  }
+  return result;
+}
+
 export function rebuildNodeMap() {
   state.nodeLayoutMap.clear();
   state.maxNodeRadius = 0;
   state.minNodeRadius = Number.POSITIVE_INFINITY;
   if (!state.layout?.root) return;
-  const desc = state.layout.root.descendants();
+  const desc = descendants(state.layout.root);
   desc.forEach(d => {
     let labelTopSpaceWorld = d._vr * 2;
     const children = d.children || [];
@@ -59,7 +77,7 @@ export function rebuildNodeMap() {
     }
 
     d._labelTopSpaceWorld = labelTopSpaceWorld;
-    state.nodeLayoutMap.set(d.data._id, d);
+    state.nodeLayoutMap.set(d._id, d);
     if (typeof d._vr === 'number' && d._vr > state.maxNodeRadius) {
       state.maxNodeRadius = d._vr;
     }
@@ -71,5 +89,5 @@ export function rebuildNodeMap() {
     state.minNodeRadius = 0;
   }
   // Precompute pick order: deepest nodes first for accurate picking
-  state.pickOrder = desc.slice().sort((a, b) => b.depth - a.depth);
+  state.pickOrder = desc.slice().sort((a, b) => (b.level || 0) - (a.level || 0));
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import { state } from '../modules/state'
 import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange } from '../modules/canvas'
 import { openProviderSearch } from '../modules/providers'
@@ -36,25 +36,14 @@ interface StageProps {
   hidden?: boolean
 }
 
-interface TooltipState {
-  visible: boolean
-  x: number
-  y: number
-  name: string
-  meta: string
-}
-
 export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden = false }: StageProps) {
-  const [tooltip, setTooltip] = useState<TooltipState>({
-    visible: false,
-    x: 0,
-    y: 0,
-    name: '',
-    meta: '',
-  })
-
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
+  // Tooltip is updated imperatively via refs (not React state) so hovering over
+  // nodes doesn't re-render the whole Stage subtree ~60x/sec.
+  const tooltipRef = useRef<HTMLDivElement>(null)
+  const tooltipNameRef = useRef<HTMLDivElement>(null)
+  const tooltipMetaRef = useRef<HTMLDivElement>(null)
   const isPanningRef = useRef(false)
   const lastPanRef = useRef<{ x: number; y: number } | null>(null)
   const pickingScheduledRef = useRef(false)
@@ -110,9 +99,30 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     return parts.join(' • ')
   }, [language])
 
+  const hideTooltip = useCallback(() => {
+    const el = tooltipRef.current
+    if (el) el.style.opacity = '0'
+  }, [])
+
+  const showTooltip = useCallback((node: any, x: number, y: number) => {
+    const el = tooltipRef.current
+    if (!el) return
+    el.style.left = `${x}px`
+    el.style.top = `${y}px`
+    el.style.opacity = '1'
+    if (tooltipNameRef.current) {
+      tooltipNameRef.current.textContent = node.name || translate('stage.unknown', undefined, language)
+    }
+    if (tooltipMetaRef.current) {
+      const meta = buildTooltipMeta(node)
+      tooltipMetaRef.current.textContent = meta
+      tooltipMetaRef.current.style.display = meta ? '' : 'none'
+    }
+  }, [language, buildTooltipMeta])
+
   const updateTooltipAndPreview = useCallback((node: any, x: number, y: number) => {
     if (!node) {
-      setTooltip((prev) => ({ ...prev, visible: false }))
+      hideTooltip()
       hidePreviewModule()
       return
     }
@@ -121,18 +131,12 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     const changedNode = nodeId !== prevHoverIdRef.current
     prevHoverIdRef.current = nodeId
 
-    setTooltip({
-      visible: true,
-      x,
-      y,
-      name: node.name || translate('stage.unknown', undefined, language),
-      meta: buildTooltipMeta(node),
-    })
+    showTooltip(node, x, y)
 
     if (changedNode) {
       showBigFor(node)
     }
-  }, [buildTooltipMeta])
+  }, [showTooltip, hideTooltip])
 
   useEffect(() => {
     const validateHover = () => {
@@ -141,7 +145,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         if (node) {
           updateTooltipAndPreview(node, px, py)
         } else {
-          setTooltip((prev) => ({ ...prev, visible: false }))
+          hideTooltip()
           hidePreviewModule()
           prevHoverIdRef.current = null
         }
@@ -164,7 +168,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       const newPan = handleMouseMovePan(x, y, isPanningRef.current, lastPanRef.current) as { x: number; y: number } | null
       if (newPan) {
         lastPanRef.current = newPan
-        setTooltip((prev) => ({ ...prev, visible: false }))
+        hideTooltip()
         hidePreviewModule()
         return
       }
@@ -178,7 +182,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         if (node) {
           updateTooltipAndPreview(node, lastMouseRef.current.x, lastMouseRef.current.y)
         } else {
-          setTooltip((prev) => ({ ...prev, visible: false }))
+          hideTooltip()
           hidePreviewModule()
           prevHoverIdRef.current = null
         }
@@ -188,7 +192,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
 
   const handleMouseLeave = () => {
     handleMouseLeaveEvent()
-    setTooltip((prev) => ({ ...prev, visible: false }))
+    hideTooltip()
 
     if (breadcrumbTimerRef.current !== null) {
       clearTimeout(breadcrumbTimerRef.current)
@@ -324,7 +328,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
           const dy = pos.y - touchState.lastTouch.y
           if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
             touchState.isPanning = true
-            setTooltip((prev) => ({ ...prev, visible: false }))
+            hideTooltip()
             hidePreviewModule()
           }
         }
@@ -445,17 +449,10 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         onClick={handleClick}
       />
 
-      <div
-        className="tooltip"
-        style={{
-          left: tooltip.x,
-          top: tooltip.y,
-          opacity: tooltip.visible ? 1 : 0,
-        }}
-      >
+      <div className="tooltip" ref={tooltipRef}>
         <div className="tooltip-content">
-          <div className="tooltip-name">{tooltip.name}</div>
-          {tooltip.meta && <div className="tooltip-meta">{tooltip.meta}</div>}
+          <div className="tooltip-name" ref={tooltipNameRef}></div>
+          <div className="tooltip-meta" ref={tooltipMetaRef}></div>
         </div>
       </div>
 

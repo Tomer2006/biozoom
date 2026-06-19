@@ -267,76 +267,14 @@ function refreshBackendLayout() {
   const root = state.DATA_ROOT;
   if (!root) return;
 
-  const hierarchyRoot = createHierarchyWrapper(root);
+  // Render/pick directly on the data nodes — no wrapper tree needed.
   state.layout = {
-    root: hierarchyRoot,
+    root,
     diameter: 4000,
   };
   state.rootLayout = state.layout;
   rebuildNodeMap();
   state.layoutChanged = true;
-}
-
-function createHierarchyWrapper(root) {
-  let cachedDescendants = null;
-
-  function wrapNode(dataNode, parent = null) {
-    const wrapped = {
-      data: dataNode,
-      depth: dataNode.level,
-      parent,
-      children: null,
-      _vx: dataNode._vx,
-      _vy: dataNode._vy,
-      _vr: dataNode._vr,
-      value: dataNode._leaves || 1,
-      height: 0,
-    };
-
-    if (dataNode.children && dataNode.children.length > 0) {
-      wrapped.children = dataNode.children.map(child => wrapNode(child, wrapped));
-    }
-
-    wrapped.descendants = function descendants() {
-      const result = [];
-      const stack = [this];
-      while (stack.length) {
-        const node = stack.pop();
-        result.push(node);
-        if (node.children) {
-          for (let i = node.children.length - 1; i >= 0; i--) stack.push(node.children[i]);
-        }
-      }
-      return result;
-    };
-    wrapped.each = function each(callback) {
-      const nodes = this.descendants();
-      for (const node of nodes) callback(node);
-      return this;
-    };
-
-    return wrapped;
-  }
-
-  const hierarchyRoot = wrapNode(root);
-  hierarchyRoot.descendants = function descendants() {
-    if (!cachedDescendants) cachedDescendants = wrappedDescendants(this);
-    return cachedDescendants;
-  };
-  return hierarchyRoot;
-}
-
-function wrappedDescendants(root) {
-  const result = [];
-  const stack = [root];
-  while (stack.length) {
-    const node = stack.pop();
-    result.push(node);
-    if (node.children) {
-      for (let i = node.children.length - 1; i >= 0; i--) stack.push(node.children[i]);
-    }
-  }
-  return result;
 }
 
 async function fetchJson(url, options = {}) {

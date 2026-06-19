@@ -26,6 +26,14 @@ let lastFpsUpdate = 0;
 let framesSinceFps = 0;
 let lastCam = { x: 0, y: 0, k: 1 };
 
+// Cache the FPS overlay element instead of querying the DOM every frame.
+let fpsElCached = null;
+function getFpsEl() {
+  if (fpsElCached && fpsElCached.isConnected) return fpsElCached;
+  fpsElCached = document.getElementById('fps');
+  return fpsElCached;
+}
+
 // Frame rate limiting
 let lastRenderTime = 0;
 let targetFrameTime = 1000 / perf.canvas.targetFPS;
@@ -90,16 +98,18 @@ function ensureRAF() {
 function loop() {
   rafId = null;
 
-  const now = performance.now();
-  const timeSinceLastRender = now - lastRenderTime;
-
-  // Frame rate limiting
-  if (adaptiveFrameRate && timeSinceLastRender < targetFrameTime) {
-    ensureRAF();
+  // Nothing to render: stop the loop entirely. requestRender()/tick() and the
+  // camera animation will call ensureRAF() again when there is work to do, so
+  // we no longer wake up 60x/sec while idle.
+  if (!needRender) {
     return;
   }
 
-  if (!needRender) {
+  const now = performance.now();
+  const timeSinceLastRender = now - lastRenderTime;
+
+  // Frame rate limiting: too soon, keep waiting (needRender is still true).
+  if (adaptiveFrameRate && timeSinceLastRender < targetFrameTime) {
     ensureRAF();
     return;
   }
@@ -113,31 +123,34 @@ function loop() {
 
   // Render if: drawCallback exists AND (camera moved OR layout changed)
   const shouldRender = drawCallback && (!sameCam || layoutChanged);
-  
+
   if (shouldRender) {
     drawCallback();
     lastCam = { x: cam.x, y: cam.y, k: cam.k };
     state.layoutChanged = false;
-    
+
     // Notify about camera change (for hover validation - O(1) check)
     for (const callback of onCameraChangeCallbacks) callback();
   }
-  
-  if (needRender) ensureRAF();
+
   frameCounter++;
 
   // Update FPS display
-  const fpsEl = document.getElementById('fps');
   framesSinceFps++;
-  if (fpsEl && now - lastFpsUpdate >= perf.canvas.fpsUpdateIntervalMs) {
-    const sec = (now - lastFpsUpdate) / 1000;
-    const fps = framesSinceFps / sec;
-    fpsEl.textContent = buildOverlayText(fps);
+  if (now - lastFpsUpdate >= perf.canvas.fpsUpdateIntervalMs) {
+    const fpsEl = getFpsEl();
+    if (fpsEl) {
+      const sec = (now - lastFpsUpdate) / 1000;
+      const fps = framesSinceFps / sec;
+      fpsEl.textContent = buildOverlayText(fps);
+    }
     lastFpsUpdate = now;
     framesSinceFps = 0;
   }
 
-  ensureRAF();
+  // Reschedule only if more rendering was requested during this frame
+  // (e.g. an in-progress camera animation called requestRender()).
+  if (needRender) ensureRAF();
 }
 
 export function registerDrawCallback(cb) {
