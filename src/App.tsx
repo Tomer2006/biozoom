@@ -23,7 +23,7 @@ import { state } from './modules/state'
 import { resizeCanvas, registerDrawCallback, tick } from './modules/canvas'
 import { draw } from './modules/render'
 import { loadEager } from './modules/data'
-import { ensureBackendViewport, findBackendNodeByPath, loadBackend } from './modules/data-backend'
+import { ensureBackendViewport, findBackendNodeByPath, loadBackend, randomBackendNode } from './modules/data-backend'
 import { decodePath, findNodeByPath, getNodePath, updateDeepLinkFromNode } from './modules/deeplink'
 import { updateNavigation, fitNodeInView, goToNode, zoomToNode } from './modules/navigation'
 import { openProviderSearch } from './modules/providers'
@@ -372,7 +372,25 @@ export default function App() {
     updateBreadcrumbs(node)
   }
 
-  const handleBreadcrumbRandom = (rootNode: any) => {
+  const handleBreadcrumbRandom = async (rootNode: any) => {
+    // Backend mode: the subtree isn't fully loaded client-side, so we can't walk
+    // it here. Let the server pick a random leaf (same way search asks the backend
+    // when the tree isn't loaded yet), then load and zoom to it.
+    if (state.loadMode === 'backend') {
+      if (!rootNode?._hasChildren) {
+        toast.info(translate('breadcrumbs.noDeeperBranch', undefined, language))
+        return
+      }
+
+      const node = await randomBackendNode(rootNode._id)
+      if (node && node._id !== rootNode._id) {
+        zoomToNode(node)
+        ensureBackendViewport({ force: true })
+      }
+      return
+    }
+
+    // Local mode: the full tree is in memory, so descend client-side.
     if (!rootNode?.children?.length) {
       toast.info(translate('breadcrumbs.noDeeperBranch', undefined, language))
       return
@@ -397,7 +415,7 @@ export default function App() {
     }
 
     if (node && node !== rootNode) {
-      ensureBackendViewport({ force: true }).then(() => zoomToNode(node))
+      zoomToNode(node)
     }
   }
 

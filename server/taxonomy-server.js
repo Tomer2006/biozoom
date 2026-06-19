@@ -60,6 +60,12 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, searchNodes(query, limit));
     }
 
+    if (url.pathname === '/api/random') {
+      const fromRaw = url.searchParams.get('from');
+      const fromId = fromRaw != null && index.nodeById[Number(fromRaw)] ? Number(fromRaw) : index.rootId;
+      return sendJson(res, buildNodeResponse(pickRandomLeaf(fromId), readDepth(url)));
+    }
+
     return serveStatic(url.pathname, res);
   } catch (error) {
     console.error(error);
@@ -374,6 +380,32 @@ function findNodeByPath(pathValue) {
   }
 
   return currentId;
+}
+
+function pickRandomLeaf(fromId) {
+  let id = index.nodeById[fromId] ? fromId : index.rootId;
+
+  // Weighted random descent by leaf counts, mirroring the client-side surprise walk.
+  // targetIndex is uniform over all leaves under `id`, so every leaf is equally likely.
+  let targetIndex = Math.floor(Math.random() * (index.leaves[id] || 1));
+  let guard = 0;
+  while (guard++ < 100000) {
+    const children = index.childrenByParent.get(id);
+    if (!children || children.length === 0) break;
+
+    let chosen = children[children.length - 1];
+    for (const childId of children) {
+      const weight = index.leaves[childId] || 1;
+      if (targetIndex < weight) {
+        chosen = childId;
+        break;
+      }
+      targetIndex -= weight;
+    }
+    id = chosen;
+  }
+
+  return id;
 }
 
 function searchNodes(query, limit) {

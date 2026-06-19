@@ -118,6 +118,16 @@ export async function loadBackendNodeById(id) {
   return nodeCache.get(id) || null;
 }
 
+export async function randomBackendNode(fromId) {
+  if (state.loadMode !== 'backend') return null;
+  const params = new URLSearchParams({ depth: '0' });
+  if (fromId != null) params.set('from', String(fromId));
+  const response = await fetchJson(`${state.backendApiBase}/random?${params}`);
+  stitchResponse(response);
+  refreshBackendLayout();
+  return nodeCache.get(response.requested_id) || null;
+}
+
 export async function findBackendNodeByPath(path) {
   if (state.loadMode !== 'backend') return null;
   const response = await fetchJson(`${state.backendApiBase}/tree/path?path=${encodeURIComponent(path)}&depth=0`);
