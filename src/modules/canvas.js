@@ -176,7 +176,7 @@ export function viewportRadius(renderDistance) {
   return (Math.hypot(W, H) * perf.canvas.viewportRadiusMultiplier) / state.camera.k * renderDistance;
 }
 
-export { W, H, DPR };
+export { W, H };
 export function getFrameCounter() {
   return frameCounter;
 }

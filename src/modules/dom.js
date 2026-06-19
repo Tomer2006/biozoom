@@ -19,31 +19,7 @@ export const getStage = () => {
   return document.getElementById('stage');
 };
 
-// Export these as getters for backwards compatibility
-export const canvas = { get current() { return getCanvas(); } };
-export const stage = { get current() { return getStage(); } };
-
-// Legacy exports for modules that use direct references
-export const topbarEl = { get current() { return document.querySelector('.topbar'); } };
+// Tooltip element references (used by tooltip.js)
 export const ttip = { get current() { return document.getElementById('tooltip'); } };
 export const tName = { get current() { return document.querySelector('.tooltip .name'); } };
 export const tMeta = { get current() { return document.querySelector('.tooltip .meta'); } };
-
-export const bigPreview = { get current() { return document.getElementById('bigPreview'); } };
-export const bigPreviewImg = { get current() { return document.getElementById('bigPreviewImg'); } };
-export const bigPreviewCap = { get current() { return document.getElementById('bigPreviewCap'); } };
-export const bigPreviewEmpty = { get current() { return document.getElementById('bigPreviewEmpty'); } };
-
-export const helpModal = { get current() { return document.getElementById('helpModal'); } };
-
-export const providerSelect = { get current() { return document.getElementById('providerSelect'); } };
-
-export const breadcrumbsEl = { get current() { return document.getElementById('breadcrumbs'); } };
-export const fpsEl = { get current() { return document.getElementById('fps'); } };
-
-export const loadingEl = { get current() { return document.getElementById('loading'); } };
-export const progressFill = { get current() { return document.getElementById('progressFill'); } };
-export const progressLabel = { get current() { return document.getElementById('progressLabel'); } };
-export const progressPct = { get current() { return document.getElementById('progressPct'); } };
-export const stageInfo = { get current() { return document.getElementById('stageInfo'); } };
-export const loadingTimer = { get current() { return document.getElementById('loadingTimer'); } };

@@ -8,7 +8,6 @@
 
 const LOG_PREFIX = '[TaxonomyExplorer]';
 const ENABLE_DEBUG = true;
-const ENABLE_TRACE = true;
 
 function formatMessage(level, message, data = null) {
   const timestamp = new Date().toISOString().substr(11, 8); // HH:MM:SS
@@ -37,9 +36,4 @@ export function logError(message, error = null, data = null) {
 export function logDebug(message, data = null) {
   if (!ENABLE_DEBUG) return;
   console.debug(formatMessage('debug', message, data));
-}
-
-export function logTrace(message, data = null) {
-  if (!ENABLE_TRACE) return;
-  console.log(formatMessage('trace', message, data));
 }

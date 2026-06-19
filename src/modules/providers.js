@@ -8,7 +8,7 @@
 
 import { perf } from './settings.js';
 
-export function providerUrl(provider, name) {
+function providerUrl(provider, name) {
   const q = encodeURIComponent(name);
   switch (provider) {
     case 'google':
@@ -28,11 +28,7 @@ export function providerUrl(provider, name) {
   }
 }
 
-export function getSearchTargetName(forNode) {
-  return forNode?.name || '';
-}
-
-export function getCurrentProvider() {
+function getCurrentProvider() {
   // First check localStorage, then fall back to settings
   const saved = localStorage.getItem('infinitespecies_searchProvider');
   if (saved && perf.search.providers[saved]) {

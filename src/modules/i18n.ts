@@ -1,6 +1,6 @@
 export type AppLanguage = 'en' | 'he'
 
-export const LANGUAGE_STORAGE_KEY = 'infinitespecies_language'
+const LANGUAGE_STORAGE_KEY = 'infinitespecies_language'
 
 type TranslationParams = Record<string, string | number>
 type TranslationValue =
@@ -104,26 +104,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       fitDescription: 'Fit current node in view',
       toggleKey: '?',
       toggleDescription: 'Toggle this help panel',
-    },
-    about: {
-      title: 'About InfiniteSpecies',
-      appTitle: 'InfiniteSpecies',
-      intro1:
-        'InfiniteSpecies is an interactive way to explore the Tree of Life. It helps you move through the living world from broad groups to individual organisms in one continuous view.',
-      intro2:
-        'It is designed for curious exploration, so you can zoom around, follow branches, and get a better sense of how organisms are related to one another.',
-      featuresTitle: 'Features',
-      feature1:
-        'Zoom and pan smoothly through the Tree of Life, from major branches down to individual organisms.',
-      feature2: 'Search for organisms by name and jump directly to matching results.',
-      feature3: 'Follow the breadcrumb path so you always know where you are in the tree.',
-      feature4: 'Hover over organisms to see image previews and quick visual context.',
-      feature5: 'Open related reference pages when you want to learn more about a species or group.',
-      feature6: 'Copy and share the current view so other people can open the same place in the tree.',
-      feature7: 'Adjust visual settings like colors, fonts, and preferred web search provider.',
-      feature8: 'Use built-in help and keyboard shortcuts for faster exploration.',
-      projectLinks: 'Project links',
-      github: 'View on GitHub',
     },
     settings: {
       title: 'Settings',
@@ -256,25 +236,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       toggleKey: '?',
       toggleDescription: 'פתיחה או סגירה של חלון העזרה',
     },
-    about: {
-      title: 'אודות InfiniteSpecies',
-      appTitle: 'InfiniteSpecies',
-      intro1:
-        'InfiniteSpecies היא דרך אינטראקטיבית לחקור את עץ החיים. היא מאפשרת לנוע בעולם החי מקבוצות רחבות ועד אורגניזמים בודדים בתצוגה רציפה אחת.',
-      intro2:
-        'המערכת מיועדת לחקירה סקרנית, כך שאפשר להתקרב, לעקוב אחרי ענפים, ולקבל תחושה טובה יותר של הקשרים בין אורגניזמים שונים.',
-      featuresTitle: 'יכולות',
-      feature1: 'זום ותזוזה חלקים דרך עץ החיים, מהענפים הגדולים ועד אורגניזמים בודדים.',
-      feature2: 'חיפוש אורגניזמים לפי שם וקפיצה ישירה לתוצאות מתאימות.',
-      feature3: 'מעקב אחרי מסלול הפירורים כדי שתמיד תדעו איפה אתם נמצאים בעץ.',
-      feature4: 'ריחוף מעל אורגניזמים כדי לראות תצוגות תמונה והקשר חזותי מהיר.',
-      feature5: 'פתיחת דפי עיון קשורים כשאתם רוצים ללמוד עוד על מין או קבוצה.',
-      feature6: 'העתקה ושיתוף של התצוגה הנוכחית כך שאנשים אחרים יפתחו בדיוק את אותו מקום בעץ.',
-      feature7: 'התאמת ההגדרות החזותיות כמו צבעים, פונטים וספק חיפוש מועדף ברשת.',
-      feature8: 'שימוש בעזרה המובנית ובקיצורי המקלדת לחקירה מהירה יותר.',
-      projectLinks: 'קישורי הפרויקט',
-      github: 'צפייה ב-GitHub',
-    },
     settings: {
       title: 'הגדרות',
       languageSection: 'שפה',
@@ -341,35 +302,26 @@ function resolveTranslation(language: AppLanguage, key: string): TranslationValu
   return current
 }
 
-export function isSupportedLanguage(value: string | null | undefined): value is AppLanguage {
+function isSupportedLanguage(value: string | null | undefined): value is AppLanguage {
   return value === 'en' || value === 'he'
 }
 
-export function isRtlLanguage(language: AppLanguage): boolean {
-  void language
-  return false
-}
-
-export function getStoredLanguage(): AppLanguage | null {
+function getStoredLanguage(): AppLanguage | null {
   if (typeof window === 'undefined') return null
   const value = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
   return isSupportedLanguage(value) ? value : null
-}
-
-export function hasStoredLanguage(): boolean {
-  return getStoredLanguage() !== null
 }
 
 export function getCurrentLanguage(): AppLanguage {
   return currentLanguage
 }
 
-export function getLanguageDirection(language: AppLanguage): 'ltr' | 'rtl' {
+function getLanguageDirection(language: AppLanguage): 'ltr' | 'rtl' {
   void language
   return 'ltr'
 }
 
-export function applyDocumentLanguage(language: AppLanguage) {
+function applyDocumentLanguage(language: AppLanguage) {
   if (typeof document === 'undefined') return
   const direction = getLanguageDirection(language)
   document.documentElement.lang = language

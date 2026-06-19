@@ -1,6 +1,6 @@
 import { perf } from './settings'
 
-export const PERF_LAB_SECRET_CODE = '::settings-lab::'
+const PERF_LAB_SECRET_CODE = '::settings-lab::'
 const PERF_OVERRIDES_STORAGE_KEY = 'infinitespecies_perf_overrides'
 
 export type EditablePerfValue =
@@ -92,7 +92,7 @@ export function getPerfSettingsSnapshot() {
   return snapshotEditableObject(perf as Record<string, unknown>)
 }
 
-export function getDefaultPerfSettingsSnapshot() {
+function getDefaultPerfSettingsSnapshot() {
   return cloneEditableValue(defaultPerfSnapshot) as EditablePerfRecord
 }
 

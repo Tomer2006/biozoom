@@ -88,7 +88,7 @@ export async function ensureBackendViewport(options = {}) {
   }
 }
 
-export function scheduleBackendViewportLoad(options = {}) {
+function scheduleBackendViewportLoad(options = {}) {
   if (state.loadMode !== 'backend') return;
   if (viewportTimer) {
     clearTimeout(viewportTimer);
@@ -104,12 +104,6 @@ export function scheduleBackendViewportLoad(options = {}) {
     viewportTimer = null;
     void ensureBackendViewport({ force: options.force });
   }, VIEWPORT_DEBOUNCE_MS);
-}
-
-export async function ensureBackendSubtree(node) {
-  if (state.loadMode !== 'backend') return node;
-  await ensureBackendViewport({ force: true });
-  return nodeCache.get(node?._id) || node;
 }
 
 export async function loadBackendNodeById(id) {

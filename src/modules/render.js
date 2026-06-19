@@ -118,7 +118,7 @@ export function draw(options = {}) {
   return drawWithOptions(options);
 }
 
-export function drawWithOptions(options = {}) {
+function drawWithOptions(options = {}) {
   const {
     ctx: ctxOverride,
     width,

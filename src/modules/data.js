@@ -6,9 +6,6 @@
  * compatibility while keeping the codebase modular.
  */
 
-// Common/shared functions
-export { mapToChildren, normalizeTree, indexTreeProgressive, loadFromJSONText, setDataRoot } from './data-common.js';
-
 // Eager loading functions
 export { loadEager } from './data-eager.js';
 

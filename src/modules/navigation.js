@@ -19,7 +19,7 @@ import { isNodeInCurrentSubtree } from './picking.js';
 // Check if we're in React mode (breadcrumbs handled by React component)
 const isReactMode = () => typeof window !== 'undefined' && window.__reactCanvas;
 
-export function setBreadcrumbs(node) {
+function setBreadcrumbs(node) {
   // In React mode, breadcrumbs are managed by React state - skip DOM manipulation
   // Don't update URL here - URL updates only happen from breadcrumb hover updates, not from clicks
   if (isReactMode()) {

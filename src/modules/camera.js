@@ -32,7 +32,7 @@ function getBreadcrumbZoomOutLimit() {
   return targetDiameterPx / (zoomLimitRadius * 2);
 }
 
-export function getMinCameraZoom() {
+function getMinCameraZoom() {
   const zoomOutLimit = getBreadcrumbZoomOutLimit();
   if (!Number.isFinite(zoomOutLimit) || zoomOutLimit <= 0) {
     return 0;
@@ -41,7 +41,7 @@ export function getMinCameraZoom() {
   return zoomOutLimit;
 }
 
-export function getMaxCameraZoom() {
+function getMaxCameraZoom() {
   const maxZoom = perf.navigation.maxCameraZoom;
   if (!Number.isFinite(maxZoom) || maxZoom <= 0) {
     return Number.POSITIVE_INFINITY;
