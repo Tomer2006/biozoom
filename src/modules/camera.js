@@ -21,12 +21,18 @@ function lerp(a, b, t) {
 }
 
 function getLargestCircleFitZoom() {
-  if (!(state.maxNodeRadius > 0) || !(W > 0) || !(H > 0)) {
+  const activeLevel = Number(state.current?.level ?? state.DATA_ROOT?.level ?? 0);
+  const levelRadius = Number.isFinite(activeLevel)
+    ? state.maxNodeRadiusByLevel.get(activeLevel) || state.loadedMaxNodeRadiusByLevel.get(activeLevel)
+    : 0;
+  const zoomLimitRadius = levelRadius || state.maxNodeRadius;
+
+  if (!(zoomLimitRadius > 0) || !(W > 0) || !(H > 0)) {
     return Number.POSITIVE_INFINITY;
   }
 
   const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-  return targetRadiusPx / state.maxNodeRadius;
+  return targetRadiusPx / zoomLimitRadius;
 }
 
 export function getMinCameraZoom() {
