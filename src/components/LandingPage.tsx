@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion'
-import { Show, SignOutButton } from '@clerk/react'
 import { translate, type AppLanguage } from '../modules/i18n'
 
 interface LandingPageProps {
   language: AppLanguage
   colorPreset: string
-  authEnabled: boolean
   onStart: () => void
   onLanguage: () => void
   onHelp: () => void
@@ -17,14 +15,9 @@ const landingTreeImages: Record<string, string> = {
   blueGradient: '/landing-tree-bg1.png',
 }
 
-function LandingSignedInStatus({ language }: { language: AppLanguage }) {
-  return <span>{translate('auth.signedIn', undefined, language)}</span>
-}
-
 export default function LandingPage({
   language,
   colorPreset,
-  authEnabled,
   onStart,
   onLanguage,
   onHelp,
@@ -73,25 +66,6 @@ export default function LandingPage({
         >
           <span className="landing-start-text">{translate('landing.start', undefined, language)}</span>
         </motion.button>
-
-        {authEnabled && (
-          <Show when="signed-in">
-            <div className="landing-auth-panel">
-              <div className="landing-auth-status">
-                <LandingSignedInStatus language={language} />
-                <SignOutButton>
-                  <motion.button
-                    className="landing-auth-signout-btn"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span>{translate('auth.signOut', undefined, language)}</span>
-                  </motion.button>
-                </SignOutButton>
-              </div>
-            </div>
-          </Show>
-        )}
       </motion.div>
 
       <motion.div

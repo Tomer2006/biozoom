@@ -4,12 +4,10 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ClerkProvider } from '@clerk/react'
 import App from './App'
 import './styles/index.css'
 import { perf } from './modules/settings.js'
 import { initializeLanguage } from './modules/i18n'
-import { getClerkPublishableKey } from './modules/clerk'
 import { applyPersistedPerfOverrides } from './modules/runtimeSettings'
 
 initializeLanguage()
@@ -45,43 +43,8 @@ document.documentElement.style.setProperty('--font-sans', robotoFontStack)
 document.documentElement.style.setProperty('--font-mono', robotoFontStack)
 perf.rendering.labelFontFamily = `'Roboto', ui-sans-serif, system-ui, sans-serif`
 
-const clerkLocalization = {
-  signIn: {
-    start: {
-      title: 'Sign in to infinitespecies',
-      titleCombined: 'Sign in to infinitespecies',
-    },
-  },
-}
-
-const clerkAppearance = {
-  theme: 'simple',
-  variables: {
-    colorPrimary: '#5bc4be',
-    colorText: '#f4f7fb',
-    colorTextSecondary: '#9db0c7',
-    colorBackground: '#0d1220',
-    colorInputBackground: '#131a2a',
-    colorInputText: '#f4f7fb',
-    colorDanger: '#ff6b6b',
-    borderRadius: '12px',
-    fontFamily: robotoFontStack,
-  },
-}
-
-const appTree = (
-  <ClerkProvider
-    publishableKey={getClerkPublishableKey() || undefined}
-    localization={clerkLocalization}
-    appearance={clerkAppearance}
-    __internal_bypassMissingPublishableKey
-  >
-      <App />
-  </ClerkProvider>
-)
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {appTree}
+    <App />
   </React.StrictMode>,
 )

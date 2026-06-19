@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { Show, SignOutButton, useClerk } from '@clerk/react'
 import { processSearchResults } from '../modules/search'
 import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
@@ -19,7 +18,6 @@ interface TaxonomyNode {
 
 interface TopbarProps {
   language: AppLanguage
-  authEnabled: boolean
   onBackToMenu: () => void
   onCopyLink: () => void
   onLanguage: () => void
@@ -79,15 +77,6 @@ function SettingsIcon() {
   )
 }
 
-function AccountIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 21a8 8 0 0 0-16 0" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  )
-}
-
 function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] {
   if (!query) return [text]
   const queryLower = query.toLowerCase()
@@ -123,20 +112,17 @@ function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] 
   return [before, <mark key="match">{match}</mark>, after]
 }
 
-function TopbarAuth({
+function TopbarMenu({
   language,
-  authEnabled,
   onLanguage,
   onSettings,
 }: {
   language: AppLanguage
-  authEnabled: boolean
   onLanguage: () => void
   onSettings: () => void
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const clerk = useClerk()
 
   useEffect(() => {
     if (!menuOpen) return
@@ -163,23 +149,23 @@ function TopbarAuth({
   }, [menuOpen])
 
   return (
-    <div className="topbar-account-menu" ref={menuRef}>
+    <div className="topbar-menu" ref={menuRef}>
       <button
-        className="btn btn-icon topbar-auth-btn"
+        className="btn btn-icon topbar-menu-btn"
         type="button"
-        title={translate('auth.account', undefined, language)}
-        aria-label={translate('auth.account', undefined, language)}
+        title={translate('topbar.settingsButton', undefined, language)}
+        aria-label={translate('topbar.settingsButton', undefined, language)}
         aria-haspopup="menu"
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((current) => !current)}
       >
-        <AccountIcon />
+        <SettingsIcon />
       </button>
 
       {menuOpen && (
-        <div className="topbar-account-dropdown" role="menu">
+        <div className="topbar-menu-dropdown" role="menu">
           <button
-            className="topbar-account-item"
+            className="topbar-menu-item"
             type="button"
             role="menuitem"
             onClick={() => {
@@ -192,7 +178,7 @@ function TopbarAuth({
           </button>
 
           <button
-            className="topbar-account-item"
+            className="topbar-menu-item"
             type="button"
             role="menuitem"
             onClick={() => {
@@ -203,35 +189,6 @@ function TopbarAuth({
             <SettingsIcon />
             <span>{translate('topbar.settingsButton', undefined, language)}</span>
           </button>
-
-          {authEnabled && (
-            <Show when="signed-in">
-              <button
-                className="topbar-account-item"
-                type="button"
-                role="menuitem"
-                onClick={() => {
-                  setMenuOpen(false)
-                  clerk.openUserProfile()
-                }}
-              >
-                <AccountIcon />
-                <span>{translate('auth.account', undefined, language)}</span>
-              </button>
-
-              <SignOutButton>
-                <button
-                  className="topbar-account-item"
-                  type="button"
-                  role="menuitem"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <AccountIcon />
-                  <span>{translate('auth.signOut', undefined, language)}</span>
-                </button>
-              </SignOutButton>
-            </Show>
-          )}
         </div>
       )}
     </div>
@@ -240,7 +197,6 @@ function TopbarAuth({
 
 export default function Topbar({
   language,
-  authEnabled,
   onBackToMenu,
   onCopyLink,
   onLanguage,
@@ -474,9 +430,8 @@ export default function Topbar({
       </div>
 
       <div className="topbar-right">
-        <TopbarAuth
+        <TopbarMenu
           language={language}
-          authEnabled={authEnabled}
           onLanguage={onLanguage}
           onSettings={onSettings}
         />

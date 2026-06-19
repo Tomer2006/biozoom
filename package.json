@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/Tomer2006/infinitespecies#readme",
   "dependencies": {
-    "@clerk/react": "^6.1.0",
     "d3-hierarchy": "^3.1.2",
     "framer-motion": "^12.23.26",
     "jszip": "^3.10.1",

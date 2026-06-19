@@ -76,7 +76,6 @@ export default function App() {
   const [screenshotOpen, setScreenshotOpen] = useState(false)
 
   const toast = useToast()
-  const authEnabled = true
 
   const loadingStartTime = useRef<number>(0)
   const timerInterval = useRef<number | null>(null)
@@ -462,7 +461,6 @@ export default function App() {
           <LandingPage
             language={language}
             colorPreset={colorPreset}
-            authEnabled={authEnabled}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}
@@ -474,7 +472,6 @@ export default function App() {
       {appState.showTopbar && (
         <Topbar
           language={language}
-          authEnabled={authEnabled}
           onBackToMenu={handleBackToMenu}
           onCopyLink={handleCopyLink}
           onLanguage={() => setLanguageModalOpen(true)}

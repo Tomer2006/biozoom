@@ -104,17 +104,6 @@
     transform: translateY(8vh);
   }
 
-  .landing-auth-panel {
-    width: min(100%, 26rem);
-    margin-top: 1rem;
-  }
-
-  .landing-auth-status,
-  .landing-google-btn {
-    width: 100%;
-    min-width: 0;
-  }
-
   .btn {
     min-width: 44px;
     min-height: 44px;
@@ -512,10 +501,6 @@
 
   .landing-start-hint {
     font-size: 0.7rem;
-  }
-
-  .landing-auth-panel {
-    margin-top: 0.75rem;
   }
 
   .landing-footer-buttons {
