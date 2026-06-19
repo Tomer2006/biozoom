@@ -1,35 +1,14 @@
 /**
- * User interaction and event handling module
+ * Canvas and keyboard interaction module
  *
- * Manages all user input events including mouse, keyboard, canvas interactions,
- * UI button clicks, search functionality, and modal dialogs. Coordinates
- * between user actions and application state changes.
+ * Handles direct canvas input (pan, zoom, hover/pick, click-to-navigate) and
+ * global keyboard shortcuts (W = provider search, R = reset, F = fit, ? = help).
+ * UI buttons and modals are owned by the React components (Topbar, Breadcrumbs, etc.).
  */
 
-import {
-  canvas,
-  helpModal,
-  helpCloseBtn,
-  providerSearchBtn,
-  copyLinkBtn,
-  searchInputEl,
-  resetBtn,
-  fitBtn,
-  surpriseBtn,
-  tooltipSearchBtn,
-  loadBtn,
-  backToMenuBtn,
-  cancelLoadBtn,
-  applyLoadBtn,
-  insertSampleBtn,
-  fileInput,
-  jsonText,
-  loadError,
-  progressLabel
-} from './dom.js';
+import { canvas, helpModal } from './dom.js';
 import { requestRender, screenToWorld } from './canvas.js';
 import { pickNodeAt } from './picking.js';
-import { showLandingPage } from './landing.js';
 import { state } from './state.js';
 import { updateTooltip } from './tooltip.js';
 import { logInfo, logDebug, logTrace } from './logger.js';
@@ -37,7 +16,6 @@ import { openProviderSearch } from './providers.js';
 import { fitNodeInView, goToNode, updateCurrentNodeOnly } from './navigation.js';
 import { clampCameraZoom } from './camera.js';
 import { isCurrentlyLoading } from './loading.js';
-import { getNodePath } from './deeplink.js';
 import { hideBigPreview } from './preview.js';
 import { perf } from './settings.js';
 
@@ -213,154 +191,5 @@ export function initEvents() {
       e.preventDefault();
     }
   });
-
-  // Tooltip search button
-  tooltipSearchBtn?.addEventListener('click', e => {
-    e.stopPropagation();
-    const target = state.hoverNode || state.current;
-    if (target) openProviderSearch(target);
-  });
-
-  providerSearchBtn?.addEventListener('click', () => {
-    const target = state.hoverNode || state.current || state.DATA_ROOT;
-    if (target) openProviderSearch(target);
-  });
-
-  // Copy link
-  copyLinkBtn?.addEventListener('click', async () => {
-    const url = new URL(location.href);
-    const path = (state.current ? getNodePath(state.current) : []).join('/');
-    url.hash = path ? `#${encodeURIComponent(path)}` : '';
-    try {
-      await navigator.clipboard.writeText(url.toString());
-      if (progressLabel) {
-        progressLabel.textContent = 'Link copied';
-        progressLabel.style.color = '';
-        setTimeout(() => {
-          if (progressLabel.textContent === 'Link copied') progressLabel.textContent = '';
-        }, 1200);
-      }
-    } catch (_e) {
-      window.prompt('Copy link:', url.toString());
-    }
-  });
-
-  resetBtn?.addEventListener('click', async () => {
-    if (isCurrentlyLoading()) {
-      console.log('🚫 [EVENTS] Reset button ignored - currently loading data');
-      return;
-    }
-    if (state.DATA_ROOT) await goToNode(state.DATA_ROOT, true);
-    // No canvas re-render needed - highlight is now CSS-based
-  });
-
-  fitBtn?.addEventListener('click', () => {
-    if (isCurrentlyLoading()) {
-      console.log('🚫 [EVENTS] Fit button ignored - currently loading data');
-      return;
-    }
-    if (state.DATA_ROOT) fitNodeInView(state.DATA_ROOT);
-  });
-
-  surpriseBtn?.addEventListener('click', () => {
-    if (isCurrentlyLoading()) {
-      console.log('🚫 [EVENTS] Surprise button ignored - currently loading data');
-      return;
-    }
-
-    // "only set random on my counnt [current] stage"
-    // Pick a random leaf within the CURRENT view (subtree) rather than the global tree.
-    // Uses the pre-calculated _leaves count for O(depth) performance instead of O(N).
-    let node = state.current || state.DATA_ROOT;
-    if (!node) return;
-
-    // Pick a random leaf index k in [0, totalLeaves)
-    // uniformity is guaranteed by weighting branches by their leaf counts
-    let targetIndex = Math.floor(Math.random() * (node._leaves || 1));
-
-    // Traverse down to find the k-th leaf
-    while (node.children && node.children.length > 0) {
-      let found = false;
-      for (const child of node.children) {
-        const w = child._leaves || 1;
-        if (targetIndex < w) {
-          node = child;
-          found = true;
-          break;
-        }
-        targetIndex -= w;
-      }
-      // Fail-safe: if something is wrong with counts, break to avoid infinite loop
-      // (though with logical subtraction it should always find a child)
-      if (!found) {
-        if (node.children.length > 0) node = node.children[0];
-        else break;
-      }
-    }
-
-    if (node) {
-      state.current = node;
-      fitNodeInView(state.current);
-    }
-    // No canvas re-render needed - highlight is now CSS-based
-  });
-
-  backToMenuBtn?.addEventListener('click', async () => {
-    // Hide topbar and show landing page
-    const topbar = document.querySelector('.topbar');
-    if (topbar) {
-      topbar.style.visibility = 'hidden';
-    }
-    showLandingPage();
-
-    // --- Reset everything ---
-
-    // 1. Clear search input and results
-    if (searchInputEl) searchInputEl.value = '';
-    const searchResultsDiv = document.getElementById('searchResults');
-    if (searchResultsDiv) {
-      searchResultsDiv.style.display = 'none';
-      searchResultsDiv.innerHTML = '';
-    }
-
-    // 2. Clear progress/status label
-    if (progressLabel) progressLabel.textContent = '';
-
-    // 3. Hide tooltip
-    const tooltipEl = document.getElementById('tooltip');
-    if (tooltipEl) tooltipEl.style.opacity = '0';
-
-    // 4. Hide big preview
-    hideBigPreview();
-
-    // 5. Clear hover state
-    state.hoverNode = null;
-
-    // 6. Clear URL hash
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-
-    // 7. Reset navigation to root (camera position and current node)
-    if (state.DATA_ROOT) {
-      // Use animate=false for instant reset so it's ready when they come back
-      await goToNode(state.DATA_ROOT, false);
-    }
-  });
-
-  // Help modal close button
-  helpCloseBtn?.addEventListener('click', () => {
-    if (!helpModal) return;
-    const helpBtn = document.getElementById('helpBtn');
-
-    // Blur first to avoid ARIA warning on the close button itself
-    if (document.activeElement) document.activeElement.blur();
-
-    helpModal.classList.remove('open');
-    helpModal.setAttribute('aria-hidden', 'true');
-
-    if (helpBtn && getComputedStyle(helpBtn).display !== 'none') helpBtn.focus();
-  });
-
 
 }

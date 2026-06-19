@@ -35,10 +35,8 @@ export const bigPreviewCap = { get current() { return document.getElementById('b
 export const bigPreviewEmpty = { get current() { return document.getElementById('bigPreviewEmpty'); } };
 
 export const helpModal = { get current() { return document.getElementById('helpModal'); } };
-export const helpCloseBtn = { get current() { return document.getElementById('helpCloseBtn'); } };
 
 export const providerSelect = { get current() { return document.getElementById('providerSelect'); } };
-export const providerSearchBtn = { get current() { return document.getElementById('providerSearchBtn'); } };
 
 export const breadcrumbsEl = { get current() { return document.getElementById('breadcrumbs'); } };
 export const fpsEl = { get current() { return document.getElementById('fps'); } };
@@ -49,12 +47,3 @@ export const progressLabel = { get current() { return document.getElementById('p
 export const progressPct = { get current() { return document.getElementById('progressPct'); } };
 export const stageInfo = { get current() { return document.getElementById('stageInfo'); } };
 export const loadingTimer = { get current() { return document.getElementById('loadingTimer'); } };
-
-export const backToMenuBtn = { get current() { return document.getElementById('backToMenuBtn'); } };
-
-export const searchInputEl = { get current() { return document.getElementById('searchInput'); } };
-export const copyLinkBtn = { get current() { return document.getElementById('copyLinkBtn'); } };
-export const fitBtn = { get current() { return document.getElementById('fitBtn'); } };
-export const tooltipSearchBtn = { get current() { return document.getElementById('tooltipSearchBtn'); } };
-export const surpriseBtn = { get current() { return document.getElementById('surpriseBtn'); } };
-export const resetBtn = { get current() { return document.getElementById('resetBtn'); } };
