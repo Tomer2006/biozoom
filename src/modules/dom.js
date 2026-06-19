@@ -53,11 +53,8 @@ export const loadingTimer = { get current() { return document.getElementById('lo
 export const backToMenuBtn = { get current() { return document.getElementById('backToMenuBtn'); } };
 
 export const searchInputEl = { get current() { return document.getElementById('searchInput'); } };
-export const searchResultsEl = { get current() { return document.getElementById('searchResults'); } };
 export const copyLinkBtn = { get current() { return document.getElementById('copyLinkBtn'); } };
 export const fitBtn = { get current() { return document.getElementById('fitBtn'); } };
 export const tooltipSearchBtn = { get current() { return document.getElementById('tooltipSearchBtn'); } };
-export const clearBtn = { get current() { return document.getElementById('clearBtn'); } };
-export const searchBtn = { get current() { return document.getElementById('searchBtn'); } };
 export const surpriseBtn = { get current() { return document.getElementById('surpriseBtn'); } };
 export const resetBtn = { get current() { return document.getElementById('resetBtn'); } };

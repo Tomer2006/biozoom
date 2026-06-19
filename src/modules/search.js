@@ -8,11 +8,8 @@
 
 import { state } from './state.js';
 import { worldToScreen } from './canvas.js';
-import { updateNavigation } from './navigation.js';
-import { searchResultsEl } from './dom.js';
 import { getNodePath } from './deeplink.js';
 import { perf } from './settings.js';
-import { logWarn } from './logger.js';
 
 /**
  * Calculate relevance score for a search match (fast version without path lookup)
@@ -240,125 +237,6 @@ export function pulseAtNode(node) {
   };
 }
 
-let resultsEventsBound = false;
-
-function hideResults() {
-  if (!searchResultsEl) return;
-  searchResultsEl.style.display = 'none';
-  searchResultsEl.innerHTML = '';
-}
-
-/**
- * Highlight matching text in a string
- */
-function highlightMatch(text, query) {
-  if (!query) return text;
-  const queryLower = query.toLowerCase();
-  const textLower = text.toLowerCase();
-  const index = textLower.indexOf(queryLower);
-  
-  if (index === -1) {
-    // Try fuzzy highlighting - find characters in order
-    const parts = [];
-    let lastIdx = 0;
-    let queryIdx = 0;
-    
-    for (let i = 0; i < text.length && queryIdx < query.length; i++) {
-      if (textLower[i] === queryLower[queryIdx]) {
-        if (i > lastIdx) {
-          parts.push(text.slice(lastIdx, i));
-        }
-        parts.push(`<mark>${text[i]}</mark>`);
-        lastIdx = i + 1;
-        queryIdx++;
-      }
-    }
-    
-    if (queryIdx === query.length && lastIdx < text.length) {
-      parts.push(text.slice(lastIdx));
-    }
-    
-    return queryIdx === query.length ? parts.join('') : text;
-  }
-  
-  // Direct match - highlight the substring
-  const before = text.slice(0, index);
-  const match = text.slice(index, index + query.length);
-  const after = text.slice(index + query.length);
-  return `${before}<mark>${match}</mark>${after}`;
-}
-
-function renderResults(nodes, q) {
-  if (!searchResultsEl) return;
-  searchResultsEl.innerHTML = '';
-  const frag = document.createDocumentFragment();
-  nodes.forEach(n => {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.setAttribute('role', 'option');
-    item.dataset.id = String(n._id);
-    const nameEl = document.createElement('div');
-    nameEl.className = 'name';
-    nameEl.innerHTML = highlightMatch(n.name || '', q);
-    item.appendChild(nameEl);
-
-    // Add path context under the name for disambiguation
-    try {
-      const parts = getNodePath(n);
-      const parentPath = parts.slice(0, Math.max(0, parts.length - 1)).join(' / ');
-      if (parentPath) {
-        const pathEl = document.createElement('div');
-        pathEl.className = 'path';
-        pathEl.innerHTML = highlightMatch(parentPath, q);
-        item.appendChild(pathEl);
-      }
-    } catch (_e) {
-      // best-effort; ignore path errors
-    }
-    frag.appendChild(item);
-  });
-  searchResultsEl.appendChild(frag);
-  searchResultsEl.style.display = 'block';
-
-  if (!resultsEventsBound) {
-    resultsEventsBound = true;
-    searchResultsEl.addEventListener('click', e => {
-      const target = e.target.closest('.item');
-      if (!target) return;
-      
-      const idStr = target.dataset.id || '';
-      const id = Number(idStr);
-      
-      // Validate ID is a valid number
-      if (!idStr || isNaN(id) || id <= 0) {
-        logWarn(`Invalid search result ID: "${idStr}"`);
-        return;
-      }
-      
-      const d = state.nodeLayoutMap.get(id);
-      const node = d?.data;
-      
-      // Explicitly handle missing node with logging
-      if (!node) {
-        logWarn(`Search result node not found in layout map (ID: ${id})`);
-        return;
-      }
-      
-      updateNavigation(node, false);
-      if (state.current) pulseAtNode(state.current);
-      // No canvas re-render needed - highlight is now CSS-based
-      hideResults();
-    });
-
-    document.addEventListener('click', e => {
-      const searchbar = document.querySelector('.searchbar');
-      if (!searchbar) return;
-      if (searchbar.contains(e.target)) return;
-      hideResults();
-    });
-  }
-}
-
 /**
  * Process search results and format them (performance-critical)
  * @param {Array} matches - Array of matched nodes
@@ -386,33 +264,4 @@ export function processSearchResults(matches, query) {
       node: n,
     };
   });
-}
-
-export async function handleSearch(progressLabelEl) {
-  const searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
-  let q = searchInput.value;
-  let matches = findAllByQuery(q, perf.search.maxResults);
-  
-  if (!matches.length) {
-    if (progressLabelEl) {
-      progressLabelEl.textContent = `No match for "${q}"`;
-      progressLabelEl.style.color = 'var(--warn)';
-      setTimeout(() => {
-        progressLabelEl.textContent = '';
-        progressLabelEl.style.color = '';
-      }, perf.search.noMatchDisplayMs);
-    }
-    hideResults();
-    return;
-  }
-  if (matches.length === 1) {
-    const node = matches[0];
-    updateNavigation(node, false);
-    if (state.current) pulseAtNode(state.current);
-    // No canvas re-render needed - highlight is now CSS-based
-    hideResults();
-  } else {
-    renderResults(matches, q);
-  }
 }

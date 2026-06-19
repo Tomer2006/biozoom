@@ -13,8 +13,6 @@ import {
   providerSearchBtn,
   copyLinkBtn,
   searchInputEl,
-  searchBtn,
-  clearBtn,
   resetBtn,
   fitBtn,
   surpriseBtn,
@@ -37,7 +35,6 @@ import { updateTooltip } from './tooltip.js';
 import { logInfo, logDebug, logTrace } from './logger.js';
 import { openProviderSearch } from './providers.js';
 import { fitNodeInView, goToNode, updateCurrentNodeOnly } from './navigation.js';
-import { handleSearch } from './search.js';
 import { clampCameraZoom } from './camera.js';
 import { isCurrentlyLoading } from './loading.js';
 import { getNodePath } from './deeplink.js';
@@ -246,21 +243,6 @@ export function initEvents() {
     } catch (_e) {
       window.prompt('Copy link:', url.toString());
     }
-  });
-
-  // Search
-  searchBtn?.addEventListener('click', () => handleSearch(progressLabel));
-  searchInputEl?.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      handleSearch(progressLabel);
-      e.preventDefault();
-    }
-  });
-  clearBtn?.addEventListener('click', () => {
-    document.getElementById('searchInput').value = '';
-    // No canvas re-render needed - highlight is now CSS-based
-    const r = document.getElementById('searchResults');
-    if (r) { r.style.display = 'none'; r.innerHTML = ''; }
   });
 
   resetBtn?.addEventListener('click', async () => {
