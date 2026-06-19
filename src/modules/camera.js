@@ -67,6 +67,7 @@ export function clampCameraZoom(k) {
 
 export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs) {
   if (!Number.isFinite(dur) || dur <= 0) dur = perf.animation.cameraAnimationMs;
+  const animationId = ++state.cameraAnimationId;
   state.targetCam.x = nx;
   state.targetCam.y = ny;
   state.targetCam.k = clampCameraZoom(nk);
@@ -78,6 +79,7 @@ export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs)
   state.animating = true;
 
   function step(now) {
+    if (animationId !== state.cameraAnimationId) return;
     const t = Math.min(1, (now - start) / dur);
     const e = easeCubicInOut(t);
     state.camera.x = lerp(sx, state.targetCam.x, e);
@@ -93,6 +95,12 @@ export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs)
     }
   }
   requestAnimationFrame(step);
+}
+
+export function stopCameraAnimation() {
+  state.cameraAnimationId += 1;
+  state.animating = false;
+  state.targetCam = { ...state.camera };
 }
 
 /**

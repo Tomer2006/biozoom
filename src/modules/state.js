@@ -20,6 +20,7 @@ export const state = {
   // camera
   camera: { x: 0, y: 0, k: 1 },
   targetCam: { x: 0, y: 0, k: 1 },
+  cameraAnimationId: 0,
   animating: false,
 
   // hover

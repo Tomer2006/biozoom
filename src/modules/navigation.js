@@ -10,7 +10,7 @@
 
 import { state } from './state.js';
 import { updateDeepLinkFromNode } from './deeplink.js';
-import { animateToCam, clampCameraZoom } from './camera.js';
+import { animateToCam, clampCameraZoom, stopCameraAnimation } from './camera.js';
 import { requestRender, W, H } from './canvas.js';
 import { logInfo, logDebug, logWarn, logError } from './logger.js';
 import { perf } from './settings.js';
@@ -174,12 +174,28 @@ export async function goToNode(node, animate = true) {
   return updateNavigation(node, animate);
 }
 
-// Update the current node without moving the camera - just changes the visible subtree
+// Update the current node without navigating the camera to a new position.
 export function updateCurrentNodeOnly(node) {
-  logInfo(`Updating current node to "${node.name}" without camera movement`);
-  
+  logInfo(`Updating current node to "${node.name}" with an immediate level zoom boundary`);
+
+  stopCameraAnimation();
+  const previousZoom = state.camera.k;
   state.current = node;
   state.layoutChanged = true;
+
+  // The active taxonomy level changes the zoom-out boundary. Apply the new
+  // boundary immediately while keeping the selected node fixed on screen.
+  const nextZoom = clampCameraZoom(previousZoom);
+  if (nextZoom !== previousZoom) {
+    const anchorX = Number(node._vx);
+    const anchorY = Number(node._vy);
+    if (Number.isFinite(anchorX) && Number.isFinite(anchorY) && previousZoom > 0) {
+      state.camera.x = anchorX - ((anchorX - state.camera.x) * previousZoom) / nextZoom;
+      state.camera.y = anchorY - ((anchorY - state.camera.y) * previousZoom) / nextZoom;
+    }
+    state.camera.k = nextZoom;
+    state.targetCam = { ...state.camera };
+  }
   
   // Clear hover node if it's outside the new current subtree
   if (state.hoverNode && !isNodeInCurrentSubtree(state.hoverNode)) {
