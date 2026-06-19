@@ -162,7 +162,11 @@ function stitchResponse(response) {
     childIdsByParent.get(serverNode.parent_id).push(serverNode.id);
   }
 
-  if (response.expanded_ids) {
+  // Note: check `.length`, not just presence — buildNodeResponse always sends an
+  // `expanded_ids` array, and an empty one (e.g. a depth=0 node/random/path response)
+  // is still truthy. Falling through to the else branch below append-wires the node's
+  // ancestor path so the node is reachable from the root (required for zoomToNode).
+  if (response.expanded_ids && response.expanded_ids.length) {
     for (const parentId of response.expanded_ids || []) {
       const parent = nodeCache.get(parentId);
       if (!parent) continue;
