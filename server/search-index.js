@@ -26,8 +26,8 @@ export function scoreSearchName(name, query, wordQuery = ` ${query}`) {
 export class TaxonomySearchIndex {
   constructor(options = {}) {
     this.namesById = [];
-    this.ids = [];
     this.wordPrefixBuckets = new Map();
+    this.prefixTopMatches = new Map();
     this.trigramCounts = new Map();
     this.trigramBuckets = new Map();
     this.cache = new Map();
@@ -37,7 +37,6 @@ export class TaxonomySearchIndex {
   add(id, name) {
     const normalizedName = normalizeSearchQuery(name);
     this.namesById[id] = normalizedName;
-    this.ids.push(id);
 
     const prefixes = new Set();
     for (const word of normalizedName.split(' ')) {
@@ -59,13 +58,21 @@ export class TaxonomySearchIndex {
   }
 
   finalize() {
+    for (const [prefix, bucket] of this.wordPrefixBuckets) {
+      const matches = [];
+      this.#collectMatches(bucket, prefix, MAX_RESULTS, matches);
+      this.prefixTopMatches.set(prefix, matches);
+    }
+    this.wordPrefixBuckets.clear();
+
     const offsets = new Map();
     for (const [trigram, count] of this.trigramCounts) {
       this.trigramBuckets.set(trigram, new Uint32Array(count));
       offsets.set(trigram, 0);
     }
 
-    for (const id of this.ids) {
+    for (let id = 1; id < this.namesById.length; id++) {
+      if (!this.namesById[id]) continue;
       for (const trigram of uniqueTrigrams(this.namesById[id])) {
         const bucket = this.trigramBuckets.get(trigram);
         const offset = offsets.get(trigram);
@@ -91,9 +98,12 @@ export class TaxonomySearchIndex {
     }
 
     const results = [];
-    const bucket = query.length >= 3
-      ? this.#smallestTrigramBucket(query)
-      : this.#smallestQueryBucket(query);
+    if (query.length === 2) {
+      const prefixMatches = this.prefixTopMatches.get(query) || [];
+      results.push(...prefixMatches.slice(0, limit));
+    }
+
+    const bucket = query.length >= 3 ? this.#smallestTrigramBucket(query) : null;
     if (bucket) this.#collectMatches(bucket, query, limit, results);
 
     this.cache.set(cacheKey, results);
@@ -101,17 +111,6 @@ export class TaxonomySearchIndex {
       this.cache.delete(this.cache.keys().next().value);
     }
     return results;
-  }
-
-  #smallestQueryBucket(query) {
-    let smallest = null;
-    for (const word of query.split(' ')) {
-      if (word.length < 2) continue;
-      const bucket = this.wordPrefixBuckets.get(word.slice(0, 2));
-      if (!bucket) return null;
-      if (!smallest || bucket.length < smallest.length) smallest = bucket;
-    }
-    return smallest;
   }
 
   #smallestTrigramBucket(query) {
@@ -133,6 +132,7 @@ export class TaxonomySearchIndex {
       insertBounded(results, { id, score }, limit, this.namesById);
     }
   }
+
 }
 
 function uniqueTrigrams(value) {

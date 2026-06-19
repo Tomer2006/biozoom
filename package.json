@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "backend": "node --max-old-space-size=4096 server/taxonomy-server.js",
-    "start": "node --max-old-space-size=4096 server/taxonomy-server.js",
+    "backend": "node --expose-gc --max-old-space-size=4096 server/taxonomy-server.js",
+    "start": "node --expose-gc --max-old-space-size=4096 server/taxonomy-server.js",
+    "compact-data": "node tools/compact-baked-data.js",
     "test": "node --test",
     "build": "vite build",
     "preview": "vite preview"

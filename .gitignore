@@ -25,4 +25,5 @@ downloaded-circle-images/
 !.env.example
 
 # Tools and utilities
-tools/
+tools/*
+!tools/compact-baked-data.js

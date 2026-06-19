@@ -26,7 +26,9 @@ test('ranks exact, name-prefix, word-prefix, and substring matches', () => {
 });
 
 test('returns deterministic, limited indexed results', () => {
-  const matches = createIndex().search('homo', 2);
+  const index = createIndex();
+  assert.deepEqual(index.search('ho', 2).map(match => match.id), [1, 2]);
+  const matches = index.search('homo', 2);
   assert.deepEqual(matches.map(match => match.id), [1, 2]);
 });
 

@@ -155,6 +155,9 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   if (validResults.length === 0) {
     throw new Error(`Failed to load any baked files (${totalFiles} files attempted, ${failed} failed)`);
   }
+  if (manifest.format === 'compact-rows-v1' && validResults.length !== totalFiles) {
+    throw new Error(`Compact baked data requires every file (${validResults.length}/${totalFiles} loaded)`);
+  }
 
   // Stage 2: Rehydrating tree
   setProgress(0, translate('data.rehydratingTree'), 1, 1);
@@ -184,7 +187,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   logInfo(`Rehydrating ${flatNodes.length.toLocaleString()} nodes from baked data`);
 
   // O(N) rehydration: build tree from flat array
-  const root = rehydrateTree(flatNodes);
+  const root = rehydrateTree(flatNodes, manifest.format);
 
   // Set state
   state.DATA_ROOT = root;
@@ -335,38 +338,41 @@ function createHierarchyWrapper(root) {
  * Rehydrate a tree structure from a flat array of baked nodes.
  * This is an O(N) operation using array-based parent lookup.
  *
- * @param {Array} flatNodes - Array of {id, parent_id, name, level, x, y, r}
+ * @param {Array} flatNodes - Object rows or compact [parent_id, name, level, x, y, r] rows
+ * @param {string} format - Manifest data format
  * @returns {Object} - Root node with children arrays and layout coordinates
  */
-function rehydrateTree(flatNodes) {
+function rehydrateTree(flatNodes, format) {
   if (!flatNodes || flatNodes.length === 0) {
     throw new Error('Cannot rehydrate empty node array');
   }
 
   const nodeCount = flatNodes.length;
   const progressEvery = Math.max(1, Math.floor(nodeCount / 20));
+  const compactRows = format === 'compact-rows-v1';
 
   // Pre-allocate node lookup by ID (array-based for speed, assuming IDs are sequential)
-  const maxId = flatNodes.reduce((max, n) => Math.max(max, n.id), 0);
+  const maxId = compactRows ? nodeCount : flatNodes.reduce((max, n) => Math.max(max, n.id), 0);
   const nodeById = new Array(maxId + 1);
 
   // First pass: create all nodes with their properties
   for (let i = 0; i < nodeCount; i++) {
     const fn = flatNodes[i];
+    const id = compactRows ? i + 1 : fn.id;
 
     const node = {
-      name: fn.name,
-      level: fn.level,
+      name: compactRows ? fn[1] : fn.name,
+      level: compactRows ? fn[2] : fn.level,
       children: [],
       parent: null,
-      _id: fn.id,
-      _vx: fn.x,
-      _vy: fn.y,
-      _vr: fn.r,
+      _id: id,
+      _vx: compactRows ? fn[3] : fn.x,
+      _vy: compactRows ? fn[4] : fn.y,
+      _vr: compactRows ? fn[5] : fn.r,
       _leaves: 0 // Will be computed in second pass
     };
 
-    nodeById[fn.id] = node;
+    nodeById[id] = node;
 
     if (i > 0 && i % progressEvery === 0) {
       setProgress(
@@ -384,12 +390,14 @@ function rehydrateTree(flatNodes) {
   // Second pass: link parents and children
   for (let i = 0; i < nodeCount; i++) {
     const fn = flatNodes[i];
-    const node = nodeById[fn.id];
+    const id = compactRows ? i + 1 : fn.id;
+    const parentId = compactRows ? fn[0] : fn.parent_id;
+    const node = nodeById[id];
 
-    if (fn.parent_id === null || fn.parent_id === undefined) {
+    if (parentId === null || parentId === undefined || parentId === 0) {
       root = node;
     } else {
-      const parent = nodeById[fn.parent_id];
+      const parent = nodeById[parentId];
       if (parent) {
         node.parent = parent;
         parent.children.push(node);

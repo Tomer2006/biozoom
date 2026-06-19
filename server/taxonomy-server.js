@@ -21,9 +21,13 @@ const maxSearchLimit = Number.isFinite(configuredSearchLimit)
   ? Math.max(1, Math.min(configuredSearchLimit, 20))
   : 20;
 const defaultViewportLimit = Number(process.env.VIEWPORT_NODE_LIMIT || 12000);
-const spatialCellSize = Number(process.env.SPATIAL_CELL_SIZE || 8);
+const configuredSpatialCellSize = Number(process.env.SPATIAL_CELL_SIZE || 8);
+const spatialCellSize = Number.isFinite(configuredSpatialCellSize) && configuredSpatialCellSize > 0
+  ? configuredSpatialCellSize
+  : 8;
 
 const index = loadIndex();
+if (typeof global.gc === 'function') global.gc();
 
 const server = http.createServer(async (req, res) => {
   try {
@@ -48,7 +52,7 @@ const server = http.createServer(async (req, res) => {
     const nodeMatch = url.pathname.match(/^\/api\/tree\/node\/(\d+)$/);
     if (nodeMatch) {
       const id = Number(nodeMatch[1]);
-      if (!index.nodeById[id]) return sendJson(res, { error: 'Node not found' }, 404);
+      if (!nodeExists(id)) return sendJson(res, { error: 'Node not found' }, 404);
       return sendJson(res, buildNodeResponse(id, readDepth(url)));
     }
 
@@ -74,7 +78,7 @@ const server = http.createServer(async (req, res) => {
 
     if (url.pathname === '/api/random') {
       const fromRaw = url.searchParams.get('from');
-      const fromId = fromRaw != null && index.nodeById[Number(fromRaw)] ? Number(fromRaw) : index.rootId;
+      const fromId = fromRaw != null && nodeExists(Number(fromRaw)) ? Number(fromRaw) : index.rootId;
       return sendJson(res, buildNodeResponse(pickRandomLeaf(fromId), readDepth(url)));
     }
 
@@ -94,102 +98,195 @@ function loadIndex() {
   const started = Date.now();
   const manifestPath = path.join(dataDir, 'manifest.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  const nodeById = [];
-  const childrenByParent = new Map();
-  const ids = [];
-  const largeSpatialIds = [];
-  const smallSpatialGrid = new Map();
-  const radiusBuckets = new Map();
+  const capacity = Number(manifest.total_nodes) + 1;
+  if (!Number.isSafeInteger(capacity) || capacity <= 1) {
+    throw new Error('Invalid manifest total_nodes');
+  }
+
+  const namesById = new Array(capacity);
+  const parentIds = new Uint32Array(capacity);
+  const levels = new Uint8Array(capacity);
+  const xCentis = new Int32Array(capacity);
+  const yCentis = new Int32Array(capacity);
+  const radiusCentis = new Uint32Array(capacity);
+  const firstChildIds = new Uint32Array(capacity);
+  const nextSiblingIds = new Uint32Array(capacity);
+  const lastChildIds = new Uint32Array(capacity);
   const searchIndex = new TaxonomySearchIndex({ maxCacheEntries: 500 });
   let rootId = null;
   let maxId = 0;
+  let totalNodes = 0;
 
   for (const file of manifest.files || []) {
     const filePath = path.join(dataDir, file.filename);
     console.log(`[taxonomy-server] Reading ${file.filename}`);
     const nodes = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const compactRows = manifest.format === 'compact-rows-v1';
+    const firstImplicitId = Number(file.start_id) || totalNodes + 1;
 
-    for (const raw of nodes) {
-      const node = {
-        id: raw.id,
-        parent_id: raw.parent_id ?? null,
-        name: String(raw.name || 'Unnamed'),
-        level: Number(raw.level || 0),
-        x: Number(raw.x || 0),
-        y: Number(raw.y || 0),
-        r: Number(raw.r || 0),
-      };
+    for (let rowIndex = 0; rowIndex < nodes.length; rowIndex++) {
+      const raw = nodes[rowIndex];
+      const id = compactRows ? firstImplicitId + rowIndex : Number(raw.id);
+      const parentId = Number(compactRows ? raw[0] : raw.parent_id) || 0;
+      const name = String((compactRows ? raw[1] : raw.name) || 'Unnamed');
+      const level = Number(compactRows ? raw[2] : raw.level) || 0;
+      const x = Number(compactRows ? raw[3] : raw.x) || 0;
+      const y = Number(compactRows ? raw[4] : raw.y) || 0;
+      const radius = Number(compactRows ? raw[5] : raw.r) || 0;
 
-      nodeById[node.id] = node;
-      ids.push(node.id);
-      searchIndex.add(node.id, node.name);
-      if (node.id > maxId) maxId = node.id;
+      if (!Number.isSafeInteger(id) || id <= 0 || id >= capacity) {
+        throw new Error(`Node id ${id} is outside manifest capacity`);
+      }
+      if (!Number.isSafeInteger(parentId) || parentId < 0 || parentId >= capacity) {
+        throw new Error(`Parent id ${parentId} for node ${id} is outside manifest capacity`);
+      }
 
-      if (node.parent_id == null) {
-        rootId = node.id;
+      namesById[id] = name;
+      parentIds[id] = parentId;
+      levels[id] = level;
+      xCentis[id] = Math.round(x * 100);
+      yCentis[id] = Math.round(y * 100);
+      radiusCentis[id] = Math.max(0, Math.round(radius * 100));
+      searchIndex.add(id, name);
+      totalNodes++;
+      if (id > maxId) maxId = id;
+
+      if (parentId === 0) {
+        rootId = id;
       } else {
-        let children = childrenByParent.get(node.parent_id);
-        if (!children) {
-          children = [];
-          childrenByParent.set(node.parent_id, children);
-        }
-        children.push(node.id);
+        const previousChild = lastChildIds[parentId];
+        if (previousChild) nextSiblingIds[previousChild] = id;
+        else firstChildIds[parentId] = id;
+        lastChildIds[parentId] = id;
       }
-
-      if (node.r >= spatialCellSize) {
-        largeSpatialIds.push(node.id);
-      } else {
-        const key = spatialKey(node.x, node.y);
-        let bucket = smallSpatialGrid.get(key);
-        if (!bucket) {
-          bucket = [];
-          smallSpatialGrid.set(key, bucket);
-        }
-        bucket.push(node.id);
-      }
-
-      const radiusKey = Math.floor(node.r * 10);
-      let radiusBucket = radiusBuckets.get(radiusKey);
-      if (!radiusBucket) {
-        radiusBucket = [];
-        radiusBuckets.set(radiusKey, radiusBucket);
-      }
-      radiusBucket.push(node.id);
     }
   }
 
   searchIndex.finalize();
 
-  const leaves = new Uint32Array(maxId + 1);
-  for (let i = ids.length - 1; i >= 0; i--) {
-    const id = ids[i];
-    const children = childrenByParent.get(id);
-    if (!children || children.length === 0) {
+  const leaves = new Uint32Array(capacity);
+  for (let id = maxId; id >= 1; id--) {
+    if (!namesById[id]) continue;
+    const firstChildId = firstChildIds[id];
+    if (!firstChildId) {
       leaves[id] = 1;
       continue;
     }
 
     let sum = 0;
-    for (const childId of children) sum += leaves[childId] || 1;
+    for (let childId = firstChildId; childId; childId = nextSiblingIds[childId]) {
+      sum += leaves[childId] || 1;
+    }
     leaves[id] = sum || 1;
   }
 
-  const radiusBucketKeysDesc = Array.from(radiusBuckets.keys()).sort((a, b) => b - a);
+  const spatialIndex = buildSpatialIndex(namesById, xCentis, yCentis, radiusCentis, maxId);
 
   console.log(`[taxonomy-server] Indexed in ${((Date.now() - started) / 1000).toFixed(1)}s`);
   return {
     manifest,
-    nodeById,
-    childrenByParent,
+    namesById,
+    parentIds,
+    levels,
+    xCentis,
+    yCentis,
+    radiusCentis,
+    firstChildIds,
+    nextSiblingIds,
     leaves,
-    ids,
-    largeSpatialIds,
-    smallSpatialGrid,
-    radiusBuckets,
-    radiusBucketKeysDesc,
+    ...spatialIndex,
     searchIndex,
     rootId,
-    totalNodes: ids.length,
+    maxId,
+    totalNodes,
+  };
+}
+
+function buildSpatialIndex(namesById, xCentis, yCentis, radiusCentis, maxId) {
+  const cellSizeCentis = Math.max(1, Math.round(spatialCellSize * 100));
+  let gridMinX = Number.POSITIVE_INFINITY;
+  let gridMaxX = Number.NEGATIVE_INFINITY;
+  let gridMinY = Number.POSITIVE_INFINITY;
+  let gridMaxY = Number.NEGATIVE_INFINITY;
+  let largeCount = 0;
+  let smallCount = 0;
+
+  for (let id = 1; id <= maxId; id++) {
+    if (!namesById[id]) continue;
+    if (radiusCentis[id] >= cellSizeCentis) {
+      largeCount++;
+      continue;
+    }
+    const gx = Math.floor(xCentis[id] / cellSizeCentis);
+    const gy = Math.floor(yCentis[id] / cellSizeCentis);
+    gridMinX = Math.min(gridMinX, gx);
+    gridMaxX = Math.max(gridMaxX, gx);
+    gridMinY = Math.min(gridMinY, gy);
+    gridMaxY = Math.max(gridMaxY, gy);
+    smallCount++;
+  }
+
+  const largeSpatialIds = new Uint32Array(largeCount);
+  if (smallCount === 0) {
+    let largeOffset = 0;
+    for (let id = 1; id <= maxId; id++) {
+      if (namesById[id] && radiusCentis[id] >= cellSizeCentis) largeSpatialIds[largeOffset++] = id;
+    }
+    return {
+      largeSpatialIds,
+      smallSpatialIds: new Uint32Array(0),
+      spatialCellOffsets: new Uint32Array(1),
+      spatialGridMinX: 0,
+      spatialGridMinY: 0,
+      spatialGridWidth: 0,
+      spatialGridHeight: 0,
+    };
+  }
+
+  const spatialGridWidth = gridMaxX - gridMinX + 1;
+  const spatialGridHeight = gridMaxY - gridMinY + 1;
+  const gridCellCount = spatialGridWidth * spatialGridHeight;
+  if (!Number.isSafeInteger(gridCellCount) || gridCellCount > 10_000_000) {
+    throw new Error(`Spatial grid is too large: ${gridCellCount} cells`);
+  }
+
+  const counts = new Uint32Array(gridCellCount);
+  let largeOffset = 0;
+  for (let id = 1; id <= maxId; id++) {
+    if (!namesById[id]) continue;
+    if (radiusCentis[id] >= cellSizeCentis) {
+      largeSpatialIds[largeOffset++] = id;
+      continue;
+    }
+    const gx = Math.floor(xCentis[id] / cellSizeCentis);
+    const gy = Math.floor(yCentis[id] / cellSizeCentis);
+    const cellIndex = (gy - gridMinY) * spatialGridWidth + gx - gridMinX;
+    counts[cellIndex]++;
+  }
+
+  const spatialCellOffsets = new Uint32Array(gridCellCount + 1);
+  for (let index = 0; index < gridCellCount; index++) {
+    spatialCellOffsets[index + 1] = spatialCellOffsets[index] + counts[index];
+  }
+
+  const writeOffsets = spatialCellOffsets.slice(0, gridCellCount);
+  const smallSpatialIds = new Uint32Array(smallCount);
+  for (let id = 1; id <= maxId; id++) {
+    if (!namesById[id] || radiusCentis[id] >= cellSizeCentis) continue;
+    const gx = Math.floor(xCentis[id] / cellSizeCentis);
+    const gy = Math.floor(yCentis[id] / cellSizeCentis);
+    const cellIndex = (gy - gridMinY) * spatialGridWidth + gx - gridMinX;
+    smallSpatialIds[writeOffsets[cellIndex]++] = id;
+  }
+
+  return {
+    largeSpatialIds,
+    smallSpatialIds,
+    spatialCellOffsets,
+    spatialGridMinX: gridMinX,
+    spatialGridMinY: gridMinY,
+    spatialGridWidth,
+    spatialGridHeight,
   };
 }
 
@@ -211,7 +308,7 @@ function buildNodeResponse(id, depth) {
     included.add(current.id);
     if (current.depthLeft <= 0) continue;
 
-    const children = index.childrenByParent.get(current.id) || [];
+    const children = childIds(current.id);
     expanded.add(current.id);
     for (const childId of children) {
       included.add(childId);
@@ -260,9 +357,11 @@ function buildViewportResponse(url) {
 
   const candidateIds = viewportCandidateIds(minX, maxX, minY, maxY, minWorldRadius);
   for (const id of candidateIds) {
-    const node = index.nodeById[id];
-    if (!node || node.r < minWorldRadius) continue;
-    if (!circleIntersectsRect(node.x, node.y, node.r, minX, maxX, minY, maxY)) continue;
+    const radius = index.radiusCentis[id] / 100;
+    if (radius < minWorldRadius) continue;
+    const x = index.xCentis[id] / 100;
+    const y = index.yCentis[id] / 100;
+    if (!circleIntersectsRect(x, y, radius, minX, maxX, minY, maxY)) continue;
 
     candidateCount++;
     visibleIds.push(id);
@@ -299,49 +398,26 @@ function buildViewportResponse(url) {
   };
 }
 
-function viewportCandidateIds(minX, maxX, minY, maxY, minWorldRadius) {
-  if (minWorldRadius >= spatialCellSize) {
-    return radiusFilteredBucketIds(minWorldRadius);
-  }
-
-  const candidates = [];
-
+function* viewportCandidateIds(minX, maxX, minY, maxY, minWorldRadius) {
   for (const id of index.largeSpatialIds) {
-    if (index.nodeById[id].r < minWorldRadius) continue;
-    candidates.push(id);
+    if (index.radiusCentis[id] / 100 >= minWorldRadius) yield id;
   }
 
-  const gridMinX = Math.floor((minX - spatialCellSize) / spatialCellSize);
-  const gridMaxX = Math.floor((maxX + spatialCellSize) / spatialCellSize);
-  const gridMinY = Math.floor((minY - spatialCellSize) / spatialCellSize);
-  const gridMaxY = Math.floor((maxY + spatialCellSize) / spatialCellSize);
+  if (minWorldRadius >= spatialCellSize || index.spatialGridWidth === 0) return;
+
+  const gridMinX = Math.max(index.spatialGridMinX, Math.floor((minX - spatialCellSize) / spatialCellSize));
+  const gridMaxX = Math.min(index.spatialGridMinX + index.spatialGridWidth - 1, Math.floor((maxX + spatialCellSize) / spatialCellSize));
+  const gridMinY = Math.max(index.spatialGridMinY, Math.floor((minY - spatialCellSize) / spatialCellSize));
+  const gridMaxY = Math.min(index.spatialGridMinY + index.spatialGridHeight - 1, Math.floor((maxY + spatialCellSize) / spatialCellSize));
 
   for (let gx = gridMinX; gx <= gridMaxX; gx++) {
     for (let gy = gridMinY; gy <= gridMaxY; gy++) {
-      const bucket = index.smallSpatialGrid.get(`${gx},${gy}`);
-      if (!bucket) continue;
-      for (const id of bucket) candidates.push(id);
+      const cellIndex = (gy - index.spatialGridMinY) * index.spatialGridWidth + gx - index.spatialGridMinX;
+      const start = index.spatialCellOffsets[cellIndex];
+      const end = index.spatialCellOffsets[cellIndex + 1];
+      for (let offset = start; offset < end; offset++) yield index.smallSpatialIds[offset];
     }
   }
-
-  return candidates;
-}
-
-function radiusFilteredBucketIds(minWorldRadius) {
-  const result = [];
-  const minKey = Math.floor(minWorldRadius * 10);
-  for (const key of index.radiusBucketKeysDesc) {
-    if (key < minKey) break;
-    const bucket = index.radiusBuckets.get(key) || [];
-    for (const id of bucket) {
-      if (index.nodeById[id].r >= minWorldRadius) result.push(id);
-    }
-  }
-  return result;
-}
-
-function spatialKey(x, y) {
-  return `${Math.floor(x / spatialCellSize)},${Math.floor(y / spatialCellSize)}`;
 }
 
 function circleIntersectsRect(cx, cy, r, minX, maxX, minY, maxY) {
@@ -354,28 +430,26 @@ function circleIntersectsRect(cx, cy, r, minX, maxX, minY, maxY) {
 }
 
 function serializeNode(id) {
-  const node = index.nodeById[id];
-  if (!node) return null;
-  const children = index.childrenByParent.get(id);
+  if (!nodeExists(id)) return null;
+  const parentId = index.parentIds[id];
   return {
-    id: node.id,
-    parent_id: node.parent_id,
-    name: node.name,
-    level: node.level,
-    x: node.x,
-    y: node.y,
-    r: node.r,
+    id,
+    parent_id: parentId || null,
+    name: index.namesById[id],
+    level: index.levels[id],
+    x: index.xCentis[id] / 100,
+    y: index.yCentis[id] / 100,
+    r: index.radiusCentis[id] / 100,
     leaves: index.leaves[id] || 1,
-    has_children: Boolean(children && children.length),
+    has_children: index.firstChildIds[id] !== 0,
   };
 }
 
 function ancestorIds(id) {
   const ids = [];
-  let node = index.nodeById[id];
-  while (node) {
-    ids.unshift(node.id);
-    node = node.parent_id == null ? null : index.nodeById[node.parent_id];
+  while (nodeExists(id)) {
+    ids.unshift(id);
+    id = index.parentIds[id];
   }
   return ids;
 }
@@ -385,13 +459,17 @@ function findNodeByPath(pathValue) {
   if (!parts.length) return index.rootId;
 
   let currentId = index.rootId;
-  const root = index.nodeById[currentId];
-  let partIndex = parts[0] === root?.name ? 1 : 0;
+  let partIndex = parts[0] === index.namesById[currentId] ? 1 : 0;
 
   for (; partIndex < parts.length; partIndex++) {
     const part = parts[partIndex];
-    const children = index.childrenByParent.get(currentId) || [];
-    const nextId = children.find(childId => index.nodeById[childId]?.name === part);
+    let nextId = 0;
+    for (const childId of childIds(currentId)) {
+      if (index.namesById[childId] === part) {
+        nextId = childId;
+        break;
+      }
+    }
     if (!nextId) return currentId;
     currentId = nextId;
   }
@@ -400,18 +478,19 @@ function findNodeByPath(pathValue) {
 }
 
 function pickRandomLeaf(fromId) {
-  let id = index.nodeById[fromId] ? fromId : index.rootId;
+  let id = nodeExists(fromId) ? fromId : index.rootId;
 
   // Weighted random descent by leaf counts, mirroring the client-side surprise walk.
   // targetIndex is uniform over all leaves under `id`, so every leaf is equally likely.
   let targetIndex = Math.floor(Math.random() * (index.leaves[id] || 1));
   let guard = 0;
   while (guard++ < 100000) {
-    const children = index.childrenByParent.get(id);
-    if (!children || children.length === 0) break;
+    const firstChildId = index.firstChildIds[id];
+    if (!firstChildId) break;
 
-    let chosen = children[children.length - 1];
-    for (const childId of children) {
+    let chosen = firstChildId;
+    for (const childId of childIds(id)) {
+      chosen = childId;
       const weight = index.leaves[childId] || 1;
       if (targetIndex < weight) {
         chosen = childId;
@@ -431,10 +510,22 @@ function searchNodes(query, limit) {
       return {
         ...serializeNode(id),
         score,
-        path: ancestorIds(id).map(ancestorId => index.nodeById[ancestorId].name).join(' / '),
+        path: ancestorIds(id).map(ancestorId => index.namesById[ancestorId]).join(' / '),
       };
     }),
   };
+}
+
+function nodeExists(id) {
+  return Number.isSafeInteger(id) && id > 0 && id <= index.maxId && Boolean(index.namesById[id]);
+}
+
+function childIds(id) {
+  const ids = [];
+  for (let childId = index.firstChildIds[id]; childId; childId = index.nextSiblingIds[childId]) {
+    ids.push(childId);
+  }
+  return ids;
 }
 
 function sendJson(res, body, status = 200, extraHeaders = {}) {

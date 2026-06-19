@@ -37,6 +37,8 @@ See the full control list in the app by pressing `?` or `F1`.
 
 **Data Pipeline (`/tools`)**: Raw OpenTree taxonomy dumps are processed, baked into a D3 packing layout offline, and split into sharded JSON chunks.
 
+Run `npm run compact-data` after generating baked files. This replaces repeated JSON object keys and explicit sequential IDs with the `compact-rows-v1` format used by both the backend and eager fallback.
+
 **Core Engine (`/src/modules`)**: A vanilla JS engine handles the render loop, spatial indexing (`picking.js`), and camera physics (`camera.js`) to avoid React render-cycle overhead.
 
 **UI Layer (`/src/components`)**: React handles the HUD, modals, search state, and URL routing on top of the canvas.
