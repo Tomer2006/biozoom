@@ -476,8 +476,6 @@ export default function App() {
           onSettings={() => setSettingsOpen(true)}
           onSettingsLab={() => setSettingsLabOpen((prev) => !prev)}
           onHelp={() => setHelpOpen(true)}
-          onUpdateBreadcrumbs={updateBreadcrumbs}
-          onShowToast={toast.showToast}
         />
       )}
 

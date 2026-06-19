@@ -7,6 +7,7 @@
     "dev": "vite",
     "backend": "node --max-old-space-size=4096 server/taxonomy-server.js",
     "start": "node --max-old-space-size=4096 server/taxonomy-server.js",
+    "test": "node --test",
     "build": "vite build",
     "preview": "vite preview"
   },

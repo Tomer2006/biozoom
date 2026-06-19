@@ -83,7 +83,7 @@ export const perf = {
   timing: {
     viewportCheckDebounceMs: 150,     // Debounce delay (ms) for viewport checks
     navigationViewportDelayMs: 500,   // Delay (ms) after navigation before triggering viewport check
-    searchDebounceMs: 300,             // Debounce delay (ms) for search input
+    searchDebounceMs: 180,             // Debounce delay (ms) for live backend search
     metricsUpdateIntervalMs: 500,      // Interval (ms) for updating performance metrics
     eventLoopLagAlpha: 0.2             // Exponential moving average alpha for event loop lag smoothing
   },
@@ -135,8 +135,9 @@ export const perf = {
   // Search settings
   search: {
     // Search results and UI settings
-    maxResults: 150,               // maximum number of search results to return
+    maxResults: 20,                // maximum number of search results to return
     noMatchDisplayMs: 900,        // duration (ms) to display "No match" message
+    navigationAnimationMs: 400,   // faster camera transition after selecting a search result
     
     // Pulse animation settings
     pulseMinScreenRadius: 2,       // Minimum screen radius (px) to show pulse animation

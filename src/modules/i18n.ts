@@ -63,7 +63,10 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       copyLink: 'Copy deep link',
       helpButton: 'Help (?)',
       settingsButton: 'Settings',
+      searching: 'Searching…',
       noResults: 'No results found',
+      searchError: 'Search is unavailable. Please try again.',
+      searchMinCharacters: 'Type at least 2 characters',
     },
     breadcrumbs: {
       ariaLabel: 'Taxonomy path',
@@ -211,7 +214,10 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       copyLink: 'העתקת קישור ישיר',
       helpButton: 'עזרה (?)',
       settingsButton: 'הגדרות',
+      searching: 'מחפש…',
       noResults: 'לא נמצאו תוצאות',
+      searchError: 'החיפוש אינו זמין כרגע. נסו שוב.',
+      searchMinCharacters: 'הקלידו לפחות 2 תווים',
     },
     breadcrumbs: {
       ariaLabel: 'מסלול טקסונומי',

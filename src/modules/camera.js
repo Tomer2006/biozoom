@@ -60,6 +60,7 @@ export function clampCameraZoom(k) {
 }
 
 export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs) {
+  if (!Number.isFinite(dur) || dur <= 0) dur = perf.animation.cameraAnimationMs;
   state.targetCam.x = nx;
   state.targetCam.y = ny;
   state.targetCam.k = clampCameraZoom(nk);

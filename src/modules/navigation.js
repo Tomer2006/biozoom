@@ -202,7 +202,7 @@ export function updateCurrentNodeOnly(node) {
  * Zoom camera to a node without changing current node or layout (performance-critical)
  * Used for search results - just moves camera, doesn't update breadcrumbs or navigation state
  */
-export function zoomToNode(node) {
+export function zoomToNode(node, durationMs) {
   const d = state.nodeLayoutMap.get(node._id);
   if (!d || typeof d._vr !== 'number' || d._vr <= 0) {
     logWarn(`Cannot zoom to node "${node.name}": node not found in layout map or invalid radius`);
@@ -214,5 +214,5 @@ export function zoomToNode(node) {
   const targetK = clampCameraZoom(targetRadiusPx / d._vr);
   
   // Animate camera to the node's position
-  animateToCam(d._vx, d._vy, targetK);
+  animateToCam(d._vx, d._vy, targetK, durationMs);
 }

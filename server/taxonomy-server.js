@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { performance } from 'node:perf_hooks';
+import { TaxonomySearchIndex, normalizeSearchQuery } from './search-index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -14,7 +16,10 @@ const dataDir = path.join(publicDir, 'data');
 const port = Number(process.env.PORT || 8787);
 const defaultDepth = Number(process.env.SUBTREE_DEPTH || 2);
 const maxDepth = Number(process.env.MAX_SUBTREE_DEPTH || 4);
-const maxSearchLimit = Number(process.env.MAX_SEARCH_LIMIT || 50);
+const configuredSearchLimit = Number(process.env.MAX_SEARCH_LIMIT || 20);
+const maxSearchLimit = Number.isFinite(configuredSearchLimit)
+  ? Math.max(1, Math.min(configuredSearchLimit, 20))
+  : 20;
 const defaultViewportLimit = Number(process.env.VIEWPORT_NODE_LIMIT || 12000);
 const spatialCellSize = Number(process.env.SPATIAL_CELL_SIZE || 8);
 
@@ -55,9 +60,16 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (url.pathname === '/api/search') {
-      const query = (url.searchParams.get('q') || '').trim();
-      const limit = Math.min(Number(url.searchParams.get('limit') || 20), maxSearchLimit);
-      return sendJson(res, searchNodes(query, limit));
+      const query = normalizeSearchQuery(url.searchParams.get('q'));
+      const requestedLimit = Number(url.searchParams.get('limit') || 20);
+      const limit = Math.max(1, Math.min(Number.isFinite(requestedLimit) ? requestedLimit : 20, maxSearchLimit));
+      const searchStarted = performance.now();
+      const body = query.length >= 2 ? searchNodes(query, limit) : { matches: [] };
+      const durationMs = performance.now() - searchStarted;
+      return sendJson(res, body, 200, {
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+        'Server-Timing': `search;dur=${durationMs.toFixed(1)}`,
+      });
     }
 
     if (url.pathname === '/api/random') {
@@ -88,6 +100,7 @@ function loadIndex() {
   const largeSpatialIds = [];
   const smallSpatialGrid = new Map();
   const radiusBuckets = new Map();
+  const searchIndex = new TaxonomySearchIndex({ maxCacheEntries: 500 });
   let rootId = null;
   let maxId = 0;
 
@@ -109,6 +122,7 @@ function loadIndex() {
 
       nodeById[node.id] = node;
       ids.push(node.id);
+      searchIndex.add(node.id, node.name);
       if (node.id > maxId) maxId = node.id;
 
       if (node.parent_id == null) {
@@ -144,6 +158,8 @@ function loadIndex() {
     }
   }
 
+  searchIndex.finalize();
+
   const leaves = new Uint32Array(maxId + 1);
   for (let i = ids.length - 1; i >= 0; i--) {
     const id = ids[i];
@@ -171,6 +187,7 @@ function loadIndex() {
     smallSpatialGrid,
     radiusBuckets,
     radiusBucketKeysDesc,
+    searchIndex,
     rootId,
     totalNodes: ids.length,
   };
@@ -409,75 +426,25 @@ function pickRandomLeaf(fromId) {
 }
 
 function searchNodes(query, limit) {
-  if (!query) return { matches: [] };
-
-  const queryLower = query.toLowerCase();
-  const candidates = [];
-  const maxCandidates = Math.max(limit * 4, 100);
-
-  for (const id of index.ids) {
-    const node = index.nodeById[id];
-    const score = scoreNode(node, queryLower);
-    if (score <= 0) continue;
-
-    candidates.push({ id, score });
-    candidates.sort((a, b) => b.score - a.score);
-    if (candidates.length > maxCandidates) candidates.length = maxCandidates;
-  }
-
-  candidates.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
-    return index.nodeById[a.id].name.localeCompare(index.nodeById[b.id].name);
-  });
-
   return {
-    matches: candidates.slice(0, limit).map(({ id, score }) => {
-      const pathNodes = ancestorIds(id).map(ancestorId => serializeNode(ancestorId));
+    matches: index.searchIndex.search(query, limit).map(({ id, score }) => {
       return {
         ...serializeNode(id),
         score,
-        path: pathNodes.map(node => node.name).join(' / '),
-        path_nodes: pathNodes,
+        path: ancestorIds(id).map(ancestorId => index.nodeById[ancestorId].name).join(' / '),
       };
     }),
   };
 }
 
-function scoreNode(node, queryLower) {
-  const nameLower = node.name.toLowerCase();
-  if (nameLower === queryLower) return 1000 + Math.max(0, 100 - node.name.length);
-  if (nameLower.startsWith(queryLower)) return 800 + Math.max(0, 100 - node.name.length);
-
-  const indexOf = nameLower.indexOf(queryLower);
-  if (indexOf >= 0) return 400 + Math.max(0, 50 - indexOf) + Math.max(0, 50 - node.name.length / 2);
-
-  let queryIndex = 0;
-  let consecutive = 0;
-  let maxConsecutive = 0;
-  for (let i = 0; i < nameLower.length && queryIndex < queryLower.length; i++) {
-    if (nameLower[i] === queryLower[queryIndex]) {
-      consecutive++;
-      maxConsecutive = Math.max(maxConsecutive, consecutive);
-      queryIndex++;
-    } else {
-      consecutive = 0;
-    }
-  }
-
-  if (queryIndex === queryLower.length) {
-    return 200 + maxConsecutive * 10 - Math.max(0, node.name.length - queryLower.length * 2);
-  }
-
-  return 0;
-}
-
-function sendJson(res, body, status = 200) {
+function sendJson(res, body, status = 200, extraHeaders = {}) {
   const payload = JSON.stringify(body);
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Content-Length': Buffer.byteLength(payload),
     'Access-Control-Allow-Origin': '*',
     'Cache-Control': 'no-store',
+    ...extraHeaders,
   });
   res.end(payload);
 }

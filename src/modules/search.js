@@ -2,7 +2,7 @@
  * Search functionality and result management module
  *
  * Handles taxonomy tree searching, result filtering, and UI management.
- * Provides fuzzy search capabilities, result highlighting, and navigation
+ * Provides exact, prefix, and substring matching, result highlighting, and navigation
  * to search results with visual feedback (pulsing animations).
  */
 
@@ -38,31 +38,6 @@ function calculateRelevanceScoreFast(node, query, queryLower) {
     score += Math.max(0, 50 - position);
     // Bonus for shorter names
     score += Math.max(0, 50 - name.length / 2);
-  }
-  // Fuzzy match - check if all query characters appear in order
-  else {
-    let queryIdx = 0;
-    let consecutiveMatches = 0;
-    let maxConsecutive = 0;
-    
-    for (let i = 0; i < nameLower.length && queryIdx < queryLower.length; i++) {
-      if (nameLower[i] === queryLower[queryIdx]) {
-        consecutiveMatches++;
-        maxConsecutive = Math.max(maxConsecutive, consecutiveMatches);
-        queryIdx++;
-      } else {
-        consecutiveMatches = 0;
-      }
-    }
-    
-    // If all query characters found in order, give partial score
-    if (queryIdx === queryLower.length) {
-      score += 200;
-      // Bonus based on how close together the matches are
-      score += maxConsecutive * 10;
-      // Penalty for longer names
-      score -= Math.max(0, name.length - queryLower.length * 2);
-    }
   }
 
   // No bonus based on child count - groups and leaf nodes are scored equally
@@ -106,25 +81,9 @@ function matchesQueryFast(node, query, queryLower) {
   const name = node.name || '';
   const nameLower = name.toLowerCase();
   
-  // Direct substring match
-  if (nameLower.includes(queryLower)) {
-    return calculateRelevanceScoreFast(node, query, queryLower);
-  }
-  
-  // Fuzzy match - check if all query characters appear in order
-  let queryIdx = 0;
-  for (let i = 0; i < nameLower.length && queryIdx < queryLower.length; i++) {
-    if (nameLower[i] === queryLower[queryIdx]) {
-      queryIdx++;
-    }
-  }
-  
-  // If all characters found in order, it's a fuzzy match
-  if (queryIdx === queryLower.length) {
-    return calculateRelevanceScoreFast(node, query, queryLower);
-  }
-  
-  return 0; // No match (don't check path during initial search - too expensive)
+  return nameLower.includes(queryLower)
+    ? calculateRelevanceScoreFast(node, query, queryLower)
+    : 0;
 }
 
 export function findAllByQuery(q, limit = perf.search.maxResults) {

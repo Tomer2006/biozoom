@@ -10,7 +10,7 @@ Live on [https://infinitespecies.com](https://infinitespecies.com)
 
 **Hybrid Rendering Engine:** Uses D3.js for layout math and HTML5 Canvas for rendering to achieve 60 FPS performance on large datasets.
 
-**Smart Search:** Fuzzy search functionality to find organisms by scientific name, with visual guidance to the result.
+**Fast Search:** Exact, prefix, and substring search for organisms by scientific name, with visual guidance to the result.
 
 **Integrated Knowledge:** Hover over nodes to see Wikipedia thumbnails and summaries, or deep-link to external databases such as GBIF, NCBI, and iNaturalist.
 

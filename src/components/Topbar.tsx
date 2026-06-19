@@ -1,20 +1,9 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { processSearchResults } from '../modules/search'
-import { performSearch, handleSingleSearchResult, handleSearchResultClick } from '../modules/search-handler'
+import { handleSearchResultClick, performSearch, prefetchSearchResult, supportsLiveSearch } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
 import { isPerfLabSecretCode } from '../modules/runtimeSettings'
-
-interface TaxonomyNode {
-  _id: number
-  name: string
-  level: number
-  children?: TaxonomyNode[]
-  parent?: TaxonomyNode | null
-  _leaves?: number
-  _vx?: number
-  _vy?: number
-  _vr?: number
-}
+import { perf } from '../modules/settings'
 
 interface TopbarProps {
   language: AppLanguage
@@ -24,8 +13,6 @@ interface TopbarProps {
   onSettings: () => void
   onSettingsLab: () => void
   onHelp: () => void
-  onUpdateBreadcrumbs: (node: TaxonomyNode) => void
-  onShowToast: (message: string, type?: 'success' | 'info' | 'warning' | 'error', duration?: number) => string
 }
 
 interface SearchResult {
@@ -83,28 +70,7 @@ function highlightMatchJSX(text: string, query: string): (string | ReactNode)[] 
   const textLower = text.toLowerCase()
   const index = textLower.indexOf(queryLower)
 
-  if (index === -1) {
-    const parts: (string | ReactNode)[] = []
-    let lastIdx = 0
-    let queryIdx = 0
-
-    for (let i = 0; i < text.length && queryIdx < query.length; i++) {
-      if (textLower[i] === queryLower[queryIdx]) {
-        if (i > lastIdx) {
-          parts.push(text.slice(lastIdx, i))
-        }
-        parts.push(<mark key={`${i}-${queryIdx}`}>{text[i]}</mark>)
-        lastIdx = i + 1
-        queryIdx++
-      }
-    }
-
-    if (queryIdx === query.length && lastIdx < text.length) {
-      parts.push(text.slice(lastIdx))
-    }
-
-    return queryIdx === query.length ? parts : [text]
-  }
+  if (index === -1) return [text]
 
   const before = text.slice(0, index)
   const match = text.slice(index, index + query.length)
@@ -203,17 +169,72 @@ export default function Topbar({
   onSettings,
   onSettingsLab,
   onHelp,
-  onUpdateBreadcrumbs,
-  onShowToast,
 }: TopbarProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [showResults, setShowResults] = useState(false)
   const [activeResultIndex, setActiveResultIndex] = useState(-1)
+  const [resultsQuery, setResultsQuery] = useState('')
+  const [searchStatus, setSearchStatus] = useState<'idle' | 'loading' | 'results' | 'no-results' | 'error' | 'too-short'>('idle')
+  const [navigatingResultId, setNavigatingResultId] = useState<number | null>(null)
   const searchRef = useRef<HTMLDivElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const resultItemRefs = useRef<Array<HTMLDivElement | null>>([])
+  const searchControllerRef = useRef<AbortController | null>(null)
+  const searchTimerRef = useRef<number | null>(null)
+  const searchSequenceRef = useRef(0)
   const searchResultsId = useId()
+  const liveSearchEnabled = supportsLiveSearch()
+
+  const handleClear = useCallback(() => {
+    searchSequenceRef.current++
+    searchControllerRef.current?.abort()
+    searchControllerRef.current = null
+    if (searchTimerRef.current !== null) window.clearTimeout(searchTimerRef.current)
+    searchTimerRef.current = null
+    setSearchQuery('')
+    setSearchResults([])
+    setResultsQuery('')
+    setShowResults(false)
+    setSearchStatus('idle')
+    setActiveResultIndex(-1)
+    setNavigatingResultId(null)
+  }, [])
+
+  const executeSearch = useCallback(async (rawQuery: string) => {
+    const query = rawQuery.trim().replace(/\s+/g, ' ').slice(0, 100)
+    if (query.length < 2) return
+
+    const sequence = ++searchSequenceRef.current
+    searchControllerRef.current?.abort()
+    const controller = new AbortController()
+    searchControllerRef.current = controller
+    setSearchStatus('loading')
+    setShowResults(true)
+
+    try {
+      const result = await performSearch(query, { signal: controller.signal })
+      if (controller.signal.aborted || sequence !== searchSequenceRef.current) return
+
+      const results: SearchResult[] = processSearchResults(result.matches, query)
+      setSearchResults(results)
+      setResultsQuery(query)
+      setSearchStatus(results.length > 0 ? 'results' : 'no-results')
+      setShowResults(true)
+      setActiveResultIndex(results.length > 0 ? 0 : -1)
+      if (results[0]) void prefetchSearchResult(results[0].node).catch(() => {})
+    } catch (error) {
+      if (controller.signal.aborted || sequence !== searchSequenceRef.current) return
+      console.error('Search failed:', error)
+      setSearchResults([])
+      setResultsQuery(query)
+      setSearchStatus('error')
+      setShowResults(true)
+      setActiveResultIndex(-1)
+    } finally {
+      if (sequence === searchSequenceRef.current) searchControllerRef.current = null
+    }
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -226,13 +247,6 @@ export default function Topbar({
     return () => document.removeEventListener('click', handleClickOutside)
   }, [])
 
-  const handleClear = () => {
-    setSearchQuery('')
-    setSearchResults([])
-    setShowResults(false)
-    setActiveResultIndex(-1)
-  }
-
   useEffect(() => {
     if (!showResults || activeResultIndex < 0) {
       return
@@ -241,14 +255,22 @@ export default function Topbar({
     resultItemRefs.current[activeResultIndex]?.scrollIntoView({
       block: 'nearest',
     })
-  }, [activeResultIndex, showResults])
+    const result = searchResults[activeResultIndex]
+    if (result) void prefetchSearchResult(result.node).catch(() => {})
+  }, [activeResultIndex, searchResults, showResults])
 
   const selectSearchResult = async (result: SearchResult) => {
-    await handleSearchResultClick(result.node)
-    setShowResults(false)
-    setSearchQuery('')
-    setSearchResults([])
-    setActiveResultIndex(-1)
+    if (navigatingResultId !== null) return
+    setNavigatingResultId(result._id)
+    try {
+      await handleSearchResultClick(result.node)
+      handleClear()
+    } catch (error) {
+      console.error('Search navigation failed:', error)
+      setNavigatingResultId(null)
+      setSearchStatus('error')
+      setShowResults(true)
+    }
   }
 
   useEffect(() => {
@@ -263,39 +285,42 @@ export default function Topbar({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [showResults])
+  }, [handleClear, showResults])
 
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) return
+  useEffect(() => {
+    if (!liveSearchEnabled) return
+    if (searchTimerRef.current !== null) window.clearTimeout(searchTimerRef.current)
 
-    if (isPerfLabSecretCode(searchQuery)) {
+    const query = searchQuery.trim()
+    if (query.length < 2 || isPerfLabSecretCode(query)) return
+
+    searchTimerRef.current = window.setTimeout(() => {
+      searchTimerRef.current = null
+      void executeSearch(query)
+    }, perf.timing.searchDebounceMs)
+
+    return () => {
+      if (searchTimerRef.current !== null) window.clearTimeout(searchTimerRef.current)
+      searchTimerRef.current = null
+    }
+  }, [executeSearch, liveSearchEnabled, searchQuery])
+
+  const handleSearch = () => {
+    const query = searchQuery.trim()
+    if (!query) return
+
+    if (isPerfLabSecretCode(query)) {
       handleClear()
       onSettingsLab()
       return
     }
 
-    const result = await performSearch(searchQuery, onShowToast)
-
-    if (!result.hasResults) {
-      setSearchResults([])
-      setShowResults(false)
-      setActiveResultIndex(-1)
-      onShowToast(translate('topbar.noResults', undefined, language), 'warning')
+    if (query.length < 2) {
+      setSearchStatus('too-short')
+      setShowResults(true)
       return
     }
-
-    if (result.singleResult) {
-      await handleSingleSearchResult(result.matches[0], onUpdateBreadcrumbs)
-      setShowResults(false)
-      setSearchQuery('')
-      setSearchResults([])
-      setActiveResultIndex(-1)
-    } else {
-      const results: SearchResult[] = processSearchResults(result.matches, searchQuery)
-      setSearchResults(results)
-      setShowResults(true)
-      setActiveResultIndex(results.length > 0 ? 0 : -1)
-    }
+    void executeSearch(query)
   }
 
   const handleResultClick = (result: SearchResult) => {
@@ -303,13 +328,18 @@ export default function Topbar({
   }
 
   const handleSearchInputChange = (value: string) => {
-    setSearchQuery(value)
-
-    if (showResults || searchResults.length > 0) {
-      setShowResults(false)
-      setSearchResults([])
-      setActiveResultIndex(-1)
-    }
+    const nextValue = value.slice(0, 100)
+    searchSequenceRef.current++
+    searchControllerRef.current?.abort()
+    searchControllerRef.current = null
+    setSearchQuery(nextValue)
+    setSearchResults([])
+    setResultsQuery('')
+    setActiveResultIndex(-1)
+    setNavigatingResultId(null)
+    const shouldSearch = liveSearchEnabled && nextValue.trim().length >= 2 && !isPerfLabSecretCode(nextValue)
+    setSearchStatus(shouldSearch ? 'loading' : 'idle')
+    setShowResults(shouldSearch)
   }
 
   const handleSearchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -354,6 +384,7 @@ export default function Topbar({
         return
       }
 
+      e.preventDefault()
       handleSearch()
       return
     }
@@ -373,7 +404,7 @@ export default function Topbar({
       </div>
 
       <div className="topbar-center">
-        <div className="searchbar" ref={searchRef}>
+        <div className="searchbar" ref={searchRef} aria-busy={searchStatus === 'loading' || navigatingResultId !== null}>
           <input
             ref={searchInputRef}
             className="searchbar-input"
@@ -382,7 +413,7 @@ export default function Topbar({
             role="combobox"
             aria-autocomplete="list"
             aria-expanded={showResults}
-            aria-controls={showResults ? searchResultsId : undefined}
+            aria-controls={showResults && searchStatus === 'results' ? searchResultsId : undefined}
             aria-activedescendant={
               showResults && activeResultIndex >= 0
                 ? `${searchResultsId}-option-${searchResults[activeResultIndex]?._id}`
@@ -390,22 +421,52 @@ export default function Topbar({
             }
             placeholder={translate('topbar.searchPlaceholder', undefined, language)}
             value={searchQuery}
+            maxLength={100}
             onChange={(e) => handleSearchInputChange(e.target.value)}
-            onFocus={() => {
-              if (searchResults.length > 0) {
-                setShowResults(true)
-              }
-            }}
             onKeyDown={handleSearchInputKeyDown}
           />
-          <button className="searchbar-btn" onClick={handleSearch} title={translate('topbar.searchButton', undefined, language)}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
-            </svg>
+          <button
+            className={`searchbar-btn${searchStatus === 'loading' || navigatingResultId !== null ? ' is-loading' : ''}`}
+            onClick={handleSearch}
+            title={translate('topbar.searchButton', undefined, language)}
+            aria-label={translate('topbar.searchButton', undefined, language)}
+          >
+            {searchStatus === 'loading' || navigatingResultId !== null ? (
+              <span className="search-spinner" aria-hidden="true" />
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            )}
           </button>
 
-          {showResults && searchResults.length > 0 && (
+          {showResults && searchStatus === 'loading' && (
+            <div className="search-results search-results-message" role="status" aria-live="polite">
+              <span className="search-spinner" aria-hidden="true" />
+              <span>{translate('topbar.searching', undefined, language)}</span>
+            </div>
+          )}
+
+          {showResults && searchStatus === 'no-results' && (
+            <div className="search-results search-results-message" role="status" aria-live="polite">
+              {translate('topbar.noResults', undefined, language)}
+            </div>
+          )}
+
+          {showResults && searchStatus === 'error' && (
+            <div className="search-results search-results-message search-results-error" role="alert">
+              {translate('topbar.searchError', undefined, language)}
+            </div>
+          )}
+
+          {showResults && searchStatus === 'too-short' && (
+            <div className="search-results search-results-message" role="status" aria-live="polite">
+              {translate('topbar.searchMinCharacters', undefined, language)}
+            </div>
+          )}
+
+          {showResults && searchStatus === 'results' && searchResults.length > 0 && (
             <div className="search-results" id={searchResultsId} role="listbox">
               {searchResults.map((result, index) => (
                 <div
@@ -414,14 +475,19 @@ export default function Topbar({
                   ref={(element) => {
                     resultItemRefs.current[index] = element
                   }}
-                  className={`search-result-item${index === activeResultIndex ? ' active' : ''}`}
+                  className={`search-result-item${index === activeResultIndex ? ' active' : ''}${navigatingResultId === result._id ? ' is-navigating' : ''}`}
                   role="option"
                   aria-selected={index === activeResultIndex}
-                  onMouseEnter={() => setActiveResultIndex(index)}
+                  aria-busy={navigatingResultId === result._id}
+                  onMouseEnter={() => {
+                    setActiveResultIndex(index)
+                    void prefetchSearchResult(result.node).catch(() => {})
+                  }}
                   onClick={() => handleResultClick(result)}
                 >
-                  <div className="search-result-name">{highlightMatchJSX(result.name, searchQuery)}</div>
-                  {result.path && <div className="search-result-path">{highlightMatchJSX(result.path, searchQuery)}</div>}
+                  <div className="search-result-name">{highlightMatchJSX(result.name, resultsQuery)}</div>
+                  {result.path && <div className="search-result-path">{highlightMatchJSX(result.path, resultsQuery)}</div>}
+                  {navigatingResultId === result._id && <span className="search-spinner search-result-spinner" aria-hidden="true" />}
                 </div>
               ))}
             </div>

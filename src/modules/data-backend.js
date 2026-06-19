@@ -8,6 +8,8 @@ import { perf } from './settings.js';
 
 const API_BASE = (import.meta.env.VITE_DATA_API_URL || '/api').replace(/\/$/, '');
 const nodeCache = new Map();
+const hydratedNodeIds = new Set();
+const nodeLoadPromises = new Map();
 const VIEWPORT_PAD_PX = 120;
 const VIEWPORT_LIMIT = 12000;
 const VIEWPORT_DEBOUNCE_MS = 160;
@@ -112,10 +114,25 @@ export async function ensureBackendSubtree(node) {
 
 export async function loadBackendNodeById(id) {
   if (state.loadMode !== 'backend') return null;
-  const response = await fetchJson(`${state.backendApiBase}/tree/node/${id}?depth=0`);
-  stitchResponse(response);
-  refreshBackendLayout();
-  return nodeCache.get(id) || null;
+  if (hydratedNodeIds.has(id)) return nodeCache.get(id) || null;
+  if (nodeLoadPromises.has(id)) return nodeLoadPromises.get(id);
+
+  const loadPromise = fetchJson(`${state.backendApiBase}/tree/node/${id}?depth=0`)
+    .then(response => {
+      stitchResponse(response);
+      refreshBackendLayout();
+      hydratedNodeIds.add(id);
+      return nodeCache.get(id) || null;
+    })
+    .finally(() => nodeLoadPromises.delete(id));
+
+  nodeLoadPromises.set(id, loadPromise);
+  return loadPromise;
+}
+
+export function prefetchBackendNodeById(id) {
+  if (state.loadMode !== 'backend' || hydratedNodeIds.has(id)) return Promise.resolve(nodeCache.get(id) || null);
+  return loadBackendNodeById(id);
 }
 
 export async function randomBackendNode(fromId) {
@@ -136,12 +153,14 @@ export async function findBackendNodeByPath(path) {
   return nodeCache.get(response.requested_id) || null;
 }
 
-export async function searchBackendNodes(query, limit) {
+export async function searchBackendNodes(query, limit, signal) {
   if (state.loadMode !== 'backend') return null;
-  const response = await fetchJson(`${state.backendApiBase}/search?q=${encodeURIComponent(query)}&limit=${limit}`);
+  const response = await fetchJson(
+    `${state.backendApiBase}/search?q=${encodeURIComponent(query)}&limit=${limit}`,
+    { signal, cache: 'default' },
+  );
   return (response.matches || []).map(match => {
-    stitchSearchPath(match);
-    const cached = nodeCache.get(match.id);
+    const cached = getOrCreateNode(match);
     cached._searchPath = match.path || '';
     cached._hasChildren = match.has_children;
     cached._leaves = match.leaves || 1;
@@ -222,19 +241,6 @@ function viewportKey() {
     perf.rendering.minPxRadius,
     state.current?._id || state.DATA_ROOT?._id || 1,
   ].join('|');
-}
-
-function stitchSearchPath(match) {
-  const pathNodes = match.path_nodes || [];
-  for (const serverNode of pathNodes) getOrCreateNode(serverNode);
-
-  for (let i = 1; i < pathNodes.length; i++) {
-    const parent = nodeCache.get(pathNodes[i - 1].id);
-    const child = nodeCache.get(pathNodes[i].id);
-    if (!parent || !child) continue;
-    child.parent = parent;
-    if (!parent.children.some(existing => existing._id === child._id)) parent.children.push(child);
-  }
 }
 
 function getOrCreateNode(serverNode) {
@@ -339,8 +345,8 @@ function wrappedDescendants(root) {
   return result;
 }
 
-async function fetchJson(url) {
-  const response = await fetch(url, { cache: 'no-store' });
+async function fetchJson(url, options = {}) {
+  const response = await fetch(url, { cache: 'no-store', ...options });
   if (!response.ok) throw new Error(`Backend request failed: ${response.status} ${response.statusText}`);
   return response.json();
 }
