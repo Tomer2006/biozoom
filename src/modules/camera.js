@@ -20,7 +20,7 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-function getLargestCircleFitZoom() {
+function getLevelZoomOutLimit() {
   const activeLevel = Number(state.current?.level ?? state.DATA_ROOT?.level ?? 0);
   const levelRadius = Number.isFinite(activeLevel)
     ? state.maxNodeRadiusByLevel.get(activeLevel) || state.loadedMaxNodeRadiusByLevel.get(activeLevel)
@@ -31,17 +31,17 @@ function getLargestCircleFitZoom() {
     return Number.POSITIVE_INFINITY;
   }
 
-  const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
-  return targetRadiusPx / zoomLimitRadius;
+  const targetDiameterPx = Math.min(W, H) * perf.navigation.zoomOutLargestCircleViewportRatio;
+  return targetDiameterPx / (zoomLimitRadius * 2);
 }
 
 export function getMinCameraZoom() {
-  const fitZoom = getLargestCircleFitZoom();
-  if (!Number.isFinite(fitZoom) || fitZoom <= 0) {
+  const zoomOutLimit = getLevelZoomOutLimit();
+  if (!Number.isFinite(zoomOutLimit) || zoomOutLimit <= 0) {
     return 0;
   }
 
-  return fitZoom / perf.navigation.maxLargestCircleZoomOutMultiplier;
+  return zoomOutLimit;
 }
 
 export function getMaxCameraZoom() {

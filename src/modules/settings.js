@@ -128,7 +128,7 @@ export const perf = {
   // Navigation settings
   navigation: {
     fitTargetRadiusMultiplier: 0.4,  // Multiplier for fitNodeInView target radius (0.5 = 50% of viewport)
-    maxLargestCircleZoomOutMultiplier: 1.5, // Largest circle at the active taxonomy level can shrink to 2/3 fitted size
+    zoomOutLargestCircleViewportRatio: 0.5, // At max zoom-out, the level's largest circle spans 50% of the shorter viewport side
     maxCameraZoom: 4000 // Fixed maximum zoom-in level for the camera
   },
 
