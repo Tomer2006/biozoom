@@ -24,7 +24,7 @@ export const perf = {
     pickMinPxRadius: 4,
     maxLabels: 180,
     labelGridCellPx: 30,
-    maxNodesPerFrame: 9000,
+    maxNodesPerFrame: Infinity,   // no cap on circles drawn per frame (was 9000)
     showGrid: false,
 
     // Grid pattern settings
