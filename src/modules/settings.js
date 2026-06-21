@@ -12,6 +12,7 @@ export const perf = {
   rendering: {
     renderDistance: 1,          // tighter culling for better FPS
     minPxRadius: 7,              // prune tiny nodes & their subtrees early
+    nodeFadePx: 5,               // fade circles in across this many screen px above minPxRadius (0 = hard pop)
     labelMinPxRadius: 18,         // minimum node radius (px) to consider it for labeling
     
     // Depth-based render distance settings
@@ -19,6 +20,7 @@ export const perf = {
     depthRenderBase: 8,           // Base number of levels to render from current node
     depthRenderFalloff: 0.7,      // Multiplier for render distance at each depth level (0.7 = 70% of previous)
     labelMinFontPx: 12,           // minimum font size (px) for labels; smaller are skipped
+    labelFadeFontPx: 3,           // fade labels in across this many font px above labelMinFontPx (0 = hard pop)
     verticalPadPx: 100,           // extra vertical padding (px) when culling to keep near-edge nodes visible
     // Nodes smaller than this on-screen are ignored for picking (in pixels)
     pickMinPxRadius: 4,
