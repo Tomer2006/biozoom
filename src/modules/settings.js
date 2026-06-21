@@ -59,7 +59,8 @@ export const perf = {
   },
   // Canvas/device related caps
   canvas: {
-    maxDevicePixelRatio: 2,     // render at up to 2x backing resolution for crisp circles/text on HiDPI displays
+    maxDevicePixelRatio: 2,     // text/labels render at up to 2x backing resolution for crispness on HiDPI displays
+    circleDevicePixelRatio: 0.5,  // circles render at 0.5x and are upscaled (very cheap fill, soft edges; raise toward 2 for sharper circles)
     targetFPS: 60,              // Target frames per second (60 FPS  / 60 = 16.66ms frame time)
     adaptiveFrameRate: true,    // Enable adaptive frame rate based on performance
     fpsUpdateIntervalMs: 125,   // Update FPS display every N ms (~8 times per second)

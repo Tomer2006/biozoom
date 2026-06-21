@@ -17,6 +17,12 @@ let W = 0;
 let H = 0;
 let DPR = 1;
 
+// Low-resolution offscreen layer for circles (flat fills don't need full DPR).
+// Composited onto the main canvas each frame; see getCircleBuffer().
+let circleCanvas = null;
+let circleCtx = null;
+let circleDPR = 1;
+
 let needRender = true;
 let rafId = null;
 let drawCallback = null;
@@ -41,6 +47,13 @@ let adaptiveFrameRate = perf.canvas.adaptiveFrameRate;
 
 export function getContext() {
   return ctx;
+}
+
+// Offscreen low-DPR layer for drawing circles, or null when a separate layer
+// would not be cheaper than the main canvas (e.g. on 1x displays).
+export function getCircleBuffer() {
+  if (!circleCtx || circleDPR >= DPR) return null;
+  return { canvas: circleCanvas, ctx: circleCtx };
 }
 
 export function resizeCanvas() {
@@ -77,7 +90,21 @@ export function resizeCanvas() {
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
 
-  logDebug(`Canvas resized: ${oldW}x${oldH} → ${W}x${H} (DPR: ${DPR})`);
+  // Size the low-res circle layer. Only worth keeping when it's actually
+  // cheaper than the main canvas (circleDevicePixelRatio < effective DPR).
+  circleDPR = Math.max(0.1, Math.min(perf.canvas.circleDevicePixelRatio || 1, DPR));
+  if (circleDPR < DPR) {
+    if (!circleCanvas) circleCanvas = document.createElement('canvas');
+    circleCanvas.width = Math.max(1, Math.floor(W * circleDPR));
+    circleCanvas.height = Math.max(1, Math.floor(H * circleDPR));
+    circleCtx = circleCanvas.getContext('2d', { alpha: false });
+    if (circleCtx) circleCtx.setTransform(circleDPR, 0, 0, circleDPR, 0, 0);
+  } else {
+    circleCanvas = null;
+    circleCtx = null;
+  }
+
+  logDebug(`Canvas resized: ${oldW}x${oldH} → ${W}x${H} (DPR: ${DPR}, circleDPR: ${circleDPR})`);
   console.log(`[Canvas] Resized: ${W}x${H} (DPR: ${DPR})`);
 }
 

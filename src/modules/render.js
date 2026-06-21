@@ -7,7 +7,7 @@
  * millions of taxonomy nodes.
  */
 
-import { getContext, W, H } from './canvas.js';
+import { getContext, getCircleBuffer, W, H } from './canvas.js';
 import { state } from './state.js';
 import { perf } from './settings.js';
 
@@ -123,10 +123,17 @@ function drawWithOptions(options = {}) {
     renderAllLabels = false
   } = options;
 
-  const ctx = ctxOverride || getContext();
-  if (!ctx || !state.layout) {
+  const mainCtx = ctxOverride || getContext();
+  if (!mainCtx || !state.layout) {
     return;
   }
+
+  // Circles are flat fills that barely benefit from extra resolution, so draw
+  // them into a cheaper low-DPR buffer and upscale, reserving the full-res main
+  // canvas for crisp text. Offscreen renders (ctxOverride) use a single ctx.
+  const circleBuffer = ctxOverride ? null : getCircleBuffer();
+  const ctx = circleBuffer ? circleBuffer.ctx : mainCtx;  // circle-drawing target
+  const lctx = mainCtx;                                    // label-drawing target
 
   const viewW = typeof width === 'number' ? width : W;
   const viewH = typeof height === 'number' ? height : H;
@@ -374,6 +381,15 @@ function drawWithOptions(options = {}) {
   // Publish the drawn set for picking (deepest/last-drawn is topmost).
   if (collectPickList) state.visibleNodes = visibleNodes;
 
+  // Composite the low-res circle layer onto the full-resolution main canvas.
+  // The opaque blit also overwrites last frame's labels, so no separate clear.
+  if (circleBuffer) {
+    lctx.globalAlpha = 1;
+    lctx.imageSmoothingEnabled = true;
+    lctx.imageSmoothingQuality = 'high';
+    lctx.drawImage(circleBuffer.canvas, 0, 0, viewW, viewH);
+  }
+
   // Optimized label placement with early rejection and reduced computation
   if (labelCandidates.length) {
     // Sort by size (largest first) and apply stricter limits based on zoom level
@@ -388,21 +404,21 @@ function drawWithOptions(options = {}) {
 
     if (capped.length > 0) {
       // Invariant text-rendering state — set once for every label this frame.
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.lineJoin = 'round';
-      ctx.miterLimit = 2;
-      ctx.fillStyle = labelFillColor;
-      ctx.globalAlpha = labelAlpha;
+      lctx.imageSmoothingEnabled = true;
+      lctx.imageSmoothingQuality = 'high';
+      lctx.textAlign = 'center';
+      lctx.textBaseline = 'middle';
+      lctx.lineJoin = 'round';
+      lctx.miterLimit = 2;
+      lctx.fillStyle = labelFillColor;
+      lctx.globalAlpha = labelAlpha;
 
       const drawLabel = (cand) => {
-        ctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
-        ctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
-        ctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
-        ctx.strokeText(cand.text, cand.sx, cand.textY);
-        ctx.fillText(cand.text, cand.sx, cand.textY);
+        lctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
+        lctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
+        lctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
+        lctx.strokeText(cand.text, cand.sx, cand.textY);
+        lctx.fillText(cand.text, cand.sx, cand.textY);
       };
 
       if (renderAllLabels) {
