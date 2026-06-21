@@ -69,7 +69,8 @@ export const perf = {
 
   // Animation timing
   animation: {
-    cameraAnimationMs: 700        // duration (ms) for camera pan/zoom transitions
+    cameraAnimationMs: 700,       // duration (ms) for camera pan/zoom transitions
+    visibilityFadeMs: 220         // time for circles and labels to fade in/out
   },
 
   // Input/Interaction settings

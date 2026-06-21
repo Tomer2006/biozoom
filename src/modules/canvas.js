@@ -26,6 +26,7 @@ let circleDPR = 1;
 let needRender = true;
 let rafId = null;
 let drawCallback = null;
+let forceNextDraw = false;
 const onCameraChangeCallbacks = new Set();  // Callbacks when camera changes
 let frameCounter = 0;
 let lastFpsUpdate = 0;
@@ -148,16 +149,25 @@ function loop() {
   const sameCam = cam.x === lastCam.x && cam.y === lastCam.y && cam.k === lastCam.k;
   const layoutChanged = state.layoutChanged;
 
-  // Render if: drawCallback exists AND (camera moved OR layout changed)
-  const shouldRender = drawCallback && (!sameCam || layoutChanged);
+  // Render for scene changes or for a time-based transition's next frame.
+  const shouldRender = drawCallback && (!sameCam || layoutChanged || forceNextDraw);
 
   if (shouldRender) {
-    drawCallback();
+    forceNextDraw = false;
+    const hasActiveTransitions = drawCallback() === true;
     lastCam = { x: cam.x, y: cam.y, k: cam.k };
     state.layoutChanged = false;
 
     // Notify about camera change (for hover validation - O(1) check)
-    for (const callback of onCameraChangeCallbacks) callback();
+    if (!sameCam || layoutChanged) {
+      for (const callback of onCameraChangeCallbacks) callback();
+    }
+
+    // Time-based canvas fades need frames even after the camera stops moving.
+    if (hasActiveTransitions) {
+      forceNextDraw = true;
+      needRender = true;
+    }
   }
 
   frameCounter++;
