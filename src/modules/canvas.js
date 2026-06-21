@@ -192,6 +192,7 @@ function loop() {
 
 export function registerDrawCallback(cb) {
   drawCallback = cb;
+  forceNextDraw = true;
 }
 
 export function onCameraChange(cb) {
