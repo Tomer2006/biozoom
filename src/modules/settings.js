@@ -12,7 +12,6 @@ export const perf = {
   rendering: {
     renderDistance: 1,          // tighter culling for better FPS
     minPxRadius: 7,              // prune tiny nodes & their subtrees early
-    nodeFadePx: 5,               // fade circles in across this many screen px above minPxRadius (0 = hard pop)
     labelMinPxRadius: 18,         // minimum node radius (px) to consider it for labeling
     
     // Depth-based render distance settings
@@ -20,7 +19,6 @@ export const perf = {
     depthRenderBase: 8,           // Base number of levels to render from current node
     depthRenderFalloff: 0.7,      // Multiplier for render distance at each depth level (0.7 = 70% of previous)
     labelMinFontPx: 12,           // minimum font size (px) for labels; smaller are skipped
-    labelFadeFontPx: 3,           // fade labels in across this many font px above labelMinFontPx (0 = hard pop)
     verticalPadPx: 100,           // extra vertical padding (px) when culling to keep near-edge nodes visible
     // Nodes smaller than this on-screen are ignored for picking (in pixels)
     pickMinPxRadius: 4,
@@ -77,6 +75,7 @@ export const perf = {
   // Input/Interaction settings
   input: {
     zoomSensitivity: 0.0015,      // Mouse wheel zoom sensitivity (higher = more sensitive)
+    zoomSmoothing: 0.2,           // Wheel-zoom easing per frame toward target (higher = snappier; 1 = instant/no smoothing)
     clickDisabledFeedbackMs: 200, // Duration (ms) to show disabled cursor feedback on click during loading
     tooltipThumbDelayMs: 60,      // Delay (ms) before showing thumbnail preview in tooltip
     searchNoMatchDisplayMs: 900  // Duration (ms) to display "No match" message in search

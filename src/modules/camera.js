@@ -100,21 +100,75 @@ export function stopCameraAnimation() {
   state.targetCam = { ...state.camera };
 }
 
+// Smooth wheel zoom: instead of snapping the camera to each wheel tick, ease
+// the zoom toward an accumulating target so newly revealed detail grows in
+// continuously instead of popping. The world point under the cursor is kept
+// pinned throughout the ease.
+const zoomAnim = {
+  active: false,
+  targetK: 1,
+  mx: 0,   // cursor x in canvas px (anchor)
+  my: 0,   // cursor y in canvas px (anchor)
+  wx: 0,   // world point under the cursor to keep fixed
+  wy: 0
+};
+
+function stepWheelZoom() {
+  if (!zoomAnim.active) return;
+
+  const k = state.camera.k;
+  const target = zoomAnim.targetK;
+  const smoothing = perf.input.zoomSmoothing;
+
+  // Move a fraction of the remaining distance each frame; snap when close.
+  const done = Math.abs(target - k) <= target * 0.001;
+  const nk = clampCameraZoom(done ? target : k + (target - k) * smoothing);
+
+  state.camera.k = nk;
+  // Re-pin the anchored world point under the cursor as the zoom changes.
+  state.camera.x = zoomAnim.wx - (zoomAnim.mx - W / 2) / nk;
+  state.camera.y = zoomAnim.wy - (zoomAnim.my - H / 2) / nk;
+
+  requestRender();
+
+  if (done) {
+    zoomAnim.active = false;
+  } else {
+    requestAnimationFrame(stepWheelZoom);
+  }
+}
+
 /**
  * Handle wheel zoom (performance-critical - runs on every scroll)
  * @param {WheelEvent} e - The wheel event
  * @param {HTMLElement} canvas - The canvas element
  */
 export function handleWheelZoom(e, canvas) {
-  const scale = Math.exp(-e.deltaY * perf.input.zoomSensitivity);
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
-  const [wx, wy] = screenToWorld(mx, my);
+  const scale = Math.exp(-e.deltaY * perf.input.zoomSensitivity);
 
-  state.camera.k = clampCameraZoom(state.camera.k * scale);
-  state.camera.x = wx - (mx - rect.width / 2) / state.camera.k;
-  state.camera.y = wy - (my - rect.height / 2) / state.camera.k;
+  // Take over from any in-flight click/zoom animation.
+  state.cameraAnimationId += 1;
+
+  // Accumulate onto the existing target during a rapid scroll burst so ticks
+  // compound the way they did when zoom was applied instantly.
+  const baseK = zoomAnim.active ? zoomAnim.targetK : state.camera.k;
+  zoomAnim.targetK = clampCameraZoom(baseK * scale);
+
+  // Re-anchor to the world point currently under the cursor (handles the
+  // cursor moving between ticks). No positional jump: it matches the live cam.
+  const [wx, wy] = screenToWorld(mx, my);
+  zoomAnim.mx = mx;
+  zoomAnim.my = my;
+  zoomAnim.wx = wx;
+  zoomAnim.wy = wy;
+
+  if (!zoomAnim.active) {
+    zoomAnim.active = true;
+    requestAnimationFrame(stepWheelZoom);
+  }
 
   requestRender();
   e.preventDefault();

@@ -147,7 +147,6 @@ function drawWithOptions(options = {}) {
 
   const {
     minPxRadius,
-    nodeFadePx,
     labelMinPxRadius,
     maxNodesPerFrame,
     verticalPadPx,
@@ -164,7 +163,6 @@ function drawWithOptions(options = {}) {
     labelFontSizeMin,
     labelFontSizeDivisor,
     labelMinFontPx,
-    labelFadeFontPx,
     labelFontWeight,
     labelFontFamily,
     maxLabels,
@@ -310,17 +308,11 @@ function drawWithOptions(options = {}) {
     const sx = viewW / 2 + (d._vx - camX) * camK;
     const sy = viewH / 2 + (d._vy - camY) * camK;
 
-    // Fade nodes in across a small band above the cull threshold so newly
-    // revealed detail eases in instead of popping as you zoom.
-    const nodeAlpha = nodeFadePx > 0
-      ? Math.min(1, (sr - minPxRadius) / nodeFadePx)
-      : 1;
-
     // Render circle with full detail
     ctx.beginPath();
     ctx.arc(sx, sy, sr, 0, Math.PI * 2);
     setFillStyle(palette[(d.level || 0) % paletteLen]);
-    setGlobalAlpha(nodeAlpha);
+    setGlobalAlpha(1);
     ctx.fill();
     const lineWidth = Math.max(strokeLineWidthMin, Math.min(strokeLineWidthMax, strokeLineWidthBase * Math.sqrt(Math.max(sr / gridTileSize, strokeLineWidthMinRatio))));
     setLineWidth(lineWidth);
@@ -366,11 +358,7 @@ function drawWithOptions(options = {}) {
             x2: sx + textWidth / 2 + pad,
             y2: textY + textHeight / 2 + pad
           };
-          // Fade labels in across a small band above the font-size gate.
-          const labelFade = labelFadeFontPx > 0
-            ? Math.min(1, (fontSize - labelMinFontPx) / labelFadeFontPx)
-            : 1;
-          labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect, alpha: labelAlpha * labelFade });
+          labelCandidates.push({ sx, sy, sr, textY, fontSize, text, rect });
         }
       }
     }
@@ -423,9 +411,9 @@ function drawWithOptions(options = {}) {
       lctx.lineJoin = 'round';
       lctx.miterLimit = 2;
       lctx.fillStyle = labelFillColor;
+      lctx.globalAlpha = labelAlpha;
 
       const drawLabel = (cand) => {
-        lctx.globalAlpha = cand.alpha;
         lctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
         lctx.lineWidth = Math.max(labelStrokeWidthMin, Math.min(labelStrokeWidthMax, cand.fontSize / labelFontSizeDivisor));
         lctx.strokeStyle = cand.fontSize > labelLargeFontThreshold ? labelStrokeColorLarge : labelStrokeColor;
