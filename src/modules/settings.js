@@ -59,7 +59,7 @@ export const perf = {
   },
   // Canvas/device related caps
   canvas: {
-    maxDevicePixelRatio: 1,
+    maxDevicePixelRatio: 2,     // render at up to 2x backing resolution for crisp circles/text on HiDPI displays
     targetFPS: 60,              // Target frames per second (60 FPS  / 60 = 16.66ms frame time)
     adaptiveFrameRate: true,    // Enable adaptive frame rate based on performance
     fpsUpdateIntervalMs: 125,   // Update FPS display every N ms (~8 times per second)
