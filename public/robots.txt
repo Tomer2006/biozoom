@@ -1,0 +1,12 @@
+# robots.txt for InfiniteSpecies — https://infinitespecies.com
+# Allow all crawlers to index the site.
+User-agent: *
+Allow: /
+
+# Don't crawl the raw taxonomy data shards or app assets — these are large
+# machine-readable files (hundreds of MB of JSON), not pages, and have no
+# search value. Blocking them preserves crawl budget for real content.
+Disallow: /data/
+Disallow: /assets/
+
+Sitemap: https://infinitespecies.com/sitemap.xml
