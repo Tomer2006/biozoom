@@ -18,6 +18,11 @@ export default function HelpModal({ language, onClose }: HelpModalProps) {
     { key: translate('help.resetKey', undefined, language), description: translate('help.resetDescription', undefined, language) },
     { key: translate('help.fitKey', undefined, language), description: translate('help.fitDescription', undefined, language) },
     { key: translate('help.toggleKey', undefined, language), description: translate('help.toggleDescription', undefined, language) },
+    { key: translate('help.tapKey', undefined, language), description: translate('help.tapDescription', undefined, language) },
+    { key: translate('help.doubleTapKey', undefined, language), description: translate('help.doubleTapDescription', undefined, language) },
+    { key: translate('help.longPressKey', undefined, language), description: translate('help.longPressDescription', undefined, language) },
+    { key: translate('help.pinchKey', undefined, language), description: translate('help.pinchDescription', undefined, language) },
+    { key: translate('help.dragKey', undefined, language), description: translate('help.dragDescription', undefined, language) },
   ]
 
   return (

@@ -36,6 +36,7 @@ export default function OnboardingModal({ isOpen, language, onClose }: Onboardin
         translate('onboarding.navigatePoint1', undefined, language),
         translate('onboarding.navigatePoint2', undefined, language),
         translate('onboarding.navigatePoint3', undefined, language),
+        translate('onboarding.navigatePoint4', undefined, language),
       ],
     },
     {

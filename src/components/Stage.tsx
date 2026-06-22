@@ -1,9 +1,9 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { state } from '../modules/state'
-import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange } from '../modules/canvas'
+import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange, W, H } from '../modules/canvas'
 import { openProviderSearch } from '../modules/providers'
 import { showBigFor, hideBigPreview as hidePreviewModule } from '../modules/preview'
-import { updateCurrentNodeOnly, fitNodeInView } from '../modules/navigation'
+import { updateCurrentNodeOnly } from '../modules/navigation'
 import {
   handleWheelEvent,
   handleMouseMovePan,
@@ -13,7 +13,7 @@ import {
   validateHoverOnCameraChange,
 } from '../modules/mouse-handler'
 import { pickNodeAt } from '../modules/picking'
-import { handleCameraPan, clampCameraZoom } from '../modules/camera'
+import { handleCameraPan, clampCameraZoom, stopCameraAnimation } from '../modules/camera'
 import { ensureBackendViewport } from '../modules/data-backend'
 import { formatNumber, translate, type AppLanguage } from '../modules/i18n'
 
@@ -54,12 +54,14 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
   const touchStateRef = useRef({
     isPanning: false,
     isZooming: false,
+    multiTouch: false,
     lastTouch: null as { x: number; y: number } | null,
     initialDistance: 0,
     initialZoom: 1,
     initialCenter: null as { x: number; y: number } | null,
     lastTapTime: 0,
     longPressTimer: null as number | null,
+    longPressFired: false,
   })
 
   useEffect(() => {
@@ -266,68 +268,90 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       }
     }
 
+    const clearLongPress = () => {
+      if (touchState.longPressTimer) {
+        clearTimeout(touchState.longPressTimer)
+        touchState.longPressTimer = null
+      }
+    }
+
+    // Drill into a node — the touch equivalent of a desktop left-click: make it
+    // the current node, update the breadcrumbs, and load its viewport data.
+    const drillIntoNode = (node: TaxonomyNode | null) => {
+      if (!node || isLoading) return
+      const current = state.current as TaxonomyNode | null
+      if (current && node._id === current._id) return
+      updateCurrentNodeOnly(node as any)
+      onUpdateBreadcrumbs(node)
+      void ensureBackendViewport({ force: true })
+    }
+
+    // Go up one level — the touch equivalent of a desktop right-click.
+    const goToParent = () => {
+      const current = state.current as TaxonomyNode | null
+      if (!current || !current.parent || isLoading) return
+      updateCurrentNodeOnly(current.parent as any)
+      onUpdateBreadcrumbs(current.parent as any)
+      void ensureBackendViewport({ force: true })
+      hideTooltip()
+      hidePreviewModule()
+      prevHoverIdRef.current = null
+      // Brief dim so the "back" gesture feels responsive.
+      canvas.style.opacity = '0.8'
+      window.setTimeout(() => {
+        canvas.style.opacity = '1'
+      }, 150)
+    }
+
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
-        const touch = e.touches[0]
-        const pos = getTouchPos(touch)
+        const pos = getTouchPos(e.touches[0])
         touchState.lastTouch = pos
         touchState.isPanning = false
+        touchState.longPressFired = false
 
-        if (touchState.longPressTimer) {
-          clearTimeout(touchState.longPressTimer)
-          touchState.longPressTimer = null
-        }
-
+        clearLongPress()
         touchState.longPressTimer = window.setTimeout(() => {
-          const current = state.current as TaxonomyNode | null
-          if (current && current.parent && !isLoading) {
-            ensureBackendViewport({ force: true }).then(() => {
-              updateCurrentNodeOnly(current.parent as any)
-              onUpdateBreadcrumbs(current.parent as any)
-            })
-            canvas.style.opacity = '0.8'
-            setTimeout(() => {
-              canvas.style.opacity = '1'
-            }, 200)
-          }
           touchState.longPressTimer = null
+          touchState.longPressFired = true
+          goToParent()
         }, 500)
 
+        // A single tap acts like desktop hover: select the node and preview it.
         const node = pickNodeAt(pos.x, pos.y)
         state.hoverNode = node
         if (node) {
           updateTooltipAndPreview(node, pos.x, pos.y)
+        } else {
+          hideTooltip()
+          hidePreviewModule()
+          prevHoverIdRef.current = null
         }
-      } else if (e.touches.length === 2) {
+      } else if (e.touches.length >= 2) {
+        touchState.multiTouch = true
         touchState.isZooming = true
         touchState.isPanning = false
         touchState.initialDistance = getDistance(e.touches[0], e.touches[1])
         touchState.initialZoom = state.camera.k
         touchState.initialCenter = getCenter(e.touches[0], e.touches[1])
-
-        if (touchState.longPressTimer) {
-          clearTimeout(touchState.longPressTimer)
-          touchState.longPressTimer = null
-        }
+        clearLongPress()
+        stopCameraAnimation()
+        hideTooltip()
+        hidePreviewModule()
       }
       e.preventDefault()
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length === 1 && touchState.lastTouch) {
-        const touch = e.touches[0]
-        const pos = getTouchPos(touch)
-
-        if (touchState.longPressTimer) {
-          clearTimeout(touchState.longPressTimer)
-          touchState.longPressTimer = null
-        }
+      if (e.touches.length === 1 && touchState.lastTouch && !touchState.isZooming) {
+        const pos = getTouchPos(e.touches[0])
 
         if (!touchState.isPanning) {
           const dx = pos.x - touchState.lastTouch.x
           const dy = pos.y - touchState.lastTouch.y
-          if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+          if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
             touchState.isPanning = true
+            clearLongPress()
             hideTooltip()
             hidePreviewModule()
           }
@@ -339,53 +363,71 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
           handleCameraPan(dx, dy)
           touchState.lastTouch = pos
         }
-      } else if (e.touches.length === 2 && touchState.isZooming) {
+      } else if (e.touches.length >= 2 && touchState.isZooming && touchState.initialDistance > 0) {
         const distance = getDistance(e.touches[0], e.touches[1])
         const scale = distance / touchState.initialDistance
         const newZoom = touchState.initialZoom * scale
+        const center = getCenter(e.touches[0], e.touches[1])
 
-        if (touchState.initialCenter) {
-          const center = getCenter(e.touches[0], e.touches[1])
-          const [wx, wy] = screenToWorld(center.x, center.y)
-
-          state.camera.k = clampCameraZoom(newZoom)
-          state.camera.x = wx - (center.x - canvas.width / 2) / state.camera.k
-          state.camera.y = wy - (center.y - canvas.height / 2) / state.camera.k
-
-          requestRender()
-        }
+        // Keep the world point under the pinch midpoint fixed as the zoom
+        // changes (same anchoring as the wheel zoom in camera.js). Use the
+        // canvas CSS size (W/H), NOT canvas.width/height — those are device
+        // pixels and would be off by devicePixelRatio on phones.
+        const [wx, wy] = screenToWorld(center.x, center.y)
+        const k = clampCameraZoom(newZoom)
+        state.camera.k = k
+        state.camera.x = wx - (center.x - W / 2) / k
+        state.camera.y = wy - (center.y - H / 2) / k
+        requestRender()
       }
       e.preventDefault()
     }
 
+    const resetTouchState = () => {
+      touchState.isPanning = false
+      touchState.isZooming = false
+      touchState.multiTouch = false
+      touchState.lastTouch = null
+      touchState.initialDistance = 0
+      touchState.initialCenter = null
+    }
+
     const handleTouchEnd = (e: TouchEvent) => {
-      if (touchState.longPressTimer) {
-        clearTimeout(touchState.longPressTimer)
-        touchState.longPressTimer = null
+      clearLongPress()
+
+      // The long-press already navigated; don't also treat the finger lift as
+      // a tap.
+      if (touchState.longPressFired) {
+        touchState.longPressFired = false
+        if (e.touches.length === 0) {
+          resetTouchState()
+          touchState.lastTapTime = 0
+        }
+        e.preventDefault()
+        return
       }
 
       if (e.touches.length === 0) {
-        if (!touchState.isPanning && !touchState.isZooming && touchState.lastTouch) {
+        const wasTap = !touchState.isPanning && !touchState.multiTouch && !!touchState.lastTouch
+
+        if (wasTap) {
           const now = Date.now()
-          const timeSinceLastTap = now - touchState.lastTapTime
-
-          if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
-            const targetNode = state.hoverNode || state.current || state.DATA_ROOT
-            if (targetNode) {
-              fitNodeInView(targetNode)
-            }
+          const sinceLastTap = now - touchState.lastTapTime
+          if (sinceLastTap > 0 && sinceLastTap < 300) {
+            // Double tap drills into the tapped node (like a desktop left-click).
+            drillIntoNode(state.hoverNode as TaxonomyNode | null)
+            touchState.lastTapTime = 0
+          } else {
+            touchState.lastTapTime = now
           }
-
-          touchState.lastTapTime = now
         }
 
-        touchState.isPanning = false
-        touchState.isZooming = false
-        touchState.lastTouch = null
-        touchState.initialDistance = 0
-        touchState.initialCenter = null
+        resetTouchState()
       } else if (e.touches.length === 1) {
+        // Lifted one finger of a pinch — resume single-finger panning, but keep
+        // multiTouch set so the final lift isn't mistaken for a tap.
         touchState.isZooming = false
+        touchState.isPanning = false
         touchState.lastTouch = getTouchPos(e.touches[0])
       }
 
@@ -402,9 +444,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       canvas.removeEventListener('touchmove', handleTouchMove)
       canvas.removeEventListener('touchend', handleTouchEnd)
       canvas.removeEventListener('touchcancel', handleTouchEnd)
-      if (touchState.longPressTimer) {
-        clearTimeout(touchState.longPressTimer)
-      }
+      clearLongPress()
     }
   }, [isLoading, onUpdateBreadcrumbs, updateTooltipAndPreview])
 

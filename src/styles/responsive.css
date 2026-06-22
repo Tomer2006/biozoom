@@ -32,9 +32,11 @@
   }
 }
 
-/* Prevent text selection during touch interactions */
+/* The canvas handles all panning/zooming itself via JS (see Stage.tsx), so tell
+   the browser not to claim any touch gestures — otherwise it pans/zooms the page
+   underneath our handlers and the controls feel broken on mobile. */
 #view {
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
