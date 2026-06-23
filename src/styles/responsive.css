@@ -305,14 +305,15 @@
 
   .big-preview {
     position: fixed;
-    top: auto !important;
+    /* Match desktop: anchor top-right (below the breadcrumbs, via the base /
+       JS-computed `top`) so the card never overlaps the bottom-right watermark. */
     right: max(var(--space-md), var(--safe-right));
     left: auto;
-    bottom: max(var(--space-md), var(--safe-bottom));
+    bottom: auto;
     width: 180px;
     max-width: min(40vw, calc(100vw - 2rem));
-    max-height: min(35vh, 18rem);
-    max-height: min(35dvh, 18rem);
+    max-height: min(55vh, 20rem);
+    max-height: min(55dvh, 20rem);
     pointer-events: auto;
   }
 
@@ -370,6 +371,20 @@
     font-size: 0.75rem;
   }
 
+  /* Clamp the path to 2 lines with a trailing ellipsis so it always sits fully
+     inside the card. The explicit max-height pins the box to exactly two text
+     lines (line-height 1.3 × 2 = 2.6em) with no vertical padding, so the clip
+     lands on a line boundary instead of leaving a stray sliver of a third line. */
+  .big-preview-path {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 2.6em;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .help-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -424,14 +439,13 @@
   }
 
   .big-preview {
-    top: auto !important;
     right: max(var(--space-sm), var(--safe-right));
     left: auto;
-    bottom: max(var(--space-sm), var(--safe-bottom));
+    bottom: auto;
     width: 150px;
     max-width: min(35vw, calc(100vw - 1rem));
-    max-height: min(30vh, 12rem);
-    max-height: min(30dvh, 12rem);
+    max-height: min(55vh, 20rem);
+    max-height: min(55dvh, 20rem);
   }
 
   [dir="rtl"] .big-preview {
@@ -635,7 +649,8 @@
     pointer-events: none;
   }
 
-  .big-preview {
-    display: block;
-  }
+  /* NOTE: don't force .big-preview { display: block } here. Visibility is driven
+     by inline styles in preview.js (showBigFor/hideBigPreview). Forcing block
+     would leave the card laid out (opacity:0) at the bottom-right with
+     pointer-events:auto, swallowing taps on the map until the first preview. */
 }
