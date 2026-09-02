@@ -7,20 +7,47 @@
  * millions of taxonomy nodes.
  */
 
-import { getContext, getCircleBuffer, W, H } from './canvas.js';
-import { state } from './state.js';
-import { perf } from './settings.js';
+import { getContext, getCircleBuffer, W, H } from './canvas';
+import { state } from './state';
+import { perf } from './settings';
+import type { Camera, TaxonomyNode } from './types'
+
+interface TextMeasurement { width: number }
+interface VisibilityState { opacity: number; target: number; updatedAt: number; seen: boolean }
+interface CircleFadeState extends VisibilityState { node: TaxonomyNode }
+interface Rect { x1: number; y1: number; x2: number; y2: number }
+interface LabelCandidate {
+  node: TaxonomyNode
+  sx: number
+  sy: number
+  sr: number
+  textY: number
+  fontSize: number
+  text: string
+  rect: Rect
+}
+interface LabelFadeState extends VisibilityState { candidate: LabelCandidate }
+interface GridSettings { tileSize: number; color: string; alpha: number; lineWidth: number }
+interface DrawOptions {
+  ctx?: CanvasRenderingContext2D
+  width?: number
+  height?: number
+  camera?: Camera
+  renderingOverrides?: Partial<typeof perf.rendering>
+  disableCulling?: boolean
+  renderAllLabels?: boolean
+}
 
 // Optimized text measurement cache with size limits and hit tracking
-const measureCache = new Map();
+const measureCache = new Map<string, TextMeasurement>();
 const MAX_CACHE_SIZE = perf.memory.maxTextCacheSize;
 const CACHE_CLEANUP_THRESHOLD = perf.memory.cacheCleanupThreshold;
-const labelCandidates = [];
-const circleFadeStates = new Map();
-const labelFadeStates = new Map();
+const labelCandidates: LabelCandidate[] = [];
+const circleFadeStates = new Map<number, CircleFadeState>();
+const labelFadeStates = new Map<number, LabelFadeState>();
 const FADE_EPSILON = 0.001;
 
-function stepVisibility(entry, target, now, durationMs) {
+function stepVisibility(entry: VisibilityState, target: number, now: number, durationMs: number) {
   const elapsed = Math.max(0, now - entry.updatedAt);
   const step = durationMs > 0 ? elapsed / durationMs : 1;
   entry.opacity = target > entry.opacity
@@ -31,13 +58,13 @@ function stepVisibility(entry, target, now, durationMs) {
   return entry.opacity;
 }
 
-function touchMeasureCacheEntry(key, metrics) {
+function touchMeasureCacheEntry(key: string, metrics: TextMeasurement) {
   // Refresh insertion order so the oldest entry remains the least recently used.
   measureCache.delete(key);
   measureCache.set(key, metrics);
 }
 
-function evictMeasureCacheEntries(targetSize) {
+function evictMeasureCacheEntries(targetSize: number) {
   while (measureCache.size > targetSize) {
     const oldestKey = measureCache.keys().next().value;
     if (oldestKey === undefined) break;
@@ -45,7 +72,7 @@ function evictMeasureCacheEntries(targetSize) {
   }
 }
 
-function getCachedTextMetrics(ctx, key, text, font) {
+function getCachedTextMetrics(ctx: CanvasRenderingContext2D, key: string, text: string, font: string): TextMeasurement {
   const cached = measureCache.get(key);
   if (cached) {
     touchMeasureCacheEntry(key, cached);
@@ -82,9 +109,9 @@ function performMemoryCleanup() {
 }
 
 // Cached grid pattern for the background
-let gridPattern = null;
-let cachedGridSettings = null;
-function getGridPattern(ctx) {
+let gridPattern: CanvasPattern | null = null;
+let cachedGridSettings: GridSettings | null = null;
+function getGridPattern(ctx: CanvasRenderingContext2D): CanvasPattern | null {
   // Check if grid settings changed - if so, regenerate pattern
   const p = perf.rendering;
   if (gridPattern && cachedGridSettings &&
@@ -101,6 +128,7 @@ function getGridPattern(ctx) {
   tile.width = tileSize;
   tile.height = tileSize;
   const tctx = tile.getContext('2d');
+  if (!tctx) return null
   tctx.strokeStyle = perf.rendering.gridColor;
   tctx.globalAlpha = perf.rendering.gridAlpha;
   tctx.lineWidth = perf.rendering.gridLineWidth;
@@ -122,11 +150,11 @@ function getGridPattern(ctx) {
   return gridPattern;
 }
 
-export function draw(options = {}) {
+export function draw(options: DrawOptions = {}) {
   return drawWithOptions(options);
 }
 
-function drawWithOptions(options = {}) {
+function drawWithOptions(options: DrawOptions = {}): boolean | void {
   const {
     ctx: ctxOverride,
     width,
@@ -165,8 +193,6 @@ function drawWithOptions(options = {}) {
     maxNodesPerFrame,
     verticalPadPx,
     gridTileSize,
-    strokeColorWithChildren,
-    strokeColorLeaf,
     strokeLineWidthMin,
     strokeLineWidthMax,
     strokeLineWidthBase,
@@ -195,7 +221,7 @@ function drawWithOptions(options = {}) {
   } = rendering;
 
   // Calculate current node's level for depth-based rendering
-  const currentLevel = state.current ? (state.current.level || 0) : 0;
+  const currentLevel = typeof state.current?.level === 'number' ? state.current.level : 0;
 
   // Node colors: read the palette once per frame (cheap and preset-safe).
   const palette = perf.colors.palette;
@@ -204,7 +230,7 @@ function drawWithOptions(options = {}) {
   // Collect the nodes actually drawn this frame so picking can scan only the
   // visible set instead of the whole tree. Only for the main on-screen render.
   const collectPickList = !ctxOverride;
-  const visibleNodes = collectPickList ? [] : null;
+  const visibleNodes: TaxonomyNode[] | null = collectPickList ? [] : null;
   const fadeDurationMs = Math.max(0, Number(perf.animation.visibilityFadeMs) || 0);
   const fadesEnabled = !ctxOverride && fadeDurationMs > 0;
   const transitionNow = fadesEnabled ? performance.now() : 0;
@@ -227,34 +253,34 @@ function drawWithOptions(options = {}) {
   ctx.globalAlpha = 1;
 
   // Batch rendering operations to minimize state changes
-  let currentFillStyle = null;
-  let currentStrokeStyle = null;
-  let currentLineWidth = null;
+  let currentFillStyle: string | CanvasGradient | CanvasPattern | null = null;
+  let currentStrokeStyle: string | CanvasGradient | CanvasPattern | null = null;
+  let currentLineWidth: number | null = null;
   let currentGlobalAlpha = 1;
 
   // Optimized canvas state management
-  const setFillStyle = (style) => {
+  const setFillStyle = (style: string | CanvasGradient | CanvasPattern) => {
     if (currentFillStyle !== style) {
       ctx.fillStyle = style;
       currentFillStyle = style;
     }
   };
 
-  const setStrokeStyle = (style) => {
+  const setStrokeStyle = (style: string | CanvasGradient | CanvasPattern) => {
     if (currentStrokeStyle !== style) {
       ctx.strokeStyle = style;
       currentStrokeStyle = style;
     }
   };
 
-  const setLineWidth = (width) => {
+  const setLineWidth = (width: number) => {
     if (currentLineWidth !== width) {
       ctx.lineWidth = width;
       currentLineWidth = width;
     }
   };
 
-  const setGlobalAlpha = (alpha) => {
+  const setGlobalAlpha = (alpha: number) => {
     if (currentGlobalAlpha !== alpha) {
       ctx.globalAlpha = alpha;
       currentGlobalAlpha = alpha;
@@ -268,7 +294,7 @@ function drawWithOptions(options = {}) {
     const offX = Math.floor((viewW / 2 - camX * camK) % gridTileSize);
     const offY = Math.floor((viewH / 2 - camY * camK) % gridTileSize);
     ctx.translate(offX, offY);
-    ctx.fillStyle = pat;
+    if (pat) ctx.fillStyle = pat;
     ctx.fillRect(-offX, -offY, viewW + gridTileSize, viewH + gridTileSize);
     ctx.restore();
   }
@@ -288,7 +314,7 @@ function drawWithOptions(options = {}) {
   const maxY = camY + halfH + padWorld;
 
   // Optimized viewport culling using pre-computed bounds
-  const isInViewport = (cx, cy, r) => {
+  const isInViewport = (cx: number, cy: number, r: number) => {
     // Fast AABB (Axis-Aligned Bounding Box) check first
     const left = cx - r;
     const right = cx + r;
@@ -308,7 +334,7 @@ function drawWithOptions(options = {}) {
     return dx * dx + dy * dy <= r * r;
   };
 
-  const drawCircle = (d, opacity) => {
+  const drawCircle = (d: TaxonomyNode, opacity: number) => {
     if (opacity <= FADE_EPSILON) return;
 
     const sr = d._vr * camK;
@@ -317,7 +343,8 @@ function drawWithOptions(options = {}) {
 
     ctx.beginPath();
     ctx.arc(sx, sy, sr, 0, Math.PI * 2);
-    setFillStyle(palette[(d.level || 0) % paletteLen]);
+    const numericLevel = typeof d.level === 'number' ? d.level : 0
+    setFillStyle(palette[numericLevel % paletteLen]);
     setGlobalAlpha(opacity);
     ctx.fill();
     const lineWidth = Math.max(strokeLineWidthMin, Math.min(strokeLineWidthMax, strokeLineWidthBase * Math.sqrt(Math.max(sr / gridTileSize, strokeLineWidthMinRatio))));
@@ -326,7 +353,7 @@ function drawWithOptions(options = {}) {
     ctx.stroke();
   };
 
-  function visit(d) {
+  function visit(d: TaxonomyNode) {
     if (drawn >= maxNodes) return;
     
     // Optimized viewport culling
@@ -337,7 +364,7 @@ function drawWithOptions(options = {}) {
     
     // Depth-based render distance culling
     if (depthRenderEnabled) {
-      const nodeLevel = d.level || 0;
+      const nodeLevel = typeof d.level === 'number' ? d.level : 0;
       const depthFromCurrent = nodeLevel - currentLevel;
       if (depthFromCurrent > 0) {
         // Calculate max render distance for this depth
@@ -376,11 +403,7 @@ function drawWithOptions(options = {}) {
     if (sr > labelMinPxRadius) {
       const text = d.name;
       const fontSize = Math.min(labelFontSizeMax, Math.max(labelFontSizeMin, sr / labelFontSizeDivisor));
-      let textWidth, textHeight, pad;
-      let shouldRenderLabel = false;
-
       if (fontSize >= labelMinFontPx) {
-        shouldRenderLabel = true;
         const key = fontSize + '|' + text;
         const metrics = getCachedTextMetrics(
           ctx,
@@ -388,12 +411,9 @@ function drawWithOptions(options = {}) {
           text,
           `${labelFontWeight} ${fontSize}px ${labelFontFamily}`
         );
-        textWidth = metrics.width;
-        textHeight = fontSize;
-        pad = 2;
-      }
-      
-      if (shouldRenderLabel) {
+        const textWidth = metrics.width;
+        const textHeight = fontSize;
+        const pad = 2;
         const availableSpace = (d._labelTopSpaceWorld ?? (d._vr * 2)) * camK;
 
         // Only show label if there's enough space for text (need text height + padding)
@@ -444,7 +464,7 @@ function drawWithOptions(options = {}) {
   }
 
   // Publish the drawn set for picking (deepest/last-drawn is topmost).
-  if (collectPickList) state.visibleNodes = visibleNodes;
+  if (collectPickList && visibleNodes) state.visibleNodes = visibleNodes;
 
   // Composite the low-res circle layer onto the full-resolution main canvas.
   // The opaque blit also overwrites last frame's labels, so no separate clear.
@@ -455,7 +475,7 @@ function drawWithOptions(options = {}) {
     lctx.drawImage(circleBuffer.canvas, 0, 0, viewW, viewH);
   }
 
-  const placedLabels = [];
+  const placedLabels: LabelCandidate[] = [];
 
   // Optimized label placement with early rejection and reduced computation
   if (labelCandidates.length) {
@@ -481,12 +501,12 @@ function drawWithOptions(options = {}) {
       if (renderAllLabels) {
         placedLabels.push(...capped);
       } else {
-        const grid = new Map();
+        const grid = new Map<number, Rect[]>();
         const cell = labelGridCellPx;
 
         // Pre-compute integer cell keys to avoid per-label string allocation.
-        const cellsForRect = r => {
-          const cells = [];
+        const cellsForRect = (r: Rect) => {
+          const cells: number[] = [];
           const x1 = Math.floor(r.x1 / cell);
           const y1 = Math.floor(r.y1 / cell);
           const x2 = Math.floor(r.x2 / cell);
@@ -499,7 +519,7 @@ function drawWithOptions(options = {}) {
           return cells;
         };
 
-        const overlaps = (a, b) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
+        const overlaps = (a: Rect, b: Rect) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
 
         // Early rejection: check against already-placed labels via the spatial grid.
         for (const cand of capped) {
@@ -536,7 +556,7 @@ function drawWithOptions(options = {}) {
     }
   }
 
-  const drawLabel = (cand, opacity) => {
+  const drawLabel = (cand: LabelCandidate, opacity: number) => {
     if (opacity <= FADE_EPSILON) return;
     lctx.globalAlpha = labelAlpha * opacity;
     lctx.font = `${labelFontWeight} ${cand.fontSize}px ${labelFontFamily}`;
@@ -551,8 +571,8 @@ function drawWithOptions(options = {}) {
     return false;
   }
 
-  const fadingOutLabels = [];
-  const currentLabels = [];
+  const fadingOutLabels: Array<{ candidate: LabelCandidate; opacity: number }> = [];
+  const currentLabels: Array<{ candidate: LabelCandidate; opacity: number }> = [];
 
   for (const cand of placedLabels) {
     const id = cand.node._id;

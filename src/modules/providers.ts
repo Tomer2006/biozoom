@@ -6,9 +6,12 @@
  * Handles provider selection UI and generates appropriate search URLs.
  */
 
-import { perf } from './settings.js';
+import { perf } from './settings';
+import type { TaxonomyNode } from './types'
 
-function providerUrl(provider, name) {
+type ProviderId = keyof typeof perf.search.providers
+
+function providerUrl(provider: ProviderId, name: string) {
   const q = encodeURIComponent(name);
   switch (provider) {
     case 'google':
@@ -28,16 +31,16 @@ function providerUrl(provider, name) {
   }
 }
 
-function getCurrentProvider() {
+function getCurrentProvider(): ProviderId {
   // First check localStorage, then fall back to settings
   const saved = localStorage.getItem('infinitespecies_searchProvider');
-  if (saved && perf.search.providers[saved]) {
-    return saved;
+  if (saved && saved in perf.search.providers) {
+    return saved as ProviderId;
   }
-  return perf.search.currentProvider || 'google';
+  return (perf.search.currentProvider as ProviderId) || 'google';
 }
 
-export function openProviderSearch(forNode) {
+export function openProviderSearch(forNode: TaxonomyNode | null) {
   if (!forNode) return;
   const provider = getCurrentProvider();
   const url = providerUrl(provider, forNode.name);

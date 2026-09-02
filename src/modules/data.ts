@@ -7,6 +7,6 @@
  */
 
 // Eager loading functions
-export { loadEager } from './data-eager.js';
+export { loadEager } from './data-eager';
 
 

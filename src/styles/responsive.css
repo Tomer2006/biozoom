@@ -650,7 +650,7 @@
   }
 
   /* NOTE: don't force .big-preview { display: block } here. Visibility is driven
-     by inline styles in preview.js (showBigFor/hideBigPreview). Forcing block
+     by React's BigPreview component. Forcing block
      would leave the card laid out (opacity:0) at the bottom-right with
      pointer-events:auto, swallowing taps on the map until the first preview. */
 }

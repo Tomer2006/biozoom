@@ -1,17 +1,18 @@
 import { motion } from 'framer-motion'
 import { translate, type AppLanguage } from '../modules/i18n'
+import type { TaxonomyNode } from '../modules/types'
 
 interface Crumb {
   id: number
   name: string
-  node: any
+  node: TaxonomyNode
 }
 
 interface BreadcrumbsProps {
   language: AppLanguage
   crumbs: Crumb[]
-  onCrumbClick: (node: any) => void
-  onRandomClick: (node: any) => void
+  onCrumbClick: (node: TaxonomyNode) => void
+  onRandomClick: (node: TaxonomyNode) => void
 }
 
 export default function Breadcrumbs({ language, crumbs, onCrumbClick, onRandomClick }: BreadcrumbsProps) {
@@ -31,6 +32,7 @@ export default function Breadcrumbs({ language, crumbs, onCrumbClick, onRandomCl
           {index > 0 && <span className="crumb-separator">{separator}</span>}
           <button
             className="crumb"
+            type="button"
             onClick={() => onCrumbClick(crumb.node)}
             title={translate('breadcrumbs.navigateTo', { name: crumb.name }, language)}
           >
@@ -50,6 +52,7 @@ export default function Breadcrumbs({ language, crumbs, onCrumbClick, onRandomCl
           <span className="crumb-separator">{separator}</span>
           <button
             className="crumb crumb-random"
+            type="button"
             onClick={() => onRandomClick(lastCrumb.node)}
             title={translate('breadcrumbs.randomJump', { name: lastCrumb.name }, language)}
             aria-label={translate('breadcrumbs.randomJump', { name: lastCrumb.name }, language)}

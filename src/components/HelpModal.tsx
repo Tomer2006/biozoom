@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { translate, type AppLanguage } from '../modules/i18n'
+import { useModalFocus } from '../hooks/useModalFocus'
 
 interface HelpModalProps {
   language: AppLanguage
@@ -7,6 +8,7 @@ interface HelpModalProps {
 }
 
 export default function HelpModal({ language, onClose }: HelpModalProps) {
+  const initialFocusRef = useModalFocus(true)
   const controls = [
     { key: translate('help.leftClickKey', undefined, language), description: translate('help.leftClickDescription', undefined, language) },
     { key: translate('help.rightClickKey', undefined, language), description: translate('help.rightClickDescription', undefined, language) },
@@ -36,6 +38,9 @@ export default function HelpModal({ language, onClose }: HelpModalProps) {
     >
       <motion.div
         className="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="help-dialog-title"
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -43,8 +48,8 @@ export default function HelpModal({ language, onClose }: HelpModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-header">
-          <h2>{translate('help.title', undefined, language)}</h2>
-          <button className="modal-close" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
+          <h2 id="help-dialog-title">{translate('help.title', undefined, language)}</h2>
+          <button ref={initialFocusRef} className="modal-close" type="button" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>

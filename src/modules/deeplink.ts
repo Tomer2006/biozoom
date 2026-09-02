@@ -6,12 +6,13 @@
  * nodes when URLs contain deep links.
  */
 
-import { state } from './state.js';
-import { logWarn, logDebug } from './logger.js';
+import { state } from './state';
+import { logWarn, logDebug } from './logger';
+import type { TaxonomyNode } from './types'
 
-export function getNodePath(node) {
-  const names = [];
-  let p = node;
+export function getNodePath(node: TaxonomyNode): string[] {
+  const names: string[] = [];
+  let p: TaxonomyNode | null = node;
   while (p) {
     names.unshift(String(p.name));
     p = p.parent;
@@ -19,11 +20,11 @@ export function getNodePath(node) {
   return names;
 }
 
-function encodePath(pathStr) {
+function encodePath(pathStr: string) {
   return encodeURIComponent(pathStr);
 }
 
-export function decodePath(hash) {
+export function decodePath(hash: string) {
   try {
     return decodeURIComponent(hash || '');
   } catch (_e) {
@@ -31,7 +32,7 @@ export function decodePath(hash) {
   }
 }
 
-export function updateDeepLinkFromNode(node) {
+export function updateDeepLinkFromNode(node: TaxonomyNode) {
   const path = getNodePath(node).join('/');
   const newHash = path ? `#${encodePath(path)}` : '';
   if (location.hash !== newHash) {
@@ -39,7 +40,7 @@ export function updateDeepLinkFromNode(node) {
   }
 }
 
-export async function findNodeByPath(pathStr) {
+export async function findNodeByPath(pathStr: string): Promise<TaxonomyNode | null> {
   const parts = pathStr.split('/').filter(Boolean);
   
   // Handle empty path or missing DATA_ROOT

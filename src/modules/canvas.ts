@@ -6,40 +6,36 @@
  * transformation utilities between world and screen space.
  */
 
-import { getCanvas, getStage } from './dom.js';
-import { buildOverlayText, initRuntimeMetrics } from './metrics.js';
-import { state } from './state.js';
-import { perf } from './settings.js';
-import { logDebug } from './logger.js';
+import { buildOverlayText, initRuntimeMetrics } from './metrics';
+import { state } from './state';
+import { perf } from './settings';
+import { logDebug } from './logger';
 
-let ctx;
+let canvasElement: HTMLCanvasElement | null = null
+let stageElement: HTMLElement | null = null
+let ctx: CanvasRenderingContext2D | null = null;
 let W = 0;
 let H = 0;
 let DPR = 1;
 
 // Low-resolution offscreen layer for circles (flat fills don't need full DPR).
 // Composited onto the main canvas each frame; see getCircleBuffer().
-let circleCanvas = null;
-let circleCtx = null;
+let circleCanvas: HTMLCanvasElement | null = null;
+let circleCtx: CanvasRenderingContext2D | null = null;
 let circleDPR = 1;
 
 let needRender = true;
-let rafId = null;
-let drawCallback = null;
+let rafId: number | null = null;
+let drawCallback: (() => boolean | void) | null = null;
 let forceNextDraw = false;
-const onCameraChangeCallbacks = new Set();  // Callbacks when camera changes
+const onCameraChangeCallbacks = new Set<() => void>();
 let frameCounter = 0;
 let lastFpsUpdate = 0;
 let framesSinceFps = 0;
 let lastCam = { x: 0, y: 0, k: 1 };
 
-// Cache the FPS overlay element instead of querying the DOM every frame.
-let fpsElCached = null;
-function getFpsEl() {
-  if (fpsElCached && fpsElCached.isConnected) return fpsElCached;
-  fpsElCached = document.getElementById('fps');
-  return fpsElCached;
-}
+let latestOverlayText = ''
+const overlayListeners = new Set<(text: string) => void>()
 
 // Frame rate limiting
 let lastRenderTime = 0;
@@ -50,21 +46,37 @@ export function getContext() {
   return ctx;
 }
 
+export function attachCanvas(canvas: HTMLCanvasElement, stage: HTMLElement) {
+  canvasElement = canvas
+  stageElement = stage
+  resizeCanvas()
+}
+
+export function detachCanvas(canvas: HTMLCanvasElement) {
+  if (canvasElement !== canvas) return
+  canvasElement = null
+  stageElement = null
+  ctx = null
+}
+
+export function subscribeMetrics(listener: (text: string) => void) {
+  overlayListeners.add(listener)
+  listener(latestOverlayText)
+  return () => { overlayListeners.delete(listener) }
+}
+
 // Offscreen low-DPR layer for drawing circles, or null when a separate layer
 // would not be cheaper than the main canvas (e.g. on 1x displays).
 export function getCircleBuffer() {
-  if (!circleCtx || circleDPR >= DPR) return null;
+  if (!circleCanvas || !circleCtx || circleDPR >= DPR) return null;
   return { canvas: circleCanvas, ctx: circleCtx };
 }
 
 export function resizeCanvas() {
-  const stage = getStage();
-  const canvas = getCanvas();
+  const stage = stageElement;
+  const canvas = canvasElement;
   
   if (!stage || !canvas) {
-    // Retry after a short delay if elements aren't ready
-    console.log('[Canvas] Waiting for stage/canvas elements...');
-    setTimeout(resizeCanvas, 100);
     return;
   }
   
@@ -72,8 +84,6 @@ export function resizeCanvas() {
   
   // Ensure we have valid dimensions
   if (bb.width === 0 || bb.height === 0) {
-    console.log('[Canvas] Stage has no dimensions yet, retrying...');
-    setTimeout(resizeCanvas, 100);
     return;
   }
   
@@ -150,11 +160,12 @@ function loop() {
   const layoutChanged = state.layoutChanged;
 
   // Render for scene changes or for a time-based transition's next frame.
-  const shouldRender = drawCallback && (!sameCam || layoutChanged || forceNextDraw);
+  const callback = drawCallback
+  const shouldRender = callback && (!sameCam || layoutChanged || forceNextDraw);
 
   if (shouldRender) {
     forceNextDraw = false;
-    const hasActiveTransitions = drawCallback() === true;
+    const hasActiveTransitions = callback() === true;
     lastCam = { x: cam.x, y: cam.y, k: cam.k };
     state.layoutChanged = false;
 
@@ -175,12 +186,10 @@ function loop() {
   // Update FPS display
   framesSinceFps++;
   if (now - lastFpsUpdate >= perf.canvas.fpsUpdateIntervalMs) {
-    const fpsEl = getFpsEl();
-    if (fpsEl) {
-      const sec = (now - lastFpsUpdate) / 1000;
-      const fps = framesSinceFps / sec;
-      fpsEl.textContent = buildOverlayText(fps);
-    }
+    const sec = (now - lastFpsUpdate) / 1000;
+    const fps = framesSinceFps / sec;
+    latestOverlayText = buildOverlayText(fps);
+    overlayListeners.forEach((listener) => listener(latestOverlayText));
     lastFpsUpdate = now;
     framesSinceFps = 0;
   }
@@ -190,40 +199,35 @@ function loop() {
   if (needRender) ensureRAF();
 }
 
-export function registerDrawCallback(cb) {
+export function registerDrawCallback(cb: () => boolean | void) {
   drawCallback = cb;
   forceNextDraw = true;
 }
 
-export function onCameraChange(cb) {
+export function onCameraChange(cb: (() => void) | null | undefined) {
   if (!cb) return () => {};
   onCameraChangeCallbacks.add(cb);
-  return () => onCameraChangeCallbacks.delete(cb);
+  return () => { onCameraChangeCallbacks.delete(cb) };
 }
-
-window.addEventListener('resize', () => {
-  resizeCanvas();
-  requestRender();
-});
 
 // Initialize runtime metrics
 try { initRuntimeMetrics(); } catch (_) {}
 
-export function worldToScreen(x, y) {
+export function worldToScreen(x: number, y: number): [number, number] {
   return [
     W / 2 + (x - state.camera.x) * state.camera.k,
     H / 2 + (y - state.camera.y) * state.camera.k
   ];
 }
 
-export function screenToWorld(px, py) {
+export function screenToWorld(px: number, py: number): [number, number] {
   return [
     state.camera.x + (px - W / 2) / state.camera.k,
     state.camera.y + (py - H / 2) / state.camera.k
   ];
 }
 
-export function viewportRadius(renderDistance) {
+export function viewportRadius(renderDistance: number) {
   return (Math.hypot(W, H) * perf.canvas.viewportRadiusMultiplier) / state.camera.k * renderDistance;
 }
 

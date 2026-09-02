@@ -5,13 +5,35 @@
  * Uses pre-calculated layouts for optimal performance (no runtime D3 dependency).
  */
 
-import { state, rebuildNodeMap } from './state.js';
-import { computeFetchConcurrency, perf } from './settings.js';
-import { logInfo, logWarn, logError, logDebug } from './logger.js';
-import { setProgress } from './loading.js';
-import { updateNavigation } from './navigation.js';
-import { decodePath, findNodeByPath } from './deeplink.js';
+import { state, rebuildNodeMap, setTaxonomyData } from './state';
+import { computeFetchConcurrency, perf } from './settings';
+import { logInfo, logWarn, logError, logDebug } from './logger';
+import { setProgress } from './loading';
+import { updateNavigation } from './navigation';
+import { decodePath, findNodeByPath } from './deeplink';
 import { formatNumber, translate } from './i18n.ts';
+import type { TaxonomyNode } from './types'
+
+interface BakedFileInfo { filename: string }
+interface BakedManifest {
+  version: string | number
+  files: BakedFileInfo[]
+  layout_size: number
+  total_nodes: number
+  format?: string
+}
+type CompactBakedRow = [number | null, string, number | string, number, number, number]
+interface ObjectBakedRow {
+  id: number
+  parent_id: number | null
+  name: string
+  level: number | string
+  x: number
+  y: number
+  r: number
+}
+type BakedRow = CompactBakedRow | ObjectBakedRow
+interface FileResult { index: number; chunk: BakedRow[]; fileInfo: BakedFileInfo }
 
 const maxRetries = perf.loading.maxRetries;
 const retryBaseDelayMs = perf.loading.retryBaseDelayMs;
@@ -21,7 +43,7 @@ const retryBaseDelayMs = perf.loading.retryBaseDelayMs;
 // ============================================================================
 
 // Eager loading: loads everything at once (using pre-baked layout data)
-export async function loadEager(url) {
+export async function loadEager(url: string): Promise<TaxonomyNode> {
   if (!url) throw new Error('No URL provided');
 
   state.loadMode = 'eager';
@@ -39,7 +61,7 @@ export async function loadEager(url) {
     throw new Error(`Failed to fetch baked manifest at ${bakedManifestUrl} (${bakedManifestRes.status}). Run "node tools/bake-layout.js" to generate baked data.`);
   }
 
-  const bakedManifest = await bakedManifestRes.json();
+  const bakedManifest = await bakedManifestRes.json() as BakedManifest;
 
   if (!bakedManifest.version || !bakedManifest.files || !bakedManifest.layout_size) {
     throw new Error('Invalid baked manifest: missing required fields (version, files, layout_size)');
@@ -60,7 +82,7 @@ export async function loadEager(url) {
  * @param {string} baseUrl - Base URL for data files
  * @param {Object} manifest - Baked manifest with file list
  */
-async function loadFromBakedFiles(baseUrl, manifest) {
+async function loadFromBakedFiles(baseUrl: string, manifest: BakedManifest): Promise<TaxonomyNode> {
   const startTime = performance.now();
 
   const totalFiles = manifest.files.length;
@@ -74,9 +96,9 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   const concurrency = Math.max(computeFetchConcurrency(), 8);
   let completed = 0;
   let failed = 0;
-  const results = new Array(manifest.files.length);
+  const results: Array<FileResult | undefined> = new Array(manifest.files.length);
 
-  const loadFileWithRetry = async (fileInfo, index, retryCount = 0) => {
+  const loadFileWithRetry = async (fileInfo: BakedFileInfo, index: number, retryCount = 0): Promise<boolean> => {
     const fileUrl = baseUrl + fileInfo.filename;
 
     try {
@@ -93,7 +115,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
         throw new Error(`Failed to fetch ${fileUrl} (${res.status})`);
       }
 
-      const chunk = await res.json();
+      const chunk = await res.json() as BakedRow[];
       results[index] = { index, chunk, fileInfo };
       completed++;
 
@@ -110,7 +132,8 @@ async function loadFromBakedFiles(baseUrl, manifest) {
     } catch (err) {
       if (retryCount < maxRetries) {
         const delay = Math.pow(2, retryCount) * retryBaseDelayMs;
-        logWarn(`Retrying ${fileUrl} after error: ${err.message}`);
+        const message = err instanceof Error ? err.message : String(err)
+        logWarn(`Retrying ${fileUrl} after error: ${message}`);
         await new Promise(resolve => setTimeout(resolve, delay));
         return loadFileWithRetry(fileInfo, index, retryCount + 1);
       } else {
@@ -123,7 +146,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
 
   // Parallel loading
   let resolved = false;
-  await new Promise((resolve) => {
+  await new Promise<void>((resolve) => {
     let inFlight = 0;
     let nextIndex = 0;
 
@@ -150,7 +173,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
     startNext();
   });
 
-  const validResults = results.filter(r => r !== undefined);
+  const validResults = results.filter((result): result is FileResult => result !== undefined);
 
   if (validResults.length === 0) {
     throw new Error(`Failed to load any baked files (${totalFiles} files attempted, ${failed} failed)`);
@@ -174,7 +197,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   }
 
   // Pre-allocate and copy (avoids stack overflow from spread operator with millions of elements)
-  const flatNodes = new Array(totalSize);
+  const flatNodes: BakedRow[] = new Array(totalSize);
   let offset = 0;
   for (const { chunk } of validResults) {
     if (Array.isArray(chunk)) {
@@ -190,7 +213,6 @@ async function loadFromBakedFiles(baseUrl, manifest) {
   const root = rehydrateTree(flatNodes, manifest.format);
 
   // Set state
-  state.DATA_ROOT = root;
   state.useBakedLayout = true;
 
   // The renderer and picking operate directly on the data nodes (which already
@@ -200,8 +222,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
     diameter: manifest.layout_size || 4000
   };
 
-  state.layout = layout;
-  state.rootLayout = layout;
+  setTaxonomyData(root, layout, 'eager')
 
   // Build node map for navigation
   rebuildNodeMap();
@@ -218,10 +239,10 @@ async function loadFromBakedFiles(baseUrl, manifest) {
         updateNavigation(node, false);
       } else {
         logWarn(`Deep link path not found: "${decoded}", falling back to root`);
-        updateNavigation(state.DATA_ROOT, false);
+        updateNavigation(root, false);
       }
     } else {
-      updateNavigation(state.DATA_ROOT, false);
+      updateNavigation(root, false);
     }
   } catch (err) {
     logError('Error during baked data deep link handling; falling back to root', err);
@@ -232,6 +253,7 @@ async function loadFromBakedFiles(baseUrl, manifest) {
 
   setProgress(1, translate('data.loadedNodesWithLayout', { count: formatNumber(flatNodes.length) }), 1, 1);
   logInfo(`Baked layout loaded: ${flatNodes.length} nodes in ${(performance.now() - startTime).toFixed(0)}ms`);
+  return root
 }
 
 /**
@@ -242,7 +264,32 @@ async function loadFromBakedFiles(baseUrl, manifest) {
  * @param {string} format - Manifest data format
  * @returns {Object} - Root node with children arrays and layout coordinates
  */
-function rehydrateTree(flatNodes, format) {
+function readBakedRow(row: BakedRow, index: number, compact: boolean) {
+  if (compact) {
+    const compactRow = row as CompactBakedRow
+    return {
+      id: index + 1,
+      parentId: compactRow[0],
+      name: compactRow[1],
+      level: compactRow[2],
+      x: compactRow[3],
+      y: compactRow[4],
+      r: compactRow[5],
+    }
+  }
+  const objectRow = row as ObjectBakedRow
+  return {
+    id: objectRow.id,
+    parentId: objectRow.parent_id,
+    name: objectRow.name,
+    level: objectRow.level,
+    x: objectRow.x,
+    y: objectRow.y,
+    r: objectRow.r,
+  }
+}
+
+function rehydrateTree(flatNodes: BakedRow[], format?: string): TaxonomyNode {
   if (!flatNodes || flatNodes.length === 0) {
     throw new Error('Cannot rehydrate empty node array');
   }
@@ -252,23 +299,25 @@ function rehydrateTree(flatNodes, format) {
   const compactRows = format === 'compact-rows-v1';
 
   // Pre-allocate node lookup by ID (array-based for speed, assuming IDs are sequential)
-  const maxId = compactRows ? nodeCount : flatNodes.reduce((max, n) => Math.max(max, n.id), 0);
-  const nodeById = new Array(maxId + 1);
+  const maxId = compactRows
+    ? nodeCount
+    : flatNodes.reduce((max, row, index) => Math.max(max, readBakedRow(row, index, false).id), 0);
+  const nodeById: Array<TaxonomyNode | undefined> = new Array(maxId + 1);
 
   // First pass: create all nodes with their properties
   for (let i = 0; i < nodeCount; i++) {
-    const fn = flatNodes[i];
-    const id = compactRows ? i + 1 : fn.id;
+    const data = readBakedRow(flatNodes[i], i, compactRows)
+    const id = data.id;
 
-    const node = {
-      name: compactRows ? fn[1] : fn.name,
-      level: compactRows ? fn[2] : fn.level,
+    const node: TaxonomyNode = {
+      name: data.name,
+      level: data.level,
       children: [],
       parent: null,
       _id: id,
-      _vx: compactRows ? fn[3] : fn.x,
-      _vy: compactRows ? fn[4] : fn.y,
-      _vr: compactRows ? fn[5] : fn.r,
+      _vx: data.x,
+      _vy: data.y,
+      _vr: data.r,
       _leaves: 0 // Will be computed in second pass
     };
 
@@ -285,14 +334,15 @@ function rehydrateTree(flatNodes, format) {
   }
 
   // Find root (parent_id === null)
-  let root = null;
+  let root: TaxonomyNode | null = null;
 
   // Second pass: link parents and children
   for (let i = 0; i < nodeCount; i++) {
-    const fn = flatNodes[i];
-    const id = compactRows ? i + 1 : fn.id;
-    const parentId = compactRows ? fn[0] : fn.parent_id;
+    const data = readBakedRow(flatNodes[i], i, compactRows)
+    const id = data.id;
+    const parentId = data.parentId;
     const node = nodeById[id];
+    if (!node) throw new Error(`Missing baked node ${id}`)
 
     if (parentId === null || parentId === undefined || parentId === 0) {
       root = node;
@@ -334,13 +384,13 @@ function rehydrateTree(flatNodes, format) {
 /**
  * Compute _leaves counts for all nodes (iterative, bottom-up)
  */
-function computeLeavesCounts(root) {
-  const stack = [root];
-  const post = [];
+function computeLeavesCounts(root: TaxonomyNode) {
+  const stack: TaxonomyNode[] = [root];
+  const post: TaxonomyNode[] = [];
 
   // Build post-order list
   while (stack.length) {
-    const n = stack.pop();
+    const n = stack.pop()!;
     post.push(n);
     const ch = n.children;
     for (let i = 0; i < ch.length; i++) {

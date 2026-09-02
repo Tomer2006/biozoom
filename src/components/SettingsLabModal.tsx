@@ -265,7 +265,7 @@ export default function SettingsLabModal({
             <div>
               <h2>Settings Lab</h2>
               <p className="settings-lab-subtitle">
-                Scrollable runtime list for every editable `perf` value in `settings.js`.
+                Scrollable runtime list for every editable `perf` value in `settings.ts`.
               </p>
             </div>
             <div className="modal-header-actions">

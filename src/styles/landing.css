@@ -120,6 +120,11 @@
     0 0 80px rgba(91, 196, 190, 0.25);
 }
 
+.landing-start-btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .landing-start-icon {
   font-size: 1.8rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));

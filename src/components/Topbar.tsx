@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { processSearchResults } from '../modules/search'
-import { handleSearchResultClick, performSearch, prefetchSearchResult, supportsLiveSearch } from '../modules/search-handler'
+import { handleSearchResultClick, performSearch, prefetchSearchResult } from '../modules/search-handler'
 import { translate, type AppLanguage } from '../modules/i18n'
 import { isPerfLabSecretCode } from '../modules/runtimeSettings'
 import { perf } from '../modules/settings'
+import type { SearchResult } from '../modules/types'
+import { useTaxonomyState } from '../hooks/useTaxonomyState'
 
 interface TopbarProps {
   language: AppLanguage
@@ -13,13 +15,6 @@ interface TopbarProps {
   onSettings: () => void
   onSettingsLab: () => void
   onHelp: () => void
-}
-
-interface SearchResult {
-  _id: number
-  name: string
-  path: string
-  node: any
 }
 
 function LanguageIcon() {
@@ -184,7 +179,8 @@ export default function Topbar({
   const searchTimerRef = useRef<number | null>(null)
   const searchSequenceRef = useRef(0)
   const searchResultsId = useId()
-  const liveSearchEnabled = supportsLiveSearch()
+  const { loadMode } = useTaxonomyState()
+  const liveSearchEnabled = loadMode === 'backend'
 
   const handleClear = useCallback(() => {
     searchSequenceRef.current++
@@ -245,6 +241,12 @@ export default function Topbar({
 
     document.addEventListener('click', handleClickOutside)
     return () => document.removeEventListener('click', handleClickOutside)
+  }, [])
+
+  useEffect(() => () => {
+    searchSequenceRef.current++
+    searchControllerRef.current?.abort()
+    if (searchTimerRef.current !== null) window.clearTimeout(searchTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -308,6 +310,11 @@ export default function Topbar({
   const handleSearch = () => {
     const query = searchQuery.trim()
     if (!query) return
+
+    if (searchTimerRef.current !== null) {
+      window.clearTimeout(searchTimerRef.current)
+      searchTimerRef.current = null
+    }
 
     if (isPerfLabSecretCode(query)) {
       handleClear()
@@ -398,9 +405,14 @@ export default function Topbar({
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <div className="topbar-brand" onClick={onBackToMenu} title={translate('topbar.returnToMenu', undefined, language)} style={{ cursor: 'pointer' }}>
+        <button
+          className="topbar-brand"
+          type="button"
+          onClick={onBackToMenu}
+          title={translate('topbar.returnToMenu', undefined, language)}
+        >
           <span>InfiniteSpecies</span>
-        </div>
+        </button>
       </div>
 
       <div className="topbar-center">
@@ -427,6 +439,7 @@ export default function Topbar({
           />
           <button
             className={`searchbar-btn${searchStatus === 'loading' || navigatingResultId !== null ? ' is-loading' : ''}`}
+            type="button"
             onClick={handleSearch}
             title={translate('topbar.searchButton', undefined, language)}
             aria-label={translate('topbar.searchButton', undefined, language)}
@@ -501,10 +514,22 @@ export default function Topbar({
           onLanguage={onLanguage}
           onSettings={onSettings}
         />
-        <button className="btn btn-icon" onClick={onCopyLink} title={translate('topbar.copyLink', undefined, language)}>
+        <button
+          className="btn btn-icon"
+          type="button"
+          onClick={onCopyLink}
+          title={translate('topbar.copyLink', undefined, language)}
+          aria-label={translate('topbar.copyLink', undefined, language)}
+        >
           <ShareIcon />
         </button>
-        <button className="btn btn-icon" onClick={onHelp} title={translate('topbar.helpButton', undefined, language)}>
+        <button
+          className="btn btn-icon"
+          type="button"
+          onClick={onHelp}
+          title={translate('topbar.helpButton', undefined, language)}
+          aria-label={translate('topbar.helpButton', undefined, language)}
+        >
           <HelpIcon />
         </button>
       </div>

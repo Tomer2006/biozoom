@@ -236,7 +236,7 @@ export const perf = {
     
     // Helper to get the current palette (used by the app)
     get palette() {
-      return this.presets[this.currentPreset];
+      return this.presets[this.currentPreset as keyof typeof this.presets];
     }
   },
 

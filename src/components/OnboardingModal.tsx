@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { translate, type AppLanguage } from '../modules/i18n'
+import { useModalFocus } from '../hooks/useModalFocus'
 
 interface OnboardingModalProps {
   isOpen: boolean
@@ -12,6 +13,7 @@ const totalSteps = 3
 
 export default function OnboardingModal({ isOpen, language, onClose }: OnboardingModalProps) {
   const [step, setStep] = useState(0)
+  const initialFocusRef = useModalFocus(isOpen)
 
   useEffect(() => {
     if (isOpen) {
@@ -65,6 +67,9 @@ export default function OnboardingModal({ isOpen, language, onClose }: Onboardin
         >
           <motion.div
             className="modal onboarding-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="onboarding-dialog-title"
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -74,9 +79,9 @@ export default function OnboardingModal({ isOpen, language, onClose }: Onboardin
             <div className="modal-header">
               <div className="onboarding-header-copy">
                 <div className="onboarding-step">{translate('onboarding.step', { current: step + 1, total: totalSteps }, language)}</div>
-                <h2>{translate('onboarding.title', undefined, language)}</h2>
+                <h2 id="onboarding-dialog-title">{translate('onboarding.title', undefined, language)}</h2>
               </div>
-              <button className="modal-close" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
+              <button ref={initialFocusRef} className="modal-close" type="button" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -99,17 +104,18 @@ export default function OnboardingModal({ isOpen, language, onClose }: Onboardin
             </div>
 
             <div className="modal-footer">
-              <button className="btn btn-ghost" onClick={onClose}>
+              <button className="btn btn-ghost" type="button" onClick={onClose}>
                 {translate('common.skip', undefined, language)}
               </button>
               <div className="onboarding-actions">
                 {step > 0 && (
-                  <button className="btn btn-ghost" onClick={() => setStep((currentStep) => currentStep - 1)}>
+                  <button className="btn btn-ghost" type="button" onClick={() => setStep((currentStep) => currentStep - 1)}>
                     {translate('common.back', undefined, language)}
                   </button>
                 )}
                 <button
                   className="btn btn-primary"
+                  type="button"
                   onClick={() => {
                     if (isLastStep) {
                       onClose()

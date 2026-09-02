@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect } from 'react'
 import type { AppLanguage } from '../modules/i18n'
 import { translate } from '../modules/i18n'
+import { useModalFocus } from '../hooks/useModalFocus'
 
 interface LanguageModalProps {
   isOpen: boolean
@@ -9,6 +11,16 @@ interface LanguageModalProps {
 }
 
 export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageModalProps) {
+  const initialFocusRef = useModalFocus(isOpen)
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -21,6 +33,9 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
         >
           <motion.div
             className="modal language-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={translate('common.language')}
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -36,7 +51,7 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
                   <path d="M12 3a15 15 0 0 0 0 18" />
                 </svg>
               </div>
-              <button className="modal-close" onClick={onClose} aria-label={translate('common.close')}>
+              <button ref={initialFocusRef} className="modal-close" type="button" onClick={onClose} aria-label={translate('common.close')}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -47,6 +62,7 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
               <div className="language-modal-options">
                 <button
                   className="language-option language-option-flag-only"
+                  type="button"
                   onClick={() => onSelect('en')}
                   aria-label={translate('languageModal.englishTitle')}
                   title={translate('languageModal.englishTitle')}
@@ -57,6 +73,7 @@ export default function LanguageModal({ isOpen, onSelect, onClose }: LanguageMod
 
                 <button
                   className="language-option language-option-flag-only"
+                  type="button"
                   onClick={() => onSelect('he')}
                   aria-label={translate('languageModal.hebrewTitle')}
                   title={translate('languageModal.hebrewTitle')}

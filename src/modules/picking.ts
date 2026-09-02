@@ -5,15 +5,16 @@
  * Uses lightweight checks for fast performance.
  */
 
-import { viewportRadius, getFrameCounter, W, H } from './canvas.js';
-import { state } from './state.js';
-import { perf } from './settings.js';
+import { viewportRadius, getFrameCounter, W, H } from './canvas';
+import { state } from './state';
+import { perf } from './settings';
+import type { TaxonomyNode } from './types'
 
 let _cachedViewR = 0;
 let _cachedFrame = -1;
 
 // Fast viewport check - only uses distance from camera center
-function nodeInView(d) {
+function nodeInView(d: TaxonomyNode) {
   const frame = getFrameCounter();
   if (frame !== _cachedFrame) {
     _cachedViewR = viewportRadius(perf.rendering.renderDistance);
@@ -26,7 +27,7 @@ function nodeInView(d) {
 }
 
 // Check if a node is within the current subtree (is state.current or a descendant of it)
-export function isNodeInCurrentSubtree(nodeData) {
+export function isNodeInCurrentSubtree(nodeData: TaxonomyNode) {
   if (!state.current) return true; // If no current node, allow all nodes
   
   // If the node is state.current itself, it's in the subtree
@@ -42,7 +43,7 @@ export function isNodeInCurrentSubtree(nodeData) {
   return false;
 }
 
-export function pickNodeAt(px, py) {
+export function pickNodeAt(px: number, py: number): TaxonomyNode | null {
   const wx = state.camera.x + (px - W / 2) / state.camera.k;
   const wy = state.camera.y + (py - H / 2) / state.camera.k;
 

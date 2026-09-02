@@ -2,11 +2,12 @@ export type AppLanguage = 'en' | 'he'
 
 const LANGUAGE_STORAGE_KEY = 'infinitespecies_language'
 
-type TranslationParams = Record<string, string | number>
+export type TranslationParams = Record<string, string | number>
+interface TranslationBranch { [key: string]: TranslationValue }
 type TranslationValue =
   | string
   | ((params: TranslationParams | undefined, language: AppLanguage) => string)
-  | Record<string, TranslationValue>
+  | TranslationBranch
 
 const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
   en: {
@@ -120,8 +121,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       title: 'Settings',
       languageSection: 'Language',
       languageLabel: 'Interface Language',
-      fontSection: 'Font',
-      fontLabel: 'Font Family',
       colorSection: 'Color Palette',
       colorLabel: 'Color Scheme',
       searchSection: 'Web Search (W key)',
@@ -139,6 +138,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     app: {
       copyLinkPrompt: 'Copy link:',
       linkCopied: 'Link copied to clipboard',
+      dataLoadFailed: 'Could not load the taxonomy data. Please try again.',
     },
     data: {
       loadingBakedFiles: (params) => `Loading ${params?.total ?? 0} baked files...`,
@@ -262,8 +262,6 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
       title: 'הגדרות',
       languageSection: 'שפה',
       languageLabel: 'שפת הממשק',
-      fontSection: 'פונט',
-      fontLabel: 'משפחת פונטים',
       colorSection: 'פלטת צבעים',
       colorLabel: 'ערכת צבעים',
       searchSection: 'חיפוש ברשת (מקש S)',
@@ -281,6 +279,7 @@ const translations: Record<AppLanguage, Record<string, TranslationValue>> = {
     app: {
       copyLinkPrompt: 'העתקת קישור:',
       linkCopied: 'הקישור הועתק ללוח',
+      dataLoadFailed: 'לא ניתן היה לטעון את נתוני הטקסונומיה. נסו שוב.',
     },
     data: {
       loadingBakedFiles: (params) => `טוען ${params?.total ?? 0} קבצי baked...`,

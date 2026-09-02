@@ -1,19 +1,18 @@
 /**
- * Mouse and touch event handler module (vanilla JS)
+ * Framework-independent typed pointer calculations used by the React stage.
  * 
  * Handles all mouse and touch interactions for canvas navigation.
  * React components should only bind these handlers to DOM events.
  */
 
-import { state } from './state.js';
-import { requestRender, screenToWorld } from './canvas.js';
-import { pickNodeAt, isNodeInCurrentSubtree } from './picking.js';
-import { handleCameraPan, handleWheelZoom } from './camera.js';
-import { showBigFor, hideBigPreview } from './preview.js';
-import { perf } from './settings.js';
-import { updateTooltip } from './tooltip.js';
+import { setHoverNode, state } from './state';
+import { screenToWorld } from './canvas';
+import { pickNodeAt, isNodeInCurrentSubtree } from './picking';
+import { handleCameraPan, handleWheelZoom } from './camera';
+import { perf } from './settings';
+import type { Point, TaxonomyNode } from './types'
 
-function containsWorldPoint(node, wx, wy) {
+function containsWorldPoint(node: TaxonomyNode | null, wx: number, wy: number) {
   if (!node || typeof node._vx !== 'number' || typeof node._vy !== 'number' || typeof node._vr !== 'number') {
     return false;
   }
@@ -23,7 +22,7 @@ function containsWorldPoint(node, wx, wy) {
   return dx * dx + dy * dy <= node._vr * node._vr;
 }
 
-function isNodeHoverableAtPoint(node, wx, wy) {
+function isNodeHoverableAtPoint(node: TaxonomyNode | null, wx: number, wy: number) {
   if (!node || !isNodeInCurrentSubtree(node)) return false;
   if (!containsWorldPoint(node, wx, wy)) return false;
 
@@ -33,7 +32,7 @@ function isNodeHoverableAtPoint(node, wx, wy) {
   return screenR >= (pickMinPxRadius || 0) && screenR >= minPxRadius;
 }
 
-function resolveHoverNodeOnCameraChange(px, py) {
+function resolveHoverNodeOnCameraChange(px: number, py: number): TaxonomyNode | null {
   const [wx, wy] = screenToWorld(px, py);
 
   let candidate = state.hoverNode || state.current || state.DATA_ROOT || null;
@@ -88,7 +87,7 @@ function resolveHoverNodeOnCameraChange(px, py) {
  * @param {Object} lastPan - Last pan position {x, y} or null
  * @returns {Object|null} Updated pan state if panning, null otherwise
  */
-export function handleMouseMovePan(x, y, isPanning, lastPan) {
+export function handleMouseMovePan(x: number, y: number, isPanning: boolean, lastPan: Point | null): Point | null {
   if (isPanning && lastPan) {
     const dx = x - lastPan.x;
     const dy = y - lastPan.y;
@@ -104,9 +103,9 @@ export function handleMouseMovePan(x, y, isPanning, lastPan) {
  * @param {number} y - Mouse Y position relative to canvas
  * @returns {Object|null} The node under cursor or null
  */
-export function handleMouseMovePick(x, y) {
+export function handleMouseMovePick(x: number, y: number): TaxonomyNode | null {
   const node = pickNodeAt(x, y);
-  state.hoverNode = node;
+  setHoverNode(node);
   return node;
 }
 
@@ -114,8 +113,7 @@ export function handleMouseMovePick(x, y) {
  * Handle mouse leave event
  */
 export function handleMouseLeaveEvent() {
-  state.hoverNode = null;
-  hideBigPreview();
+  setHoverNode(null);
 }
 
 /**
@@ -125,7 +123,7 @@ export function handleMouseLeaveEvent() {
  * @param {number} y - Mouse Y position relative to canvas
  * @returns {Object|null} Pan state if middle button, null otherwise
  */
-export function handleMouseDown(button, x, y) {
+export function handleMouseDown(button: number, x: number, y: number): Point | null {
   if (button === 1) {
     // Middle mouse button - start panning
     return { x, y };
@@ -138,7 +136,7 @@ export function handleMouseDown(button, x, y) {
  * @param {WheelEvent} e - The wheel event
  * @param {HTMLElement} canvas - The canvas element
  */
-export function handleWheelEvent(e, canvas) {
+export function handleWheelEvent(e: WheelEvent, canvas: HTMLCanvasElement) {
   handleWheelZoom(e, canvas);
 }
 
@@ -148,14 +146,18 @@ export function handleWheelEvent(e, canvas) {
  * @param {number} y - Mouse Y position
  * @param {Function} onTooltipUpdate - Callback to update tooltip
  */
-export function validateHoverOnCameraChange(x, y, onTooltipUpdate) {
+export function validateHoverOnCameraChange(
+  x: number,
+  y: number,
+  onTooltipUpdate: (node: TaxonomyNode | null, x: number, y: number) => void,
+) {
   if (x === 0 && y === 0) return; // No mouse position yet
 
   const nextHover = resolveHoverNodeOnCameraChange(x, y);
   const prevHoverId = state.hoverNode?._id ?? null;
   const nextHoverId = nextHover?._id ?? null;
 
-  state.hoverNode = nextHover;
+  setHoverNode(nextHover);
 
   if (prevHoverId !== nextHoverId && onTooltipUpdate) {
     onTooltipUpdate(nextHover, x, y);

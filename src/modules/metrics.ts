@@ -6,13 +6,16 @@
  * functionality for performance monitoring and optimization.
  */
 
-import { perf } from './settings.js';
+import { perf } from './settings';
 
-let gpuInfo = null;
+interface GpuInfo { vendor: string; renderer: string }
+interface ChromePerformanceMemory { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number }
+
+let gpuInfo: GpuInfo | null = null;
 let eventLoopLagMs = 0;
 let lastIntervalTs = 0;
 
-function detectGpuInfo() {
+function detectGpuInfo(): GpuInfo | null {
   try {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
@@ -21,21 +24,21 @@ function detectGpuInfo() {
     if (dbg) {
       const vendor = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL);
       const renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
-      return { vendor, renderer };
+      return { vendor: String(vendor), renderer: String(renderer) };
     }
     // Fallback: use version string
-    return { vendor: 'WebGL', renderer: gl.getParameter(gl.VERSION) };
+    return { vendor: 'WebGL', renderer: String(gl.getParameter(gl.VERSION)) };
   } catch (_e) {
     return null;
   }
 }
 
-function formatMb(bytes) {
+function formatMb(bytes: number) {
   return (bytes / (1024 * 1024)).toFixed(1);
 }
 
 function getHeapLine() {
-  const m = performance && performance.memory ? performance.memory : null;
+  const m = (performance as Performance & { memory?: ChromePerformanceMemory }).memory ?? null;
   if (!m) return 'Heap: n/a';
   const used = m.usedJSHeapSize || 0;
   const total = m.totalJSHeapSize || 0;
@@ -62,7 +65,7 @@ export function initRuntimeMetrics() {
   }, perf.timing.metricsUpdateIntervalMs);
 }
 
-export function buildOverlayText(currentFps) {
+export function buildOverlayText(currentFps: number) {
   const fps = Math.max(0, Math.round(currentFps || 0));
   const ms = fps > 0 ? Math.round(1000 / fps) : 0;
   const heap = getHeapLine();

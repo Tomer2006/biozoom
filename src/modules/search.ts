@@ -6,23 +6,33 @@
  * to search results with visual feedback (pulsing animations).
  */
 
-import { state } from './state.js';
-import { worldToScreen } from './canvas.js';
-import { getNodePath } from './deeplink.js';
-import { perf } from './settings.js';
+import { state } from './state';
+import { worldToScreen } from './canvas';
+import { getNodePath } from './deeplink';
+import { perf } from './settings';
+import type { SearchResult, TaxonomyNode } from './types'
+
+interface ScoredNode { node: TaxonomyNode; score: number }
+
+export interface PulsePresentation {
+  style: Record<string, string>
+  keyframes: Keyframe[]
+  timing: KeyframeAnimationOptions
+}
 
 /**
  * Calculate relevance score for a search match (fast version without path lookup)
  * Higher score = more relevant result
  */
-function calculateRelevanceScoreFast(node, query, queryLower) {
+function calculateRelevanceScoreFast(node: TaxonomyNode, queryLower: string) {
   const name = node.name || '';
   const nameLower = name.toLowerCase();
   let score = 0;
 
   // Exact match (case-insensitive) - highest priority
   if (nameLower === queryLower) {
-    score += 1000;
+    // Keep exact matches above every possible prefix/path bonus.
+    score += 2000;
   }
   // Exact match at start of name - very high priority
   else if (nameLower.startsWith(queryLower)) {
@@ -43,7 +53,7 @@ function calculateRelevanceScoreFast(node, query, queryLower) {
   // No bonus based on child count - groups and leaf nodes are scored equally
 
   // Prefer nodes at moderate depth (not too shallow, not too deep)
-  const level = node.level || 0;
+  const level = typeof node.level === 'number' ? node.level : 0;
   if (level >= 2 && level <= 8) {
     score += 10;
   }
@@ -54,7 +64,7 @@ function calculateRelevanceScoreFast(node, query, queryLower) {
 /**
  * Add path-based scoring to an existing score (expensive operation, use sparingly)
  */
-function addPathScore(node, queryLower, baseScore) {
+function addPathScore(node: TaxonomyNode, queryLower: string, baseScore: number) {
   try {
     const parts = getNodePath(node);
     const fullPath = parts.join(' / ').toLowerCase();
@@ -77,23 +87,23 @@ function addPathScore(node, queryLower, baseScore) {
  * Check if a node matches the search query (fast version without path lookup)
  * Returns the relevance score, or 0 if no match
  */
-function matchesQueryFast(node, query, queryLower) {
+function matchesQueryFast(node: TaxonomyNode, queryLower: string) {
   const name = node.name || '';
   const nameLower = name.toLowerCase();
   
   return nameLower.includes(queryLower)
-    ? calculateRelevanceScoreFast(node, query, queryLower)
+    ? calculateRelevanceScoreFast(node, queryLower)
     : 0;
 }
 
-export function findAllByQuery(q, limit = perf.search.maxResults) {
+export function findAllByQuery(q: string, limit = perf.search.maxResults): TaxonomyNode[] {
   if (!q) return [];
   q = q.trim();
   if (!q || !state.layout?.root) return [];
   
   const queryLower = q.toLowerCase();
-  const scoredResults = [];
-  const stack = [state.layout.root];
+  const scoredResults: ScoredNode[] = [];
+  const stack: TaxonomyNode[] = [state.layout.root];
   const maxCandidates = Math.min(limit * 3, 500); // Collect more candidates than needed for path scoring
   
   // Phase 1: Fast search - collect candidates without expensive path lookups
@@ -101,7 +111,7 @@ export function findAllByQuery(q, limit = perf.search.maxResults) {
     const d = stack.pop();
     if (!d) continue;
 
-    const score = matchesQueryFast(d, q, queryLower);
+    const score = matchesQueryFast(d, queryLower);
     if (score > 0) {
       scoredResults.push({ node: d, score });
     }
@@ -113,7 +123,7 @@ export function findAllByQuery(q, limit = perf.search.maxResults) {
   }
   
   // If we have exact matches (score >= 1000), prioritize those and skip path scoring
-  const exactMatches = scoredResults.filter(r => r.score >= 1000);
+  const exactMatches = scoredResults.filter(r => r.score >= 2000);
   if (exactMatches.length > 0) {
     // Sort exact matches and return top results
     exactMatches.sort((a, b) => {
@@ -129,7 +139,7 @@ export function findAllByQuery(q, limit = perf.search.maxResults) {
     }
     
     // Otherwise, add path scores to remaining candidates and combine
-    const otherResults = scoredResults.filter(r => r.score < 1000);
+    const otherResults = scoredResults.filter(r => r.score < 2000);
     for (let i = 0; i < Math.min(otherResults.length, limit * 2); i++) {
       otherResults[i].score = addPathScore(otherResults[i].node, queryLower, otherResults[i].score);
     }
@@ -164,36 +174,32 @@ export function findAllByQuery(q, limit = perf.search.maxResults) {
   return scoredResults.slice(0, limit).map(r => r.node);
 }
 
-export function pulseAtNode(node) {
-  if (!node || typeof node._id !== 'number') return;
+export function getPulsePresentation(node: TaxonomyNode): PulsePresentation | null {
+  if (!node || typeof node._id !== 'number') return null;
   const d = state.nodeLayoutMap.get(node._id);
-  if (!d) return;
+  if (!d) return null;
   const [sx, sy] = worldToScreen(d._vx, d._vy);
   const sr = d._vr * state.camera.k;
-  if (sr <= perf.search.pulseMinScreenRadius) return;
-  const el = document.getElementById('pulse');
-  if (!el) return;
-  el.style.display = 'block';
+  if (sr <= perf.search.pulseMinScreenRadius) return null;
   const posMult = perf.search.pulsePositionMultiplier;
   const sizeMult = perf.search.pulseSizeMultiplier;
-  el.style.left = sx - sr * posMult + 'px';
-  el.style.top = sy - sr * posMult + 'px';
-  el.style.width = sr * sizeMult + 'px';
-  el.style.height = sr * sizeMult + 'px';
-  el.style.boxShadow = `0 0 ${sr * perf.search.pulseShadowOuter}px ${sr * perf.search.pulseShadowInner}px rgba(113,247,197,.3), inset 0 0 ${sr * perf.search.pulseShadowOuter2}px ${sr * perf.search.pulseShadowInner2}px rgba(113,247,197,.25)`;
-  el.style.border = `${perf.search.pulseBorderWidth}px solid ${perf.search.pulseColor}`;
-  el
-    .animate(
-      [
+  return {
+    style: {
+      display: 'block',
+      left: `${sx - sr * posMult}px`,
+      top: `${sy - sr * posMult}px`,
+      width: `${sr * sizeMult}px`,
+      height: `${sr * sizeMult}px`,
+      boxShadow: `0 0 ${sr * perf.search.pulseShadowOuter}px ${sr * perf.search.pulseShadowInner}px rgba(113,247,197,.3), inset 0 0 ${sr * perf.search.pulseShadowOuter2}px ${sr * perf.search.pulseShadowInner2}px rgba(113,247,197,.25)`,
+      border: `${perf.search.pulseBorderWidth}px solid ${perf.search.pulseColor}`,
+    },
+    keyframes: [
         { transform: `scale(${perf.search.pulseScaleStart})`, opacity: 0.0 },
         { transform: 'scale(1)', opacity: perf.search.pulseOpacity, offset: perf.search.pulseScaleOffset },
         { transform: `scale(${perf.search.pulseScaleEnd})`, opacity: 0.0 }
-      ],
-      { duration: perf.search.pulseDurationMs, easing: 'ease-out' }
-    )
-    .onfinish = () => {
-    el.style.display = 'none';
-  };
+    ],
+    timing: { duration: perf.search.pulseDurationMs, easing: 'ease-out' },
+  }
 }
 
 /**
@@ -202,7 +208,7 @@ export function pulseAtNode(node) {
  * @param {string} query - The search query
  * @returns {Array} Formatted search results
  */
-export function processSearchResults(matches, query) {
+export function processSearchResults(matches: TaxonomyNode[], _query: string): SearchResult[] {
   return matches.map(n => {
     let path = '';
     if (n._searchPath) {

@@ -44,6 +44,13 @@
 }
 
 .topbar-brand {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -467,7 +474,7 @@
   color: var(--text-muted);
 }
 
-/* Legacy search result classes (used by search.js module) */
+/* Search result classes */
 .search-results .item {
   display: flex;
   flex-direction: column;

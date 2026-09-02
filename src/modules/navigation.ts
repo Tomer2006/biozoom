@@ -8,59 +8,15 @@
  * In React mode, breadcrumb DOM manipulation is skipped - React handles it.
  */
 
-import { state } from './state.js';
-import { updateDeepLinkFromNode } from './deeplink.js';
-import { animateToCam, clampCameraZoom, stopCameraAnimation } from './camera.js';
-import { requestRender, W, H } from './canvas.js';
-import { logInfo, logDebug, logWarn, logError } from './logger.js';
-import { perf } from './settings.js';
-import { isNodeInCurrentSubtree } from './picking.js';
+import { setCurrentNode, setHoverNode, state } from './state';
+import { animateToCam, clampCameraZoom, stopCameraAnimation } from './camera';
+import { requestRender, W, H } from './canvas';
+import { logInfo, logDebug, logWarn, logError } from './logger';
+import { perf } from './settings';
+import { isNodeInCurrentSubtree } from './picking';
+import type { TaxonomyNode } from './types'
 
-// Check if we're in React mode (breadcrumbs handled by React component)
-const isReactMode = () => typeof window !== 'undefined' && window.__reactCanvas;
-
-function setBreadcrumbs(node) {
-  // In React mode, breadcrumbs are managed by React state - skip DOM manipulation
-  // Don't update URL here - URL updates only happen from breadcrumb hover updates, not from clicks
-  if (isReactMode()) {
-    // updateDeepLinkFromNode(node); // Removed - URL updates only on breadcrumb hover
-    return;
-  }
-  
-  // Legacy DOM manipulation for non-React mode
-  const breadcrumbsEl = document.getElementById('breadcrumbs');
-  if (!breadcrumbsEl) return;
-  
-  breadcrumbsEl.innerHTML = '';
-  const path = [];
-  let p = node;
-  while (p) {
-    path.unshift(p);
-    p = p.parent;
-  }
-  path.forEach((n, i) => {
-    const el = document.createElement('div');
-    el.className = 'crumb';
-    el.textContent = n.name;
-    el.title = `Go to ${n.name}`;
-    el.addEventListener('click', () => updateNavigation(n, false));
-    breadcrumbsEl.appendChild(el);
-    if (i < path.length - 1) {
-      const sep = document.createElement('div');
-      sep.className = 'crumb sep';
-      sep.textContent = '›';
-      sep.style.cursor = 'default';
-      breadcrumbsEl.appendChild(sep);
-    }
-  });
-  // Don't update URL here - URL updates only happen from breadcrumb hover updates, not from clicks
-  // updateDeepLinkFromNode(node);
-
-  // Request render whenever breadcrumbs change for any reason
-  requestRender();
-}
-
-export function fitNodeInView(node) {
+export function fitNodeInView(node: TaxonomyNode) {
   const d = state.nodeLayoutMap.get(node._id);
   if (!d || typeof d._vr !== 'number' || d._vr <= 0) {
     logWarn(`Cannot fit node "${node.name}" in view: node not found in layout map or invalid radius`);
@@ -77,13 +33,13 @@ export function fitNodeInView(node) {
 }
 
 // Centralized navigation update function - handles all navigation changes and canvas updates
-export async function updateNavigation(node, animate = true) {
+export async function updateNavigation(node: TaxonomyNode, animate = true) {
   const startTime = performance.now();
 
   logInfo(`Starting navigation to "${node.name}" (animate=${animate})`);
 
   logDebug(`Setting current node to "${node.name}"`);
-  state.current = node;
+  setCurrentNode(node);
   // Force layout changed to ensure render happens even if camera doesn't move
   state.layoutChanged = true;
 
@@ -100,8 +56,6 @@ export async function updateNavigation(node, animate = true) {
     throw new Error('No pre-baked layout available');
   }
 
-  setBreadcrumbs(state.current);
-
   // Force render update when current node changes, even if camera doesn't move much
   requestRender();
 
@@ -117,12 +71,12 @@ export async function updateNavigation(node, animate = true) {
   if (animate) {
     if (state.rootLayout) {
       // Global layout: zoom to node position
-      const d = state.nodeLayoutMap.get(state.current._id);
+      const d = state.nodeLayoutMap.get(node._id);
       if (d) {
         // Calculate k to fit the node's circle using the same multiplier as fitNodeInView
         const targetRadiusPx = Math.min(W, H) * perf.navigation.fitTargetRadiusMultiplier;
         const targetK = clampCameraZoom(targetRadiusPx / d._vr);
-        console.log(`[updateNavigation] node="${state.current.name}" _id=${state.current._id} _vr=${d._vr} W=${W} H=${H} mult=${perf.navigation.fitTargetRadiusMultiplier} targetR=${targetRadiusPx} k=${targetK} currentK=${state.camera.k}`);
+        console.log(`[updateNavigation] node="${node.name}" _id=${node._id} _vr=${d._vr} W=${W} H=${H} mult=${perf.navigation.fitTargetRadiusMultiplier} targetR=${targetRadiusPx} k=${targetK} currentK=${state.camera.k}`);
         // Render the new subtree immediately before starting animation
         requestRender();
         animateToCam(d._vx, d._vy, targetK);
@@ -142,7 +96,7 @@ export async function updateNavigation(node, animate = true) {
     }
   } else {
     if (state.rootLayout) {
-      const d = state.nodeLayoutMap.get(state.current._id);
+      const d = state.nodeLayoutMap.get(node._id);
       if (d) {
         state.camera.x = d._vx;
         state.camera.y = d._vy;
@@ -170,17 +124,17 @@ export async function updateNavigation(node, animate = true) {
 }
 
 // Legacy function for backward compatibility
-export async function goToNode(node, animate = true) {
+export async function goToNode(node: TaxonomyNode, animate = true) {
   return updateNavigation(node, animate);
 }
 
 // Update the current node without navigating the camera to a new position.
-export function updateCurrentNodeOnly(node) {
+export function updateCurrentNodeOnly(node: TaxonomyNode) {
   logInfo(`Updating current node to "${node.name}" with an immediate level zoom boundary`);
 
   stopCameraAnimation();
   const previousZoom = state.camera.k;
-  state.current = node;
+  setCurrentNode(node);
   state.layoutChanged = true;
 
   // The bottom breadcrumb changes the zoom-out boundary. Apply the new
@@ -199,7 +153,7 @@ export function updateCurrentNodeOnly(node) {
   
   // Clear hover node if it's outside the new current subtree
   if (state.hoverNode && !isNodeInCurrentSubtree(state.hoverNode)) {
-    state.hoverNode = null;
+    setHoverNode(null);
   }
   
   // Ensure layout is set
@@ -210,7 +164,6 @@ export function updateCurrentNodeOnly(node) {
     }
   }
   
-  setBreadcrumbs(state.current);
   requestRender();
 }
 
@@ -218,7 +171,7 @@ export function updateCurrentNodeOnly(node) {
  * Zoom camera to a node without changing current node or layout (performance-critical)
  * Used for search results - just moves camera, doesn't update breadcrumbs or navigation state
  */
-export function zoomToNode(node, durationMs) {
+export function zoomToNode(node: TaxonomyNode, durationMs?: number) {
   const d = state.nodeLayoutMap.get(node._id);
   if (!d || typeof d._vr !== 'number' || d._vr <= 0) {
     logWarn(`Cannot zoom to node "${node.name}": node not found in layout map or invalid radius`);

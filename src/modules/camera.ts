@@ -5,18 +5,18 @@
  * loading system when the viewport changes during animations.
  */
 
-import { state } from './state.js';
-import { requestRender, screenToWorld, W, H } from './canvas.js';
-import { perf } from './settings.js';
+import { state } from './state';
+import { requestRender, screenToWorld, W, H } from './canvas';
+import { perf } from './settings';
 
 // Native cubic-in-out easing function (replaces d3-ease)
-function easeCubicInOut(t) {
+function easeCubicInOut(t: number) {
   return t < 0.5
     ? 4 * t * t * t
     : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-function lerp(a, b, t) {
+function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
@@ -50,7 +50,7 @@ function getMaxCameraZoom() {
   return maxZoom;
 }
 
-export function clampCameraZoom(k) {
+export function clampCameraZoom(k: number) {
   if (!Number.isFinite(k) || k <= 0) {
     return 1;
   }
@@ -62,7 +62,7 @@ export function clampCameraZoom(k) {
   return clamped;
 }
 
-export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs) {
+export function animateToCam(nx: number, ny: number, nk: number, dur = perf.animation.cameraAnimationMs) {
   if (!Number.isFinite(dur) || dur <= 0) dur = perf.animation.cameraAnimationMs;
   const animationId = ++state.cameraAnimationId;
   state.targetCam.x = nx;
@@ -75,7 +75,7 @@ export function animateToCam(nx, ny, nk, dur = perf.animation.cameraAnimationMs)
     start = performance.now();
   state.animating = true;
 
-  function step(now) {
+  function step(now: number) {
     if (animationId !== state.cameraAnimationId) return;
     const t = Math.min(1, (now - start) / dur);
     const e = easeCubicInOut(t);
@@ -143,7 +143,7 @@ function stepWheelZoom() {
  * @param {WheelEvent} e - The wheel event
  * @param {HTMLElement} canvas - The canvas element
  */
-export function handleWheelZoom(e, canvas) {
+export function handleWheelZoom(e: WheelEvent, canvas: HTMLCanvasElement) {
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
@@ -179,7 +179,7 @@ export function handleWheelZoom(e, canvas) {
  * @param {number} dx - Delta X in screen pixels
  * @param {number} dy - Delta Y in screen pixels
  */
-export function handleCameraPan(dx, dy) {
+export function handleCameraPan(dx: number, dy: number) {
   state.camera.x -= dx / state.camera.k;
   state.camera.y -= dy / state.camera.k;
   requestRender();

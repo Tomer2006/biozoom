@@ -7,6 +7,7 @@ import {
   translate,
   type AppLanguage,
 } from '../modules/i18n'
+import { useModalFocus } from '../hooks/useModalFocus'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -18,16 +19,7 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ isOpen, language, colorPreset, onColorPresetChange, onLanguageChange, onClose }: SettingsModalProps) {
-  const fontSettings = perf.fonts && perf.fonts.presets && perf.fonts.currentPreset ? perf.fonts : null
-
-  const getSavedFontPreset = () => {
-    if (!fontSettings) return null
-    const saved = localStorage.getItem('infinitespecies_fontPreset')
-    if (saved && fontSettings.presets[saved as keyof typeof fontSettings.presets]) {
-      return saved
-    }
-    return fontSettings.currentPreset
-  }
+  const initialFocusRef = useModalFocus(isOpen)
 
   const getSavedColorPreset = () => {
     const saved = localStorage.getItem('infinitespecies_colorPreset')
@@ -38,40 +30,14 @@ export default function SettingsModal({ isOpen, language, colorPreset, onColorPr
   }
 
   const [currentColorPreset, setCurrentColorPreset] = useState(getSavedColorPreset)
-  const [currentFontPreset, setCurrentFontPreset] = useState(getSavedFontPreset)
 
   const colorPresets = Object.keys(perf.colors.presets)
-  const fontPresets = fontSettings ? Object.keys(fontSettings.presets) : []
 
   const handleColorChange = (preset: string) => {
     setCurrentColorPreset(preset)
     perf.colors.currentPreset = preset
     localStorage.setItem('infinitespecies_colorPreset', preset)
     onColorPresetChange(preset)
-  }
-
-  const handleFontChange = (preset: string) => {
-    if (!fontSettings) return
-    setCurrentFontPreset(preset)
-    fontSettings.currentPreset = preset
-    localStorage.setItem('infinitespecies_fontPreset', preset)
-
-    const fontConfig = fontSettings.presets[preset as keyof typeof fontSettings.presets]
-    if (fontConfig) {
-      if (fontConfig.import) {
-        const existingLink = document.querySelector(`link[href*="${fontConfig.import}"]`)
-        if (!existingLink) {
-          const link = document.createElement('link')
-          link.rel = 'stylesheet'
-          link.href = `https://fonts.googleapis.com/css2?family=${fontConfig.import}&display=swap`
-          document.head.appendChild(link)
-        }
-      }
-
-      document.documentElement.style.setProperty('--font-sans', `'${fontConfig.name}', ui-sans-serif, system-ui, -apple-system, sans-serif`)
-      document.documentElement.style.setProperty('--font-mono', `'${fontConfig.name}', ui-sans-serif, system-ui, -apple-system, sans-serif`)
-      perf.rendering.labelFontFamily = `'${fontConfig.name}', ui-sans-serif, system-ui, sans-serif`
-    }
   }
 
   useEffect(() => {
@@ -101,6 +67,9 @@ export default function SettingsModal({ isOpen, language, colorPreset, onColorPr
         >
           <motion.div
             className="modal settings-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="settings-dialog-title"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -108,8 +77,8 @@ export default function SettingsModal({ isOpen, language, colorPreset, onColorPr
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>{translate('settings.title', undefined, language)}</h2>
-              <button className="modal-close" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
+              <h2 id="settings-dialog-title">{translate('settings.title', undefined, language)}</h2>
+              <button ref={initialFocusRef} className="modal-close" type="button" onClick={onClose} aria-label={translate('common.close', undefined, language)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -132,22 +101,6 @@ export default function SettingsModal({ isOpen, language, colorPreset, onColorPr
                   </select>
                 </div>
               </div>
-
-              {fontSettings && currentFontPreset && (
-                <div className="settings-section">
-                  <h3 className="settings-section-title">{translate('settings.fontSection', undefined, language)}</h3>
-                  <div className="settings-select-group">
-                    <label htmlFor="font-select">{translate('settings.fontLabel', undefined, language)}</label>
-                    <select id="font-select" className="settings-select" value={currentFontPreset} onChange={(e) => handleFontChange(e.target.value)}>
-                      {fontPresets.map((preset) => (
-                        <option key={preset} value={preset}>
-                          {fontSettings.presets[preset as keyof typeof fontSettings.presets].name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              )}
 
               <div className="settings-section">
                 <h3 className="settings-section-title">{translate('settings.colorSection', undefined, language)}</h3>

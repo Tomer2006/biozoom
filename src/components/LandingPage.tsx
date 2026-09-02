@@ -4,6 +4,7 @@ import { translate, type AppLanguage } from '../modules/i18n'
 interface LandingPageProps {
   language: AppLanguage
   colorPreset: string
+  isStarting: boolean
   onStart: () => void
   onLanguage: () => void
   onHelp: () => void
@@ -18,6 +19,7 @@ const landingTreeImages: Record<string, string> = {
 export default function LandingPage({
   language,
   colorPreset,
+  isStarting,
   onStart,
   onLanguage,
   onHelp,
@@ -60,11 +62,16 @@ export default function LandingPage({
       >
         <motion.button
           className="landing-start-btn"
+          type="button"
+          disabled={isStarting}
+          aria-busy={isStarting}
           onClick={onStart}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="landing-start-text">{translate('landing.start', undefined, language)}</span>
+          <span className="landing-start-text">
+            {translate(isStarting ? 'loading.loadingLabel' : 'landing.start', undefined, language)}
+          </span>
         </motion.button>
       </motion.div>
 
@@ -74,13 +81,13 @@ export default function LandingPage({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <motion.button className="landing-footer-btn landing-footer-icon-btn" onClick={onLanguage} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} title={translate('common.language', undefined, language)}>
+        <motion.button type="button" className="landing-footer-btn landing-footer-icon-btn" onClick={onLanguage} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} title={translate('common.language', undefined, language)}>
           <span aria-hidden="true">🌐</span>
         </motion.button>
-        <motion.button className="landing-footer-btn" onClick={onSettings} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <motion.button type="button" className="landing-footer-btn" onClick={onSettings} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           {translate('common.settings', undefined, language)}
         </motion.button>
-        <motion.button className="landing-footer-btn" onClick={onHelp} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <motion.button type="button" className="landing-footer-btn" onClick={onHelp} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           {translate('common.help', undefined, language)}
         </motion.button>
       </motion.div>

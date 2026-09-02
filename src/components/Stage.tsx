@@ -1,8 +1,8 @@
-import { useEffect, useRef, useCallback } from 'react'
-import { state } from '../modules/state'
-import { requestRender, screenToWorld, resizeCanvas, tick, onCameraChange, W, H } from '../modules/canvas'
+import { useEffect, useRef, useCallback, useState } from 'react'
+import { setHoverNode, state } from '../modules/state'
+import { attachCanvas, detachCanvas, requestRender, screenToWorld, resizeCanvas, tick, onCameraChange, W, H } from '../modules/canvas'
 import { openProviderSearch } from '../modules/providers'
-import { showBigFor, hideBigPreview as hidePreviewModule } from '../modules/preview'
+import { loadPreview, type PreviewData } from '../modules/preview'
 import { updateCurrentNodeOnly } from '../modules/navigation'
 import {
   handleWheelEvent,
@@ -16,18 +16,10 @@ import { pickNodeAt } from '../modules/picking'
 import { handleCameraPan, clampCameraZoom, stopCameraAnimation } from '../modules/camera'
 import { ensureBackendViewport } from '../modules/data-backend'
 import { formatNumber, translate, type AppLanguage } from '../modules/i18n'
-
-interface TaxonomyNode {
-  _id: number
-  name: string
-  level: number
-  children?: TaxonomyNode[]
-  parent?: TaxonomyNode | null
-  _leaves?: number
-  _vx?: number
-  _vy?: number
-  _vr?: number
-}
+import { subscribeToPulse } from '../modules/visual-events'
+import type { TaxonomyNode } from '../modules/types'
+import PulseOverlay from './PulseOverlay'
+import BigPreview from './BigPreview'
 
 interface StageProps {
   language: AppLanguage
@@ -50,6 +42,9 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
   const lastMouseRef = useRef({ x: 0, y: 0 })
   const prevHoverIdRef = useRef<number | null>(null)
   const breadcrumbTimerRef = useRef<number | null>(null)
+  const previewRequestRef = useRef(0)
+  const [preview, setPreview] = useState<PreviewData | null>(null)
+  const [pulse, setPulse] = useState<{ node: TaxonomyNode; sequence: number } | null>(null)
 
   const touchStateRef = useRef({
     isPanning: false,
@@ -65,18 +60,42 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
   })
 
   useEffect(() => {
-    if (canvasRef.current) {
-      // @ts-ignore
-      window.__reactCanvas = canvasRef.current
+    const canvas = canvasRef.current
+    const stage = stageRef.current
+    if (canvas && stage) attachCanvas(canvas, stage)
+
+    const handleResize = () => {
+      resizeCanvas()
+      requestRender()
+      void ensureBackendViewport({ force: true })
     }
+    window.addEventListener('resize', handleResize)
 
     return () => {
+      window.removeEventListener('resize', handleResize)
+      if (canvas) detachCanvas(canvas)
       if (breadcrumbTimerRef.current !== null) {
         clearTimeout(breadcrumbTimerRef.current)
         breadcrumbTimerRef.current = null
       }
     }
   }, [onUpdateBreadcrumbs])
+
+  useEffect(() => subscribeToPulse((node) => {
+    setPulse((previous) => ({ node, sequence: (previous?.sequence ?? 0) + 1 }))
+  }), [])
+
+  const hidePreview = useCallback(() => {
+    previewRequestRef.current += 1
+    setPreview(null)
+  }, [])
+
+  const showPreview = useCallback((node: TaxonomyNode) => {
+    const request = ++previewRequestRef.current
+    void loadPreview(node).then((nextPreview) => {
+      if (previewRequestRef.current === request) setPreview(nextPreview)
+    })
+  }, [])
 
   useEffect(() => {
     if (!hidden && canvasRef.current) {
@@ -88,7 +107,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     }
   }, [hidden])
 
-  const buildTooltipMeta = useCallback((node: any) => {
+  const buildTooltipMeta = useCallback((node: TaxonomyNode) => {
     const parts: string[] = []
     const isLeafNode = !node.children || node.children.length === 0
 
@@ -106,7 +125,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     if (el) el.style.opacity = '0'
   }, [])
 
-  const showTooltip = useCallback((node: any, x: number, y: number) => {
+  const showTooltip = useCallback((node: TaxonomyNode, x: number, y: number) => {
     const el = tooltipRef.current
     if (!el) return
     el.style.left = `${x}px`
@@ -122,10 +141,10 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     }
   }, [language, buildTooltipMeta])
 
-  const updateTooltipAndPreview = useCallback((node: any, x: number, y: number) => {
+  const updateTooltipAndPreview = useCallback((node: TaxonomyNode | null, x: number, y: number) => {
     if (!node) {
       hideTooltip()
-      hidePreviewModule()
+      hidePreview()
       return
     }
 
@@ -136,19 +155,19 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     showTooltip(node, x, y)
 
     if (changedNode) {
-      showBigFor(node)
+      showPreview(node)
     }
-  }, [showTooltip, hideTooltip])
+  }, [showTooltip, hideTooltip, hidePreview, showPreview])
 
   useEffect(() => {
     const validateHover = () => {
       const { x, y } = lastMouseRef.current
-      validateHoverOnCameraChange(x, y, (node: any, px: number, py: number) => {
+      validateHoverOnCameraChange(x, y, (node, px, py) => {
         if (node) {
           updateTooltipAndPreview(node, px, py)
         } else {
           hideTooltip()
-          hidePreviewModule()
+          hidePreview()
           prevHoverIdRef.current = null
         }
       })
@@ -171,7 +190,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       if (newPan) {
         lastPanRef.current = newPan
         hideTooltip()
-        hidePreviewModule()
+        hidePreview()
         return
       }
     }
@@ -185,7 +204,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
           updateTooltipAndPreview(node, lastMouseRef.current.x, lastMouseRef.current.y)
         } else {
           hideTooltip()
-          hidePreviewModule()
+          hidePreview()
           prevHoverIdRef.current = null
         }
       })
@@ -279,22 +298,22 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     // the current node, update the breadcrumbs, and load its viewport data.
     const drillIntoNode = (node: TaxonomyNode | null) => {
       if (!node || isLoading) return
-      const current = state.current as TaxonomyNode | null
+      const current = state.current
       if (current && node._id === current._id) return
-      updateCurrentNodeOnly(node as any)
+      updateCurrentNodeOnly(node)
       onUpdateBreadcrumbs(node)
       void ensureBackendViewport({ force: true })
     }
 
     // Go up one level — the touch equivalent of a desktop right-click.
     const goToParent = () => {
-      const current = state.current as TaxonomyNode | null
+      const current = state.current
       if (!current || !current.parent || isLoading) return
-      updateCurrentNodeOnly(current.parent as any)
-      onUpdateBreadcrumbs(current.parent as any)
+      updateCurrentNodeOnly(current.parent)
+      onUpdateBreadcrumbs(current.parent)
       void ensureBackendViewport({ force: true })
       hideTooltip()
-      hidePreviewModule()
+      hidePreview()
       prevHoverIdRef.current = null
       // Brief dim so the "back" gesture feels responsive.
       canvas.style.opacity = '0.8'
@@ -319,12 +338,12 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
 
         // A single tap acts like desktop hover: select the node and preview it.
         const node = pickNodeAt(pos.x, pos.y)
-        state.hoverNode = node
+        setHoverNode(node)
         if (node) {
           updateTooltipAndPreview(node, pos.x, pos.y)
         } else {
           hideTooltip()
-          hidePreviewModule()
+      hidePreview()
           prevHoverIdRef.current = null
         }
       } else if (e.touches.length >= 2) {
@@ -337,7 +356,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         clearLongPress()
         stopCameraAnimation()
         hideTooltip()
-        hidePreviewModule()
+          hidePreview()
       }
       e.preventDefault()
     }
@@ -353,7 +372,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
             touchState.isPanning = true
             clearLongPress()
             hideTooltip()
-            hidePreviewModule()
+        hidePreview()
           }
         }
 
@@ -370,7 +389,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         const center = getCenter(e.touches[0], e.touches[1])
 
         // Keep the world point under the pinch midpoint fixed as the zoom
-        // changes (same anchoring as the wheel zoom in camera.js). Use the
+        // changes (same anchoring as the wheel zoom in camera.ts). Use the
         // canvas CSS size (W/H), NOT canvas.width/height — those are device
         // pixels and would be off by devicePixelRatio on phones.
         const [wx, wy] = screenToWorld(center.x, center.y)
@@ -446,16 +465,16 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
       canvas.removeEventListener('touchcancel', handleTouchEnd)
       clearLongPress()
     }
-  }, [isLoading, onUpdateBreadcrumbs, updateTooltipAndPreview])
+  }, [hidePreview, isLoading, onUpdateBreadcrumbs, updateTooltipAndPreview])
 
   const handleContextMenu = async (e: React.MouseEvent) => {
     e.preventDefault()
     if (isLoading) return
 
-    const current = state.current as TaxonomyNode | null
+    const current = state.current
     if (current && current.parent) {
       await ensureBackendViewport({ force: true })
-      updateCurrentNodeOnly(current.parent as any)
+      updateCurrentNodeOnly(current.parent)
       onUpdateBreadcrumbs(current.parent)
     }
   }
@@ -471,7 +490,7 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
     const node = pickNodeAt(x, y)
     if (!node) return
 
-    updateCurrentNodeOnly(node as any)
+    updateCurrentNodeOnly(node)
     onUpdateBreadcrumbs(node)
     await ensureBackendViewport({ force: true })
   }
@@ -496,33 +515,17 @@ export default function Stage({ language, isLoading, onUpdateBreadcrumbs, hidden
         </div>
       </div>
 
-      <div className="big-preview" id="bigPreview" aria-hidden="true">
-        <div className="big-preview-header">
-          <div className="big-preview-caption" id="bigPreviewCap"></div>
-        </div>
-        <img id="bigPreviewImg" alt="" decoding="async" />
-        <div className="big-preview-empty" id="bigPreviewEmpty" aria-hidden="true">
-          {translate('stage.noImage', undefined, language)}
-        </div>
-        <div className="big-preview-footer">
-          <button
-            className="btn btn-small"
-            onClick={(e) => {
-              e.stopPropagation()
-              const targetNode = state.hoverNode || state.current
-              if (targetNode) {
-                openProviderSearch(targetNode)
-              }
-            }}
-            title={translate('stage.webSearchTitle', undefined, language)}
-          >
-            {translate('stage.webSearch', undefined, language)}
-          </button>
-          <div className="big-preview-path" id="bigPreviewPath"></div>
-        </div>
-      </div>
+      <BigPreview
+        language={language}
+        preview={preview}
+        onWebSearch={() => openProviderSearch(state.hoverNode || state.current)}
+      />
 
-      <div className="pulse" id="pulse" />
+      <PulseOverlay
+        node={pulse?.node ?? null}
+        sequence={pulse?.sequence ?? 0}
+        onFinish={() => setPulse(null)}
+      />
 
       <div className="stage-watermark">InfiniteSpecies.com</div>
     </div>

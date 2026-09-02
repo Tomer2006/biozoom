@@ -6,7 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './styles/index.css'
-import { perf } from './modules/settings.js'
+import { perf } from './modules/settings'
 import { initializeLanguage } from './modules/i18n'
 import { applyPersistedPerfOverrides } from './modules/runtimeSettings'
 

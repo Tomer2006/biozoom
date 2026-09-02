@@ -6,7 +6,9 @@
  * Provides node mapping and layout indexing utilities for efficient lookups.
  */
 
-export const state = {
+import type { LoadMode, TaxonomyLayout, TaxonomyNode, TaxonomyState } from './types'
+
+export const state: TaxonomyState = {
   DATA_ROOT: null,
   current: null,
   layout: null,
@@ -34,17 +36,78 @@ export const state = {
   layoutChanged: false,
 
   // data loading state
-  loadMode: 'eager', // 'eager' only now
+  loadMode: 'eager',
+  backendApiBase: '/api',
+  useBakedLayout: false,
 };
+
+export interface TaxonomySnapshot {
+  current: TaxonomyNode | null
+  hoverNode: TaxonomyNode | null
+  dataRoot: TaxonomyNode | null
+  loadMode: LoadMode
+  revision: number
+}
+
+type StateListener = () => void
+const stateListeners = new Set<StateListener>()
+let snapshot: TaxonomySnapshot = {
+  current: null,
+  hoverNode: null,
+  dataRoot: null,
+  loadMode: 'eager',
+  revision: 0,
+}
+
+function publishState() {
+  snapshot = {
+    current: state.current,
+    hoverNode: state.hoverNode,
+    dataRoot: state.DATA_ROOT,
+    loadMode: state.loadMode,
+    revision: snapshot.revision + 1,
+  }
+  stateListeners.forEach((listener) => listener())
+}
+
+export function subscribeTaxonomyState(listener: StateListener) {
+  stateListeners.add(listener)
+  return () => { stateListeners.delete(listener) }
+}
+
+export function getTaxonomySnapshot() {
+  return snapshot
+}
+
+export function setCurrentNode(node: TaxonomyNode | null) {
+  if (state.current === node) return
+  state.current = node
+  publishState()
+}
+
+export function setHoverNode(node: TaxonomyNode | null) {
+  if (state.hoverNode === node) return
+  state.hoverNode = node
+  publishState()
+}
+
+export function setTaxonomyData(root: TaxonomyNode, layout: TaxonomyLayout, loadMode: LoadMode) {
+  state.DATA_ROOT = root
+  state.layout = layout
+  state.rootLayout = layout
+  state.loadMode = loadMode
+  state.layoutChanged = true
+  publishState()
+}
 
 // Collect all nodes in a (data) tree, depth-first. Replaces the per-node
 // .descendants() methods that the old hierarchy wrapper attached to every node.
-function descendants(root) {
-  const result = [];
+export function descendants(root: TaxonomyNode | null): TaxonomyNode[] {
+  const result: TaxonomyNode[] = [];
   if (!root) return result;
-  const stack = [root];
+  const stack: TaxonomyNode[] = [root];
   while (stack.length) {
-    const n = stack.pop();
+    const n = stack.pop()!;
     result.push(n);
     const ch = n.children;
     if (ch) {
@@ -89,5 +152,9 @@ export function rebuildNodeMap() {
     state.minNodeRadius = 0;
   }
   // Precompute pick order: deepest nodes first for accurate picking
-  state.pickOrder = desc.slice().sort((a, b) => (b.level || 0) - (a.level || 0));
+  state.pickOrder = desc.slice().sort((a, b) => {
+    const aLevel = typeof a.level === 'number' ? a.level : 0
+    const bLevel = typeof b.level === 'number' ? b.level : 0
+    return bLevel - aLevel
+  });
 }

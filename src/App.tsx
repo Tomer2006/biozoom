@@ -36,6 +36,8 @@ import {
   type AppLanguage,
 } from './modules/i18n'
 import { perf } from './modules/settings'
+import { subscribeProgress } from './modules/loading'
+import type { TaxonomyNode } from './modules/types'
 
 export interface AppState {
   isLanding: boolean
@@ -46,9 +48,9 @@ export interface AppState {
   loadingPct: string
   loadingTimer: string
   showTopbar: boolean
-  breadcrumbs: Array<{ id: number; name: string; node: any }>
-  currentNode: any
-  hoverNode: any
+  breadcrumbs: Array<{ id: number; name: string; node: TaxonomyNode }>
+  currentNode: TaxonomyNode | null
+  hoverNode: TaxonomyNode | null
 }
 
 const ONBOARDING_STORAGE_KEY = 'infinitespecies_onboardingSeen'
@@ -80,6 +82,7 @@ export default function App() {
 
   const loadingStartTime = useRef<number>(0)
   const timerInterval = useRef<number | null>(null)
+  const startInFlight = useRef(false)
 
   useEffect(() => {
     resizeCanvas()
@@ -152,7 +155,7 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [helpOpen, languageModalOpen, onboardingOpen])
 
-  const updateBreadcrumbs = useCallback((node: any) => {
+  const updateBreadcrumbs = useCallback((node: TaxonomyNode | null) => {
     if (!node) {
       setAppState((prev: AppState) => ({ ...prev, breadcrumbs: [], currentNode: null }))
       if (window.location.hash) {
@@ -162,8 +165,8 @@ export default function App() {
       return
     }
 
-    const crumbs: Array<{ id: number; name: string; node: any }> = []
-    let current = node
+    const crumbs: Array<{ id: number; name: string; node: TaxonomyNode }> = []
+    let current: TaxonomyNode | null = node
     while (current) {
       crumbs.unshift({
         id: current._id,
@@ -208,6 +211,9 @@ export default function App() {
   }, [appState.isLoading, language])
 
   const showLoading = useCallback((title?: string) => {
+    if (timerInterval.current !== null) {
+      clearInterval(timerInterval.current)
+    }
     loadingStartTime.current = performance.now()
     setAppState((prev: AppState) => ({
       ...prev,
@@ -228,11 +234,18 @@ export default function App() {
   }, [language])
 
   const hideLoading = useCallback(() => {
-    if (timerInterval.current) {
+    if (timerInterval.current !== null) {
       clearInterval(timerInterval.current)
       timerInterval.current = null
     }
     setAppState((prev: AppState) => ({ ...prev, isLoading: false }))
+  }, [])
+
+  useEffect(() => () => {
+    if (timerInterval.current !== null) {
+      clearInterval(timerInterval.current)
+      timerInterval.current = null
+    }
   }, [])
 
   const updateProgress = useCallback((progress: number, label?: string, currentStage = 1, totalStages = 1) => {
@@ -245,16 +258,13 @@ export default function App() {
     }))
   }, [language])
 
-  useEffect(() => {
-    // @ts-ignore
-    window.__reactShowLoading = showLoading
-    // @ts-ignore
-    window.__reactHideLoading = hideLoading
-    // @ts-ignore
-    window.__reactUpdateProgress = updateProgress
-  }, [hideLoading, showLoading, updateProgress])
+  useEffect(() => subscribeProgress(({ percentage, label, currentStage, totalStages }) => {
+    updateProgress(percentage, label, currentStage, totalStages)
+  }), [updateProgress])
 
   const handleStartExploration = async () => {
+    if (startInFlight.current) return
+    startInFlight.current = true
     showLoading(translate('loading.loadingTaxonomy', undefined, language))
     setAppState((prev: AppState) => ({ ...prev, isLanding: false, showTopbar: true }))
 
@@ -262,7 +272,7 @@ export default function App() {
 
     await new Promise<void>((resolve) => {
       requestAnimationFrame(() => {
-        requestAnimationFrame(resolve)
+        requestAnimationFrame(() => resolve())
       })
     })
     resizeCanvas()
@@ -328,9 +338,25 @@ export default function App() {
 
       hideLoading()
       console.error('Failed to load data from all candidates')
+      setAppState((prev: AppState) => ({
+        ...prev,
+        isLanding: true,
+        showTopbar: false,
+        breadcrumbs: [],
+      }))
+      toast.error(translate('app.dataLoadFailed', undefined, language), 5000)
     } catch (err) {
       hideLoading()
       console.error('Error starting exploration:', err)
+      setAppState((prev: AppState) => ({
+        ...prev,
+        isLanding: true,
+        showTopbar: false,
+        breadcrumbs: [],
+      }))
+      toast.error(translate('app.dataLoadFailed', undefined, language), 5000)
+    } finally {
+      startInFlight.current = false
     }
   }
 
@@ -366,13 +392,13 @@ export default function App() {
     }
   }
 
-  const handleBreadcrumbClick = async (node: any) => {
+  const handleBreadcrumbClick = async (node: TaxonomyNode) => {
     await ensureBackendViewport({ force: true })
     await goToNode(node, true)
     updateBreadcrumbs(node)
   }
 
-  const handleBreadcrumbRandom = async (rootNode: any) => {
+  const handleBreadcrumbRandom = async (rootNode: TaxonomyNode) => {
     // Backend mode: the subtree isn't fully loaded client-side, so we can't walk
     // it here. Let the server pick a random leaf (same way search asks the backend
     // when the tree isn't loaded yet), then load and zoom to it.
@@ -462,6 +488,7 @@ export default function App() {
           <LandingPage
             language={language}
             colorPreset={colorPreset}
+            isStarting={appState.isLoading}
             onStart={handleStartExploration}
             onLanguage={() => setLanguageModalOpen(true)}
             onHelp={() => setHelpOpen(true)}

@@ -1,37 +1,61 @@
-import { state, rebuildNodeMap } from './state.js';
-import { setProgress } from './loading.js';
-import { updateNavigation } from './navigation.js';
-import { decodePath } from './deeplink.js';
-import { logInfo } from './logger.js';
-import { W, H, onCameraChange, requestRender } from './canvas.js';
-import { perf } from './settings.js';
+import { state, rebuildNodeMap, setTaxonomyData } from './state';
+import { setProgress } from './loading';
+import { updateNavigation } from './navigation';
+import { decodePath } from './deeplink';
+import { logInfo } from './logger';
+import { W, H, onCameraChange, requestRender } from './canvas';
+import { perf } from './settings';
+import type { TaxonomyNode } from './types'
+
+interface ServerNode {
+  id: number
+  parent_id: number | null
+  name: string
+  level: number | string
+  x: number
+  y: number
+  r: number
+  leaves?: number
+  has_children?: boolean
+  path?: string
+}
+
+interface BackendResponse {
+  nodes?: ServerNode[]
+  matches?: ServerNode[]
+  root_id?: number
+  requested_id?: number
+  expanded_ids?: number[]
+  depth?: number
+}
+
+interface ViewportOptions { force?: boolean; immediate?: boolean }
 
 const API_BASE = (import.meta.env.VITE_DATA_API_URL || '/api').replace(/\/$/, '');
-const nodeCache = new Map();
-const hydratedNodeIds = new Set();
-const nodeLoadPromises = new Map();
+const nodeCache = new Map<number, TaxonomyNode>();
+const hydratedNodeIds = new Set<number>();
+const nodeLoadPromises = new Map<number, Promise<TaxonomyNode | null>>();
 const VIEWPORT_PAD_PX = 120;
 const VIEWPORT_LIMIT = 12000;
 const VIEWPORT_DEBOUNCE_MS = 160;
-let viewportTimer = null;
+let viewportTimer: number | null = null;
 let viewportLoadingRegistered = false;
 let lastViewportKey = '';
 let inFlightViewportKey = '';
 
-export async function loadBackend(apiBase = API_BASE) {
+export async function loadBackend(apiBase = API_BASE): Promise<TaxonomyNode> {
   state.loadMode = 'backend';
   state.backendApiBase = apiBase.replace(/\/$/, '');
   setProgress(0.15, 'Loading taxonomy root from backend...', 1, 1);
 
-  const response = await fetchJson(`${state.backendApiBase}/tree/root?depth=0`);
+  const response = await fetchJson<BackendResponse>(`${state.backendApiBase}/tree/root?depth=0`);
   stitchResponse(response);
 
-  const root = nodeCache.get(response.root_id);
+  const root = response.root_id == null ? null : nodeCache.get(response.root_id);
   if (!root) throw new Error('Backend did not return a root node');
 
-  state.DATA_ROOT = root;
   state.useBakedLayout = true;
-  refreshBackendLayout();
+  refreshBackendLayout(root);
 
   const rawHash = location.hash ? location.hash.slice(1) : '';
   const decoded = decodePath(rawHash);
@@ -54,7 +78,7 @@ export async function loadBackend(apiBase = API_BASE) {
   return root;
 }
 
-export async function ensureBackendViewport(options = {}) {
+export async function ensureBackendViewport(options: ViewportOptions = {}): Promise<BackendResponse | null> {
   if (state.loadMode !== 'backend') return null;
   if (!(W > 0) || !(H > 0)) return null;
 
@@ -77,7 +101,7 @@ export async function ensureBackendViewport(options = {}) {
   });
 
   try {
-    const response = await fetchJson(`${state.backendApiBase}/tree/viewport?${params}`);
+    const response = await fetchJson<BackendResponse>(`${state.backendApiBase}/tree/viewport?${params}`);
     stitchResponse(response);
     refreshBackendLayout();
     requestRender();
@@ -88,7 +112,7 @@ export async function ensureBackendViewport(options = {}) {
   }
 }
 
-function scheduleBackendViewportLoad(options = {}) {
+function scheduleBackendViewportLoad(options: ViewportOptions = {}) {
   if (state.loadMode !== 'backend') return;
   if (viewportTimer) {
     clearTimeout(viewportTimer);
@@ -106,12 +130,13 @@ function scheduleBackendViewportLoad(options = {}) {
   }, VIEWPORT_DEBOUNCE_MS);
 }
 
-export async function loadBackendNodeById(id) {
+export async function loadBackendNodeById(id: number): Promise<TaxonomyNode | null> {
   if (state.loadMode !== 'backend') return null;
   if (hydratedNodeIds.has(id)) return nodeCache.get(id) || null;
-  if (nodeLoadPromises.has(id)) return nodeLoadPromises.get(id);
+  const existingPromise = nodeLoadPromises.get(id)
+  if (existingPromise) return existingPromise;
 
-  const loadPromise = fetchJson(`${state.backendApiBase}/tree/node/${id}?depth=0`)
+  const loadPromise = fetchJson<BackendResponse>(`${state.backendApiBase}/tree/node/${id}?depth=0`)
     .then(response => {
       stitchResponse(response);
       refreshBackendLayout();
@@ -124,32 +149,32 @@ export async function loadBackendNodeById(id) {
   return loadPromise;
 }
 
-export function prefetchBackendNodeById(id) {
+export function prefetchBackendNodeById(id: number): Promise<TaxonomyNode | null> {
   if (state.loadMode !== 'backend' || hydratedNodeIds.has(id)) return Promise.resolve(nodeCache.get(id) || null);
   return loadBackendNodeById(id);
 }
 
-export async function randomBackendNode(fromId) {
+export async function randomBackendNode(fromId?: number): Promise<TaxonomyNode | null> {
   if (state.loadMode !== 'backend') return null;
   const params = new URLSearchParams({ depth: '0' });
   if (fromId != null) params.set('from', String(fromId));
-  const response = await fetchJson(`${state.backendApiBase}/random?${params}`);
+  const response = await fetchJson<BackendResponse>(`${state.backendApiBase}/random?${params}`);
   stitchResponse(response);
   refreshBackendLayout();
-  return nodeCache.get(response.requested_id) || null;
+  return response.requested_id == null ? null : nodeCache.get(response.requested_id) || null;
 }
 
-export async function findBackendNodeByPath(path) {
+export async function findBackendNodeByPath(path: string): Promise<TaxonomyNode | null> {
   if (state.loadMode !== 'backend') return null;
-  const response = await fetchJson(`${state.backendApiBase}/tree/path?path=${encodeURIComponent(path)}&depth=0`);
+  const response = await fetchJson<BackendResponse>(`${state.backendApiBase}/tree/path?path=${encodeURIComponent(path)}&depth=0`);
   stitchResponse(response);
   refreshBackendLayout();
-  return nodeCache.get(response.requested_id) || null;
+  return response.requested_id == null ? null : nodeCache.get(response.requested_id) || null;
 }
 
-export async function searchBackendNodes(query, limit, signal) {
-  if (state.loadMode !== 'backend') return null;
-  const response = await fetchJson(
+export async function searchBackendNodes(query: string, limit: number, signal?: AbortSignal): Promise<TaxonomyNode[]> {
+  if (state.loadMode !== 'backend') return [];
+  const response = await fetchJson<BackendResponse>(
     `${state.backendApiBase}/search?q=${encodeURIComponent(query)}&limit=${limit}`,
     { signal, cache: 'default' },
   );
@@ -162,17 +187,18 @@ export async function searchBackendNodes(query, limit, signal) {
   });
 }
 
-function stitchResponse(response) {
+function stitchResponse(response: BackendResponse) {
   const serverNodes = response.nodes || [];
   for (const serverNode of serverNodes) {
     getOrCreateNode(serverNode);
   }
 
-  const childIdsByParent = new Map();
+  const childIdsByParent = new Map<number, number[]>();
   for (const serverNode of serverNodes) {
     if (serverNode.parent_id == null) continue;
-    if (!childIdsByParent.has(serverNode.parent_id)) childIdsByParent.set(serverNode.parent_id, []);
-    childIdsByParent.get(serverNode.parent_id).push(serverNode.id);
+    const childIds = childIdsByParent.get(serverNode.parent_id) ?? []
+    childIds.push(serverNode.id)
+    childIdsByParent.set(serverNode.parent_id, childIds)
   }
 
   // Note: check `.length`, not just presence — buildNodeResponse always sends an
@@ -186,7 +212,7 @@ function stitchResponse(response) {
 
       const children = (childIdsByParent.get(parentId) || [])
         .map(childId => nodeCache.get(childId))
-        .filter(Boolean);
+        .filter((child): child is TaxonomyNode => child !== undefined);
 
       parent.children = children;
       for (const child of children) child.parent = parent;
@@ -221,7 +247,6 @@ function registerViewportLoader() {
   if (viewportLoadingRegistered) return;
   viewportLoadingRegistered = true;
   onCameraChange(() => scheduleBackendViewportLoad());
-  window.addEventListener('resize', () => scheduleBackendViewportLoad({ force: true }));
 }
 
 function viewportKey() {
@@ -237,10 +262,17 @@ function viewportKey() {
   ].join('|');
 }
 
-function getOrCreateNode(serverNode) {
+function getOrCreateNode(serverNode: ServerNode): TaxonomyNode {
   let node = nodeCache.get(serverNode.id);
   if (!node) {
     node = {
+      _id: serverNode.id,
+      name: serverNode.name,
+      level: serverNode.level,
+      _vx: serverNode.x,
+      _vy: serverNode.y,
+      _vr: serverNode.r,
+      _leaves: serverNode.leaves || 1,
       children: [],
       parent: null,
       _loadedDepth: 0,
@@ -263,22 +295,21 @@ function getOrCreateNode(serverNode) {
   return node;
 }
 
-function refreshBackendLayout() {
-  const root = state.DATA_ROOT;
+function refreshBackendLayout(rootOverride?: TaxonomyNode) {
+  const root = rootOverride ?? state.DATA_ROOT;
   if (!root) return;
 
   // Render/pick directly on the data nodes — no wrapper tree needed.
-  state.layout = {
+  const layout = {
     root,
     diameter: 4000,
   };
-  state.rootLayout = state.layout;
+  setTaxonomyData(root, layout, 'backend')
   rebuildNodeMap();
-  state.layoutChanged = true;
 }
 
-async function fetchJson(url, options = {}) {
+async function fetchJson<T>(url: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(url, { cache: 'no-store', ...options });
   if (!response.ok) throw new Error(`Backend request failed: ${response.status} ${response.statusText}`);
-  return response.json();
+  return response.json() as Promise<T>;
 }
